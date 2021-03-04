@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+{% load static %}
+
+
+{% block title %} Home {%endblock%}
+
+{%block container_block%}
+
+{% block header%}Hello this is an HTML page{%endblock%} 
+<br/>
+ <img src="{% static 'images/image.jpeg' %}">
+ <br/>
+ {{help_text}}
+ 
+ {%endblock%}

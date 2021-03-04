@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+{% block title %}Web{% endblock %}
+ {% block container_block %}
+    {% block title %}Web{%endblock%}
+
+		<div class="container">
+			<h1>Fill out the below web </h1>
+			<form method="POST">
+				{{form.as_p}}
+				{% csrf_token %}
+				<input type="submit" class="btn btn-primary" value="Submit"/>
+				
+			</form>
+		</div>	
+{% endblock %}
