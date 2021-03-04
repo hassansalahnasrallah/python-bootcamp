@@ -6,4 +6,4 @@ from first_app.models import Topic, Webpage, AccessRecord, UserProfile
 admin.site.register(Topic)
 admin.site.register(Webpage)
 admin.site.register(AccessRecord)
-admin.site.register(UserProfile)
+#admin.site.register(UserProfile)
