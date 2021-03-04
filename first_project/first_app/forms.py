@@ -11,8 +11,8 @@ class FormName(forms.Form):
     def clean(self):
         all_clean_data=super().clean()
         
-        email=all_clean_data['email']
-        vmail=all_clean_data['verify_email']
+        #email=all_clean_data['email']
+       # vmail=all_clean_data['verify_email']
         
         if email!= vmail:
             raise forms.ValidationError("Make sure emails match")
