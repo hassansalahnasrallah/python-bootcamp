@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% block body_block %}
+
+	<h2>this is your vacation {{user}}</h2> 
+	<form method ="POST" action = "showvacation" >
+		  	<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        
+            {% for data in form %}
+            <table border="1">
+            <tr>
+            <td>description</td> 
+            <td>date from</td>
+               <td>  date to</td>
+                </tr>
+                  <tr>
+                  <td>{{data.description}}</td>>
+                  <td>{{data.datefrom}}</td>
+                  <td>{{data.dateto}}</td>
+                  </tr></table>
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>
+
+
+<input type="button" onclick="location.href='vacation';" value="add vacation" />
+</form>
+		
+		
+{% endblock %}
