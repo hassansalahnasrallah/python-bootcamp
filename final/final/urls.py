@@ -20,4 +20,5 @@ from django.conf.urls import url
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'',include(views.urlpatterns)),
+    #path("register", views.register, name="register")
 ]

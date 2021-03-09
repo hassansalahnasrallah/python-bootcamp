@@ -16,6 +16,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, "template")
 STATIC_DIR = os.path.join(BASE_DIR, "static")
+MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -124,6 +125,8 @@ STATICFILES_DIRS = [
     STATIC_DIR,
     
     ]
+MEDIA_ROOT= MEDIA_DIR
+MEDIA_URL = '/media/'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'home'

@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} hello {%endblock%}
-{% block content %}
+{% block img %}
+<img src= "{% static 'img/signup1.png' %}" width=10%>
+{% endblock %}
 
-<img src="{% static 'img/signup.png' %}" width="50%"/>
+{% block form %}
+
+	<form method="POST" enctype="multipart/form-data">
+		{%csrf_token %}
+		{{forms.as_p}}
+		{{profile_form.as_p}}
+		<input type="submit" name= "" value="signup" />
+	</form>
 
 
 
-{%endblock %}
+{% endblock %}
