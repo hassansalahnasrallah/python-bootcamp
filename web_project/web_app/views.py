@@ -142,12 +142,13 @@ def vacation(request):
             #user.dateto = vacation.cleaned_data['dateto']
             #for object in user:
                 #object.save()
-            current_user = request.user.id
-            print(current_user)
-            user= models.Vacation.objects.get(id = 3)
+            #current_user = request.user.username
+           # print(current_user)
+           # user= models.Vacation.objects.filter(user= current_user)
 
-            user= vacation.save()
-            user.save()
+            vacation_save= vacation.save(commit=False)
+            vacation_save.user_id=request.user.id
+            vacation_save.save()
             return HttpResponseRedirect(reverse('index'))
         else:
             return HttpResponse('not valid entry')
