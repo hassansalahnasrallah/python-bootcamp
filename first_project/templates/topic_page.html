@@ -1,0 +1,19 @@
+
+
+<table>
+	<thead>	
+		<tr>
+			<th>Title</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for topic in topics %}
+			<tr>
+				<td>{{topic.topic_name}}</td>
+				<td><a href="{% url 'topic_form' %}?id={{topic.id}}">Edit</a></td>
+			</tr>
+		{% endfor %}
+	</tbody>
+
+</table>

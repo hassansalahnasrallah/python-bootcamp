@@ -7,6 +7,7 @@ import profile
 from django.contrib.auth import authenticate, login
 from django.urls.base import reverse
 from django.contrib.auth.decorators import login_required
+from first_app.models import Topic
 # Create your views here.
 
 def index(request):
@@ -125,6 +126,54 @@ def user_login(request):
     
     return render(request, "login.html", context)
 
+def topic_page(request):
+    context = {}
+    
+    context['topics'] = Topic.objects.all()
+    
+    return render(request, "topic_page.html", context)
+
+def topic_form(request):
+    context = {}
+    
+    topic_id = request.GET.get('id')
+    topic = None
+    if topic_id:
+        topic = Topic.objects.filter(id=topic_id).first()
+    
+    context['topic'] = topic
+       
+    return render(request, "topic_form.html", context)
+
+
+def save_topic(request):
+    
+    topic_name = request.POST.get('topic_name')
+    topic_id = request.POST.get('topic_id')
+    
+    if topic_name:
+        
+        if topic_id:
+            #update
+            topic = Topic.objects.filter(id=topic_id).first()
+            
+            if topic:
+                topic.topic_name = topic_name
+                topic.save()
+                response = "SUCCESS"
+            else:
+                response = "FAIL"
+        else:
+            #create
+            Topic.objects.create(topic_name=topic_name)
+            response = "SUCCESS"
+    else:
+        response = "FAIL"
+        
+    return HttpResponse(response)
+
+
+
 urlpatterns = [
     
     url(r"index/", index, name="index"),
@@ -134,5 +183,7 @@ urlpatterns = [
     url(r"webpage/", form_webpage, name="form_webpage"),
     url(r"register/", register, name="register"),
     url(r"user_login/", user_login, name="user_login"),
-    
+    url(r"topic/", topic_form, name="topic_form"),
+    url(r"topic_save/", save_topic, name="save_topic"),
+    url(r"page/", topic_page, name="topic_page"),
 ]

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block container_block %}
+
+<form name="topic_form" action="{% url 'save_topic' %}" method="POST">
+	{% csrf_token %}
+	
+	<label>Topic</label>
+	<input name="topic_name" class="form-control" value="{{topic.topic_name}}" placeholder="Topic" /> 
+	<input type="hidden" name="topic_id" value="{{topic.id}}" />
+	<button type="button" id="save_topic" class="btn btn-success">Save</button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+	$(function(){
+		$("#save_topic").click(function(){
+			
+			$.ajax({
+				type: "POST",
+				url: "{% url 'save_topic' %}", //$("form[name=topic_form]").attr('action')
+				data: {
+					topic_name: $("input[name=topic_name]").val(),
+					topic_id: $("input[name=topic_id]").val(),
+					csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val()
+				},
+				dataType: 'json',
+				success: function(response){
+					//console.log(response)
+					
+					//Handle form functionality
+				},
+				error: function(){
+					
+				}
+			});
+		});	
+	});
+</script>
+{% endblock %}
