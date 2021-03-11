@@ -18,6 +18,7 @@ from django.urls import path
 from web_app import views
 from web_project import settings
 from django.conf.urls import url
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register', views.register , name='register'),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('profile', views.profile, name='profile'),
     path('index', views.index, name='index'),
     path('vacation', views.vacation, name='vacation'),
-    path('showvacation',views.showvacation, name='showvacation')]
+    path('showvacation',views.showvacation, name='showvacation')
+    ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

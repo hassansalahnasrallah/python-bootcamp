@@ -26,7 +26,7 @@ def register(request):
             profile = profile_form.save(commit=False)
             if 'picture' in request.FILES:
                 print("found the picture")
-                profile.picture = request.FILES['pictures']
+                profile.picture = request.FILES['picture']
             profile.user = user
             profile.save()
             
@@ -65,7 +65,6 @@ def login_1(request):
     return  render(request, "login.html" ,  context)         
          
          
-@login_required(login_url='login')
 def profile(request):
     profile_form = forms.UserProfileInfoForm
     if request.method == "POST":
@@ -89,7 +88,7 @@ def profile(request):
 
 
 
-@login_required(login_url='login')
+@login_required
 def index(request):
     current_user = request.user.id
     print('enterd')
@@ -128,6 +127,7 @@ def showformdata(request):
 
 def vacation(request):
     vacation = forms.vacation
+    vacation_id= request.GET.get('id')
     if request.method == "POST":
        
         vacation = forms.vacation(data= request.POST)
@@ -145,11 +145,19 @@ def vacation(request):
             #current_user = request.user.username
            # print(current_user)
            # user= models.Vacation.objects.filter(user= current_user)
+            if vacation_id:
+                vacation_save = models.Vacation.objects.get(id = vacation_id)
+                vacation_save.description = vacation.cleaned_data['description']
+                vacation_save.datefrom = vacation.cleaned_data['datefrom']
+                vacation_save.dateto = vacation.cleaned_data['dateto']
+                vacation_save.save()
+                return HttpResponseRedirect(reverse('showvacation'))
+               
 
             vacation_save= vacation.save(commit=False)
             vacation_save.user_id=request.user.id
             vacation_save.save()
-            return HttpResponseRedirect(reverse('index'))
+            return HttpResponseRedirect(reverse('showvacation'))
         else:
             return HttpResponse('not valid entry')
     context = {'vacation': forms.vacation }
