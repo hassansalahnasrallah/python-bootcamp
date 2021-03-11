@@ -2,18 +2,49 @@
 
 {% block container_block %}
 
-<form name="topic_form" action="{% url 'save_topic' %}" method="POST">
+
+<link rel="stylesheet" href="https://formvalidation.io/vendors/formvalidation/css/formValidation.min.css">
+
+<form name="topic_form" id="topic_form" action="{% url 'save_topic' %}" method="POST">
 	{% csrf_token %}
 	
 	<label>Topic</label>
-	<input name="topic_name" class="form-control" value="{{topic.topic_name}}" placeholder="Topic" /> 
+	<input name="topic_name" class="form-control" value="{{topic.topic_name}}" placeholder="Topic" required /> 
 	<input type="hidden" name="topic_id" value="{{topic.id}}" />
 	<button type="button" id="save_topic" class="btn btn-success">Save</button>
 </form>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js'></script>
+
 <script>
 	$(function(){
+		const form = document.getElementById('topic_form');
+	    FormValidation.formValidation(form, {
+	        fields: {
+	        	topic_name: {
+	                validators: {
+	                    notEmpty: {
+	                        message: 'The name is required'
+	                    }
+	                }
+	            },
+	            
+	        },
+	        plugins: {
+	            trigger: new FormValidation.plugins.Trigger(),
+	            tachyons: new FormValidation.plugins.Tachyons(),
+	            submitButton: new FormValidation.plugins.SubmitButton(),
+	            icon: new FormValidation.plugins.Icon({
+	                valid: 'fa fa-check',
+	                invalid: 'fa fa-times',
+	                validating: 'fa fa-refresh'
+	            }),
+	        }
+	    });  
+		
+		
 		$("#save_topic").click(function(){
 			
 			$.ajax({
@@ -26,15 +57,32 @@
 				},
 				dataType: 'json',
 				success: function(response){
-					//console.log(response)
+					console.log(response)
 					
+					if(response.status == 'OK'){
+						alert("Save success");
+						var topic_id = response.payload.id;
+						$("input[name=topic_id]").val(topic_id);
+					}else{
+						if(response.message == 'FAIL'){
+							alert("Fail to save")
+						}else if(response.message == 'NAME_EXISTS'){
+							alert("This topic already found")
+						}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
+							alert("You have missing parameters")
+						}else if(response.message == 'TOPIC_NAME_ALREADY_EXISTS'){
+							alert("Name already found")
+						}
+					}
 					//Handle form functionality
 				},
 				error: function(){
 					
+					alert("Error in save")
 				}
 			});
 		});	
 	});
+	
 </script>
 {% endblock %}

@@ -1,19 +1,33 @@
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+  
 
-<table>
-	<thead>	
+<h1>Hello</h1>
+
+<table id="vacation_table">
+	<thead>
 		<tr>
 			<th>Title</th>
-			<th>Action</th>
 		</tr>
 	</thead>
 	<tbody>
-		{% for topic in topics %}
-			<tr>
-				<td>{{topic.topic_name}}</td>
-				<td><a href="{% url 'topic_form' %}?id={{topic.id}}">Edit</a></td>
-			</tr>
-		{% endfor %}
 	</tbody>
-
 </table>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+
+<script>
+	$(function(){
+		$("#vacation_table").DataTable( {
+		    ajax: {
+		        url: '{% url "topic_grid" %}',
+		    },
+		    columns: [{'data': 'topic_name', 'name': 'topic_name'}]
+		} );
+	});
+	
+
+</script>
