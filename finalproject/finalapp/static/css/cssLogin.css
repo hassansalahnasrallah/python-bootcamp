@@ -1,0 +1,40 @@
+body  
+{  
+    margin: 0;  
+    padding: 0;  
+    background-color:#6abadeba;  
+    font-family: 'Arial';  
+}  
+.style{  
+        width: 382px;  
+        overflow: hidden;  
+        margin: auto;  
+        margin: 20 0 0 450px;  
+        padding: 80px;  
+        background: #23463f;  
+        border-radius: 15px ;  
+          
+}  
+h2{  
+      
+    color: rgb(0, 64, 128);  
+    padding: 20px;  
+}  
+label{  
+    color: rgb(0, 64, 128);  
+    font-size: 17px;  
+}  
+
+   
+.h{
+	
+  padding: 60px;
+  text-align: center;
+  background: rgb(0, 0, 128);
+  color: white;
+  font-size: 30px;
+}
+	
+ 
+    
+

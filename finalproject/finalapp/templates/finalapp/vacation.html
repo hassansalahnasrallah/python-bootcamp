@@ -1,0 +1,34 @@
+{% extends "finalapp/basic.html" %}
+{% load static %}
+{% block title %}Vacation{% endblock %}
+{% block script %}<script src="{% static "js/java.js" %}"></script>{% endblock %}
+
+{% block body_block %}
+<div class="container">
+    <div class="jumbotron">
+ 
+ <h1>Fill out the form to add your vacation!</h1>
+    <div class="container">
+      <form method="POST">
+         {{ form.as_p }}
+         <label>Please let the date be in this syntax Y-M-D H:M:S</label><br>
+          {% csrf_token %}
+         <input type="hidden" id="datefrom" value="{{datefrom}}">
+         <input type="hidden" id="dateto" value="{{dateto}}">
+<button type="button" id="event" class="btn btn-primary" >Calculate Duration</button><br><br>
+    <br>
+         
+        <input type="submit" class="btn btn-primary" value="Submit">
+      </form>
+<form>
+  <input type="submit" class="btn btn-primary" value="Back to Home">
+ </form>
+    
+  </div>
+
+  </div>
+    </div>
+{% endblock %}
+
+
+

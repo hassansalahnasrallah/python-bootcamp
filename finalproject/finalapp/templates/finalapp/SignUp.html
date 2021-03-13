@@ -1,0 +1,35 @@
+{% extends "finalapp/basic.html" %}
+{% load static %}
+{% block title %}SignUp{% endblock %}
+{% block body_block %}
+  <div class="container">
+    <div class="jumbotron">
+      
+        {% if SignedUp %}
+        <h1>Thank you for signing up!</h1>
+<form method="POST" action="{% url 'index' %}">
+ {% csrf_token %}
+<input type="submit" class="btn btn-primary" value="Back to Main">
+ </form>
+      {% else %}
+        <h1>Register Here</h1>
+        <h3>Just fill out the form.</h3>
+
+        <form enctype="multipart/form-data" method="POST">
+          {% csrf_token %}
+          {{ employee_form.as_p }}
+          {{ profile_form.as_p }}
+          <input type="submit" class="btn btn-primary" name="" value="Register">
+        </form>
+
+      {% endif %}
+
+
+
+    
+
+    </div>
+
+  </div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'finalapp/basic.html' %}
+{% block title %}Login{% endblock %}
+{% block body_block %}
+  <div class="container" class=style>
+    <div class="jumbotron">
+      <h1>Please Login Here</h1>
+       <h2>If you don't have an account please sign in first</h2>
+        <form method="post" action="{% url 'finalapp:User_Login' %}">
+          {% csrf_token %}
+          <label for="username">Username:</label>
+          <input type="text" name="username" placeholder="Username">
+
+          <label for="password">Password:</label>
+          <input type="password" name="password">
+
+          <input type="submit" class="btn btn-primary" name="" value="Login">
+
+        </form>
+
+    </div>
+  </div>
+{% endblock %}

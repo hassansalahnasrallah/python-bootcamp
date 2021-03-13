@@ -1,0 +1,23 @@
+{% extends "finalapp/basic.html" %}
+{% load static %}
+{% block title %}Profile{% endblock %}
+{% block body_block %}
+<h1 align="center" class="h">Hello! You are logged in</h1><br><br><br><br>
+{% csrf_token %}
+
+<label>You Can Manage Your Vacations In the Home Page,Just click on the below button to go there<br>
+<label>You Can Also find and edit your profile info<br>
+<label>You Can Logout there too<br>
+
+<br><br>
+<form method="post" action="{% url 'Home' %}">
+ {% csrf_token %}
+<input type="Submit" class="btn btn-primary" value="Now go to HOME" >
+
+</form>
+
+
+
+
+
+{% endblock %}
