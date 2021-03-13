@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+{% block body_block %}
+
+
+	<form method ="POST">
+		{% csrf_token %}
+		{{vacation.as_p}}
+		
+		
+		
+		
+		<input type = "submit" name="" value = "Register"/>
+		</form>
+		
+		
+{% endblock %}
