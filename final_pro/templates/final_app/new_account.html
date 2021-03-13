@@ -1,0 +1,18 @@
+
+{% extends 'base.html' %}
+{% block container_block %}
+	{% if registered %}
+	<a href = " {% url 'loginpage' %}">LOGIN HERE</a>
+	{% else %}
+{% block title %} new_account {% endblock %}
+
+{% block header %} CREATE YOUR NEW ACCOUNT HERE {% endblock %}
+
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{user_form.as_p}}
+		{{profile_form.as_p}}
+		<input type="submit" class="btn btn-primary" value="Submit" />
+	</form>
+	{% endif %}
+{% endblock %}

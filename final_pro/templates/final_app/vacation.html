@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %} vacation {% endblock %}
+{% block header %} add your vacation: {% endblock %}
+{% block container_block %}
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{user_vacation.as_p}}
+		
+		<input type="submit" class="btn btn-primary" value="ADD" />
+	</form>
+{% endblock %}
