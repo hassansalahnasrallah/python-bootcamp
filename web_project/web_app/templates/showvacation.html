@@ -1,6 +1,6 @@
 {% extends 'base.html'%}
 {% block body_block %}
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<link rel="stylesheet"href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 
 	<h2>this is your vacation {{user}}</h2> 
 	<form method ="POST" action = "showvacation" >
@@ -9,30 +9,34 @@
         <div class="col-md-12">
         
            
-            <table id="vacation_table" border="1">
+            <table id="vacation_table">
+            <thead>
             <tr>
             <td>description</td> 
             <td>date from</td>
                <td>  date to</td>
-                </tr>
+                </tr></thead>
+                <tbody>
                    {% for data in form %}
                    <tr>
                   <td>{{data.description}}</td>>
                   <td>{{data.datefrom}}</td>
                   <td>{{data.dateto}}</td>
                   <td> <a href= "{% url 'vacation'%}?id={{data.id}}">Edit</a>
+                  </td></tr>
                   {% endfor %}
-                  </tr></table></br>
-                  <script src="jquery-3.6.0.min.js"></script>
-                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-            <script src="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+                  </tbody>
+                  </table>
+                 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+            <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
         </div>
     </div>
 </div>
 <script>
-    $(function(){
-    	$("#vacation_table").DataTable();
-    });</script>
+    $(document).ready(function(){
+        $('#vacation_table').DataTable();
+    });
+</script>
 
 <input type="button" onclick="location.href='vacation';" value="add vacation" />
 </form>
