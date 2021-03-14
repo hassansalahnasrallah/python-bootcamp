@@ -21,15 +21,12 @@ class UserProfileInfoForm(forms.ModelForm):
     
     class Meta():
         model = Userprofile
-        fields = ('job_description' , 'picture', 'date' )
-        widgets = {
-            'date': forms.DateInput(attrs={'class':'datepicker'}),
-        }
-        
+        fields = ('job_description' , 'picture' )
+       
         
         
         
 class vacation(forms.ModelForm):
     class Meta():
         model = Vacation
-        fields = ('description', 'datefrom', 'dateto')
+        fields = ('description',)

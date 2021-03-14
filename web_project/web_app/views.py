@@ -68,6 +68,8 @@ def login_1(request):
 def profile(request):
     profile_form = forms.UserProfileInfoForm
     if request.method == "POST":
+        date=request.POST.get('date')
+        print('date')
        
         profile_form = forms.UserProfileInfoForm(data= request.POST)
     
@@ -77,7 +79,7 @@ def profile(request):
             user = models.Userprofile.objects.get(user_id = current_user)
             user.job_description = profile_form.cleaned_data['job_description']
             user.picture = profile_form.cleaned_data['picture']
-            user.date = profile_form.cleaned_data['date']
+            user.date = date
             user.save()
             return HttpResponseRedirect(reverse('showvacation'))
         else:
@@ -129,7 +131,8 @@ def vacation(request):
     vacation = forms.vacation
     vacation_id= request.GET.get('id')
     if request.method == "POST":
-       
+        datefrom = request.POST.get('datefrom')
+        dateto = request.POST.get('dateto')
         vacation = forms.vacation(data= request.POST)
     
         if vacation.is_valid():
@@ -148,14 +151,17 @@ def vacation(request):
             if vacation_id:
                 vacation_save = models.Vacation.objects.get(id = vacation_id)
                 vacation_save.description = vacation.cleaned_data['description']
-                vacation_save.datefrom = vacation.cleaned_data['datefrom']
-                vacation_save.dateto = vacation.cleaned_data['dateto']
+                vacation_save.datefrom = datefrom
+                vacation_save.dateto = dateto
                 vacation_save.save()
                 return HttpResponseRedirect(reverse('showvacation'))
                
 
             vacation_save= vacation.save(commit=False)
             vacation_save.user_id=request.user.id
+            vacation_save.description = vacation.cleaned_data['description']
+            vacation_save.datefrom = datefrom
+            vacation_save.dateto = dateto
             vacation_save.save()
             return HttpResponseRedirect(reverse('showvacation'))
         else:
