@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+{% block body_block%}
+
+	<h2>this is your profile {{user}}</h2> 
+	<form method ="POST" action = "index" >
+		  	<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        <h1>
+            {% for data in form %}
+            <h3>job_position</h3>    <h1>{{data.job_position}}</h1></br>
+            <h3>Date_Of_Birth</h3><h1>{{data.Date_Of_Birth}}</h1></br>
+            <h4>profile_pic</h4><h1>{{data.profile_pic}}</h1></br>
+              
+            {% endfor %}
+            </h1>
+        </div>
+    </div>
+</div>
+
+<input type="button" onclick="href='profile';" value="Change your profile" />
+</form>
+		
+		
+{% endblock %}

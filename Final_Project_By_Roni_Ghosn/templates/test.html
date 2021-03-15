@@ -1,0 +1,113 @@
+{% extends 'base.html'%}
+{% block body_block%}
+
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+<form method ="POST">
+ {% csrf_token %}
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<div id='show_age'>
+<scripts
+ $("#calculate_age").click(function()){
+
+ $("#show_age").html(your age is ");
+      if ( age>20 ) {
+        $( "#effect" ).animate({
+          backgroundColor: "#aa0000",
+          color: "#fff",
+          width: 500
+        }, 1000 );
+      } else {
+        $( "#effect" ).animate({
+          backgroundColor: "#fff",
+          color: "#000",
+          width: 240
+        }, 1000 );
+      }
+ } 
+ </div>
+ </script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+ 
+
+  $( function() {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  
+ $( function() {
+    var age = true;
+    $( "#button" ).on( "click", function() {
+      if ( age>20 ) {
+        $( "#effect" ).animate({
+          backgroundColor: "#aa0000",
+          color: "#fff",
+          width: 500
+        }, 1000 );
+      } else {
+        $( "#effect" ).animate({
+          backgroundColor: "#fff",
+          color: "#000",
+          width: 240
+        }, 1000 );
+      }
+      age = !age;
+    });
+  } );
+
+  </script>
+
+ 
+<p>DateOfBirth: <input type="text" id="datepicker"></p>
+
+ <div class="ui-widget">
+  <label for="tags">Tags: </label>
+  <input id="tags">
+</div>
+<div class="toggler">
+  <div id="effect" class="ui-widget-content ui-corner-all">
+    <h3 class="ui-widget-header ui-corner-all">Age</h3>
+    <p>
+     
+    </p>
+  </div>
+</div>
+ {% endblock%}
+ </form>
+<button id="button" class="ui-state-default ui-corner-all">send age</button>
+<button class="ui-button ui-widget ui-corner-all">show dialog</button>
+
