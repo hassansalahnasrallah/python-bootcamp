@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <title>{%block title %} {% endblock %}</title>
+</head>
+<body>
+ <nav class="navbar navbar-default navbar-static-top">
+
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li><a>Weclome back: {{user.username}}</a></li>
+            <li><a></a></li>
+            <li><a href = "{% url 'index' %}" >Home </a></li>
+            <li><a href = "{% url 'form_VacationForm' %}">Add vacation</a></li>    
+            <li><a href = "{% url 'vacation_list' %}">Vacation List</a></li>    
+            <li><a>&nspar; &ThinSpace;</a></li>
+            <li class="form-inline"><a href = "{% url 'logout_request' %}">Logout</a></li>    
+        </div>
+        </ul>
+    </div>
+</nav>
+
+       
+    <div class="container">
+        
+       {% block container_block %}
+     
+      {% endblock  %}
+      
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends 'Vacations/base.html' %}
+{%block title %} Form {% endblock %}
+
+{% block container_block %}
+ 
+<h1>Fill Out The Form Below.</h1>
+    <form method="POST">
+        {{form.as_p}}
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="submit">
+    </form>
+ 
+{% endblock %}
+

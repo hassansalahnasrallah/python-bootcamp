@@ -1,0 +1,35 @@
+{% extends 'Vacations/base.html' %}
+ {% load static %} 
+{% block title %} index {%endblock %} 
+{% block container_block %}
+
+
+<div class="container-1 h-100 row align-items-center">
+    <h1>Vacation Manager Page:</h1>
+  
+</div>
+<div class="jumbotron">
+   
+
+<p><strong><u>Your Employee Card:</u></strong> </p>
+
+<p>username :{{request.user.username}}</p>
+<p>email: {{user.email}}</p><br/>
+<p>*Feel Free to Manage your Vacations here at anytime!</p>
+
+
+<br />
+
+<img src="{% static '/images/image1.jpeg' %}" width="250px" />
+
+<br />
+{{help_text}}
+<br />
+</div>
+
+{% endblock %}
+
+
+<ul>
+  
+</ul>

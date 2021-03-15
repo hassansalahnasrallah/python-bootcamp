@@ -1,0 +1,33 @@
+{% extends "Vacations/base.html" %} 
+
+{% block container_block %}
+
+<p>available location:</p>
+
+<table class="table table-bordered table-dark">
+    <thead class="">
+    <tr>
+        <th scope="col">Location</th>
+        <th scope="col">Employee</th>
+        <th scope="col">From:</th>
+        <th scope="col">To:</th>
+      </tr>
+    </thead>
+    <tbody>
+<tr>
+    {% for x in Desc %}
+    <td>{{x.desc}}</td>
+    <td>{{x.user}}</td>
+    <td>{{x.from_date}}</td>
+    <td>{{x.to_date}}</td>
+
+
+</tr>
+</tbody>
+{% endfor %}
+<!--<h1>{{x.emp_name}}</h1> -->
+</table>
+
+
+
+{% endblock %}
