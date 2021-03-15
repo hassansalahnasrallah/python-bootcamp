@@ -1,0 +1,33 @@
+{% extends "employee_app/base.html" %}
+{% block title %} Vacation Table {% endblock %}
+{% block header %}Vacation Table:{% endblock %}
+{% block container_block %}
+
+<table id="demoGrid"  border='5' align='center' >
+
+<tr><th>Description</th>
+<th>DateFrom</th>
+<th>DateTo</th>
+<th>Duration</th>
+<th>Edit</th>
+
+</tr>
+
+
+{% for vacation in vacations %}
+<tr><td>{{vacation.Description}}</td>
+<td>{{vacation.Datetime_From}}</td>
+<td>{{vacation.Datetime_To}}</td>
+<td>{{vacation.Duration}}</td>
+<td><a href="{% url 'Vacation_Fields' %}?id={{vacation.id}}">Edit</a></td>
+</tr>
+{% endfor %}
+
+</table>
+<br><br><br>
+
+<center><a  href="{% url  'Vacation_Fields' %}" class="btn btn-primary btn-lg">Add Vacation</a></center>
+
+
+ 
+{% endblock %}

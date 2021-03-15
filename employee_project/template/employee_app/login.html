@@ -1,0 +1,13 @@
+{% extends "employee_app/base.html" %}
+{% block title %} Sign Up Form {% endblock %}
+{% block header %}Welcome To LogIn Page You Should Sign Up First:{% endblock %}
+{% block container_block %}
+<form method="POST" action="{% url  'user_login' %}">
+ {% csrf_token %}
+<label for="name">User Name:</label>
+<input type="text" name="username" placeholder="username" /><br>
+<label for="password">Password:</label>
+<input type="password" name="password" placeholder="Password" /><br>
+<input type="submit" class='btn btn-primary' value="LogIn">
+</form>
+{% endblock %}
