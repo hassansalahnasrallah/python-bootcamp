@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}ProfilePage{% endblock %}
+{% block container %}
+<form method="POST" enctype="multipart/form-data">
+{{employee_form.as_p}}
+{% csrf_token %}
+<br>
+
+<input type="submit" class="btn btn-dark" value="Submit"/>
+</form>
+
+
+
+{% endblock %}

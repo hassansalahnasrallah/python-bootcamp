@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}HomePage{% endblock %}
+{% block container %}
+<form method="POST" name="HomePageView" action="{% url 'savedHomePage' %}">
+<table>
+{% csrf_token %}
+<tr>
+<td><label>Description:</label></td>
+<td><textarea name="text_area" id="text" cols="80" rows="10" >{{userid.description}}</textarea></td></tr>
+<tr>
+<td><label>DateFrom:</label></td>
+<td><input id="date_from" name="datefrom" value="{{userid.datetimefrom|date:'Y-m-d'}}" ></td></tr>
+<tr>
+<td><label>DateTo:</label></td>
+<td><input id="date_to" name="dateto" value="{{userid.datetimeto|date:'Y-m-d'}}"></td></tr>
+<tr>
+<td><label>Duration:</label></td>
+<td><input type="text" name="duration_field" id="durationField" value="{{userid.Duration}}" readonly></td>
+</tr>
+<tr><td colspan="2"><button type="button" id="ButtonCal">CalculateDuration</button></td></tr>
+
+<input type="hidden" name="idOfVaca" value="{{userid.id}}">
+
+</table>
+
+
+<br>
+
+<button type="button" id="savedHomePage" class="btn btn-dark"/>Save</button>
+</form>
+
+{% endblock %}

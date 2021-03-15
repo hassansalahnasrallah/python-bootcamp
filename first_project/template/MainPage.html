@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}MainPage{% endblock %}
+{% load static %}
+{% block container %}
+<h2 id="Home" align="center" class="mt-4 mb-4"><b><em>Welcome To My Site!</em></b></h2>
+    
+ <table cellspacing="20px">
+        <tr>
+<td><button type="button"  id="SpecialButton1"  > </button></td>
+<td><img src="{% static 'IMAGE/PhotographyImage1.png' %}" id="Images" class="borderimage"></td>
+<td><button type="button" id="SpecialButton2"  > </button></td> 
+       </tr>
+
+    </table>
+{% endblock %}

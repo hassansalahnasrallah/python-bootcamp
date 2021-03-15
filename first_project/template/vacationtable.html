@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Vacation{% endblock %}
+
+{% block container %}
+<table border="2" align="center" cellpadding="15" style="text-align:center;" class="vacatable">
+<tbody>
+<tr><td>Description</td>
+<td>DateTimeFrom</td>
+<td>DateTimeTo</td>
+<td>Duration</td>
+<td></td>
+</tr>
+{% for vaca in user_info %}
+<tr>
+{% if present_user == vaca.user %}
+<td>{{vaca.description}}</td>
+<td>{{vaca.datetimefrom}}</td>
+<td>{{vaca.datetimeto}}</td>
+<td>{{vaca.Duration}}</td>
+<td><a href="{% url 'HomePageView' %}?id={{vaca.id}}">Edit</a></td>
+{% endif %}
+</tr>
+
+{% endfor %}
+
+
+</tbody>
+</table>
+{% endblock %}
+
