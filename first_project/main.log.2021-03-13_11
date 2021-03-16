@@ -1,0 +1,18 @@
+2021-03-13 11:44:05,973 | DEBUG | views.py:21 | Index
+2021-03-13 11:44:05,973 | INFO | views.py:22 | Index 
+2021-03-13 11:44:05,973 | WARNING | views.py:23 | warning
+2021-03-13 11:44:05,974 | ERROR | views.py:24 | ll
+2021-03-13 11:45:37,493 | DEBUG | proactor_events.py:623 | Using proactor: IocpProactor
+2021-03-13 11:46:18,559 | DEBUG | proactor_events.py:623 | Using proactor: IocpProactor
+2021-03-13 11:46:32,979 | DEBUG | proactor_events.py:623 | Using proactor: IocpProactor
+2021-03-13 11:46:39,749 | DEBUG | views.py:149 | Now we are in the topic form
+2021-03-13 11:47:16,027 | DEBUG | views.py:149 | Now we are in the topic form
+2021-03-13 11:47:27,200 | ERROR | views.py:199 | Error while saving topic name
+Traceback (most recent call last):
+  File "D:\workbench\learning\django_course(ParkInnovation)\src\python-bootcamp\first_project\first_app\views.py", line 172, in save_topic
+    print(0/0)
+ZeroDivisionError: division by zero
+2021-03-13 11:48:04,548 | DEBUG | proactor_events.py:623 | Using proactor: IocpProactor
+2021-03-13 11:52:53,559 | DEBUG | proactor_events.py:623 | Using proactor: IocpProactor
+2021-03-13 11:53:06,866 | DEBUG | proactor_events.py:623 | Using proactor: IocpProactor
+2021-03-13 11:53:07,620 | DEBUG | proactor_events.py:623 | Using proactor: IocpProactor

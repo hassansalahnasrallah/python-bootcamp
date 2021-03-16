@@ -8,10 +8,20 @@ from django.contrib.auth import authenticate, login
 from django.urls.base import reverse
 from django.contrib.auth.decorators import login_required
 from first_app.models import Topic
+import json
+from django.db.utils import IntegrityError
+
+import logging
+
+log = logging.getLogger(__name__)
 # Create your views here.
 
 def index(request):
     context = {"help_text": "This is a help text"}
+    log.debug("Index")
+    log.info("Index ")
+    log.warning("warning")
+    log.error("ll")
     return render(request, "first_app/index.html", context)
 
 
@@ -88,7 +98,7 @@ def register(request):
             
             profile.user = user
             profile.save()
-            
+            log.debug("Saved profile and user for user: %s", user)
             registered = True
         else:
             print("Form not valid")
@@ -136,6 +146,7 @@ def topic_page(request):
 def topic_form(request):
     context = {}
     
+    log.debug("Now we are in the topic form")
     topic_id = request.GET.get('id')
     topic = None
     if topic_id:
@@ -151,31 +162,68 @@ def save_topic(request):
     topic_name = request.POST.get('topic_name')
     topic_id = request.POST.get('topic_id')
     
-    if topic_name:
-        
-        if topic_id:
-            #update
-            topic = Topic.objects.filter(id=topic_id).first()
+    status = "OK"
+    message = "SUCCESS"
+    payload = {}
+    
+    try:
+        if topic_name:
             
-            if topic:
-                topic.topic_name = topic_name
-                topic.save()
-                response = "SUCCESS"
+            if topic_id:
+                #update
+                topic = Topic.objects.filter(id=topic_id).first()
+                
+                if topic:
+                    topic.topic_name = topic_name
+                    topic.save()
+                    payload['id'] = topic.id
+                else:
+                    message = "TOPIC_NOT_FOUND"
+                    status = "FAIL"
             else:
-                response = "FAIL"
+                #create
+                topic = Topic.objects.create(topic_name=topic_name)
+                payload['id'] = topic.id
         else:
-            #create
-            Topic.objects.create(topic_name=topic_name)
-            response = "SUCCESS"
-    else:
-        response = "FAIL"
+            message = "MISSING_REQUIRED_PARAMETERS"
+            status = "FAIL"
+            
+    except IntegrityError:
+        status = "FAIL"
+        message = "TOPIC_NAME_ALREADY_EXISTS"
         
-    return HttpResponse(response)
+    except:
+       status = "FAIL"
+       message = "SYSTEM_ERROR" 
+       log.error("Error while saving topic name", exc_info=1)
+        
+    response = {"status": status, "message": message, "payload": payload}
+    
+    return HttpResponse(json.dumps(response))
 
 
+def topic_grid(request):
+    
+    #response = [{'title': "vacation title"}, ]
+    
+    data = []
+    all_topics = Topic.objects.all()
+    for topic in all_topics:
+        data.append({'topic_name': topic.topic_name})
+    
+    records = len(all_topics)
+    
+    response = {
+        #'draw': request.GET.get("_"),
+        'recordsTotal': records,
+        'recordsFiltered': records,
+        'data': data,
+    }
+    
+    return HttpResponse(json.dumps(response))
 
 urlpatterns = [
-    
+    url(r"topic_grid", topic_grid, name="topic_grid"),
     url(r"index/", index, name="index"),
     url(r"index_2/", index2, name="index2"),
     url(r"index_3/", index3, name="index3"),

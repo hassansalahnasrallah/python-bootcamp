@@ -1,88 +1,103 @@
 {% extends 'base.html' %}
 
+
 {% block container_block %}
-
-
-<link rel="stylesheet" href="https://formvalidation.io/vendors/formvalidation/css/formValidation.min.css">
-
 <form name="topic_form" id="topic_form" action="{% url 'save_topic' %}" method="POST">
 	{% csrf_token %}
-	
 	<label>Topic</label>
-	<input name="topic_name" class="form-control" value="{{topic.topic_name}}" placeholder="Topic" required /> 
+	<input name="topic_name" class="form-control" value="{{topic.topic_name}}" placeholder="Topic" /> 
 	<input type="hidden" name="topic_id" value="{{topic.id}}" />
-	<button type="button" id="save_topic" class="btn btn-success">Save</button>
+	<button type="submit" id="save_topic" class="btn btn-success">Save</button>
 </form>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
-<script src='https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js'></script>
+<!-- <form class="cmxform" id="commentForm" method="get" action="">
+  <fieldset>
+    <legend>Please provide your name, email address (won't be published) and a comment</legend>
+    <p>
+      <label for="cname">Name (required, at least 2 characters)</label>
+      <input id="cname" name="name" minlength="2" type="text">
+    </p>
+    <p>
+      <label for="cemail">Number (required)</label>
+      <input id="number" type="text" name="number">
+    </p>
+    <p>
+      <label for="cemail">E-Mail (required)</label>
+      <input id="cemail" type="email" name="email" required>
+    </p>
+    <p>
+      <label for="curl">URL (optional)</label>
+      <input id="curl" type="url" name="url">
+    </p>
+    <p>
+      <label for="ccomment">Your comment (required)</label>
+      <textarea id="ccomment" name="comment" required></textarea>
+    </p>
+    <p>
+      <input class="submit" type="submit" value="Submit">
+    </p>
+  </fieldset>
+</form> -->
+
 
 <script>
 	$(function(){
-		const form = document.getElementById('topic_form');
-	    FormValidation.formValidation(form, {
-	        fields: {
-	        	topic_name: {
-	                validators: {
-	                    notEmpty: {
-	                        message: 'The name is required'
-	                    }
-	                }
-	            },
-	            
-	        },
-	        plugins: {
-	            trigger: new FormValidation.plugins.Trigger(),
-	            tachyons: new FormValidation.plugins.Tachyons(),
-	            submitButton: new FormValidation.plugins.SubmitButton(),
-	            icon: new FormValidation.plugins.Icon({
-	                valid: 'fa fa-check',
-	                invalid: 'fa fa-times',
-	                validating: 'fa fa-refresh'
-	            }),
-	        }
-	    });  
-		
+		$("#topic_form").validate({
+			rules: {
+				topic_name: {
+					required: true,
+				},
+			},
+			
+			messages: {
+				topic_name: {
+					required: "Name is required"
+				},
+				
+			},
+			submitHandler: function(){
+				$.ajax({
+					type: "POST",
+					url: "{% url 'save_topic' %}", //$("form[name=topic_form]").attr('action')
+					data: {
+						topic_name: $("input[name=topic_name]").val(),
+						topic_id: $("input[name=topic_id]").val(),
+						csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val()
+					},
+					dataType: 'json',
+					success: function(response){
+						console.log(response)
+						
+						if(response.status == 'OK'){
+							alert("Save success");
+							var topic_id = response.payload.id;
+							$("input[name=topic_id]").val(topic_id);
+						}else{
+							if(response.message == 'FAIL'){
+								alert("Fail to save")
+							}else if(response.message == 'NAME_EXISTS'){
+								alert("This topic already found")
+							}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
+								alert("You have missing parameters")
+							}else if(response.message == 'TOPIC_NAME_ALREADY_EXISTS'){
+								alert("Name already found")
+							}
+						}
+						//Handle form functionality
+					},
+					error: function(){
+						
+						alert("Error in save")
+					}
+				});
+			}
+		});
 		
 		$("#save_topic").click(function(){
-			
-			$.ajax({
-				type: "POST",
-				url: "{% url 'save_topic' %}", //$("form[name=topic_form]").attr('action')
-				data: {
-					topic_name: $("input[name=topic_name]").val(),
-					topic_id: $("input[name=topic_id]").val(),
-					csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val()
-				},
-				dataType: 'json',
-				success: function(response){
-					console.log(response)
-					
-					if(response.status == 'OK'){
-						alert("Save success");
-						var topic_id = response.payload.id;
-						$("input[name=topic_id]").val(topic_id);
-					}else{
-						if(response.message == 'FAIL'){
-							alert("Fail to save")
-						}else if(response.message == 'NAME_EXISTS'){
-							alert("This topic already found")
-						}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
-							alert("You have missing parameters")
-						}else if(response.message == 'TOPIC_NAME_ALREADY_EXISTS'){
-							alert("Name already found")
-						}
-					}
-					//Handle form functionality
-				},
-				error: function(){
-					
-					alert("Error in save")
-				}
-			});
+			$("#topic_form").submit();
 		});	
 	});
 	
 </script>
+
 {% endblock %}

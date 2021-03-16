@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
+try:
+    from first_project.local_settings import lsettings
+except ImportError:
+    lsettings = {}
+    
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent 
 TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
@@ -25,7 +30,7 @@ MEDIA_DIR = os.path.join(BASE_DIR, "media")
 SECRET_KEY = '-lksjb9bij#kou!ea^-^b$gorrf+@_2s$mbjrq9i*$%u$f!9*h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = lsettings.get('DEBUG', False)
 
 ALLOWED_HOSTS = []
 
@@ -86,9 +91,9 @@ WSGI_APPLICATION = 'first_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'first_project',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'NAME': lsettings.get('db_name', 'first_project'),
+        'USER': lsettings.get('db_user','root'),
+        'PASSWORD': lsettings.get('db_password', 'root'),
         'HOST': '127.0.0.1',
         'PORT': '3306'
     }
@@ -113,6 +118,59 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+#LOGGING Configurations
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'formatters': {
+        'simple': {
+            'format': '%(module)s line: %(lineno)s: %(message)s'
+        },
+        'level_app':{
+            'format': '%(asctime)s | %(levelname)s | %(filename)s:%(lineno)s | %(message)s'
+        }
+        
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'level_app'
+        },
+#         'main_log_file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.handlers.TimedRotatingFileHandler',
+#             'filename': '%s/main.log' % (BASE_DIR),
+#             'formatter': 'level_app'
+#         }
+        
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],#, 'main_log_file'],
+            'level': 'ERROR',
+            'propagate': True
+        },
+        'requests': {
+            'handlers': ['console'],#, 'main_log_file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        '': {
+            'handlers': ['console'],#, 'main_log_file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        }
+        
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
