@@ -81,15 +81,15 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'first_project',
         'USER':'root',
-        'PASSWORD':'root',
+        'PASSWORD':'1910sarjoun',
         'HOST':'127.0.0.1',
-        'POST':'3306'
+        'PORT':'3306'
     }
 }
 # DATABASES = {
     # 'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME':BASE_DIR / 'db.sqlite3'
+        # 'NAME':BASE_DIR / 'db.sqlite3',
     # }
 # }
 
@@ -110,6 +110,58 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# LOGGING={
+    # 'version':1,
+    # 'disable_existing_loggers':False,
+    # 'filters':{
+        # 'require_debug_false':{
+            # '()':'django.utils.log.RequireDebugFalse'
+            # }
+    # },
+    # 'formatters':{
+        # 'simple':{
+            # 'format':'%(module)s line :%(lineno)s | %(message)s ' 
+        # },
+        # 'level_app':{
+        # 'format':'%(asctime)s | %(levelname)s | %(filname)s:%(lineno)s | %(message)s '
+        # }
+    # },
+    # 'handlers':{
+        # 'console':{
+            # 'level':'DEBUG',
+            # 'class':'logging.StreamerHandler',
+            # 'formatter':'level_app'
+        # },
+        # 'main-_log_file':{
+            # 'level':'DEBUG',
+            # 'class':'logging.handlers.TimedRotatingFileHandler',
+            # 'filename':'%s/main.log'%(BASE_DIR),
+            # 'formatter':'level_app',     
+        # }
+        #
+    # },
+    # 'loggers':{
+        # 'django':{
+            # 'handlers':['console','main_log_file'],
+            # 'level':'ERROR',
+            # 'propagate':True,
+            #
+        # },
+        # 'requests':{
+            # 'handlers':['console','main_log_file'],
+            # 'level':'INFO',
+            # 'propagate':True,
+            #
+        # },
+        # '':{
+            # 'handlers':['console','main_log_file'],
+            # 'level':'DEBUG',
+            # 'propagate':True,
+        # }
+    # }
+# }
+
 
 
 # Internationalization

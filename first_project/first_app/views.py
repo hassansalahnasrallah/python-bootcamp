@@ -3,9 +3,10 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.conf.urls import url
 from . import forms
 from django.contrib.auth import authenticate
-
 from django.contrib.auth.decorators import login_required
 from django.urls.base import reverse
+from first_app.models import Topic
+from _sqlite3 import IntegrityError
 #from forms import FormName
 
 # Create your views here.
@@ -52,7 +53,7 @@ def form_webpage(request):
 def register(request):
     
     user_form=forms.UserForm
-    profile_form=forms.UserProfileInfoForm
+    profile_form=forms.UserProfileInfoForm()
     
     registered=False
     
@@ -116,6 +117,79 @@ def user_login(request):
     
     return render(request,'login.html',context)
 
+def topic_page(request):
+    context={}
+    context['topics']= Topic.objects.all()
+    return render(request,"topic_page.html",context)
+
+def topic_form(request):
+    context={}
+    
+    topic_id=request.GET.get('id')
+    topic=None
+    
+    if topic_id:
+        topic=Topic.objects.filter(id=topic_id).first()
+        
+    context['topic']=topic
+    return render (request,'topic_form.html',context)
+
+def save_topic(request):
+    topic_name=request.POST.get("topic_name")
+    topic_id=request.POST.get("topic_id")
+    status='OK'
+    message='SUCCESS'
+    payload={}
+    try:
+        if topic_name:
+            if topic_id: 
+                #update
+                topic=Topic.objects.filter(id=topic_id).first()
+                if topic:
+                    topic.topic_name=topic_name
+                    topic.save()
+                    payload['id']=topic.id
+                else:
+                    message="TOPIC_NOT_FOUND"
+                    status="FAIL"
+            else:
+                #create
+                Topic.objects.create(topic_name=topic_name)
+        else:
+            message="MISSING_RQUIRED_PARAMETERS"
+            status="FAIL"
+    except IntegrityError:
+        message="TOPIC_NAME_DUPLICATE"
+        status="FAIL"
+    except:
+        message="SYSTEM_ERROR"
+        status="FAIL"
+                    
+    response={"status":status,"message":message,"payload":payload}
+    
+    return HttpResponse(json.dumps(response))
+
+def topic_grid(request):
+#    response=[{'title':vacation_title}]
+    data=[]
+    all_topic=Topic.objects.all()
+    for topic in all_topics:
+        response.append({'topic_name':topic.topic_name})
+        data.append({'topic_name':topic.topic_name})
+    records=len(all_topics)
+    response={
+        'draw':0,
+        'recordsTotal':records,
+        'recordsFiltered':records,
+        'data':data,
+        }
+    return HttpResponse(json.dumps(response))
+
+def dialog(request):
+    context={}
+    return render(request,'dialog.html',context)
+
+
 urlpatterns = [
     url(r'index/',index, name="index"),
     url(r'index_2/',index2, name="index2"),
@@ -124,4 +198,9 @@ urlpatterns = [
     url(r'webpage/',form_webpage, name="form_webpage"),
     url(r"register/",register,name="register"),
     url(r"login/",user_login,name="user_login"),
+    url(r"topic/",topic_form,name="topic_form"),
+    url(r"save/",save_topic,name="save_topic"),
+    url(r"topic_page/",topic_page,name="topic_page"),
+    url(r"topic_grid/",topic_grid,name="topic_grid"),
+    url(r"dialog/",dialog,name="dialog"),
     ]
