@@ -37,14 +37,17 @@ body {
 
 <div class="topnav">
   <a href="#home">Home</a>
-  <a href="{% url 'register' %}">login</a>
-  <a href="#contact">Signup</a>
+  <a href="{% url 'user_login' %}">login</a>
+  <a href="{% url 'register' %}">Signup</a>
 </div>
 <div>
+<br>
 <div style="padding-left:16px">
 </div>
+<br>
 <div class= container>
 {% block img %}{% endblock %}
+<br>
 {% block form %}{% endblock %}
 </div> 
 </div>
