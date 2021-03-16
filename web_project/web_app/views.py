@@ -9,6 +9,7 @@ from django.contrib.auth.models import AbstractUser
 from .models import User
 from django.contrib.auth.decorators import login_required
 from django.template.context_processors import request
+from web_project import settings
 
 def register(request):
     
@@ -97,6 +98,7 @@ def index(request):
     form = models.Userprofile.objects.filter(user_id = current_user)
     print(form)
     context = {'form':form}
+    context['MEDIA_URL'] = settings.MEDIA_URL
     return render(request, 'index.html', context)
 
 
