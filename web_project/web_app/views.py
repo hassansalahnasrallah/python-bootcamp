@@ -112,19 +112,7 @@ def showvacation(request):
     
     
     
-def showformdata(request):
-    fm = forms.UserForm
-    if request.method == 'POST':
-        fm = forms.UserForm(data=request.POST)
-        if fm.is_valid():
-            nm = fm.cleaned_data['job_description']
-            em = fm.cleaned_data['picture']
-            pw = fm.cleaned_data['password']
-            reg = User(username='Mazen',name=nm, email=em, password=pw)
-            reg.save()
-    else:
-        fm = register(request)
-    return render(request,"profile.html",{'form':fm})
+
 
 
 def vacation(request):
