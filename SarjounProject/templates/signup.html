@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title%}Signup{%endblock%}
+
+{%block container%}
+<div class="jumbotron">
+{% if sign_up %}
+	{%url 'login'%}
+	{% csrf_token %}
+{%else%}
+	<form method ='POST' enctype ="multipart/form-data">
+		<h2> Sign up</h2>
+		{{signup_form.as_p}}
+		{% csrf_token %}
+		<input type="submit" class="btn btn-primary" name=signup" value="Submit"/>
+
+	</form>
+	
+{% endif%}
+</div>
+{%endblock%}
