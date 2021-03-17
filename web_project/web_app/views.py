@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from lib2to3.fixes.fix_input import context
 from web_app import forms
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.urls.base import reverse
 from web_app import models, forms
@@ -91,7 +91,7 @@ def profile(request):
 
 
 
-@login_required
+@login_required(login_url='login')
 def index(request):
     current_user = request.user.id
     print('enterd')
@@ -102,7 +102,7 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-
+@login_required(login_url='login')
 def showvacation(request):
     current_user = request.user.id
     print('enterd')
@@ -164,6 +164,12 @@ def vacation(request):
 def jquery(request):
     context= {}
     return render(request, 'jqueryui.html', context)
+
+
+def userlogout(request):
+    logout(request)
+
+    return HttpResponseRedirect(reverse('login'))
 
 
 
