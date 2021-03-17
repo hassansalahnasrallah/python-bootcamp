@@ -164,7 +164,6 @@ def save_topic(request):
     except:
         message="SYSTEM_ERROR"
         status="FAIL"
-                    
     response={"status":status,"message":message,"payload":payload}
     
     return HttpResponse(json.dumps(response))

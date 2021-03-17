@@ -12,5 +12,5 @@ class FormSignup(forms.ModelForm):
 class userprofile(forms.ModelForm):
     class Meta():
         model=UserProfile
-        fields=('picture',)
+        fields='__all__'
     

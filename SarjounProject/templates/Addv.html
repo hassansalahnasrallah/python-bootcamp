@@ -7,9 +7,13 @@
 	<label>Description</label>
 	<input class="form-control" name="desc" value="{{ vacation.description }}" placeholder="Description" required />
 	<label>From</label>
-	<input class="form-control" type="text" name="date_from" value="{{ vacation.datefrom|date:'Y-m-d' }}" required   />
+	<input class="form-control" type="text" name="date_from" id="date_from" value="{{ vacation.datefrom|date:'Y-m-d' }}" required   />
 	<label>To</label>
-	<input class="form-control" type="text" name="date_to" value="{{ vacation.dateto|date:'Y-m-d' }}"required  />
+	<input class="form-control" type="text" name="date_to" id="date_to" value="{{ vacation.dateto|date:'Y-m-d' }}"required  />
+	<label>Duration</label>
+	<input class="form-control" type="integer" name="duration" id="duration" readonly/>
+	<button type="button" id="Btn_Calculate"> Calculate </button>
+	<br>
 	<input type="hidden" name="vacation_id" value="{{vacation.id}}"/>
 	<br>
 	<button type="submit" id="save_vacation" class="btn btn-success" href="{% url 'vacation' %}"> Save </button>
@@ -19,6 +23,22 @@
 <br><br>
 
 <script>
+
+$("#Btn_Calculate").click(function(){
+    console.log("done");
+	var data= $("#date_from").val();
+	var array=data.split('-');
+	FirstDate=new Date(array[0],array[1],array[2])
+	var data1= $("#date_to").val();
+	var array1=data1.split('-');
+	SecondDate=new Date(array1[0],array1[1],array1[2]);
+	var timedifference= SecondDate.getTime() - FirstDate.getTime();
+	console.log(timedifference);
+	var nodays= timedifference/(1000*3600*24);
+	console.log(nodays);
+	$("#duration").val(parseInt(nodays)+" days");
+	});
+
 
 $(function(){
 	$("#save_vacation").click(function(){
