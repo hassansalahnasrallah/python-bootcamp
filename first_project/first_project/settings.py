@@ -111,57 +111,58 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# LOGGING={
-    # 'version':1,
-    # 'disable_existing_loggers':False,
-    # 'filters':{
-        # 'require_debug_false':{
-            # '()':'django.utils.log.RequireDebugFalse'
-            # }
-    # },
-    # 'formatters':{
-        # 'simple':{
-            # 'format':'%(module)s line :%(lineno)s | %(message)s ' 
-        # },
-        # 'level_app':{
-        # 'format':'%(asctime)s | %(levelname)s | %(filname)s:%(lineno)s | %(message)s '
-        # }
-    # },
-    # 'handlers':{
-        # 'console':{
-            # 'level':'DEBUG',
-            # 'class':'logging.StreamerHandler',
-            # 'formatter':'level_app'
-        # },
-        # 'main-_log_file':{
-            # 'level':'DEBUG',
-            # 'class':'logging.handlers.TimedRotatingFileHandler',
-            # 'filename':'%s/main.log'%(BASE_DIR),
-            # 'formatter':'level_app',     
-        # }
-        #
-    # },
-    # 'loggers':{
-        # 'django':{
-            # 'handlers':['console','main_log_file'],
-            # 'level':'ERROR',
-            # 'propagate':True,
-            #
-        # },
-        # 'requests':{
-            # 'handlers':['console','main_log_file'],
-            # 'level':'INFO',
-            # 'propagate':True,
-            #
-        # },
-        # '':{
-            # 'handlers':['console','main_log_file'],
-            # 'level':'DEBUG',
-            # 'propagate':True,
-        # }
-    # }
-# }
+#LOGGING Configurations
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'formatters': {
+        'simple': {
+            'format': '%(module)s line: %(lineno)s: %(message)s'
+        },
+        'level_app':{
+            'format': '%(asctime)s | %(levelname)s | %(filename)s:%(lineno)s | %(message)s'
+        }
+        
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'level_app'
+        },
+#         'main_log_file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.handlers.TimedRotatingFileHandler',
+#             'filename': '%s/main.log' % (BASE_DIR),
+#             'formatter': 'level_app'
+#         }
+        
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],#, 'main_log_file'],
+            'level': 'ERROR',
+            'propagate': True
+        },
+        'requests': {
+            'handlers': ['console'],#, 'main_log_file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        '': {
+            'handlers': ['console'],#, 'main_log_file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        }
+        
+    }
+}
 
 
 # Internationalization
