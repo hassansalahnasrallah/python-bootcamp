@@ -1,0 +1,1306 @@
+2021-03-14 18:46:05,306 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 18:47:15,080 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 18:47:16,674 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 18:47:16,786 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 18:49:00,660 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 18:49:05,125 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 18:49:05,247 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 18:49:27,864 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 81, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1143, in execute_sql
+    sql, params = self.as_sql()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1488, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 823, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1222, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1217, in get_prep_value
+    return self.to_python(value)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1189, in to_python
+    raise exceptions.ValidationError(
+django.core.exceptions.ValidationError: ['“03/12/2021” value has an invalid date format. It must be in YYYY-MM-DD format.']
+2021-03-14 18:49:27,864 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 81, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1143, in execute_sql
+    sql, params = self.as_sql()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1488, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 823, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1222, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1217, in get_prep_value
+    return self.to_python(value)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1189, in to_python
+    raise exceptions.ValidationError(
+django.core.exceptions.ValidationError: ['“03/12/2021” value has an invalid date format. It must be in YYYY-MM-DD format.']
+2021-03-14 18:49:27,876 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 128101
+2021-03-14 18:49:27,876 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 128101
+2021-03-14 18:54:34,592 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 18:54:34,694 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 18:55:06,601 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 81, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+2021-03-14 18:55:06,601 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 81, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+2021-03-14 18:55:06,657 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 148874
+2021-03-14 18:55:06,657 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 148874
+2021-03-14 18:55:26,788 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 81, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+2021-03-14 18:55:26,788 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 81, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+2021-03-14 18:55:26,796 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 148874
+2021-03-14 18:55:26,796 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 148874
+2021-03-14 18:56:41,196 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 77, in profile
+    user = models.Userprofile.objects.get(user_id = current_user)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+web_app.models.Userprofile.DoesNotExist: Userprofile matching query does not exist.
+2021-03-14 18:56:41,196 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 77, in profile
+    user = models.Userprofile.objects.get(user_id = current_user)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+web_app.models.Userprofile.DoesNotExist: Userprofile matching query does not exist.
+2021-03-14 18:56:41,202 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 78063
+2021-03-14 18:56:41,202 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 78063
+2021-03-14 18:57:26,066 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 81, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+2021-03-14 18:57:26,066 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 81, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+2021-03-14 18:57:26,075 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 148875
+2021-03-14 18:57:26,075 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 148875
+2021-03-14 18:57:50,689 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 18:57:50,794 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 18:58:08,109 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 81, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+2021-03-14 18:58:08,109 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 81, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+2021-03-14 18:58:08,119 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 148875
+2021-03-14 18:58:08,119 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 148875
+2021-03-14 18:59:57,755 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:00:14,465 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 82, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+2021-03-14 19:00:14,465 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 82, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+2021-03-14 19:00:14,472 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 148868
+2021-03-14 19:00:14,472 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 148868
+2021-03-14 19:02:10,770 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:02:30,961 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 83, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+2021-03-14 19:02:30,961 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 83, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+2021-03-14 19:02:30,968 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 149001
+2021-03-14 19:02:30,968 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 149001
+2021-03-14 19:03:25,822 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 83, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+2021-03-14 19:03:25,822 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 83, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+2021-03-14 19:03:25,830 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 149001
+2021-03-14 19:03:25,830 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 149001
+2021-03-14 19:04:11,002 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:04:24,068 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 83, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+2021-03-14 19:04:24,068 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 83, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_userprofile.date
+2021-03-14 19:04:24,180 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 149001
+2021-03-14 19:04:24,180 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 149001
+2021-03-14 19:05:18,753 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:05:18,819 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:07:32,963 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:07:33,055 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:09:45,336 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:09:45,485 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:10:10,186 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 83, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1143, in execute_sql
+    sql, params = self.as_sql()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1488, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 823, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1222, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1217, in get_prep_value
+    return self.to_python(value)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1189, in to_python
+    raise exceptions.ValidationError(
+django.core.exceptions.ValidationError: ['“03/24/2021” value has an invalid date format. It must be in YYYY-MM-DD format.']
+2021-03-14 19:10:10,186 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 83, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1143, in execute_sql
+    sql, params = self.as_sql()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1488, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 823, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1222, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1217, in get_prep_value
+    return self.to_python(value)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1189, in to_python
+    raise exceptions.ValidationError(
+django.core.exceptions.ValidationError: ['“03/24/2021” value has an invalid date format. It must be in YYYY-MM-DD format.']
+2021-03-14 19:10:10,213 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 128242
+2021-03-14 19:10:10,213 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 128242
+2021-03-14 19:10:57,127 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:10:57,230 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:12:27,376 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:12:27,483 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:12:44,763 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 83, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1143, in execute_sql
+    sql, params = self.as_sql()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1488, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 823, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1222, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1217, in get_prep_value
+    return self.to_python(value)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1189, in to_python
+    raise exceptions.ValidationError(
+django.core.exceptions.ValidationError: ['“03/27/2021” value has an invalid date format. It must be in YYYY-MM-DD format.']
+2021-03-14 19:12:44,763 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 83, in profile
+    user.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 872, in _save_table
+    updated = self._do_update(base_qs, using, pk_val, values, update_fields,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 926, in _do_update
+    return filtered._update(values) > 0
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 803, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1522, in execute_sql
+    cursor = super().execute_sql(result_type)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1143, in execute_sql
+    sql, params = self.as_sql()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1488, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 823, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1222, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1217, in get_prep_value
+    return self.to_python(value)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\fields\__init__.py", line 1189, in to_python
+    raise exceptions.ValidationError(
+django.core.exceptions.ValidationError: ['“03/27/2021” value has an invalid date format. It must be in YYYY-MM-DD format.']
+2021-03-14 19:12:44,772 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 128242
+2021-03-14 19:12:44,772 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 128242
+2021-03-14 19:16:40,472 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:16:40,549 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:18:24,020 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:18:24,115 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:21:17,423 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:21:36,369 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:21:36,463 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:22:07,659 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:22:07,756 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:23:15,237 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:23:15,331 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:24:43,269 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:24:55,448 | ERROR | log.py:224| Internal Server Error: /vacation
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_vacation.datefrom
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 161, in vacation
+    vacation_save.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_vacation.datefrom
+2021-03-14 19:24:55,448 | ERROR | log.py:224| Internal Server Error: /vacation
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_vacation.datefrom
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 161, in vacation
+    vacation_save.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_vacation.datefrom
+2021-03-14 19:24:55,459 | ERROR | basehttp.py:157| "POST /vacation HTTP/1.1" 500 148428
+2021-03-14 19:24:55,459 | ERROR | basehttp.py:157| "POST /vacation HTTP/1.1" 500 148428
+2021-03-14 19:26:31,187 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:26:49,195 | ERROR | log.py:224| Internal Server Error: /vacation
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_vacation.datefrom
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 162, in vacation
+    vacation_save.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_vacation.datefrom
+2021-03-14 19:26:49,195 | ERROR | log.py:224| Internal Server Error: /vacation
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_vacation.datefrom
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 162, in vacation
+    vacation_save.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_vacation.datefrom
+2021-03-14 19:26:49,288 | ERROR | basehttp.py:157| "POST /vacation HTTP/1.1" 500 148752
+2021-03-14 19:26:49,288 | ERROR | basehttp.py:157| "POST /vacation HTTP/1.1" 500 148752
+2021-03-14 19:28:00,549 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:28:08,161 | ERROR | log.py:224| Internal Server Error: /vacation
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_vacation.datefrom
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 162, in vacation
+    vacation_save.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_vacation.datefrom
+2021-03-14 19:28:08,161 | ERROR | log.py:224| Internal Server Error: /vacation
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: web_app_vacation.datefrom
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 162, in vacation
+    vacation_save.save()
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: web_app_vacation.datefrom
+2021-03-14 19:28:08,210 | ERROR | basehttp.py:157| "POST /vacation HTTP/1.1" 500 148752
+2021-03-14 19:28:08,210 | ERROR | basehttp.py:157| "POST /vacation HTTP/1.1" 500 148752
+2021-03-14 19:29:07,928 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-14 19:29:33,436 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor

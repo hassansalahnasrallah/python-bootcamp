@@ -161,3 +161,9 @@ def vacation(request):
 
 
 
+def jquery(request):
+    context= {}
+    return render(request, 'jqueryui.html', context)
+
+
+
