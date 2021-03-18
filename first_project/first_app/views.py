@@ -14,11 +14,6 @@ def index(request):
     context={"help_text":"this is a help text"}
     return render(request, 'first_app/index.html', context)
 
-def index2(request):
-    return HttpResponse("Nfekho")
-
-def index3(request):
-    return HttpResponse("Nfekho bel laban")
 
 def form_name_view(request):
     form = forms.FormName()
@@ -191,8 +186,6 @@ def dialog(request):
 
 urlpatterns = [
     url(r'index/',index, name="index"),
-    url(r'index_2/',index2, name="index2"),
-    url(r'index_3/',index3, name="index3"),
     url(r'form/',form_name_view, name="form_name_view"),
     url(r'webpage/',form_webpage, name="form_webpage"),
     url(r"register/",register,name="register"),

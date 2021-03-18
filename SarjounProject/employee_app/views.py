@@ -34,21 +34,21 @@ def Login(request):
 
 
 def Signup(request):
-    userprofileinfo=forms.userprofile()
+   # userprofileinfo=forms.UserInfo()
     signup_form=forms.FormSignup()
     sign_up=False
     
     if request.method=='POST':
         signup_form=forms.FormSignup(data=request.POST)
-        userprofileinfo=forms.userprofile(data=request.POST)
+        #userprofileinfo=forms.UserInfo(data=request.POST)
         
-        if signup_form.is_valid() and userprofileinfo.is_valid():
+        if signup_form.is_valid:
             user=signup_form.save()
             user.set_password(user.password)
             user.save()
-            profile=userprofileinfo.save(commit=False)
-            profile.user=user
-            profile.save()
+            # profile=userprofileinfo.save(commit=False)
+            # profile.user=user
+            # profile.save()
             sign_up=True
             return HttpResponseRedirect(reverse('login'))
         else:
@@ -56,7 +56,7 @@ def Signup(request):
     else:
         print("Not valid")
 
-    context={'signup_form':signup_form,'sign_up':sign_up,'userinfo':userprofileinfo}
+    context={'signup_form':signup_form,'sign_up':sign_up}
 
     return render(request,'signup.html',context)
 

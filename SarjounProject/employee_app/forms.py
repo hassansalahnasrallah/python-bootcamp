@@ -9,8 +9,7 @@ class FormSignup(forms.ModelForm):
         model=User
         fields=('username','email','password')
         
-class userprofile(forms.ModelForm):
+class UserInfo(forms.ModelForm):
     class Meta():
-        model=UserProfile
-        fields='__all__'
-    
+        model = UserProfile
+        fields = ('job_position','profilepicture','dateofbirth')
