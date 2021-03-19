@@ -1,0 +1,114 @@
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+
+  <script>
+  
+  $( function() {
+    $( "#datepicker" ).datepicker({
+    	
+    	dateFormate: "dd-mm-yy",
+    });
+    
+    $( "#datepicker" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+    
+    $( "#show_dialog" ).click(function(){
+    	
+    	$( "#dialog" ).dialog();
+    	
+    });
+    
+    $("#calculate_age").click(function (){
+    	
+    	var age = new Date().getFullYear()-new Date ($( "#datepicker" ).val()).getFullYear()
+    	console.log(age);
+    	$("#show_age").html("your age now is:"+age);
+    	if (age > 25){
+    		$( "#show_age" ).animate({
+    	          backgroundColor: "#aa0000",
+    	          color: "#fff",
+    	          width: 500
+    	        }, 1000 );
+    		
+    		
+    	}
+    	else{
+    		$( "#show_age" ).animate({
+  	          backgroundColor: "blue",
+  	          color: "#fff",
+  	          width: 500
+  	        }, 1000 );  		
+    	}	   	
+    });
+    
+    
+    $("#calculate_duration").click(function (){
+    	var dt = $( "#datepicker" ).datepicker("getDate");
+    	var date = dt.getDate();
+    	var month = dt.getMonth() + 1;
+    	var year = dt.getFullYear();
+    	var duration = new Date().getFullYear() - new Date ($( "#datepicker" ).val()).getFullYear();
+    	console.log(duration);
+    	$("#show_duration").html("Duration="+ date+" days "+month+" months "+year+" years ");
+    		
+    		   	
+    });
+    
+   });
+
+  
+  $( function() {
+    var availableTags = [
+      "Manager",
+      "Super manager",
+    ];
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  
+  
+  </script>
+ 
+
+  
+</head>
+
+
+<body>
+ 
+<p>Date: <input type="text" id="datepicker"></p>
+ 
+<button type="button" id="calculate_age">Get current age</button> 
+<div id ='show_age'>Age result here</div> 
+
+<p></p>
+
+<div class="ui-widget">
+  <label for="tags">Position:</label>
+  <input id="tags">
+</div>
+ 
+
+<p></p>
+
+<button type="button" id="show_dialog">Dialog</button> 
+<div id="dialog" title="Basic dialog">
+	<p class="not-visible" >Hello Dear! Move me!</p>
+</div>
+
+<p>Duration: <input type="text" id="duration"></p>
+<button type="button" id="calculate_duration">Get Duration</button>
+<div id ='show_duration'></div>
+
+</body>
+</html>

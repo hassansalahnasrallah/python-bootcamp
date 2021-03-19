@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+
+ {% block container_block %}
+
+<form name="vacation_form" action="{% url 'save_vacation' %}" method="POST">
+	{%csrf_token%}
+	
+	
+	<label>Description</label>
+	<input name="description" class="form-control" value="{{desc.description}}" placeholder="Description"/>
+	<input type="hidden" name="description_id" value="{{desc.id}}"/>
+	
+	<button type="button" id="save_vacation" class="btn btn-success">Save</button>
+
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<script>
+	$(function(){
+		$("#save_vacation").click(function(){
+			
+			$.ajax({
+				type:"POST",
+				url:"{% url 'save_vacation' %}",//$("form[name=topic_form]").attr('action')
+				data:{
+					description: $("input[name=description]").val(),
+					description_id: $("input[name=description_id]").val(),
+					csrfmiddlewaretoken: $("input=<csrfmiddlewaretoken]").val(),
+				},
+				dataType: 'json',//json bcz data is dictionary
+				
+				success: function(){
+					//console.log(response)
+					
+					//handle form functionalty
+				
+			    },
+			    
+			    error: function(){
+			    	
+			    	
+			    }
+			})
+
+		});
+	});
+
+
+</script>
+{% endblock %}

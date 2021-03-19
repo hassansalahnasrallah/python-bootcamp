@@ -13,8 +13,9 @@ class UserProfile(models.Model):
      
      
 class Vacation(models.Model):
-    description=models.CharField(max_length=255)
-    date_from = models.DateField()
-    date_to= models.DateField()
-    duration=models.CharField(max_length=10)
+    #employee = models.ForeignKey(User,on_delete=models.CASCADE)
+    description = models.CharField(max_length=255)
+    #date_from = models.DateField()
+    #date_to = models.DateField()
+    #duration = models.CharField(max_length=10)
        

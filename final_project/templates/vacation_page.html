@@ -1,0 +1,25 @@
+
+<table>
+
+	<thead>
+		<tr>
+			<th>Description</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+
+	<tbody>
+	
+		{% for desc in vacations %}
+		
+			<tr>
+				<td>{{desc.description}}</td>
+				<td><a href="{% url 'vacation_form' %}?id={{desc.id}}">Edit</a></td>
+			</tr>
+		{% endfor %}
+
+	</tbody>
+
+
+
+</table>
