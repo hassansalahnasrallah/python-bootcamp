@@ -4,9 +4,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery</title>
+  <title>jQuery test </title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
+  <style>
+  #feedback { font-size: 1.4em; }
+  #selectable .ui-selecting { background: #FECA40; }
+  #selectable .ui-selected { background: #F39814; color: white; }
+  #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+  
+   .ui-controlgroup-vertical {
+      width: 150px;
+    }
+    .ui-controlgroup.ui-controlgroup-vertical > button.ui-button,
+    .ui-controlgroup.ui-controlgroup-vertical > .ui-controlgroup-label {
+      text-align: center;
+    }
+    #car-type-button {
+      width: 120px;
+    }
+    .ui-controlgroup-horizontal .ui-spinner-input {
+      width: 20px;
+    }
+    
+    .toggler { width: 500px; height: 200px; position: relative; }
+    #button { padding: .5em 1em; text-decoration: none; }
+    #effect { width: 240px;  padding: 1em; border: 1px solid #000; background: #eee; color: #333; }
+    .newClass { text-indent: 40px; letter-spacing: .4em; width: 410px; height: 120px; padding: 30px; margin: 10px; font-size: 1.1em; }
+   
+  </style>
+
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   
@@ -50,6 +78,14 @@
     	}	   	
     });
     
+    var availableTags = [
+        "Manager",
+        "Super manager",
+      ];
+      $( "#tags" ).autocomplete({
+        source: availableTags
+      });
+    
     
     $("#calculate_duration").click(function (){
     	var dt = $( "#datepicker" ).datepicker("getDate");
@@ -63,24 +99,271 @@
     		   	
     });
     
+    $( "#draggable" ).draggable();
+    
+    $( "#draggable" ).draggable();
+    $( "#droppable" ).droppable({
+      drop: function( event, ui ) {
+        $( this )
+          .addClass( "ui-state-highlight" )
+          .find( "p" )
+            .html( "Dropped!" );
+      }
+    });
+    
+    
+    $( "#resizable" ).resizable();
+    
+    $( "#selectable" ).selectable();
+    
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+    
+    $( "#accordion" ).accordion();
+    
+    $( "#checkbox" ).checkboxradio();
+    
+    
+    $( ".controlgroup-vertical" ).controlgroup({
+      "direction": "vertical"
+    });
+    
+    
+    $( "#menu" ).menu();
+    
+    $( "#progressbar" ).progressbar({
+        value: 50
+      });
+    
+    $( "#number" )
+    .selectmenu()
+    .selectmenu( "menuWidget" )
+      .addClass( "overflow" );
+    
+    $( "#slider" ).slider();
+    
+    
+    var spinner = $( "#spinner" ).spinner();
+    
+    $( "#disable" ).on( "click", function() {
+      if ( spinner.spinner( "option", "disabled" ) ) {
+        spinner.spinner( "enable" );
+      } else {
+        spinner.spinner( "disable" );
+      }
+    });
+    $( "#destroy" ).on( "click", function() {
+      if ( spinner.spinner( "instance" ) ) {
+        spinner.spinner( "destroy" );
+      } else {
+        spinner.spinner();
+      }
+    });
+    $( "#getvalue" ).on( "click", function() {
+      alert( spinner.spinner( "value" ) );
+    });
+    $( "#setvalue" ).on( "click", function() {
+      spinner.spinner( "value", 5 );
+    });
+ 
+    $( "button" ).button();
+    
+    $( "#tabs" ).tabs();
+    
+    $( document ).tooltip();
+    
+    
+    $( "#button" ).on( "click", function() {
+        $( "#effect" ).addClass( "newClass", 1000, callback );
+      });
+   
+      function callback() {
+        setTimeout(function() {
+          $( "#effect" ).removeClass( "newClass" );
+        }, 1500 );
+      }
+      
+      function runEffect() {
+          
+          var selectedEffect = $( "#effectTypes" ).val();
+     
+         
+          var options = {};
+          
+          if ( selectedEffect === "scale" ) {
+            options = { percent: 50 };
+          } else if ( selectedEffect === "transfer" ) {
+            options = { to: "#button2", className: "ui-effects-transfer" };
+          } else if ( selectedEffect === "size" ) {
+            options = { to: { width: 200, height: 60 } };
+          }
+     
+          
+          $( "#effect2" ).effect( selectedEffect, options, 500, callback );
+        };
+     
+        
+        function callback() {
+          setTimeout(function() {
+            $( "#effect2" ).removeAttr( "style" ).hide().fadeIn();
+          }, 1000 );
+        };
+     
+        
+        $( "#button2" ).on( "click", function() {
+          runEffect();
+          return false;
+        });
+ 
+        function runEffectHide() {
+            var selectedEffect = $( "#effectTypes" ).val();
+       
+            var options = {};
+            if ( selectedEffect === "scale" ) {
+              options = { percent: 50 };
+            } else if ( selectedEffect === "size" ) {
+              options = { to: { width: 200, height: 60 } };
+            }
+       
+            $( "#effect2" ).hide( selectedEffect, options, 1000, callback );
+          };
+       
+          function callback() {
+            setTimeout(function() {
+              $( "#effect2" ).removeAttr( "style" ).hide().fadeIn();
+            }, 1000 );
+          };
+       
+          $( "#button3" ).on( "click", function() {
+        	  runEffectHide();
+          });        
+        
+    function runEffectToggle() {
+    	var selectedEffect = $( "#effectTypes" ).val();
+    	var options = {};
+        if ( selectedEffect === "scale" ) {
+        	options = { percent: 50 };
+        } else if ( selectedEffect === "size" ) {
+        	options = { to: { width: 200, height: 60 } };
+        }
+         
+        $( "#effect2" ).toggle( selectedEffect, options, 500 );
+         };
+         
+        $( "#button4" ).on( "click", function() {
+           runEffectToggle();
+        });
+            
+            
+    $.widget( "custom.colorize", {
+       
+        options: {
+          red: 255,
+          green: 0,
+          blue: 0,
+   
+          
+          change: null,
+          random: null
+        },
+   
+        
+        _create: function() {
+          this.element
+           
+            .addClass( "custom-colorize" );
+   
+          this.changer = $( "<button>", {
+            text: "change",
+            "class": "custom-colorize-changer"
+          })
+          .appendTo( this.element )
+          .button();
+   
+         
+          this._on( this.changer, {
+            click: "random"
+          });
+          this._refresh();
+        },
+   
+        _refresh: function() {
+          this.element.css( "background-color", "rgb(" +
+            this.options.red +"," +
+            this.options.green + "," +
+            this.options.blue + ")"
+          );
+   
+          this._trigger( "change" );
+        },
+   
+        random: function( event ) {
+          var colors = {
+            red: Math.floor( Math.random() * 256 ),
+            green: Math.floor( Math.random() * 256 ),
+            blue: Math.floor( Math.random() * 256 )
+          };
+   
+          if ( this._trigger( "random", event, colors ) !== false ) {
+            this.option( colors );
+          }
+        },
+   
+        _destroy: function() {
+          this.changer.remove();
+   
+          this.element
+            .removeClass( "custom-colorize" )
+            .enableSelection()
+            .css( "background-color", "transparent" );
+        },
+   
+        _setOptions: function(){ 
+          this._superApply( arguments );
+          this._refresh();
+        },
+   
+        _setOption: function( key, value ) {
+          if ( /red|green|blue/.test(key) && (value < 0 || value > 255) ) {
+            return;
+          }
+          this._super( key, value );
+        }
+      });
+   
+      $( "#my-widget1" ).colorize();
+      
+   
+   
+     
+   
+      
+      $( "#disable" ).on( "click", function() {
+    	  if ( $( ":custom-colorize" ).colorize( "option", "disabled" ) ) {
+          $( ":custom-colorize" ).colorize( "enable" );
+          } else {
+          $( ":custom-colorize" ).colorize( "disable" );
+          }
+       });
+   
+      $( "#green" ).on( "click", function() {
+        $( ":custom-colorize" ).colorize( "option", {
+          red: 64,
+          green: 250,
+          blue: 8
+        });
+      });
+    
+      
+
+    
+    
    });
 
-  
-  $( function() {
-    var availableTags = [
-      "Manager",
-      "Super manager",
-    ];
-    $( "#tags" ).autocomplete({
-      source: availableTags
-    });
-  } );
-  
-  
+   
+
   </script>
  
-
-  
 </head>
 
 
@@ -91,7 +374,7 @@
 <button type="button" id="calculate_age">Get current age</button> 
 <div id ='show_age'>Age result here</div> 
 
-<p></p>
+<p>Auto complete</p>
 
 <div class="ui-widget">
   <label for="tags">Position:</label>
@@ -99,16 +382,309 @@
 </div>
  
 
-<p></p>
+<p>Dialog</p>
 
 <button type="button" id="show_dialog">Dialog</button> 
-<div id="dialog" title="Basic dialog">
-	<p class="not-visible" >Hello Dear! Move me!</p>
-</div>
 
-<p>Duration: <input type="text" id="duration"></p>
+	<div id="dialog" title="Basic dialog">
+		<p class="not-visible" >Hello Dear! Move me!</p>
+	</div>
+
+
+<p>Duration: <input type="text" id="duration" title="don't write here"></p>
 <button type="button" id="calculate_duration">Get Duration</button>
 <div id ='show_duration'></div>
+
+
+<p>draggable</p>
+<div id="draggable" class="ui-widget-content">
+  <p>Drag me around</p>
+</div>
+
+<p>droppable</p>
+ 
+<div id="droppable" class="ui-widget-header">
+  <p>Drop here</p>
+</div>
+
+<p>resizable</p>
+<div id="resizable" class="ui-widget-content">
+  <h3 class="ui-widget-header">Resizable</h3>
+</div>
+
+<p>selectable</p>
+<ol id="selectable">
+  <li class="ui-widget-content">Item 1</li>
+  <li class="ui-widget-content">Item 2</li>
+  <li class="ui-widget-content">Item 3</li>
+  <li class="ui-widget-content">Item 4</li>
+  <li class="ui-widget-content">Item 5</li>
+  <li class="ui-widget-content">Item 6</li>
+  <li class="ui-widget-content">Item 7</li>
+</ol>
+
+
+<p>sortable</p>
+
+<ul id="sortable">
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+</ul>
+
+<p>accordion</p>
+<div id="accordion">
+  <h3>Section 1</h3>
+  <div>
+    <p>
+    TEXT 1
+    </p>
+  </div>
+  <h3>Section 2</h3>
+  <div>
+    <p>
+   TEXT 2
+    </p>
+  </div>
+  <h3>Section 3</h3>
+  <div>
+    <p>
+    TEXT 3
+    </p>
+    <ul>
+      <li>List item one</li>
+      <li>List item two</li>
+      <li>List item three</li>
+    </ul>
+  </div>
+  <h3>Section 4</h3>
+  <div>
+    <p>
+    TEXT 4
+    </p>
+  </div>
+</div>
+
+
+<p>checkboxradio</p>
+
+<h2>Radio Group</h2>
+  <fieldset>
+    <legend>Select a color: </legend>
+    <label for="radio-1">Black</label>
+    <input type="radio" name="radio-1" id="radio-1">
+    <label for="radio-2">White</label>
+    <input type="radio" name="radio-1" id="radio-2">
+    <label for="radio-3">Red</label>
+    <input type="radio" name="radio-1" id="radio-3">
+  </fieldset>
+  
+ <h2>Checkbox</h2>
+
+  <fieldset>
+    <legend>choose 2 numbers: </legend>
+    <label for="checkbox-1">1</label>
+    <input type="checkbox" name="checkbox-1" id="checkbox-1">
+    <label for="checkbox-2">2</label>
+    <input type="checkbox" name="checkbox-2" id="checkbox-2">
+    <label for="checkbox-3">3</label>
+    <input type="checkbox" name="checkbox-3" id="checkbox-3">
+    <label for="checkbox-4">4</label>
+    <input type="checkbox" name="checkbox-4" id="checkbox-4">
+  </fieldset> 
+
+  
+  
+ <p>Controlgroup</p> 
+ 
+ <div class="widget">
+ <fieldset>
+    <legend>Rental Car</legend>
+    <div class="controlgroup-vertical">
+      <select>
+        <option>Compact car</option>
+        <option>Midsize car</option>
+        <option>Full size car</option>
+        <option>SUV</option>
+        <option>Luxury</option>
+        <option>Truck</option>
+        <option>Van</option>
+      </select>
+      <label for="transmission-standard-v">Standard</label>
+      <input type="radio" name="transmission-v" id="transmission-standard-v">
+      <label for="transmission-automatic-v">Automatic</label>
+      <input type="radio" name="transmission-v" id="transmission-automatic-v">
+      <label for="insurance-v">Insurance</label>
+      <input type="checkbox" name="insurance" id="insurance-v">
+      <label for="vertical-spinner" class="ui-controlgroup-label"># of cars</label>
+      <input id="vertical-spinner" class="ui-spinner-input">
+      <button id="book">Book Now!</button>
+    </div>
+  </fieldset>
+</div>
+
+<p>Menu</p>
+
+<ul id="menu">
+  <li class="ui-state-disabled"><div>Toys (n/a)</div></li>
+  <li><div>Books</div></li>
+  <li><div>Clothing</div></li>
+  <li><div>Electronics</div>
+    <ul>
+      <li class="ui-state-disabled"><div>Home Entertainment</div></li>
+      <li><div>Car Hifi</div></li>
+      <li><div>Utilities</div></li>
+    </ul>
+  </li>
+  <li><div>Movies</div></li>
+  <li><div>Music</div>
+    <ul>
+      <li><div>Rock</div>
+        <ul>
+          <li><div>Alternative</div></li>
+          <li><div>Classic</div></li>
+        </ul>
+      </li>
+      <li><div>Jazz</div>
+        <ul>
+          <li><div>Freejazz</div></li>
+          <li><div>Big Band</div></li>
+          <li><div>Modern</div></li>
+        </ul>
+      </li>
+      <li><div>Pop</div></li>
+    </ul>
+  </li>
+  <li class="ui-state-disabled"><div>Specials (n/a)</div></li>
+</ul>
+
+<p>progressbar</p>
+
+<div id="progressbar"></div>
+
+<p>Select menu</p>
+<label for="number">Select a number</label>
+    <select name="number" id="number">
+      <optgroup label="1 till 5">
+      	<option>1</option>
+      	<option selected="selected">2</option>
+      	<option>3</option>
+      	<option>4</option>
+     	<option>5</option>
+      </optgroup>
+      <optgroup label="6 till 10">
+     	<option>6</option>
+     	<option>7</option>
+     	<option>8</option>
+     	<option>9</option>
+     	<option>10</option>
+      </optgroup>
+      <option>11</option>
+      <option>12</option>
+      <option>13</option>
+      <option>14</option>
+      <option>15</option>
+      <option>16</option>
+      <option>17</option>
+      <option>18</option>
+      <option>19</option>
+    </select>
+
+
+<p>slider</p>
+
+<div id="slider"></div>
+
+<p>spinner</p>
+<p>
+  <label for="spinner">Select a value:</label>
+  <input id="spinner" name="value">
+
+ 
+
+  <button id="disable">Toggle disable/enable</button>
+  <button id="destroy">Toggle widget</button>
+
+ 
+  <button id="getvalue">Get value</button>
+  <button id="setvalue">Set value to 5</button>
+</p>
+
+
+<p>tabs</p>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">tab 1</a></li>
+    <li><a href="#tabs-2">tab 2</a></li>
+    <li><a href="#tabs-3">tab 3</a></li>
+  </ul>
+  <div id="tabs-1">
+    <p>text 1</p>
+  </div>
+  <div id="tabs-2">
+	<p>text 2</p>  
+  </div>
+  <div id="tabs-3">
+	<p>text 3</p>    
+  </div>
+</div>
+
+<p>Tooltip: move the mouse to the duration box</p>
+
+
+<p>widget factory</p>
+<div>
+  <div id="my-widget1">color me</div>
+  <button id="disable">Toggle disabled option</button>
+  <button id="green">Go green</button>
+</div>
+  
+<p>Add class</p>
+
+<div class="toggler">
+  <div id="effect" class="ui-corner-all">
+      HI I AM DALIA 
+  </div>
+</div>
+ 
+<button id="button" class="ui-state-default ui-corner-all">Run Effect</button>
+
+<p>Effects</p>
+
+<div class="toggler2">
+  <div id="effect2" class="ui-widget-content ui-corner-all">
+    <h3 class="ui-widget-header ui-corner-all">Effect</h3>
+    <p>
+     Hello Dear!
+    </p>
+  </div>
+</div>
+ 
+<select name="effects" id="effectTypes">
+  <option value="blind">Blind</option>
+  <option value="bounce">Bounce</option>
+  <option value="clip">Clip</option>
+  <option value="drop">Drop</option>
+  <option value="explode">Explode</option>
+  <option value="fade">Fade</option>
+  <option value="fold">Fold</option>
+  <option value="highlight">Highlight</option>
+  <option value="puff">Puff</option>
+  <option value="pulsate">Pulsate</option>
+  <option value="scale">Scale</option>
+  <option value="shake">Shake</option>
+  <option value="size">Size</option>
+  <option value="slide">Slide</option>
+  <option value="transfer">Transfer</option>
+</select>
+ 
+<button id="button2" class="ui-state-default ui-corner-all">Run Effect</button>
+<button id="button3" class="ui-state-default ui-corner-all">Run Effect Hide</button>
+<button id="button4" class="ui-state-default ui-corner-all">Run Effect Toggle</button>
 
 </body>
 </html>
