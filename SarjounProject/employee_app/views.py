@@ -13,10 +13,10 @@ from django.db.utils import IntegrityError
 
 def Login(request):
     context={}
-    if request.method=='POST':
-        username=request.POST.get('username')
-        password=request.POST.get('password')
-        user=authenticate(username=username,password=password)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username,password=password)
         
         if user:
             if user.is_active:
@@ -34,9 +34,12 @@ def Login(request):
 
 
 def Signup(request):
+    """
+    
+    """
    # userprofileinfo=forms.UserInfo()
-    signup_form=forms.FormSignup()
-    sign_up=False
+    signup_form = forms.FormSignup()
+    sign_up = False
     
     if request.method=='POST':
         signup_form=forms.FormSignup(data=request.POST)
@@ -52,11 +55,12 @@ def Signup(request):
             sign_up=True
             return HttpResponseRedirect(reverse('login'))
         else:
-             print("User not found")
+            #User logging
+            print("User not found")
     else:
         print("Not valid")
 
-    context={'signup_form':signup_form,'sign_up':sign_up}
+    context={'signup_form':signup_form, 'sign_up':sign_up}
 
     return render(request,'signup.html',context)
 
@@ -91,15 +95,15 @@ def save_profile(request):
                 user_profile.save()
         else:
             UserProfile.objects.create(user=user,job_position=job_position,dateofbirth=dateofbirth,profilepicture=profilepicture)
+    
     return HttpResponseRedirect(reverse('vacation'))
 
-
-@login_required()
+@login_required
 def vacation(request):
     context={}
     context['vacations']=Vacation.objects.all()
+    
     return render(request,'vacation.html',context)
-
 
 @login_required()
 def AddV(request):
@@ -113,45 +117,60 @@ def AddV(request):
 
 
 def save(request):
+    """
+    """
+    
     user=request.user
     description=request.POST.get("desc")
     datefrom=request.POST.get("date_from")
     dateto=request.POST.get("date_to")
     vacation_id=request.POST.get("vacation_id")
+    
     status="OK"
     message="SUCCESS"
     payload={}
+    
     try:
         if description and datefrom and dateto:
             if vacation_id:
-                vacation=Vacation.objects.filter(id=vacation_id).first()
-                if vacation:
-                    vacation.description=description
-                    vacation.datefrom=datefrom
-                    vacation.dateto=dateto
-                    vacation.save()
-                    payload['id']=vacation.id
-                else:
-                    message="VACATION_NOT_FOUND"
-                    status="FAIL"
+                vacation = Vacation.objects.filter(id=vacation_id).first()
             else:
-                Vacation.objects.create(user=user,description=description,datefrom=datefrom,dateto=dateto)
+                vacation = Vacation(user=user)
+                
+            if vacation:
+                vacation.description = description
+                vacation.datefrom = datefrom
+                vacation.dateto = dateto
+                vacation.save()
+                
+                payload['id'] = vacation.id
+                
+            else:
+                message="VACATION_NOT_FOUND"
+                status="FAIL"
+        else:
+            #Use logging
+            message="MISSING_REQUIRED_PARAMETERS"
+            status="FAIL"
+            
     except IntegrityError:
         message="VACATION_NAME_DUPLICATE"
         status="FAIL"
     except:
         message="SYSTEM_ERROR"
         status="FAIL"
-    response={"status":status,"message":message,"payload":payload}
-    return HttpResponseRedirect(reverse('vacation'))
+        
+    response={"status":status, "message":message, "payload":payload}
+    
+    return HttpResponse(json.dumps(response))
 
 urlpatterns=[
     url(r'login/',Login,name='login'),
     url(r'logout/',Logout,name='logout'),
     url(r'signup/',Signup,name='sign_up'),
     url(r'EditProfile/',EditProfile,name='EditProfile'),
-    url(r'vacation/',vacation,name='vacation'),
-    url(r'AddV',AddV,name='AddV'),
+    url(r'', vacation, name='vacation'),
+    url(r'AddV', AddV, name='AddV'),
     url(r"save/",save,name="save"),
     url(r"save_profile/",save_profile,name="save_profile"),
     ]
