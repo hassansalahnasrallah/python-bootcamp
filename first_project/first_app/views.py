@@ -7,11 +7,14 @@ import profile
 from django.contrib.auth import authenticate, login
 from django.urls.base import reverse
 from django.contrib.auth.decorators import login_required
-from first_app.models import Topic
+from first_app.models import Topic, Webpage, UserProfile
 import json
 from django.db.utils import IntegrityError
-
+from first_project import settings
 import logging
+from datetime import date
+import os
+import random
 
 log = logging.getLogger(__name__)
 # Create your views here.
@@ -140,6 +143,7 @@ def topic_page(request):
     context = {}
     
     context['topics'] = Topic.objects.all()
+    context['django_topic_id'] = Topic.objects.filter(topic_name="Django").first().id
     
     return render(request, "topic_page.html", context)
 
@@ -222,6 +226,97 @@ def topic_grid(request):
     
     return HttpResponse(json.dumps(response))
 
+def web_page_grid(request):
+    """
+    Dispaly grid of web page
+    """
+    
+    data = []
+    
+    topic_id = request.POST.get('topic_id')
+    
+    
+    all_web_pages = Webpage.objects.filter(topic_id=topic_id).all()
+    
+    for web_page in all_web_pages:
+        data.append({'name': web_page.name, 'url': web_page.url})
+        
+    records = len(all_web_pages)
+    response = {
+        #'draw': request.GET.get("_"),
+        'recordsTotal': records,
+        'recordsFiltered': records,
+        'data': data,
+    }
+    
+    return HttpResponse(json.dumps(response))
+
+def profile_form(request):
+    context = {}
+    
+    context['MEDIA_URL'] = settings.MEDIA_URL
+    context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
+    
+    return render(request, "profile_form.html", context)
+
+def save_profile(request):
+    status = "OK"
+    message = "SUCCESS"
+    payload = {}
+    
+    profile_img = request.FILES['profile_img']
+    portfolio = request.POST.get('portfolio')
+    
+    try:
+        log.debug("Profile image: %s", profile_img)  
+        
+        #define media prefix
+        mediaPrefix = ("%s/%s") % (date.today().year, date.today().month)
+        #define mediapath directory
+        mediaPathDirectory = ("%s/%s") % (settings.MEDIA_ROOT, mediaPrefix)
+        
+        #check if path exists
+        if not os.path.exists(mediaPathDirectory):
+            # create media path dir if not found
+            os.makedirs(mediaPathDirectory)
+        
+        #check image extension
+        extension = profile_img.name.split(u'.')[-1]  
+        
+        #rename profile image
+        new_filename = "profile-pic-%s.%s" % (random.randint(0, 10000), extension)
+        
+        #set path
+        path = os.path.join(mediaPathDirectory, new_filename)
+        dest = open(path, 'wb+')
+        
+        #write image into dest
+        #chunk means to read file peace by peace
+        for chunk in profile_img.chunks():
+            dest.write(chunk)
+            dest.close()
+            
+        image_url = "%s/%s" % (mediaPrefix, new_filename)
+        
+        user_profile = UserProfile.objects.filter(user_id=request.user.id).first()
+        if not user_profile:
+            user_profile = UserProfile.objects.create(user_id=request.user.id)
+            log.debug("user profile not found, creating a new one")
+        
+        user_profile.picture = image_url
+        user_profile.portfolio = portfolio
+        user_profile.save()
+        log.debug("Saved profile image successfully for user: %s", request.user.id)
+        
+    except:
+        status = "FAIL"
+        message = "SYSTEM_ERROR" 
+        log.error("Error while saving topic name", exc_info=1)
+    
+    response = {"status": status, "message": message, "payload": payload}
+    
+    return HttpResponse(json.dumps(response))
+
 urlpatterns = [
     url(r"topic_grid", topic_grid, name="topic_grid"),
     url(r"index/", index, name="index"),
@@ -234,4 +329,7 @@ urlpatterns = [
     url(r"topic/", topic_form, name="topic_form"),
     url(r"topic_save/", save_topic, name="save_topic"),
     url(r"page/", topic_page, name="topic_page"),
+    url(r"web_page_grid/", web_page_grid, name="web_page_grid"),
+    url(r"profile/", profile_form, name="profile_form"),
+    url(r"save_profile_user/", save_profile, name="save_profile"),
 ]

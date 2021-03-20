@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+
+{% block container_block %}
+<form name="profile_form" id="profile_form" action="" method="POST">
+	{% csrf_token %}
+	<label>Image</label>
+	<input type="file" name="profile_img" />
+	<input type="text" name="portfolio" value="{{user_profile.portfolio}}" />
+	<button type="button" id="save_topic" class="btn btn-success">Save</button>
+</form>
+
+<img src="{{MEDIA_URL}}{{user_profile.picture}}" />
+<script>
+	$(function(){
+		
+		$("#save_topic").click(function(){
+			var formData = new FormData();
+			
+			formData.append('profile_img', $("input[name=profile_img]")[0].files[0]);
+			formData.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
+			formData.append('portfolio', $("input[name=portfolio]").val());
+			
+			console.log(formData);
+			
+			$.ajax({
+				method: "POST",
+				url: "{% url 'save_profile' %}",
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function(response){
+					console.log(response)
+					
+					if(response.status == 'OK'){
+						alert("Save success");
+						//var topic_id = response.payload.id;
+						//$("input[name=topic_id]").val(topic_id);
+					}else{
+						if(response.message == 'FAIL'){
+							alert("Fail to save")
+						}else if(response.message == 'NAME_EXISTS'){
+							alert("This topic already found")
+						}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
+							alert("You have missing parameters")
+						}else if(response.message == 'TOPIC_NAME_ALREADY_EXISTS'){
+							alert("Name already found")
+						}
+					}
+					//Handle form functionality
+				},
+				error: function(){
+					
+					alert("Error in save")
+				}
+			});
+		});
+		
+	});
+	
+</script>
+
+{% endblock %}

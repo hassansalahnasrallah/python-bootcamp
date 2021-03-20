@@ -4,15 +4,42 @@
 
 <h1>Hello</h1>
 
-<table id="vacation_table">
+<!-- <table id="vacation_table_1">
 	<thead>
 		<tr>
 			<th>Title</th>
 		</tr>
 	</thead>
 	<tbody>
+		{% for v in topics %}
+			<tr>
+				<th>{{v.topic_name}}
+			</tr>
+		{% endfor %}
 	</tbody>
 </table>
+ -->
+<!-- <table id="vacation_table">
+	<thead>
+		<tr>
+			<th>Title</th>
+		</tr>
+	</thead>
+	<tbody>	
+	</tbody>
+</table> -->
+{% csrf_token %}
+<table id="webpage">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>URL</th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 
@@ -21,12 +48,32 @@
 
 <script>
 	$(function(){
-		$("#vacation_table").DataTable( {
+		//$("#vacation_table_1").DataTable();
+		
+		/* $("#vacation_table").DataTable({
 		    ajax: {
 		        url: '{% url "topic_grid" %}',
+		        //type: 'POST',
+		        //headers
+		       
 		    },
 		    columns: [{'data': 'topic_name', 'name': 'topic_name'}]
-		} );
+		}); */
+		
+		$("#webpage").DataTable({
+			ajax: {
+				url: "{% url 'web_page_grid' %}",
+				type: "POST",
+				data: function(d){
+					d.csrfmiddlewaretoken = $("input[name=csrfmiddlewaretoken]").val();
+					d.topic_id = "{{django_topic_id}}"
+				}
+			},
+			columns: [
+				{'data': 'name', 'name': 'name', 'sortable': true},
+				{'data': 'url', 'name': 'url', 'sortable': true}
+			]
+		})
 	});
 	
 
