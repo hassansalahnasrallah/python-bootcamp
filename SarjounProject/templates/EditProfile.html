@@ -18,7 +18,7 @@
 		<label>Profile Picture</label>
 		<input  type="file" name="p_pic"/>
 		<br>
-		<input type="submit" class="btn btn-primary" id=save_user" value="Save"/>
+		<input type="button" class="btn btn-primary" id=save_user" value="Save"/>
 		<input type="hidden" name="user_id" value="{{user.id}}"/>
 		
 	</form>
@@ -28,40 +28,56 @@
 <br><br>
 
 </div>
+<img src="{{MEDIA_URL}}{{user_profile.picture}}" />
 <script>
-$(function(){
-	$("#save_user").click(function(){
+	$(function(){
 		
-		$.ajax({
-			type:"POST",
-			url:"{% url 'save_profile' %}",
-			data: {
-				Jposition:$('input[name=Jposition]').val(),
-				date_of_birth:$('input[name=date_of_birth]').val(),
-				p_pic:$('input[name=p_pic]').val(),
-				user_id:$('input[name=user_id]').val(),
-				csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val()
-			},
-			dataType:'json',
-			success: function(){
-				console.log(response)
-				if(response.status=='OK'){
-					alert("Save Success");
-					var topic_id=response.payload.id
-					$("input[name=vacation_id_id]").val(vacation__id)
-				}else if (response.message=='MISSING_RQUIRED_PARAMETERS'){
-					alert("You have a missing parameter");
+		$("#save_user").click(function(){
+			var formData = new FormData();
+			
+			formData.append('date_of_birth', $("input[name=date_of_birth]").val());
+			formData.append('Jposition', $("input[name=Jposition]").val());
+			formData.append('p_pic', $("input[name=p_pic]")[0].files[0]);
+			formData.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
+			
+			
+			console.log(formData);
+			
+			$.ajax({
+				method: "POST",
+				url: "{% url 'save_profile' %}",
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function(response){
+					console.log(response)
 					
+					if(response.status == 'OK'){
+						alert("Save success");
+						//var topic_id = response.payload.id;
+						//$("input[name=topic_id]").val(topic_id);
+					}else{
+						if(response.message == 'FAIL'){
+							alert("Fail to save")
+						}else if(response.message == 'NAME_EXISTS'){
+							alert("This topic already found")
+						}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
+							alert("You have missing parameters")
+						}else if(response.message == 'TOPIC_NAME_ALREADY_EXISTS'){
+							alert("Name already found")
+						}
+					}
+					//Handle form functionality
+				},
+				error: function(){
+					
+					alert("Error in save")
 				}
-			},
-			error: function(){
-				alert("error in save")
-			}
+			});
 		});
 		
 	});
 	
-});
 </script>
 
 
