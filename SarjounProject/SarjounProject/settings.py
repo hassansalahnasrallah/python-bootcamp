@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'SarjounProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'sarjoun_final',
+        'NAME':'sarjoun_test',
         'USER':'root',
-        'PASSWORD':'1910sarjoun',
+        'PASSWORD':'root',
         'HOST':'127.0.0.1',
         'PORT':'3306'
     }
