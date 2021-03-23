@@ -15,6 +15,7 @@ import logging
 from datetime import date
 import os
 import random
+from django.db.models import Q 
 
 log = logging.getLogger(__name__)
 # Create your views here.
@@ -234,12 +235,25 @@ def web_page_grid(request):
     data = []
     
     topic_id = request.POST.get('topic_id')
+    table_length = request.POST.get('length')
+    global_search = request.POST.get('search[value]')
     
+    sorting_column_index = request.POST.get('order[0][column]')
+    sorting_column_direction = request.POST.get('order[0][dir]')
     
-    all_web_pages = Webpage.objects.filter(topic_id=topic_id).all()
+    sorted_column = request.POST.get('columns[%s][name]' % (sorting_column_index))
+    
+    qset = Q(topic_id=topic_id)
+    
+    if global_search:
+        qset &= Q(name__icontains=global_search) | Q(url__icontains=global_search)
+    
+    all_web_pages = Webpage.objects.filter(qset).all().order_by("%s%s" % ("-" if sorting_column_direction == "desc" else "", sorted_column))[:int(table_length)]
+    
+    log.debug("Total retrieved: %s", len(all_web_pages))
     
     for web_page in all_web_pages:
-        data.append({'name': web_page.name, 'url': web_page.url})
+        data.append({'id': web_page.id, 'name': web_page.name, 'url': web_page.url})
         
     records = len(all_web_pages)
     response = {

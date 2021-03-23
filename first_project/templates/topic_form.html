@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 
+{% block style_container %}
+		
+<style></style>
+
+{% endblock %}
+		
 
 {% block container_block %}
 <form name="topic_form" id="topic_form" action="{% url 'save_topic' %}" method="POST">
@@ -39,6 +45,9 @@
   </fieldset>
 </form> -->
 
+{% endblock %}
+
+{% block scripts %}
 
 <script>
 	$(function(){

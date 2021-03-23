@@ -34,6 +34,7 @@
 		<tr>
 			<th>Name</th>
 			<th>URL</th>
+			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -69,9 +70,29 @@
 					d.topic_id = "{{django_topic_id}}"
 				}
 			},
+			lengthMenu: [1, 5, 10, 25, 50],
+			
+			pageLength: 10,
+			
+			processing: true,
+			serverSide: true,
+			
 			columns: [
 				{'data': 'name', 'name': 'name', 'sortable': true},
-				{'data': 'url', 'name': 'url', 'sortable': true}
+				{'data': 'url', 'name': 'url', 'sortable': true},
+				{'data': 'action'}
+			],
+			
+			columnDefs: [
+				{
+					targets: -1, //or 3
+					title: 'Actions',
+					render: function(data, type, full, meta){
+						var edit_url = "{% url 'topic_form' %}?id=" + full.id;
+						return "<a href='"+edit_url+"'>Edit</a>"
+					}
+					
+				}
 			]
 		})
 	});
