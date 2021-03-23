@@ -2,24 +2,25 @@ from django.shortcuts import render
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.conf.urls import url
 from . import forms
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login , logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from final_app.models import Vacation
+import json
 
 # Create your views here.
 
 def index(request):
-    context={}
+    context = {}
     return render(request, 'index.html', context)
 
 def test(request):
-    context={}
+    context = {}
     return render(request, 'test.html', context)
 
 @login_required
 def table(request):
-    context={}
+    context = {}
     return render(request, 'table.html', context)
 
 #@login_required
@@ -45,26 +46,26 @@ def table(request):
 
 def register(request):   
     
-    user_form=forms.UserForm
-    profile_form=forms.UserProfileInfoForm
+    user_form = forms.UserForm
+    profile_form = forms.UserProfileInfoForm
     
-    registered=False
+    registered = False
     
     if request.method == "POST":
         
         user_form = forms.UserForm(data=request.POST)
-        profile_form=forms.UserProfileInfoForm(data=request.POST)
+        profile_form = forms.UserProfileInfoForm(data = request.POST)
         
         if user_form.is_valid() and profile_form.is_valid():
             
             print("form valid")
             #save data
-            user=user_form.save()
+            user = user_form.save()
             user.set_password(user.password)
             
             user.save()
             
-            profile=profile_form.save(commit=False)
+            profile = profile_form.save(commit = False)
             #commit=false prevent to save the profile bbecause still need to edit profile (bdna User)
             
             profile.user=user
@@ -72,12 +73,12 @@ def register(request):
             #check if profile pic provided
             if 'picture' in request.FILES:
                 print("found the picture")
-                profile.picture=request.FILES['picture']
+                profile.picture = request.FILES['picture']
             
             
             profile.save()
             
-            registered=True
+            registered = True
             
         else:
             print("form not valid")
@@ -85,9 +86,19 @@ def register(request):
     else:
         print("Not valid request")  
               
-    context={'user_form':user_form,'profile_form':profile_form,'registered':registered}
+    context={'user_form': user_form,'profile_form': profile_form,'registered': registered}
     
     return render(request,'registration.html',context)
+
+
+#def save_register(request):     
+    
+#    description = request.POST.get('')
+#    description_id = request.POST.get('')
+
+#    return HttpResponse(json.dumps(response))
+
+
 
 def user_login(request):
     
@@ -98,6 +109,7 @@ def user_login(request):
         username=request.POST.get('username') 
         password=request.POST.get('password')
         
+        loggedin = False
         
         #django built in authentication
         
@@ -109,7 +121,9 @@ def user_login(request):
             if user.is_active:
                 login(request,user)
                 
-                return HttpResponseRedirect( reverse('table'))
+                loggedin = True
+                
+                return HttpResponseRedirect( reverse('vacation_form'))
 
 
             
@@ -122,8 +136,16 @@ def user_login(request):
     else:
         return render (request,'login.html',context)
         
+    context={'loggedin': loggedin}
+    return render (request,'login.html',context)
+
+def user_logout(request):
+    logout(request)
     
-    return render (request,'login.html',context)          
+
+    return HttpResponseRedirect(reverse('user_login'))           
+
+#tene method heyye vacation grid
 
 def vacation_page(request):
     
@@ -138,7 +160,7 @@ def vacation_form(request):
     context = {}
     
     description_id = request.GET.get('id')
-    desc=None
+    desc = None
     if description_id:
         desc = Vacation.objects.filter(id=description_id).first()
         print("there is a vacation id")
@@ -154,38 +176,78 @@ def save_vacation(request):
     description_id = request.POST.get('description_id')
     #desc
     
-    if description: #and and and 
-        
-        if description_id:
-            #update
-            desc = Vacation.objects.filter(id = description_id).first()
-            
-            if desc:
-                desc.description = description
-                desc.save()
-                response = "SUCCESS"
-            else:
-                 response = "FAIL"
-                
-        else:
-            #create
-            Vacation.objects.create(description=description )
-            response = "SUCCESS"
-            
-    else:
-        response = "FAIL!"
     
-    return HttpResponse(response)
+    status = "OK"
+    message = "SUCCESS"
+    payload = {}
+    
+    try:
+        if description: #and and and 
+        
+            if description_id:
+                #update
+                desc = Vacation.objects.filter(id = description_id).first()
+            
+                if desc:
+                    desc.description = description
+                    desc.save()
+                    payload['id'] = desc.id
+                else:
+                    message = "DESCRIPTION_NOT_FOUND"
+                    status = "FAIL"
+                
+            else:
+                #create
+                desc = Vacation.objects.create(description=description )
+                payload['id'] = desc.id
+                response = "SUCCESS"
+            
+        else:
+            message = "MISSING_REQUIRED_PARAMETERS"
+            status = "FAIL!"
+            
+
+    except:
+        message = "SYSTEM_ERROR"
+        status = "FAIL!!"
+                
+    response = {'status': status, 'message': message, 'payload': payload }
+    return HttpResponse(json.dumps(response))
+
+def vacation_grid(request):
+    
+    
+    #response=[{'title':"vacation title"}]
+    
+    data = []
+    vacations = Vacation.objects.all()
+    for vacation in vacations:
+        data.append({'description': vacation.description})#eza aktar mn field bzeed commas
+    
+    records = len(vacations)
+    
+    response = {
+        'recordsTotal': records,
+        'recordsTotal': records,
+        'data': data,
+        
+        }
+    
+    return HttpResponse(json.dumps(response))
 
 urlpatterns = [
-    
-  url(r'index/',index,name="index"),
+   
+  url(r'',index,name="index"),
   url(r'test/',test,name="test"),
   url(r'table/',table,name="table"),
   #url(r'vacation/',form_vacation,name="form_vacation"),
   url(r'register/',register,name="register"),
-  url(r'user_login/',user_login,name="user_login"), 
+  #url(r'register_save/',save_register,name="save_register"),
+  url(r'user_login/',user_login,name="user_login"),
+  url(r'user_logout/',user_logout,name="user_logout"), 
   url(r'page/',vacation_page,name="vacation_page"),
   url(r'vacation2/',vacation_form,name="vacation_form"),
-  url(r'vacation_save/',save_vacation,name="save_vacation"),
+  url(r'vacation_save/',save_vacation,name="save_vacation"), 
+  url(r'vacation_grid/',vacation_grid,name="vacation_grid"),
+
     ]

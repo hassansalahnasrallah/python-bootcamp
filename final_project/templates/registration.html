@@ -7,15 +7,44 @@
      {% if registered %}
          <h1>Thank you for registration</h1>
      {% else %} 
-      	 <form method="POST" enctype="multipart/form-data">
+      	 <form id="registration_form" method="POST" enctype="multipart/form-data">
       
        		{%csrf_token%}
       		{{user_form.as_p}}
       		{{profile_form.as_p}}
       
       
-      	 	<input type="submit" name="" value="Register"/>  
+      	 	<input type="submit" name="" id="register" value="Register"/>  
       
      	 </form>
+     	 
      {% endif %}        
 {% endblock %}
+
+<script>
+
+	$(function(){
+		
+		$( "#registration_form" ).validate({
+			  rules: {
+				  username: {
+			      required: true,	      
+			    }
+			  },
+			  
+			  messages: {
+				  username: {
+					  required: "User name is required" 
+				  }
+				  
+			  } 
+		});
+		
+		$("#register").click(function(){
+			
+			$("#registration_form").submit();
+		});
+		
+	});
+
+</script>

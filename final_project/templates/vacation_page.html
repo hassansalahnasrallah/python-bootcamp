@@ -1,25 +1,58 @@
 
-<table>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+<h1>DATA TABLE</h1>
+</table>
 
+<table id= "vacation_table" class= "cell-border compact stripe">
 	<thead>
 		<tr>
 			<th>Description</th>
-			<th>Action</th>
+			<th>Duration</th>
+			<th>Date from</th>
+			<th>Date to</th>
+			<th>Action</th>	
 		</tr>
 	</thead>
-
 	<tbody>
-	
-		{% for desc in vacations %}
-		
+		{% for vacation in vacations %}
 			<tr>
-				<td>{{desc.description}}</td>
-				<td><a href="{% url 'vacation_form' %}?id={{desc.id}}">Edit</a></td>
-			</tr>
+				<td>{{vacation.description}}</td>
+				
+			</tr>		
+			
 		{% endfor %}
-
 	</tbody>
-
-
-
 </table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+
+
+<script>
+
+	$(function(){
+		
+		$('#vacation_table').DataTable({
+			ajax: {
+				url: '{% url "vacation_grid" %}',
+			},
+			columns: [{
+				'data': 'description', 'name': 'description',
+				//'data': 'duration', 'name': 'duration',
+				
+				}]
+			//data esm l data elle be3eta mn l views w name huwe esm l field
+		});
+		
+	});
+
+</script>
+
+<!-- 
+<a href= "{% url 'vacation_form' %}?id={{desc.id}}">Edit</a> 
+<td>{{vacation.duration}}</td>
+
+
+-->

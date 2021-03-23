@@ -7,15 +7,18 @@
 
 	<form method="post" action="{% url 'user_login'%}">
 		{% csrf_token %}
-		
-		<label>Username</label>
+		{% if loggedin %}
+        	<h1>Welcome Dear</h1>
+     	{% else %}
+     		<label>Username</label>
 			<input type="text" name="username" placeholder="Username"/>
 		
-		
-		<label>Password</label>
+		    <label>Password</label>
 			<input type="password" name="password" />
 		
-		<input type="submit" value="login"/>
+			<input type="submit" value="login"/>
+     	{% endif %}  
+		
 	
 	</form>
 
