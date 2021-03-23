@@ -7,8 +7,14 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+     
+    <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
+    
     <title>{%block title %} {% endblock %}</title>
 </head>
+
 <body>
  <nav class="navbar navbar-default navbar-static-top">
 
@@ -16,7 +22,7 @@
         <ul class="nav navbar-nav">
             <li><a>Weclome back: {{user.username}}</a></li>
             <li><a></a></li>
-            <li><a href = "{% url 'index' %}" >Home </a></li>
+            <li><a href = "{% url 'index' %}" >Profile </a></li>
             <li><a href = "{% url 'form_VacationForm' %}">Add vacation</a></li>    
             <li><a href = "{% url 'vacation_list' %}">Vacation List</a></li>    
             <li><a>&nspar; &ThinSpace;</a></li>

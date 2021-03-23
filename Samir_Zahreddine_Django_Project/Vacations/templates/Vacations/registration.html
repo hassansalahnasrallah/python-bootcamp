@@ -11,7 +11,8 @@
 <body>
 <div class="jumbotron">
   <div class="form-group">
-{% if registered%} 
+{% if registered %} 
+
 <h1>Thank You For Registration.</h1>
 <a href="{% url 'user_login' %}">Login</a>
 {% else %}   
@@ -25,4 +26,5 @@
 </div>
 </div>
 {% endif %}  
+
 </body

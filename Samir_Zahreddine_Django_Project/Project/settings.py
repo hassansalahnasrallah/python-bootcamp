@@ -15,9 +15,9 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATES_DIR = os.path.join(BASE_DIR,"templates")
-STATIC_DIR = os.path.join(BASE_DIR,"static")
-MEDIA_DIR =os.path.join(BASE_DIR,"media")
+TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+MEDIA_DIR = os.path.join(BASE_DIR, "media")
 
 
 # Quick-start development settings - unsuitable for production
@@ -86,6 +86,17 @@ DATABASES = {
 }
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'Project',
+#         'USER': 'root',
+#         'PASSWORD': 'root',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#     }
+# }
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -103,6 +114,60 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+#LOGGING Configurations
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'formatters': {
+        'simple': {
+            'format': '%(module)s line: %(lineno)s: %(message)s'
+        },
+        'level_app':{
+            'format': '%(asctime)s | %(levelname)s | %(filename)s:%(lineno)s | %(message)s'
+        }
+        
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'level_app'
+        },
+#         'main_log_file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.handlers.TimedRotatingFileHandler',
+#             'filename': '%s/main.log' % (BASE_DIR),
+#             'formatter': 'level_app'
+#         }
+        
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],#, 'main_log_file'],
+            'level': 'ERROR',
+            'propagate': True
+        },
+        'requests': {
+            'handlers': ['console'],#, 'main_log_file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        '': {
+            'handlers': ['console'],#, 'main_log_file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        }
+        
+    }
+}
+
 
 
 # Internationalization
@@ -132,9 +197,9 @@ MEDIA_URL = '/media/'
 LOGIN_URL = '/user_login/'
 
 
-
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
- 
+
+

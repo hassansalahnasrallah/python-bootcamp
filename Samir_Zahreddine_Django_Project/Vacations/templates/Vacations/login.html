@@ -35,14 +35,17 @@
   <label>username: </label>
   <input type="text" name="username" placeholder="username" /><br>
   <label>Password: </label>
-  <input type="text" name="password" placeholder="password" />
+  <input type="password" name="password" placeholder="password" /><br>
 
-  <input type="submit" value="login" class="btn btn-primary"/>
+  <input  type="submit" value="login" class="btn btn-primary" />
 
 </form>
+<hr>
 <p>Not a user yet? <a href="{% url 'register' %}">register</a></p>
 </div>
 </div>
 </div>
 {% endblock %}
+
+
 </body>

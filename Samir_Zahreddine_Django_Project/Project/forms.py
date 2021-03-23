@@ -28,8 +28,8 @@ class UserProfileInfoForm(forms.ModelForm):
 class VacationInfoForm(forms.ModelForm):
     class Meta(): #same Consept as __init__
         model = Vacation
-        #fields = ('desc','to_date','from_date')   
-        fields = ('__all__')
+        fields = ('desc','from_date','to_date')   
+        #fields = ('__all__')
         widgets = {
             'from_date': DateInput(attrs={'type': 'date'}),
             'to_date': DateTimeInput(attrs={'type': 'date'}),

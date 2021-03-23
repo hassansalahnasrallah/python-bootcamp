@@ -9,45 +9,62 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 
+
+#to get console debug/log 
+import logging
+log = logging.getLogger(__name__)
+
+
 # Create your views here.
-
-
 def home(request):
     return HttpResponse("<h1>This is the Home Page.</h1>")
 
 
 def index(request):
+    """
+    Main page to view user profile 
+    """
 
-    context = {'emp': EmployeeProfile.objects.all()}
+    context = {}
+    emp = EmployeeProfile.objects.all()
+    context  ['emp'] =  emp
+    
 
     return render(request, "Vacations/index.html", context)
 
 
 @login_required
+#def form_vacation
 def form_VacationForm(request):
+    """
+    On form validated, create vacation and assign it to the logged in user
+    On success, redirect to the vacation list
+    """
     form = forms.VacationInfoForm()
-
+    
     if request.method == 'POST':
         form = forms.VacationInfoForm(data=request.POST)
 
         if form.is_valid():
-            form.save(commit=False)
-            # user_id=request.session['_auth_user_id']
-            #forms.Vacation.emp_name = User.objects.get()
-            user = request.user
-            Vacation.user = user
-            form.save()
+            vacation = form.save(commit=False)
+            vacation.user = request.user
+            vacation.save()
+            log.debug("Vacation successfully added for user: %s",vacation.user)
+            return vacation_list(request)
 
-            return index(request)
 
         else:
-            print("Error Saving.")
+           # print("Error Saving.")
+            log.error("failed to save...")
 
     context = {'form': form}
     return render(request, 'Vacations/web_page.html', context)
 
 
 def register(request):
+    """
+    user inserts required data to DB
+    """
 
     user_form = forms.UserForm
     profile_form = forms.UserProfileInfoForm
@@ -75,7 +92,10 @@ def register(request):
 
             profile.user = user
             profile.save()
+            log.debug("Profile saved successfully for user: %s", user)
             registered = True
+            return render(request, 'Vacations/login.html')
+            return render('vacations.login.html', message='Save complete')
 
         else:
             print("not valid.")
@@ -89,6 +109,9 @@ def register(request):
 
 
 def user_login(request):
+    """
+    user login through username & password to manage vacations
+    """
 
     context = {}
 
@@ -106,31 +129,43 @@ def user_login(request):
             if user.is_active:
                 # session
                 login(request, user)
+                log.debug("user logged in: %s", user)
                 return HttpResponseRedirect(reverse('index'))
 
             else:
+                log.error(" account is not active for user: %s", user)
                 return HttpResponse("Your account is not active.")
+
         else:
+            log.error("Invalid Login Details for user: %s", user)
             return HttpResponse("Invalid Login Details.")
 
     else:
-
+      
         return render(request, 'Vacations/login.html', context)
-
+  
     return render(request, 'Vacations/login.html', context)
 
 
+@login_required
 def vacation_list(request):
-    order_by = request.GET.get('order_by', 'defaultOrderField')
-    context = {'Desc': Vacation.objects.order_by(
-        'desc'), 'Desc2': Vacation.objects.all()}
+    """
+    get list of vacation filter by logged in user
+    """
+    context = {}
+    
+    vacation_list = Vacation.objects.filter(user=request.user).all()
+    context['vacations'] = vacation_list
 
     return render(request, 'Vacations/list_vacations.html', context)
 
 
 def logout_request(request):
+    """
+    login out for user page
+    """
     logout(request)
-    messages.info(request, "You have successfully logged out.")
+    log.debug("user logged out")
     return render(request, 'Vacations/login.html')
 
 
@@ -141,5 +176,4 @@ urlpatterns = [
     url(r'user_login/', user_login, name='user_login'),
     url(r'vacations/', vacation_list, name='vacation_list'),
     url(r'logout/', logout_request, name='logout_request'),
-
 ]

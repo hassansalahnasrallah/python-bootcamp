@@ -1,33 +1,61 @@
-{% extends "Vacations/base.html" %} 
+{% extends "Vacations/base.html" %} {%block head %} {% endblock%}
+
+<head> </head>
 
 {% block container_block %}
+<p><strong>Vacations:</strong></p>
 
-<p>available location:</p>
-
-<table class="table table-bordered table-dark">
-    <thead class="">
-    <tr>
-        <th scope="col">Location</th>
-        <th scope="col">Employee</th>
-        <th scope="col">From:</th>
-        <th scope="col">To:</th>
+<body>
+  <table id="vacation_table">
+    <thead>
+      <tr>
+        <th>Location</th>
+        <th>Employee</th>
+        <th>From:</th>
+        <th>To:</th>
       </tr>
     </thead>
     <tbody>
-<tr>
-    {% for x in Desc %}
-    <td>{{x.desc}}</td>
-    <td>{{x.user}}</td>
-    <td>{{x.from_date}}</td>
-    <td>{{x.to_date}}</td>
+      {% for vacation in vacations %}
+      <tr>
+        <td>{{vacation.desc}}</td>
+        <td>{{vacation.user}}</td>
+        <td>{{vacation.from_date}}</td>
+        <td>
+          {{vacation.to_date}}
+          <button type="submit" value="edit" class="btn btn-link">Edit</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"
+  ></script>
 
+  <script
+    type="text/javascript"
+    charset="utf8"
+    src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"
+  ></script>
 
-</tr>
-</tbody>
-{% endfor %}
-<!--<h1>{{x.emp_name}}</h1> -->
-</table>
+  <script>
+    $(function(){
+    //$("#vacation_table").DataTable();
 
-
-
+      $("#vacation_table").DataTable({
+    	// ajax: {
+    	// 	url: "{% url 'vacation_list' %}",
+    	// 	type: "POST",
+    	// 	data: function(d){
+    	// 		d.csrfmiddlewaretoken = $("input[name=csrfmiddlewaretoken]").val();
+      //   },
+      // },
+    })
+	});
+   // });
+  </script>
+</body>
 {% endblock %}

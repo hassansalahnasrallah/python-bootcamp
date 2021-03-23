@@ -4,7 +4,7 @@
 {% block container_block %}
  
 <h1>Fill Out The Form Below.</h1>
-    <form method="POST">
+    <form name='' method="POST">
         {{form.as_p}}
         {% csrf_token %}
         <input type="submit" class="btn btn-primary" value="submit">
@@ -12,3 +12,6 @@
  
 {% endblock %}
 
+<script>
+	
+</script>
