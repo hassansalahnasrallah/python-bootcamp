@@ -16,7 +16,7 @@ class UserProfile(models.Model):
 class Vacation(models.Model):
     #employee = models.ForeignKey(User,on_delete=models.CASCADE)
     description = models.CharField(max_length=255, null = True)
-    #date_from = models.DateField(default = None)
-    #date_to = models.DateField(default = None)
+    #date_from = models.DateField(null=True)
+    #date_to = models.DateField(null=True)
     #duration = models.CharField(max_length=10,default = None)
        

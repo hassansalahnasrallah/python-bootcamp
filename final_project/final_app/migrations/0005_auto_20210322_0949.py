@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='vacation',
             name='date_from',
-            field=models.DateField(default=0),
+            field=models.DateField(),
         ),
         migrations.AddField(
             model_name='vacation',
             name='date_to',
-            field=models.DateField(default=0),
+            field=models.DateField(),
         ),
     ]

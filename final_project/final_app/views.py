@@ -45,7 +45,9 @@ def table(request):
 #     return render(request,'vacation.html',context) 
 
 def register(request):   
-    
+    """
+    """
+    #TODO add try catch and logging
     user_form = forms.UserForm
     profile_form = forms.UserProfileInfoForm
     
@@ -65,7 +67,7 @@ def register(request):
             
             user.save()
             
-            profile = profile_form.save(commit = False)
+            profile = profile_form.save(commit=False)
             #commit=false prevent to save the profile bbecause still need to edit profile (bdna User)
             
             profile.user=user
@@ -79,14 +81,15 @@ def register(request):
             profile.save()
             
             registered = True
-            
+            #login user
+            #redirect to the home or vacation page
         else:
             print("form not valid")
             
     else:
         print("Not valid request")  
               
-    context={'user_form': user_form,'profile_form': profile_form,'registered': registered}
+    context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered}
     
     return render(request,'registration.html',context)
 
@@ -101,7 +104,8 @@ def register(request):
 
 
 def user_login(request):
-    
+    """
+    """
     
     context={}
     
@@ -113,13 +117,13 @@ def user_login(request):
         
         #django built in authentication
         
-        user=authenticate(username=username,password=password)
+        user = authenticate(username=username,password=password)
         #check if username valid then if active
         
         if user:
             
             if user.is_active:
-                login(request,user)
+                login(request, user)
                 
                 loggedin = True
                 
@@ -137,16 +141,17 @@ def user_login(request):
         return render (request,'login.html',context)
         
     context={'loggedin': loggedin}
+    
     return render (request,'login.html',context)
 
 def user_logout(request):
     logout(request)
-    
 
     return HttpResponseRedirect(reverse('user_login'))           
 
 #tene method heyye vacation grid
 
+@login_required
 def vacation_page(request):
     
     context = {}
@@ -159,21 +164,21 @@ def vacation_form(request):
     
     context = {}
     
-    description_id = request.GET.get('id')
-    desc = None
-    if description_id:
-        desc = Vacation.objects.filter(id=description_id).first()
+    vacation_id = request.GET.get('id')
+    employee_vacation = None
+    if vacation_id:
+        employee_vacation = Vacation.objects.filter(id=vacation_id).first()
         print("there is a vacation id")
         
     
-    context['desc'] = desc
+    context['desc'] = employee_vacation
     
     return render(request,'vacation_form.html',context)
 
 def save_vacation(request):     
     
     description = request.POST.get('description')
-    description_id = request.POST.get('description_id')
+    vacation_id = request.POST.get('description_id')
     #desc
     
     
@@ -184,24 +189,25 @@ def save_vacation(request):
     try:
         if description: #and and and 
         
-            if description_id:
+            if vacation_id:
                 #update
-                desc = Vacation.objects.filter(id = description_id).first()
-            
-                if desc:
-                    desc.description = description
-                    desc.save()
-                    payload['id'] = desc.id
-                else:
-                    message = "DESCRIPTION_NOT_FOUND"
-                    status = "FAIL"
-                
+                vacation = Vacation.objects.filter(id = description_id).first()
             else:
-                #create
-                desc = Vacation.objects.create(description=description )
+                vacation = Vacation(employee_id=request.user.id)
+            
+            if vacation:
+                vacation.description = description
+                vacation.save()
                 payload['id'] = desc.id
                 response = "SUCCESS"
-            
+            else:
+                message = "DESCRIPTION_NOT_FOUND"
+                status = "FAIL"
+                
+#             else:
+#                 #create
+#                 desc = Vacation.objects.create(description=description )
+#                 payload['id'] = desc.id
         else:
             message = "MISSING_REQUIRED_PARAMETERS"
             status = "FAIL!"
@@ -212,6 +218,7 @@ def save_vacation(request):
         status = "FAIL!!"
                 
     response = {'status': status, 'message': message, 'payload': payload }
+    
     return HttpResponse(json.dumps(response))
 
 def vacation_grid(request):
@@ -236,8 +243,7 @@ def vacation_grid(request):
     return HttpResponse(json.dumps(response))
 
 urlpatterns = [
-   
-  url(r'',index,name="index"),
+  url(r'^$',index,name="index"),
   url(r'test/',test,name="test"),
   url(r'table/',table,name="table"),
   #url(r'vacation/',form_vacation,name="form_vacation"),

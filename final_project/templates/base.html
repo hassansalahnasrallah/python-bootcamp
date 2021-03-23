@@ -20,6 +20,10 @@
                  <li><a href="{%url 'index' %}">Welcome</a></li>  
                  <li><a href="{%url 'vacation_page' %}">Vacation Table</a></li>
          		 <li><a href="{%url 'user_logout' %}">Log out</a></li>
+         		 
+         		 {% if request.user %}
+         		 	<li>Hello {{request.user.username}} </li>
+         		 {% endif %}
      	
            	 </ul>
          </div>
