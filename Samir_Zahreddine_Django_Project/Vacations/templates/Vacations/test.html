@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
+    <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
+    
+</head>
+<body>
+    
+    <table id="mytable" style="margin: 20px; border: 1px solid;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Samir</td>
+                <td>20</td>
+                <td>LBN</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+
+<script>
+    $(document).ready( function () {
+        $('#mytable').DataTable();
+    } );
+</script>
