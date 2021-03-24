@@ -18,20 +18,6 @@ def MainPage(request):
     context={}
     return render(request, 'final_app/mainpage.html', context)
 
-
-#def VacationPage(request):
-#    user=request.user
-#    user_vacation=forms.Vacation_form
-#    if request.method=="POST":
-#        user_vacation=forms.Vacation_form(data=request.POST)
-#        if user_vacation.is_valid:
-#            uservacation=user_vacation.save(commit=False)
-#            uservacation.user_id=request.user.id 
-#            uservacation.save()
-#            return HttpResponseRedirect(reverse('profilepage'))
-#    context={"user_vacation":user_vacation}
-#    return render(request, 'final_app/vacation.html', context)
-    
 def LoginPage(request):
     
     context={}
@@ -106,36 +92,7 @@ def register(request):
         print("not valid request")
     context={"user_form":forms.UserProfile_form , "profile_form" : forms.ProfileContent_form , "registered": registered}
     return render(request, 'final_app/new_account.html', context)
-"""
-def Vacation(request):
-    vac_added=False
-    datefrom=None
-    dateto=None
-    vacation_form = forms.Vacation()
-    if request.method == 'POST':
-        vacation_form = forms.Vacation(data=request.POST)
 
-        if vacation_form.is_valid():
-         
-           vacation = vacation_form.save(commit=False)
-           vacation.user = request.user
-           
-           vacation.save()
-          
-           vac_added=True
-           
-           date_from=vacation_form.cleaned_data['datefrom']
-           date_to=vacation_form.cleaned_data['dateto']
-           
-        else:
-            print(vacation_form.errors)
-       
-    #else:
-       # vacation_form = Vacation_form()
-    context= {'vacation_form':vacation_form,'vac_added':vac_added,'from_date':date_from,'to_date':date_to}
-    
-    return render(request,'final_app/vacation.html', context)
-"""
 @login_required
 def logout(request):
     
@@ -161,9 +118,7 @@ def add_vacation(request):
 
 
 def save(request):
-    """
-    """
-    
+        
     user=request.user
     description=request.POST.get("desc")
     datefrom=request.POST.get("date_from")
@@ -193,7 +148,7 @@ def save(request):
                 message="VACATION_NOT_FOUND"
                 status="FAIL"
         else:
-            #Use logging
+            
             message="MISSING_REQUIRED_PARAMETERS"
             status="FAIL"
             
