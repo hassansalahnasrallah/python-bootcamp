@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from final_app.models import ProfileContent, Vacation
+from django.forms.widgets import DateInput
 
 #class LoginPage_form(forms.ModelForm):
     
@@ -19,7 +20,13 @@ class UserProfile_form(forms.ModelForm):
 class Vacation_form(forms.ModelForm):
     class Meta():
         model=Vacation
-        fields=('job_desc' , 'from_date' , 'to_date')        
+        fields=('vacation_desc' , 'datefrom' , 'dateto')
+        widgets = {
+            
+            'datefrom': DateInput(attrs={ 'type': 'date'}),
+            'dateto': DateInput(attrs={ 'type': 'date'}),
+            
+        }        
 #class UserProfile_form(forms.ModelForm):
     
 #    password=forms.CharField(widget=forms.PasswordInput())

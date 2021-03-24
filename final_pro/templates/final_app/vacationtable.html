@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+{% block container_block %}
+		{% csrf_token %}
+		<h3 align="center" >Vacation table</h3>
+		<table align="center" border="1" class="table table-striped">
+		<thead>
+		<th></th>
+		<th> Description </th>
+		<th> Date from </th>
+		<th> Date to </th>
+		<th> </th>
+		</thead>
+		<tbody>
+			{% for vacation in vacations %}
+				<tr>
+				<td></td>
+				<td>{{ vacation.vacation_desc}}</td>
+				<td>{{ vacation.datefrom}}</td>
+				<td>{{ vacation.dateto}}</td>	
+				<td><a href="{% url 'add_vacation' %}?id={{vacation.id}}">Edit</a></td>
+				</tr>
+			{% endfor%}
+			</tbody>
+			</table>
+	<br/>
+	<br/>
+	<a class="btn btn-success" href="{% url 'add_vacation' %}">Add Vacation</a>		
+{% endblock%}

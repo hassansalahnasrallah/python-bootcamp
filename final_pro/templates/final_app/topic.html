@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}topic form{% endblock %}
+{% block header %}here's the topic form{% endblock %}
+
+{% block container_block %}
+	<form method="POST" name="topic_view" action="{% url 'save_topic' %}">
+	{% csrf_token %}
+	<label>Topic</label>
+	<input name="topic_view" class="form-control" value="" placeholder="Topic" />
+	<button type="submit" class="btn btn-success" >SAVE</button>
+	</form>
+{% endblock %}
