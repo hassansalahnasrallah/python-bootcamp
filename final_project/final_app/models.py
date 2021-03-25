@@ -7,8 +7,8 @@ class UserProfileInfo(models.Model):
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     job_position = models.CharField(max_length=255)
-    profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
-    Date_Of_Birth = models.DateField()
+    profile_pic = models.ImageField(upload_to='profile_pic', blank=True)
+    Date_Of_Birth = models.DateField(null=True)
     
     
     

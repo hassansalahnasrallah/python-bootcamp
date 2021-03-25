@@ -1,0 +1,733 @@
+2021-03-17 21:20:22,520 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 21:21:19,499 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 21:54:03,699 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 21:56:31,562 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 21:56:41,919 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 21:56:42,225 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 21:56:49,217 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 21:56:57,011 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 21:58:18,314 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 113, in profile
+    date = rquest.POST.get('Date_Of_Birth')
+NameError: name 'rquest' is not defined
+2021-03-17 21:58:18,314 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 113, in profile
+    date = rquest.POST.get('Date_Of_Birth')
+NameError: name 'rquest' is not defined
+2021-03-17 21:58:18,561 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 72174
+2021-03-17 21:58:18,561 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 72174
+2021-03-17 21:59:19,426 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 21:59:29,657 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 120, in profile
+    user = models.UserProfileInfo.objects.get(user_id = current_user)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+final_app.models.UserProfileInfo.DoesNotExist: UserProfileInfo matching query does not exist.
+2021-03-17 21:59:29,657 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 120, in profile
+    user = models.UserProfileInfo.objects.get(user_id = current_user)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+final_app.models.UserProfileInfo.DoesNotExist: UserProfileInfo matching query does not exist.
+2021-03-17 21:59:29,670 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 81586
+2021-03-17 21:59:29,670 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 81586
+2021-03-17 22:08:49,028 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 22:10:08,484 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 120, in profile
+    user = models.UserProfileInfo.objects.get(user_id = current_user)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+final_app.models.UserProfileInfo.DoesNotExist: UserProfileInfo matching query does not exist.
+2021-03-17 22:10:08,484 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 120, in profile
+    user = models.UserProfileInfo.objects.get(user_id = current_user)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+final_app.models.UserProfileInfo.DoesNotExist: UserProfileInfo matching query does not exist.
+2021-03-17 22:10:08,531 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 81714
+2021-03-17 22:10:08,531 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 81714
+2021-03-17 22:13:33,912 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 22:14:38,780 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 22:30:29,348 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 22:31:00,508 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 22:44:41,101 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 22:45:46,235 | ERROR | log.py:224| Internal Server Error: /register
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 320, in _query
+    self._do_get_result(db)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 145, in _do_get_result
+    self._result = result = self._get_result()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 352, in _get_result
+    return self._get_db().store_result()
+MySQLdb._exceptions.OperationalError: (1048, "Column 'Date_Of_Birth' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 57, in register
+    profile.save()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 78, in execute
+    raise IntegrityError(*tuple(e.args))
+django.db.utils.IntegrityError: (1048, "Column 'Date_Of_Birth' cannot be null")
+2021-03-17 22:45:46,235 | ERROR | log.py:224| Internal Server Error: /register
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 320, in _query
+    self._do_get_result(db)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 145, in _do_get_result
+    self._result = result = self._get_result()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 352, in _get_result
+    return self._get_db().store_result()
+MySQLdb._exceptions.OperationalError: (1048, "Column 'Date_Of_Birth' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 57, in register
+    profile.save()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 78, in execute
+    raise IntegrityError(*tuple(e.args))
+django.db.utils.IntegrityError: (1048, "Column 'Date_Of_Birth' cannot be null")
+2021-03-17 22:45:46,269 | ERROR | basehttp.py:157| "POST /register HTTP/1.1" 500 150068
+2021-03-17 22:45:46,269 | ERROR | basehttp.py:157| "POST /register HTTP/1.1" 500 150068
+2021-03-17 22:49:12,298 | ERROR | log.py:224| Internal Server Error: /login
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 94, in login
+    login(request, user)
+TypeError: login() takes 1 positional argument but 2 were given
+2021-03-17 22:49:12,298 | ERROR | log.py:224| Internal Server Error: /login
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 94, in login
+    login(request, user)
+TypeError: login() takes 1 positional argument but 2 were given
+2021-03-17 22:49:12,306 | ERROR | basehttp.py:157| "POST /login HTTP/1.1" 500 67156
+2021-03-17 22:49:12,306 | ERROR | basehttp.py:157| "POST /login HTTP/1.1" 500 67156
+2021-03-17 22:49:33,322 | ERROR | log.py:224| Internal Server Error: /vacation_forms
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 320, in _query
+    self._do_get_result(db)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 145, in _do_get_result
+    self._result = result = self._get_result()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 352, in _get_result
+    return self._get_db().store_result()
+MySQLdb._exceptions.OperationalError: (1048, "Column 'user_id' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 201, in vacation
+    vacation_save.save()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 78, in execute
+    raise IntegrityError(*tuple(e.args))
+django.db.utils.IntegrityError: (1048, "Column 'user_id' cannot be null")
+2021-03-17 22:49:33,322 | ERROR | log.py:224| Internal Server Error: /vacation_forms
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 320, in _query
+    self._do_get_result(db)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 145, in _do_get_result
+    self._result = result = self._get_result()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 352, in _get_result
+    return self._get_db().store_result()
+MySQLdb._exceptions.OperationalError: (1048, "Column 'user_id' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 201, in vacation
+    vacation_save.save()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 78, in execute
+    raise IntegrityError(*tuple(e.args))
+django.db.utils.IntegrityError: (1048, "Column 'user_id' cannot be null")
+2021-03-17 22:49:33,393 | ERROR | basehttp.py:157| "POST /vacation_forms HTTP/1.1" 500 148744
+2021-03-17 22:49:33,393 | ERROR | basehttp.py:157| "POST /vacation_forms HTTP/1.1" 500 148744
+2021-03-17 22:55:40,116 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 22:56:01,578 | ERROR | log.py:224| Internal Server Error: /login
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 94, in login
+    login(request, user)
+TypeError: login() takes 1 positional argument but 2 were given
+2021-03-17 22:56:01,578 | ERROR | log.py:224| Internal Server Error: /login
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 94, in login
+    login(request, user)
+TypeError: login() takes 1 positional argument but 2 were given
+2021-03-17 22:56:01,587 | ERROR | basehttp.py:157| "POST /login HTTP/1.1" 500 67148
+2021-03-17 22:56:01,587 | ERROR | basehttp.py:157| "POST /login HTTP/1.1" 500 67148
+2021-03-17 22:58:38,853 | ERROR | log.py:224| Internal Server Error: /vacation_forms
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 320, in _query
+    self._do_get_result(db)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 145, in _do_get_result
+    self._result = result = self._get_result()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 352, in _get_result
+    return self._get_db().store_result()
+MySQLdb._exceptions.OperationalError: (1048, "Column 'user_id' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 201, in vacation
+    vacation_save.save()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 78, in execute
+    raise IntegrityError(*tuple(e.args))
+django.db.utils.IntegrityError: (1048, "Column 'user_id' cannot be null")
+2021-03-17 22:58:38,853 | ERROR | log.py:224| Internal Server Error: /vacation_forms
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 320, in _query
+    self._do_get_result(db)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 145, in _do_get_result
+    self._result = result = self._get_result()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 352, in _get_result
+    return self._get_db().store_result()
+MySQLdb._exceptions.OperationalError: (1048, "Column 'user_id' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 201, in vacation
+    vacation_save.save()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 78, in execute
+    raise IntegrityError(*tuple(e.args))
+django.db.utils.IntegrityError: (1048, "Column 'user_id' cannot be null")
+2021-03-17 22:58:38,880 | ERROR | basehttp.py:157| "POST /vacation_forms HTTP/1.1" 500 148744
+2021-03-17 22:58:38,880 | ERROR | basehttp.py:157| "POST /vacation_forms HTTP/1.1" 500 148744
+2021-03-17 22:58:45,177 | ERROR | log.py:224| Internal Server Error: /vacation_forms
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 320, in _query
+    self._do_get_result(db)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 145, in _do_get_result
+    self._result = result = self._get_result()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 352, in _get_result
+    return self._get_db().store_result()
+MySQLdb._exceptions.OperationalError: (1048, "Column 'user_id' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 201, in vacation
+    vacation_save.save()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 78, in execute
+    raise IntegrityError(*tuple(e.args))
+django.db.utils.IntegrityError: (1048, "Column 'user_id' cannot be null")
+2021-03-17 22:58:45,177 | ERROR | log.py:224| Internal Server Error: /vacation_forms
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 320, in _query
+    self._do_get_result(db)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 145, in _do_get_result
+    self._result = result = self._get_result()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 352, in _get_result
+    return self._get_db().store_result()
+MySQLdb._exceptions.OperationalError: (1048, "Column 'user_id' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 201, in vacation
+    vacation_save.save()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 78, in execute
+    raise IntegrityError(*tuple(e.args))
+django.db.utils.IntegrityError: (1048, "Column 'user_id' cannot be null")
+2021-03-17 22:58:45,191 | ERROR | basehttp.py:157| "POST /vacation_forms HTTP/1.1" 500 148744
+2021-03-17 22:58:45,191 | ERROR | basehttp.py:157| "POST /vacation_forms HTTP/1.1" 500 148744
+2021-03-17 23:02:00,395 | ERROR | log.py:224| Internal Server Error: /vacation_forms
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 320, in _query
+    self._do_get_result(db)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 145, in _do_get_result
+    self._result = result = self._get_result()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 352, in _get_result
+    return self._get_db().store_result()
+MySQLdb._exceptions.OperationalError: (1048, "Column 'user_id' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 201, in vacation
+    vacation_save.save()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 78, in execute
+    raise IntegrityError(*tuple(e.args))
+django.db.utils.IntegrityError: (1048, "Column 'user_id' cannot be null")
+2021-03-17 23:02:00,395 | ERROR | log.py:224| Internal Server Error: /vacation_forms
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 320, in _query
+    self._do_get_result(db)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 145, in _do_get_result
+    self._result = result = self._get_result()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 352, in _get_result
+    return self._get_db().store_result()
+MySQLdb._exceptions.OperationalError: (1048, "Column 'user_id' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 201, in vacation
+    vacation_save.save()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 78, in execute
+    raise IntegrityError(*tuple(e.args))
+django.db.utils.IntegrityError: (1048, "Column 'user_id' cannot be null")
+2021-03-17 23:02:00,409 | ERROR | basehttp.py:157| "POST /vacation_forms HTTP/1.1" 500 148744
+2021-03-17 23:02:00,409 | ERROR | basehttp.py:157| "POST /vacation_forms HTTP/1.1" 500 148744
+2021-03-17 23:06:26,071 | ERROR | log.py:224| Internal Server Error: /vacation_forms
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 320, in _query
+    self._do_get_result(db)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 145, in _do_get_result
+    self._result = result = self._get_result()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 352, in _get_result
+    return self._get_db().store_result()
+MySQLdb._exceptions.OperationalError: (1048, "Column 'user_id' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 201, in vacation
+    vacation_save.save()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 78, in execute
+    raise IntegrityError(*tuple(e.args))
+django.db.utils.IntegrityError: (1048, "Column 'user_id' cannot be null")
+2021-03-17 23:06:26,071 | ERROR | log.py:224| Internal Server Error: /vacation_forms
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 320, in _query
+    self._do_get_result(db)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 145, in _do_get_result
+    self._result = result = self._get_result()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 352, in _get_result
+    return self._get_db().store_result()
+MySQLdb._exceptions.OperationalError: (1048, "Column 'user_id' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 201, in vacation
+    vacation_save.save()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 78, in execute
+    raise IntegrityError(*tuple(e.args))
+django.db.utils.IntegrityError: (1048, "Column 'user_id' cannot be null")
+2021-03-17 23:06:26,086 | ERROR | basehttp.py:157| "POST /vacation_forms HTTP/1.1" 500 148755
+2021-03-17 23:06:26,086 | ERROR | basehttp.py:157| "POST /vacation_forms HTTP/1.1" 500 148755
+2021-03-17 23:09:40,046 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor

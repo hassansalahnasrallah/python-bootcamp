@@ -1,10 +1,35 @@
 {% extends 'base.html'%}
 {% block body_block %}
+<head>
 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Datepicker - Format date</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker({
+    	dateFormat: 'yy-mm-dd'
+    });})
+     $( function() {
+    $( "#datepicker2" ).datepicker({
+    	dateFormat: 'yy-mm-dd'
+    });})
+  
+  </script>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
 
 	<form method ="POST">
 		{% csrf_token %}
 		{{vacation.as_p}}
+		<p>Date_from: <input type="text" id="datepicker" size="40" name="date_from"></p>
+		<p>Date_to: <input type="text" id="datepicker2" size="40" name="date_to"></p>
 		
 		
 		
@@ -13,4 +38,7 @@
 		</form>
 		
 		
+</body>
+</div>
+	</div>
 {% endblock %}

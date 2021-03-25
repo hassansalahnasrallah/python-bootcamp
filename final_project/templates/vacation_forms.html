@@ -1,29 +1,46 @@
 {% extends 'base.html'%}
 {% block body_block %}
-
-	<h2>this is your vacation {{user}}</h2> 
+<link rel="stylesheet"href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<div class="container">
+    <div class="jumbotron">
+	<h2> this is your vacation {{user}} </h2> 
 	<form method ="POST" action = "vacation_forms" >
 		  	<div class="container">
     <div class="row">
         <div class="col-md-12">
         
-            {% for data in form %}
-            <table border="1">
+           
+            <table id="vacation_table">
+            <thead>
             <tr>
             <td>description</td> 
             <td>date_from</td>
                <td>date_to</td>
-                </tr>
-                  <tr>
+                </tr></thead>
+                <tbody>
+                   {% for data in form %}
+                   <tr>
                   <td>{{data.description}}</td>>
                   <td>{{data.date_from}}</td>
                   <td>{{data.date_to}}</td>
-                  </tr></table>
-            {% endfor %}
-            
+                  <td> <a href= "{% url 'vacation'%}?id={{data.id}}">Edit</a>
+                  </td></tr>
+                  {% endfor %}
+                  </tbody>
+                  </table>
+                 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+            <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
         </div>
     </div>
 </div>
+</div>
+</div>
+<script>
+    $(document).ready(function(){
+        $('#vacation_table').DataTable();
+    });
+</script>
+
 <input type="button" onclick="location.href='vacation';" value="add vacation" />
 </form>
 		

@@ -4,7 +4,7 @@ from lib2to3.fixes.fix_input import context
 
 from final_app import forms
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 from django.http.response import HttpResponse, HttpResponseRedirect
 
@@ -24,11 +24,13 @@ from django.conf.urls import url
 
 from final_app.forms import UserForm,UserProfileInfoForm
 
+from final_project import settings
+
 def register(request):
     
     registered = False
-    #user_form = forms.UserForm
-    #profile_form = forms.UserProfileInfoForm
+    user_form = forms.UserForm
+    profile_form = forms.UserProfileInfoForm
     if request.method == "POST":
         user_form = forms.UserForm(data= request.POST)
         profile_form = forms.UserProfileInfoForm(data= request.POST)
@@ -43,13 +45,14 @@ def register(request):
             
             profile = profile_form.save(commit=False)
             
-            profile.user=user
+            
             
             if 'profile_pic' in request.FILES:
                 
                 print("found the picture")
                 
                 profile.profile_pic = request.FILES['profile_pic']
+            profile.user=user
             
             profile.save()
             
@@ -67,8 +70,8 @@ def register(request):
     # This is the render and context dictionary to feed
     # back to the registration.html file page.
     return render(request,'registration.html',
-                          {'user_form':user_form,
-                           'profile_form':profile_form,
+                          {'user_form':forms.UserForm,
+                           'profile_form':forms.UserProfileInfoForm,
                            'registered':registered})   
             
     
@@ -76,42 +79,40 @@ def register(request):
 
 
 def login(request):
-
+    
     if request.method == 'POST':
-        # First get the username and password supplied
+        
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        # Django's built-in authentication function:
+        
         user = authenticate(username=username, password=password)
 
-        # If we have a user
+        
         if user:
-            #Check it the account is active
-            if user.is_active:
-                # Log the user in.
-                login(request,user)
-                # Send the user back to some page.
-                # In this case their homepage.
-                return HttpResponseRedirect(reverse('index'))
-            else:
-                # If account is not active:
-                return HttpResponse("Your account is not active.")
+            
+            login(request, user)
+            return HttpResponseRedirect(reverse('index'))
+        
         else:
-            print("Someone tried to login and failed.")
-            print("They used username: {} and password: {}".format(username,password))
-            return HttpResponse("Invalid login details supplied.")
-
+            
+           
+            return  render(request, 'login.html' ,  {})
+          
     else:
-        #Nothing has been provided for username or password.
-        return render(request, 'login.html', {})
+        return  render(request, "login.html" ,   {})
+        HttpResponse("there is no such user. Please register a new user")
          
-@login_required(login_url='login')
+         
+    return  render(request, "login.html" ,   {})  
+         
+
 def profile(request):
     profile_form = forms.UserProfileInfoForm
     if request.method == "POST":
-       
-        profile_form = forms.UserProfileInfoForm(data= request.POST)
+        date = request.POST.get('Date_Of_Birth')
+        print('Date_Of_Birth')
+        profile_form = forms.UserProfileInfoForm(data = request.POST)
     
         if profile_form.is_valid():
             current_user = request.user.id
@@ -123,7 +124,7 @@ def profile(request):
             
             user.profile_pic = profile_form.cleaned_data['profile_pic']
             
-            user.Date_Of_Birth = profile_form.cleaned_data['Date_Of_Birth']
+            user.date = date
             
             user.save()
             return HttpResponseRedirect(reverse('vacation_forms'))
@@ -142,41 +143,25 @@ def index(request):
     form = models.UserProfileInfo.objects.filter(user_id = current_user)
     print(form)
     context = {'form':form}
+    context['MEDIA_URL'] = settings.MEDIA_URL
     return render(request, 'index.html', context)
 
 
-
+@login_required(login_url='login')
 def vacation_forms(request):
     current_user = request.user.id
-    print('entered')
+    print('you have entered')
     form = models.Vacation.objects.filter(user_id = current_user)
     print(form)
     context = {'form':form}
     return render(request, 'vacation_forms.html', context)
-    
-    
-    
-    
-def showformdata(request):
-    #form = forms.UserForm
-    if request.method == 'POST':
-        form = forms.UserForm(data=request.POST)
-        if form.is_valid():
-            nam = form.cleaned_data['job_position']
-            eml = fm.cleaned_data['profile_pic']
-            pswrd = fm.cleaned_data['password']
-            regstr = User(username='Wissam',name=nam, email=eml, password=pswrd)
-            regstr.save()
-    else:
-        form = register(request)
-    return render(request,"profile.html",{'form':form})
-
-
+  
 def vacation(request):
     vacation = forms.vacation
     vacation_id= request.GET.get('id')
     if request.method == "POST":
-       
+        date_from = request.POST.get('date_from')
+        date_to = request.POST.get('date_to')
         vacation = forms.vacation(data= request.POST)
     
         if vacation.is_valid():
@@ -184,20 +169,31 @@ def vacation(request):
             if vacation_id:
                 vacation_save = models.Vacation.objects.get(id = vacation_id)
                 vacation_save.description = vacation.cleaned_data['description']
-                vacation_save.date_from = vacation.cleaned_data['date_from']
-                vacation_save.date_to = vacation.cleaned_data['date_to']
+                vacation_save.date_from = date_from
+                vacation_save.date_to = date_to
                 vacation_save.save()
                 return HttpResponseRedirect(reverse('vacation_forms'))
                
 
             vacation_save= vacation.save(commit=False)
             vacation_save.user_id=request.user.id
+            vacation_save.description = vacation.cleaned_data['description']
+            vacation_save.date_from = date_from
+            vacation_save.date_to = date_to
             vacation_save.save()
             return HttpResponseRedirect(reverse('vacation_forms'))
         else:
-            return HttpResponse('not valid entry')
+            return HttpResponse('no valid entry')
     context = {'vacation': forms.vacation }
     return render(request, 'vacation.html', context)
+
+
+
+
+def user_logout(request):
+    logout(request)
+
+    return HttpResponseRedirect(reverse('login'))
 
 def test(request):
     context={}
@@ -210,5 +206,6 @@ urlpatterns = [
     url(r'index', index, name='index'),
     url(r'vacation',vacation, name='vacation'),
     url(r'vacation_forms',vacation_forms, name='vacation_forms'),
-    url(r'test', test, name='test'),
+    url(r'logout', user_logout, name='logout'),
+    url(r'test', test, name='test')
     ]

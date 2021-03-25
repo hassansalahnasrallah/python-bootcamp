@@ -1,0 +1,386 @@
+2021-03-17 23:09:40,400 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 23:09:46,944 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 23:09:51,322 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 23:16:42,708 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 23:16:43,071 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 23:17:00,383 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 23:20:20,910 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 120, in profile
+    user = models.UserProfileInfo.objects.get(user_id = current_user)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+final_app.models.UserProfileInfo.DoesNotExist: UserProfileInfo matching query does not exist.
+2021-03-17 23:20:20,910 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 120, in profile
+    user = models.UserProfileInfo.objects.get(user_id = current_user)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+final_app.models.UserProfileInfo.DoesNotExist: UserProfileInfo matching query does not exist.
+2021-03-17 23:20:20,924 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 81610
+2021-03-17 23:20:20,924 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 81610
+2021-03-17 23:20:38,879 | ERROR | log.py:224| Internal Server Error: /logout
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 212, in logout
+    logout(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 212, in logout
+    logout(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 212, in logout
+    logout(request)
+  [Previous line repeated 959 more times]
+RecursionError: maximum recursion depth exceeded
+2021-03-17 23:20:38,879 | ERROR | log.py:224| Internal Server Error: /logout
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 212, in logout
+    logout(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 212, in logout
+    logout(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 212, in logout
+    logout(request)
+  [Previous line repeated 959 more times]
+RecursionError: maximum recursion depth exceeded
+2021-03-17 23:20:38,978 | ERROR | basehttp.py:157| "GET /logout HTTP/1.1" 500 3376274
+2021-03-17 23:20:38,978 | ERROR | basehttp.py:157| "GET /logout HTTP/1.1" 500 3376274
+2021-03-17 23:22:58,814 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 23:23:10,485 | ERROR | log.py:224| Internal Server Error: /login
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+TypeError: login() missing 1 required positional argument: 'user'
+2021-03-17 23:23:10,485 | ERROR | log.py:224| Internal Server Error: /login
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+TypeError: login() missing 1 required positional argument: 'user'
+2021-03-17 23:23:10,556 | ERROR | basehttp.py:157| "POST /login HTTP/1.1" 500 63225
+2021-03-17 23:23:10,556 | ERROR | basehttp.py:157| "POST /login HTTP/1.1" 500 63225
+2021-03-17 23:23:37,351 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 23:23:49,264 | ERROR | log.py:224| Internal Server Error: /login
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 94, in login
+    login(request, user)
+TypeError: login() takes 1 positional argument but 2 were given
+2021-03-17 23:23:49,264 | ERROR | log.py:224| Internal Server Error: /login
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 94, in login
+    login(request, user)
+TypeError: login() takes 1 positional argument but 2 were given
+2021-03-17 23:23:49,284 | ERROR | basehttp.py:157| "POST /login HTTP/1.1" 500 67158
+2021-03-17 23:23:49,284 | ERROR | basehttp.py:157| "POST /login HTTP/1.1" 500 67158
+2021-03-17 23:23:57,303 | ERROR | log.py:224| Internal Server Error: /logout
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 212, in user_logout
+    logout(request)
+NameError: name 'logout' is not defined
+2021-03-17 23:23:57,303 | ERROR | log.py:224| Internal Server Error: /logout
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 212, in user_logout
+    logout(request)
+NameError: name 'logout' is not defined
+2021-03-17 23:23:57,416 | ERROR | basehttp.py:157| "GET /logout HTTP/1.1" 500 65653
+2021-03-17 23:23:57,416 | ERROR | basehttp.py:157| "GET /logout HTTP/1.1" 500 65653
+2021-03-17 23:24:24,934 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 23:24:34,445 | ERROR | log.py:224| Internal Server Error: /login
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 94, in login
+    login(request, user)
+TypeError: login() takes 1 positional argument but 2 were given
+2021-03-17 23:24:34,445 | ERROR | log.py:224| Internal Server Error: /login
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 94, in login
+    login(request, user)
+TypeError: login() takes 1 positional argument but 2 were given
+2021-03-17 23:24:34,458 | ERROR | basehttp.py:157| "POST /login HTTP/1.1" 500 67158
+2021-03-17 23:24:34,458 | ERROR | basehttp.py:157| "POST /login HTTP/1.1" 500 67158
+2021-03-17 23:24:46,768 | ERROR | log.py:224| Internal Server Error: /logout
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 212, in logout
+    logout(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 212, in logout
+    logout(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 212, in logout
+    logout(request)
+  [Previous line repeated 959 more times]
+RecursionError: maximum recursion depth exceeded
+2021-03-17 23:24:46,768 | ERROR | log.py:224| Internal Server Error: /logout
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 212, in logout
+    logout(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 212, in logout
+    logout(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 212, in logout
+    logout(request)
+  [Previous line repeated 959 more times]
+RecursionError: maximum recursion depth exceeded
+2021-03-17 23:24:46,814 | ERROR | basehttp.py:157| "GET /logout HTTP/1.1" 500 3376274
+2021-03-17 23:24:46,814 | ERROR | basehttp.py:157| "GET /logout HTTP/1.1" 500 3376274
+2021-03-17 23:29:26,527 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 120, in profile
+    user = models.UserProfileInfo.objects.get(user_id = current_user)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+final_app.models.UserProfileInfo.DoesNotExist: UserProfileInfo matching query does not exist.
+2021-03-17 23:29:26,527 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 120, in profile
+    user = models.UserProfileInfo.objects.get(user_id = current_user)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+final_app.models.UserProfileInfo.DoesNotExist: UserProfileInfo matching query does not exist.
+2021-03-17 23:29:26,555 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 81458
+2021-03-17 23:29:26,555 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 81458
+2021-03-17 23:30:26,011 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 120, in profile
+    user = models.UserProfileInfo.objects.get(user_id = current_user)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+final_app.models.UserProfileInfo.DoesNotExist: UserProfileInfo matching query does not exist.
+2021-03-17 23:30:26,011 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 120, in profile
+    user = models.UserProfileInfo.objects.get(user_id = current_user)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 429, in get
+    raise self.model.DoesNotExist(
+final_app.models.UserProfileInfo.DoesNotExist: UserProfileInfo matching query does not exist.
+2021-03-17 23:30:26,028 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 81610
+2021-03-17 23:30:26,028 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 81610
+2021-03-17 23:32:28,365 | DEBUG | Image.py:405| Importing BlpImagePlugin
+2021-03-17 23:32:29,501 | DEBUG | Image.py:405| Importing BmpImagePlugin
+2021-03-17 23:32:29,990 | DEBUG | Image.py:405| Importing BufrStubImagePlugin
+2021-03-17 23:32:30,146 | DEBUG | Image.py:405| Importing BlpImagePlugin
+2021-03-17 23:32:30,686 | DEBUG | Image.py:405| Importing CurImagePlugin
+2021-03-17 23:32:30,793 | DEBUG | Image.py:405| Importing BmpImagePlugin
+2021-03-17 23:32:31,033 | DEBUG | Image.py:405| Importing BufrStubImagePlugin
+2021-03-17 23:32:31,167 | DEBUG | Image.py:405| Importing DcxImagePlugin
+2021-03-17 23:32:31,236 | DEBUG | Image.py:405| Importing CurImagePlugin
+2021-03-17 23:32:31,443 | DEBUG | Image.py:405| Importing DdsImagePlugin
+2021-03-17 23:32:31,557 | DEBUG | Image.py:405| Importing DcxImagePlugin
+2021-03-17 23:32:31,630 | DEBUG | Image.py:405| Importing EpsImagePlugin
+2021-03-17 23:32:31,652 | DEBUG | Image.py:405| Importing DdsImagePlugin
+2021-03-17 23:32:31,679 | DEBUG | Image.py:405| Importing EpsImagePlugin
+2021-03-17 23:32:31,940 | DEBUG | Image.py:405| Importing FitsStubImagePlugin
+2021-03-17 23:32:31,941 | DEBUG | Image.py:405| Importing FitsStubImagePlugin
+2021-03-17 23:32:32,002 | DEBUG | Image.py:405| Importing FliImagePlugin
+2021-03-17 23:32:32,002 | DEBUG | Image.py:405| Importing FliImagePlugin
+2021-03-17 23:32:32,037 | DEBUG | Image.py:405| Importing FpxImagePlugin
+2021-03-17 23:32:32,038 | DEBUG | Image.py:405| Importing FpxImagePlugin
+2021-03-17 23:32:32,080 | DEBUG | Image.py:408| Image: failed to import FpxImagePlugin: No module named 'olefile'
+2021-03-17 23:32:32,085 | DEBUG | Image.py:408| Image: failed to import FpxImagePlugin: No module named 'olefile'
+2021-03-17 23:32:32,094 | DEBUG | Image.py:405| Importing FtexImagePlugin
+2021-03-17 23:32:32,089 | DEBUG | Image.py:405| Importing FtexImagePlugin
+2021-03-17 23:32:32,100 | DEBUG | Image.py:405| Importing GbrImagePlugin
+2021-03-17 23:32:32,103 | DEBUG | Image.py:405| Importing GbrImagePlugin
+2021-03-17 23:32:32,117 | DEBUG | Image.py:405| Importing GifImagePlugin
+2021-03-17 23:32:32,127 | DEBUG | Image.py:405| Importing GifImagePlugin
+2021-03-17 23:32:32,128 | DEBUG | Image.py:405| Importing GribStubImagePlugin
+2021-03-17 23:32:32,148 | DEBUG | Image.py:405| Importing GribStubImagePlugin
+2021-03-17 23:32:32,177 | DEBUG | Image.py:405| Importing Hdf5StubImagePlugin
+2021-03-17 23:32:32,178 | DEBUG | Image.py:405| Importing Hdf5StubImagePlugin
+2021-03-17 23:32:32,225 | DEBUG | Image.py:405| Importing IcnsImagePlugin
+2021-03-17 23:32:32,225 | DEBUG | Image.py:405| Importing IcnsImagePlugin
+2021-03-17 23:32:32,269 | DEBUG | Image.py:405| Importing IcoImagePlugin
+2021-03-17 23:32:32,269 | DEBUG | Image.py:405| Importing IcoImagePlugin
+2021-03-17 23:32:32,281 | DEBUG | Image.py:405| Importing ImImagePlugin
+2021-03-17 23:32:32,284 | DEBUG | Image.py:405| Importing ImImagePlugin
+2021-03-17 23:32:32,303 | DEBUG | Image.py:405| Importing ImtImagePlugin
+2021-03-17 23:32:32,305 | DEBUG | Image.py:405| Importing ImtImagePlugin
+2021-03-17 23:32:32,312 | DEBUG | Image.py:405| Importing IptcImagePlugin
+2021-03-17 23:32:32,318 | DEBUG | Image.py:405| Importing IptcImagePlugin
+2021-03-17 23:32:32,328 | DEBUG | Image.py:405| Importing JpegImagePlugin
+2021-03-17 23:32:32,330 | DEBUG | Image.py:405| Importing JpegImagePlugin
+2021-03-17 23:32:32,335 | DEBUG | Image.py:405| Importing Jpeg2KImagePlugin
+2021-03-17 23:32:32,338 | DEBUG | Image.py:405| Importing Jpeg2KImagePlugin
+2021-03-17 23:32:32,348 | DEBUG | Image.py:405| Importing McIdasImagePlugin
+2021-03-17 23:32:32,352 | DEBUG | Image.py:405| Importing McIdasImagePlugin
+2021-03-17 23:32:32,363 | DEBUG | Image.py:405| Importing MicImagePlugin
+2021-03-17 23:32:32,364 | DEBUG | Image.py:405| Importing MicImagePlugin
+2021-03-17 23:32:32,418 | DEBUG | Image.py:408| Image: failed to import MicImagePlugin: No module named 'olefile'
+2021-03-17 23:32:32,419 | DEBUG | Image.py:405| Importing MpegImagePlugin
+2021-03-17 23:32:32,425 | DEBUG | Image.py:405| Importing MpegImagePlugin
+2021-03-17 23:32:32,435 | DEBUG | Image.py:405| Importing MpoImagePlugin
+2021-03-17 23:32:32,443 | DEBUG | Image.py:405| Importing MpoImagePlugin
+2021-03-17 23:32:32,457 | DEBUG | Image.py:405| Importing MspImagePlugin
+2021-03-17 23:32:32,459 | DEBUG | Image.py:405| Importing MspImagePlugin
+2021-03-17 23:32:32,468 | DEBUG | Image.py:405| Importing PalmImagePlugin
+2021-03-17 23:32:32,475 | DEBUG | Image.py:405| Importing PalmImagePlugin
+2021-03-17 23:32:32,544 | DEBUG | Image.py:405| Importing PcdImagePlugin
+2021-03-17 23:32:32,545 | DEBUG | Image.py:405| Importing PcdImagePlugin
+2021-03-17 23:32:32,569 | DEBUG | Image.py:405| Importing PcxImagePlugin
+2021-03-17 23:32:32,570 | DEBUG | Image.py:405| Importing PcxImagePlugin
+2021-03-17 23:32:32,577 | DEBUG | Image.py:405| Importing PdfImagePlugin
+2021-03-17 23:32:32,579 | DEBUG | Image.py:405| Importing PdfImagePlugin
+2021-03-17 23:32:32,697 | DEBUG | Image.py:405| Importing PixarImagePlugin
+2021-03-17 23:32:32,698 | DEBUG | Image.py:405| Importing PixarImagePlugin
+2021-03-17 23:32:32,741 | DEBUG | Image.py:405| Importing PngImagePlugin
+2021-03-17 23:32:32,833 | DEBUG | Image.py:405| Importing PngImagePlugin
+2021-03-17 23:32:32,861 | DEBUG | Image.py:405| Importing PpmImagePlugin
+2021-03-17 23:32:32,881 | DEBUG | Image.py:405| Importing PpmImagePlugin
+2021-03-17 23:32:32,884 | DEBUG | Image.py:405| Importing PsdImagePlugin
+2021-03-17 23:32:32,962 | DEBUG | Image.py:405| Importing PsdImagePlugin
+2021-03-17 23:32:33,078 | DEBUG | Image.py:405| Importing SgiImagePlugin
+2021-03-17 23:32:33,033 | DEBUG | Image.py:405| Importing SgiImagePlugin
+2021-03-17 23:32:33,180 | DEBUG | Image.py:405| Importing SpiderImagePlugin
+2021-03-17 23:32:33,183 | DEBUG | Image.py:405| Importing SpiderImagePlugin
+2021-03-17 23:32:33,249 | DEBUG | Image.py:405| Importing SunImagePlugin
+2021-03-17 23:32:33,290 | DEBUG | Image.py:405| Importing SunImagePlugin
+2021-03-17 23:32:33,299 | DEBUG | Image.py:405| Importing TgaImagePlugin
+2021-03-17 23:32:33,364 | DEBUG | Image.py:405| Importing TgaImagePlugin
+2021-03-17 23:32:33,385 | DEBUG | Image.py:405| Importing TiffImagePlugin
+2021-03-17 23:32:33,465 | DEBUG | Image.py:405| Importing TiffImagePlugin
+2021-03-17 23:32:33,479 | DEBUG | Image.py:405| Importing WebPImagePlugin
+2021-03-17 23:32:33,543 | DEBUG | Image.py:405| Importing WebPImagePlugin
+2021-03-17 23:32:39,918 | DEBUG | Image.py:405| Importing WmfImagePlugin
+2021-03-17 23:32:39,919 | DEBUG | Image.py:405| Importing WmfImagePlugin
+2021-03-17 23:32:39,950 | DEBUG | Image.py:405| Importing XbmImagePlugin
+2021-03-17 23:32:39,950 | DEBUG | Image.py:405| Importing XbmImagePlugin
+2021-03-17 23:32:39,962 | DEBUG | Image.py:405| Importing XpmImagePlugin
+2021-03-17 23:32:39,960 | DEBUG | Image.py:405| Importing XpmImagePlugin
+2021-03-17 23:32:39,975 | DEBUG | Image.py:405| Importing XVThumbImagePlugin
+2021-03-17 23:32:39,977 | DEBUG | Image.py:405| Importing XVThumbImagePlugin
+2021-03-17 23:33:09,220 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 127, in profile
+    user.Date_Of_Birth = Date_Of_Birth
+NameError: name 'Date_Of_Birth' is not defined
+2021-03-17 23:33:09,220 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 127, in profile
+    user.Date_Of_Birth = Date_Of_Birth
+NameError: name 'Date_Of_Birth' is not defined
+2021-03-17 23:33:09,234 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 72995
+2021-03-17 23:33:09,234 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 72995
+2021-03-17 23:34:51,569 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 23:38:35,627 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 23:39:25,426 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 127, in profile
+    user.Date_Of_Birth = Date_Of_Birth
+NameError: name 'Date_Of_Birth' is not defined
+2021-03-17 23:39:25,426 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 127, in profile
+    user.Date_Of_Birth = Date_Of_Birth
+NameError: name 'Date_Of_Birth' is not defined
+2021-03-17 23:39:25,513 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 72995
+2021-03-17 23:39:25,513 | ERROR | basehttp.py:157| "POST /profile HTTP/1.1" 500 72995
+2021-03-17 23:39:41,888 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-17 23:57:17,496 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor

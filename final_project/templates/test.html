@@ -1,113 +1,322 @@
-{% extends 'base.html'%}
-{% block body_block%}
-
-
-
+<!doctype html>
+<html lang="en">
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery UI Datepicker - Default functionality</title>
+  <title>jQuery UI Draggable - Default functionality</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
-<form method ="POST">
- {% csrf_token %}
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<div id='show_age'>
-<scripts
- $("#calculate_age").click(function()){
-
- $("#show_age").html(your age is ");
-      if ( age>20 ) {
-        $( "#effect" ).animate({
-          backgroundColor: "#aa0000",
-          color: "#fff",
-          width: 500
-        }, 1000 );
-      } else {
-        $( "#effect" ).animate({
-          backgroundColor: "#fff",
-          color: "#000",
-          width: 240
-        }, 1000 );
-      }
- } 
- </div>
- </script>
-  <script>
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
+  <style>
+  #draggable { width: 150px; height: 150px; padding: 0.5em; }
+  #draggable { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+  #droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+  #resizable { width: 150px; height: 150px; padding: 0.5em; }
+  #resizable h3 { text-align: center; margin: 0; }
+  #feedback { font-size: 1.4em; }
+  #selectable .ui-selecting { background: #FECA40; }
+  #selectable .ui-selected { background: #F39814; color: white; }
+  #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+  #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+  #sortable li span { position: absolute; margin-left: -1.3em; }
+  .toggler { width: 500px; height: 200px; position: relative; }
+  #button { padding: .5em 1em; text-decoration: none; }
+  #effect { position: relative;  width: 240px;  padding: 1em;  letter-spacing: 0; font-size: 1.2em; border: 1px solid #000; background: #eee; color: #333; }
+  .newClass { text-indent: 40px; letter-spacing: .4em; width: 410px; height: 100px; padding: 30px; margin: 10px; font-size: 1.6em; }
+ #parent {
+    width: 60%;
+    height: 40px;
+    margin: 10px auto;
+    padding: 5px;
+    border: 1px solid #777;
+    background-color: #fbca93;
+    text-align: center;
+  }
+  .positionable {
+    position: absolute;
+    display: block;
+    right: 0;
+    bottom: 0;
+    background-color: #bcd5e6;
+    text-align: center;
+  }
+  #positionable1 {
+    width: 75px;
+    height: 75px;
+  }
+  #positionable2 {
+    width: 120px;
+    height: 40px;
+  }
+  select, input {
+    margin-left: 15px;
+  }
  
-
-  $( function() {
-    var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-    $( "#tags" ).autocomplete({
-      source: availableTags
-    });
-  } );
+ 
+ 
+  </style>
   
- $( function() {
-    var age = true;
-    $( "#button" ).on( "click", function() {
-      if ( age>20 ) {
-        $( "#effect" ).animate({
-          backgroundColor: "#aa0000",
-          color: "#fff",
-          width: 500
-        }, 1000 );
-      } else {
-        $( "#effect" ).animate({
-          backgroundColor: "#fff",
-          color: "#000",
-          width: 240
-        }, 1000 );
-      }
-      age = !age;
-    });
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  
+  $( function() {
+    $( "#draggable" ).draggable();
   } );
-
+  $( function() {
+	    $( "#draggable" ).draggable();
+	    $( "#droppable" ).droppable({
+	      drop: function( event, ui ) {
+	        $( this )
+	          .addClass( "ui-state-highlight" )
+	          .find( "p" )
+	            .html( "Dropped!" );
+	      }
+	    });
+	  } );
+  $( function() {
+    $( "#resizable" ).resizable();
+    $( "#selectable" ).selectable();
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+    $( "#accordion" ).accordion();
+    $( "input" ).checkboxradio();
+    $( "#progressbar" ).progressbar({
+        value: 37})
+    
+  } );
+  $( function() {
+	    $( "#button" ).on( "click", function() {
+	      $( "#effect" ).removeClass( "newClass", 1000, callback );
+	    });
+	 
+	    function callback() {
+	      setTimeout(function() {
+	        $( "#effect" ).addClass( "newClass" );
+	      }, 1500 );
+	    }
+	  } );
+  $( function() {
+	    function position() {
+	      $( ".positionable" ).position({
+	        of: $( "#parent" ),
+	        my: $( "#my_horizontal" ).val() + " " + $( "#my_vertical" ).val(),
+	        at: $( "#at_horizontal" ).val() + " " + $( "#at_vertical" ).val(),
+	        collision: $( "#collision_horizontal" ).val() + " " + $( "#collision_vertical" ).val()
+	      });
+	    }
+	 
+	    $( ".positionable" ).css( "opacity", 0.5 );
+	 
+	    $( "select, input" ).on( "click keyup change", position );
+	 
+	    $( "#parent" ).draggable({
+	      drag: position
+	    });
+	 
+	    position();
+	  } );
   </script>
-
+</head>
+<body>
  
-<p>DateOfBirth: <input type="text" id="datepicker"></p>
 
- <div class="ui-widget">
-  <label for="tags">Tags: </label>
-  <input id="tags">
+
+<div id="draggable" class="ui-widget-content">
+  <p>Drag me to my target</p>
 </div>
-<div class="toggler">
-  <div id="effect" class="ui-widget-content ui-corner-all">
-    <h3 class="ui-widget-header ui-corner-all">Age</h3>
+ 
+<div id="droppable" class="ui-widget-header">
+  <p>Drop here</p></br>
+</div></br> </br> </br> </br> </br> </br> </br> </br>
+<div id="resizable" class="ui-widget-content">
+  <h3 class="ui-widget-header">Resizable</h3>
+</div>
+<p>selectable</p>
+<ol id="selectable">
+  <li class="ui-widget-content">Item 1</li>
+  <li class="ui-widget-content">Item 2</li>
+  <li class="ui-widget-content">Item 3</li>
+  <li class="ui-widget-content">Item 4</li>
+  <li class="ui-widget-content">Item 5</li>
+  <li class="ui-widget-content">Item 6</li>
+  <li class="ui-widget-content">Item 7</li>
+</ol>
+<p>sortable</p>
+<ul id="sortable">
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+</ul>
+
+<div id="accordion">
+  <h3>Section 1</h3>
+  <div>
     <p>
-     
+    Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+    ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+    amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+    odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+    </p>
+  </div>
+  <h3>Section 2</h3>
+  <div>
+    <p>
+    Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+    purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+    velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+    suscipit faucibus urna.
+    </p>
+  </div>
+  <h3>Section 3</h3>
+  <div>
+    <p>
+    Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+    Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+    ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+    lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+    </p>
+    <ul>
+      <li>List item one</li>
+      <li>List item two</li>
+      <li>List item three</li>
+    </ul>
+  </div>
+  <h3>Section 4</h3>
+  <div>
+    <p>
+    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+    et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+    faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+    mauris vel est.
+    </p>
+    <p>
+    Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+    inceptos himenaeos.
     </p>
   </div>
 </div>
- {% endblock%}
- </form>
-<button id="button" class="ui-state-default ui-corner-all">send age</button>
-<button class="ui-button ui-widget ui-corner-all">show dialog</button>
-
+<div class="widget">
+  <h1>Checkbox and radio button widgets</h1>
+ 
+  <h2>Radio Group</h2>
+  <fieldset>
+    <legend>Select a Location: </legend>
+    <label for="radio-1">work</label>
+    <input type="radio" name="radio-1" id="radio-1">
+    <label for="radio-2">home</label>
+    <input type="radio" name="radio-1" id="radio-2">
+    <label for="radio-3">buissness</label>
+    <input type="radio" name="radio-1" id="radio-3">
+  </fieldset>
+ 
+  <h2>Checkbox</h2>
+  <fieldset>
+    <legend>Hotel Ratings: </legend>
+    <label for="checkbox-1">2 Star</label>
+    <input type="checkbox" name="checkbox-1" id="checkbox-1">
+    <label for="checkbox-2">3 Star</label>
+    <input type="checkbox" name="checkbox-2" id="checkbox-2">
+    <label for="checkbox-3">4 Star</label>
+    <input type="checkbox" name="checkbox-3" id="checkbox-3">
+    <label for="checkbox-4">5 Star</label>
+    <input type="checkbox" name="checkbox-4" id="checkbox-4">
+  </fieldset>
+ 
+  <h2>Checkbox nested in label</h2>
+  <fieldset>
+    <legend>Bed Type: </legend>
+    <label for="checkbox-nested-1">2 Double
+      <input type="checkbox" name="checkbox-nested-1" id="checkbox-nested-1">
+    </label>
+    <label for="checkbox-nested-2">2 Queen
+      <input type="checkbox" name="checkbox-nested-2" id="checkbox-nested-2">
+    </label>
+    <label for="checkbox-nested-3">1 Queen
+      <input type="checkbox" name="checkbox-nested-3" id="checkbox-nested-3">
+    </label>
+    <label for="checkbox-nested-4">1 King
+      <input type="checkbox" name="checkbox-nested-4" id="checkbox-nested-4">
+    </label>
+  </fieldset>
+</div>
+<div id="progressbar"></div>
+<div class="toggler">
+  <div id="effect" class="newClass ui-corner-all">
+   Etiam libero neque, luctus a, eleifend nec, semper at, lorem. Sed pede.
+  </div>
+</div>
+ 
+<button id="button" class="ui-state-default ui-corner-all">Run Effect</button>
+ 
+<div id="parent">
+  <p>
+  This is the position parent element.
+  </p>
+</div>
+ 
+<div class="positionable" id="positionable1">
+  <p>
+  to position
+  </p>
+</div>
+ 
+<div class="positionable" id="positionable2">
+  <p>
+  to position 2
+  </p>
+</div>
+ 
+<div style="padding: 20px; margin-top: 75px;">
+  position...
+  <div style="padding-bottom: 20px;">
+    <b>my:</b>
+    <select id="my_horizontal">
+      <option value="left">left</option>
+      <option value="center">center</option>
+      <option value="right">right</option>
+    </select>
+    <select id="my_vertical">
+      <option value="top">top</option>
+      <option value="center">center</option>
+      <option value="bottom">bottom</option>
+    </select>
+  </div>
+  <div style="padding-bottom: 20px;">
+    <b>at:</b>
+    <select id="at_horizontal">
+      <option value="left">left</option>
+      <option value="center">center</option>
+      <option value="right">right</option>
+    </select>
+    <select id="at_vertical">
+      <option value="top">top</option>
+      <option value="center">center</option>
+      <option value="bottom">bottom</option>
+    </select>
+  </div>
+  <div style="padding-bottom: 20px;">
+    <b>collision:</b>
+    <select id="collision_horizontal">
+      <option value="flip">flip</option>
+      <option value="fit">fit</option>
+      <option value="flipfit">flipfit</option>
+      <option value="none">none</option>
+    </select>
+    <select id="collision_vertical">
+      <option value="flip">flip</option>
+      <option value="fit">fit</option>
+      <option value="flipfit">flipfit</option>
+      <option value="none">none</option>
+    </select>
+  </div>
+</div>
+ 
+</body>
+</html>

@@ -1,25 +1,37 @@
 {% extends 'base.html'%}
 {% block body_block%}
-
-	<h2>this is your profile {{user}}</h2> 
+<div class="container">
+    <div class="jumbotron">
+	<h2>Welcome back {{user}}</h2> 
 	<form method ="POST" action = "index" >
 		  	<div class="container">
     <div class="row">
         <div class="col-md-12">
         <h1>
-            {% for data in form %}
-            <h3>job_position</h3>    <h1>{{data.job_position}}</h1></br>
-            <h3>Date_Of_Birth</h3><h1>{{data.Date_Of_Birth}}</h1></br>
-            <h4>profile_pic</h4><h1>{{data.profile_pic}}</h1></br>
-              
-            {% endfor %}
+       <table border= '5px'  bordercolor="black" >
+            <thead>
+            <tr>
+            <td>job_position</td> 
+            <td>Date_Of_Birth</td>
+               <td>profile_pic</td>
+                </tr></thead>
+                <tbody>
+           {% for data in form %}
+                  <tr>
+                  <td>{{data.job_position}}</td>
+                  <td>{{data.Date_Of_Birth}}</td>
+                  <td><img src="{{MEDIA_URL}}{{ profile_pic }}"/>{{data.profile_pic}}</td>
+                  </td></tr>
+                  {% endfor %}
+                  </tbody>
+                  </table>
             </h1>
         </div>
     </div>
 </div>
-
-<input type="button" onclick="href='profile';" value="Change your profile" />
+</div>
+</div>
+<input type="button" onclick="location.href='profile'" value="Change your profile" />
 </form>
-		
-		
+          
 {% endblock %}
