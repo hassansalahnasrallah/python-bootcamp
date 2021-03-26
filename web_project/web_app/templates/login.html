@@ -1,7 +1,10 @@
 {% extends 'base.html'%}
 {% block body_block %}
 
-
+ <style>
+    #navbar {
+    display: none;
+}</style>
 	<form method ="POST" action ="login">
 		{% csrf_token %}
 		<label>username</label>

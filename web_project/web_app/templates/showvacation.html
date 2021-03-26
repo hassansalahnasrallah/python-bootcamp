@@ -9,7 +9,7 @@
         <div class="col-md-12">
         
            
-            <table id="vacation_table">
+            <table id= "table">
             <thead>
             <tr>
             <td>description</td> 
@@ -26,17 +26,19 @@
                   </td></tr>
                   {% endfor %}
                   </tbody>
-                  </table>
+               </table>
                  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
             <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+           <script type = "text/javascript">
+    $(document).ready(function(){
+        $('#table').DataTable();
+    });
+			</script>
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function(){
-        $('#vacation_table').DataTable();
-    });
-</script>
+
+
 
 <input type="button" onclick="location.href='vacation';" value="add vacation" />
 </form>

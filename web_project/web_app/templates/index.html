@@ -1,4 +1,9 @@
 {% extends 'base.html'%}
+{%block form_block%}
+{% for data in form %}
+<img src="{{MEDIA_URL}}{{ data.picture }}" height="500" width="500"/>
+{% endfor %}
+{% endblock %}
 {% block body_block %}
 
 	<h2>this is your profile {{user}}</h2> 
@@ -9,7 +14,7 @@
         <h1>
             {% for data in form %}
             <h3>job_description</h3>    <h1>{{data.job_description}}</h1></Br>
-                <h3>picture</h3><img src="{{MEDIA_URL}}{{ data.picture }}"/>{{data.picture}}</Br>
+                
                 <h3>date</h3><h1>{{data.date}}</h1></Br>
             {% endfor %}
             </h1>

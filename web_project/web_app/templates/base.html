@@ -4,22 +4,45 @@
     <meta charset="utf-8">
     <title>Base</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	 <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	 <meta charset="utf-8"> 
+	 
+	 
+	 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>jQuery UI Datepicker - Default functionality</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+            <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+            <link rel="stylesheet" type="text/css"href="style.css">
   <script>
+  
   $( function() {
     $( "#datepicker" ).datepicker();
   } );
   </script>
+          <script type = "text/javascript">
+    $(document).ready(function(){
+        $('#table').DataTable();
+    });
+			</script>
+
+<style>
+ #navbar {
+  width: 100%;
+  align: right;
+   z-index: 9;
+    margin-left: 500;}
+body{
+	margin: 0;
+	background-color:#46a046;
+	}</style>
   </head>
   <body>
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-static-top" id="navbar">
       <div class="container">
         <ul class="nav navbar-nav">
           <li><a class="navbar-brand" href="login" >Web App</a></li>
@@ -29,14 +52,20 @@
         </ul>
       </div>
     </nav>
-    <div class="container">
-
-
-
+<div class="container">
+  <div class= "row">
+    <div  style="background:green; height:500px;class="col-6"; float:left; >
+    {% block form_block %}
+    <img src="https://tse3.mm.bing.net/th?id=OIP.cml2GTRb2Z3Xp15g9EXPYAHaEc&pid=Api&P=0&w=309&h=186" height="500" width="500"/>
+    {% endblock %}
+    </div>
+  <div  style="background:white; height:500px;class="col-6"; float:left; >
     {% block body_block %}
     {# Anything outside of this will be inherited if you use extend.#}
     {% endblock %}
     </div>
+  </div>
+</div>
 
 
   </body>

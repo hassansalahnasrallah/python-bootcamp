@@ -1,6 +1,9 @@
 {% extends 'base.html'%}
 {% block body_block %}
-
+ <style>
+    #navbar {
+    display: none;
+}</style>
 
 	<form method ="POST" enctype="multipart/form-data">
 		{% csrf_token %}
@@ -11,6 +14,7 @@
 		
 		
 		<input type = "submit" name="" value = "Register"/>
+		<input type="button" onclick="location.href='login';" value="Login here" />
 		</form>
 		
 		

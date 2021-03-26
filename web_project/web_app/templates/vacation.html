@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="js/jquery.validate.js"></script>
   <script>
   $( function() {
     $( "#datepicker" ).datepicker({
@@ -23,17 +24,19 @@
 <body>
 
 
-	<form method ="POST">
+	<form method ="POST" name="vacation">
 		{% csrf_token %}
 		{{vacation.as_p}}
-		<p>Date: <input type="text" id="datepicker" size="30" name="datefrom"></p>
-		<p>Date: <input type="text" id="datepicker2" size="30" name="dateto"></p>
+		<p>Date: <input type="text" id="datepicker" size="30" name="datefrom" required></p>
+		<p>Date: <input type="text" id="datepicker2" size="30" name="dateto" required></p>
 		
 		
 		
 		
 		<input type = "submit" name="" value = "Register"/>
 		</form>
+		<script>
+			$("#vacation").validate()</script>
 		
 		
 </body>
