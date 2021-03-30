@@ -1,0 +1,120 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"  />
+  
+
+    <title>Document</title>
+
+ 
+    <style>
+      body {
+        background-color: #209171;
+      }
+      img{
+        border-radius: 50%;
+        border-radius: 4px;
+        padding: 5px;
+        width: 85px;
+      }
+
+      .div-1 {
+        background-color: #126950;
+        margin-left: 550px;
+        width: 50%;
+        height: 500px;
+        float: left;
+      }
+      .div-2 {
+        background-color: white;
+        margin-left: 375px;
+        margin-bottom: 500px;
+        height: 464px;
+        width: 70%;
+        float: right
+      }
+      .footer {
+        margin-top: 40%;
+        height: 55px;
+        width: 100%;
+      }
+      .cont-1 {
+        position: absolute; /* or absolute */
+        top: 15%;
+      }
+      .items {
+        margin-top: 55px;
+        position: absolute;
+        text-align: center;
+        margin-right: 50px;
+      }
+      #h1-div2 {
+        color: #209171;
+      }
+      #p-footer {
+        padding-top: 10px;
+        color: white;
+        text-align: center;
+      }
+    </style>
+
+  </head>
+  <body>  
+
+    <nav class="navbar navbar-default navbar-static-top">
+
+      <div class="container" >
+          <ul class="nav navbar-nav">
+              <li><a>Logo</a></li>
+              <li><a></a></li>
+              <li><a href = "{% url 'index' %}" >Home </a></li>
+              <li><a href = "{% url 'form_VacationForm' %}">Vacations</a></li>    
+              <li><a href = "{% url 'vacation_list' %}">Profile</a></li>    
+              <li><a>&nspar; &ThinSpace;</a></li>
+              <li class="form-inline"><a href = "{% url 'logout_request' %}">Logout</a></li>    
+          </div>
+          </ul>
+      </div>
+  </nav>
+
+    <div class="cont-1">
+      <div class="div-1">
+       
+        <div class="div-2">
+          <img src= "{% static '/images/df.png' %}" />
+         
+          <div class="items">
+            <p>PYTHON BOOTCAMP</p>
+            <h1 id="h1-div2">Employee Vacataion</h1>
+            <p>Your way to add a vacation</p>
+            <form method="POST"  action="{% url 'user_login' %}">
+              {% csrf_token %}
+            <input  type="submit" value="login" class="btn btn-success" />
+          </form>
+           <p></p>
+            <p>
+              Dont have an account? <a href="{% url 'register' %}">Signup</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <footer class="footer">
+    <div class="text-center" style="background-color: rgba(0, 0, 0, 0.2);">
+    <p id="p-footer">Samir Zahreddine Django Project</p>
+    </div>
+  </footer>
+
+
+</html>
