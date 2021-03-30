@@ -3,25 +3,43 @@
 {% block title %} index {%endblock %} 
 {% block container_block %}
 
-
+<style>
+    body{
+        background-color: #209171;
+    }
+    #div-1 {
+        background-color: #126950;
+        margin-right: 550px;
+        width: 75%;
+        height: 500px;
+        float: left;
+      }
+      #div-2{
+        opacity: 1;
+      }
+      
+      #items{
+          color: aliceblue;
+      }
+</style>
 <div class="container-1 h-100 row align-items-center">
-    <h1>Vacation Manager Page:</h1>
+    <h1 style="color: aliceblue;">Vacation Manager</h1>
   
 </div>
-<div class="jumbotron">
-   
+<div id='div-1' class="jumbotron">
+   <div id="items">
 
 <p><strong><u>Your Employee Card:</u></strong> </p>
 
-<p>username: {{request.user.username}}</p>
+<p>user name: {{request.user.username}}</p>
 <p>email: {{user.email}}</p><br/>
-<p>*Feel Free to Manage your Vacations here at anytime!</p>
-<p>profile: </p><br/>
-
-
-<br />
-
-<!--<img src="{% static '/images/image1.jpeg' %}" width="250px" /> -->
+<p>profile: </p>
+</div>
+<div id="div-2">
+<img src={{emp.profile_pic}} width="120"/>
+<!-- <img src="{% static '/images/image1.jpeg' %}" width="250px" />  -->
+</div>
+<p style="color:white;">*Feel Free to Manage your Vacations here at anytime!</p>
 
 <br />
 {{help_text}}

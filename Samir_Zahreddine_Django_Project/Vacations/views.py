@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse, HttpResponseRedirect, response
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, response
 from django.conf.urls import url
 from Vacations.models import *
 from Project import forms
@@ -12,6 +12,8 @@ from django.contrib import messages
 
 #to get console debug/log 
 import logging
+import json
+from django.db.models import Q
 log = logging.getLogger(__name__)
 
 
@@ -19,14 +21,15 @@ log = logging.getLogger(__name__)
 def home(request):
     return HttpResponse("<h1>This is the Home Page.</h1>")
 
-
+@login_required
 def index(request):
     """
     Main page to view user profile 
     """
 
     context = {}
-    emp = EmployeeProfile.objects.all()
+    emp = EmployeeProfile.objects.filter(user=request.user).all()
+
     context  ['emp'] =  emp
     
 
@@ -58,7 +61,7 @@ def form_VacationForm(request):
             log.error("failed to save...")
 
     context = {'form': form}
-    return render(request, 'Vacations/web_page.html', context)
+    return render(request, 'Vacations/vacation_form.html', context)
 
 
 def register(request):
@@ -94,7 +97,7 @@ def register(request):
             profile.save()
             log.debug("Profile saved successfully for user: %s", user)
             registered = True
-            return render(request, 'Vacations/login.html')
+            return render(request, 'Vacations/newLogin.html')
             return render('vacations.login.html', message='Save complete')
 
         else:
@@ -142,9 +145,9 @@ def user_login(request):
 
     else:
       
-        return render(request, 'Vacations/login.html', context)
+        return render(request, 'Vacations/newLogin.html', context)
   
-    return render(request, 'Vacations/login.html', context)
+    return render(request, 'Vacations/newLogin.html', context)
 
 
 @login_required
@@ -155,6 +158,7 @@ def vacation_list(request):
     context = {}
     
     vacation_list = Vacation.objects.filter(user=request.user).all()
+
     context['vacations'] = vacation_list
 
     return render(request, 'Vacations/list_vacations.html', context)
@@ -166,14 +170,46 @@ def logout_request(request):
     """
     logout(request)
     log.debug("user logged out")
-    return render(request, 'Vacations/login.html')
+    return render(request, 'Vacations/newLogin.html')
 
 
+def validate_username(request):
+    """
+    Check username availability
+    """
+    username = request.GET.get('username', None)
+    email = request.GET.get('email', None)
+    
+    # email = User.object.get(email=request.user.email)
+    response = {
+        'is_taken': User.objects.filter(username__iexact=username).exists(),
+        'is_taken2': User.objects.filter(email__iexact=email).exists(),
+
+    }
+    return JsonResponse(response)
+
+
+def jsTest(request):
+    context={}
+    emp = EmployeeProfile.objects.all()
+    context  ['emp'] =  emp
+    return render(request,'Vacations/newIndex.html',context)
+
+
+
+
+ 
 urlpatterns = [
     url(r'index/', index, name='index'),
-    url(r'webpage/', form_VacationForm, name='form_VacationForm'),
+    url(r'vacationform/', form_VacationForm, name='form_VacationForm'),
     url(r'register/', register, name='register'),
     url(r'user_login/', user_login, name='user_login'),
     url(r'vacations/', vacation_list, name='vacation_list'),
     url(r'logout/', logout_request, name='logout_request'),
+    url(r'validate_username', validate_username, name='validate_username'),
+   
+    url(r'jsTest/', jsTest, name='jsTest'),
+
+    
+
 ]

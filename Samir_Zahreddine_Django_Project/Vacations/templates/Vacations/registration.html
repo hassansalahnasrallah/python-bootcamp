@@ -7,24 +7,122 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+
+    <style>
+        body {
+            background-color: #209171;
+          }
+          .div-1{
+            width:50%;
+            padding-left: 150px;        
+            align-content: center;
+          }
+    </style>
 </head>
 <body>
-<div class="jumbotron">
+    <nav class="navbar navbar-default navbar-static-top">
+
+        <div class="container">
+            <ul class="nav navbar-nav">
+                <li><a>Registration Form</a></li>
+                <li><a></a></li>
+                <li><a href = "{% url 'index' %}" >Profile </a></li>
+                <li><a href = "{% url 'form_VacationForm' %}">Add vacation</a></li>    
+                <li><a href = "{% url 'vacation_list' %}">Vacation List</a></li>    
+                <li><a>&nspar; &ThinSpace;</a></li>
+                <li class="form-inline15"><a href = "{% url 'logout_request' %}">Logout</a></li>    
+            </div>
+            </ul>
+        </div>
+    </nav>
+
+  <h1 class="container mt-5 w-50" style='color:aliceblue;'> Signup Form:</h1>
+  <div class='div-1'>
+<div class="jumbotron container mt-10 w-20"  style=" background: rgba(80, 182, 156, 0.39);">
   <div class="form-group">
 {% if registered %} 
 
 <h1>Thank You For Registration.</h1>
 <a href="{% url 'user_login' %}">Login</a>
 {% else %}   
-<form method="POST" enctype="multipart/form-data">
+<form id='id_username' method="POST" enctype="multipart/form-data">
   {% csrf_token %} 
   {{user_form.as_p}} 
   {{profile_form.as_p}}
-  <input type="submit" value="register" />
+  <input type="submit" value="register"  class='btn btn-success'/>
 </form>
 <p>Already a user? <a href="{% url 'user_login' %}">Login</a></p>
 </div>
 </div>
+</div>
 {% endif %}  
+    <footer>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+   
+    <a class="text-white">Samir Zahreddine Django Project</a>
+  </div>
+  <!-- Copyright -->
+</footer>
 
-</body
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+        $('#id_username').validate({
+            rules:{
+                email: "required",
+                position: "required",
+                password:{
+                    required:true,
+                    minLength:5
+                
+                },
+                username:{
+                    required:true,
+                    minLength:5
+                }
+            }
+            
+        });
+        
+  
+       
+            // catch the form's submit event
+            $('#id_username').keyup(function () {
+                // create an AJAX call
+                $.ajax({
+                    data: $(this).serialize(), // get the form data
+                    url: "{% url 'validate_username' %}",
+                    // on success
+                    success: function (response) {
+                        if (response.is_taken == true || response.is_taken2 == true) {
+                            $('#id_username').removeClass('is-valid').addClass('is-invalid');
+                            $('#id_username').after('<div class="invalid-feedback d-block" style= "color: white;" id="usernameError">* username or email are not available!</div>')
+                            
+                            $('#id_username').removeClass('is-valid').addClass('is-invalid');
+                            $('#id_username').after('<div class="invalid-feedback d-block" style= "color: white;" id="usernameError">* username or email are not available!!</div>')
+                        }
+                       
+                        else {
+                            $('#id_username').removeClass('is-invalid').addClass('is-valid');
+                            $('#usernameError').remove();
+
+                        }
+               
+                       
+                    },
+                    // on error
+                    error: function (response) {
+                        // alert the error if any error occured
+                        console.log(response.responseJSON.errors)
+                    }
+                });
+
+                return false;
+            });
+        });
+        
+
+   
+    </script>
+</body>
