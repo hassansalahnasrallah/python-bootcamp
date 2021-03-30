@@ -12,9 +12,13 @@
 	
 	
 	<label>Description</label>
-	<input name="description" class="form-control" value="{{desc.description}}" placeholder="Description" required>
-	<input type="hidden" name="description_id" value="{{desc.id}}">
+	<input name="description" class="form-control" value="{{vacation.description}}" placeholder="Description" required>
+	<input name="date_from" class="form-control" value="" placeholder="Date_from" >
+	<input name="date_to" class="form-control" value="" placeholder="Date_to"  >
+	<input name="duration" class="form-control" value="" placeholder="Duration" >
 	
+	<input type="hidden" name="vacation_id" value="{{vacation.id}}">
+	<p></p>
 	<button type="button" id="save_vacation" class="btn btn-success">Save</button>
 
 </form>

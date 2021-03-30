@@ -37,6 +37,7 @@
 
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://momentjs.com/downloads/moment.min.js"></script>
   
 
   <script>
@@ -56,7 +57,6 @@
     });
     
     $("#calculate_age").click(function (){
-    	
     	var age = new Date().getFullYear()-new Date ($( "#datepicker" ).val()).getFullYear()
     	console.log(age);
     	$("#show_age").html("your age now is:"+age);
@@ -66,8 +66,6 @@
     	          color: "#fff",
     	          width: 500
     	        }, 1000 );
-    		
-    		
     	}
     	else{
     		$( "#show_age" ).animate({
@@ -75,7 +73,8 @@
   	          color: "#fff",
   	          width: 500
   	        }, 1000 );  		
-    	}	   	
+    	}	   	        	
+    	
     });
     
     var availableTags = [
@@ -88,14 +87,13 @@
     
     
     $("#calculate_duration").click(function (){
-    	var dt = $( "#datepicker" ).datepicker("getDate");
-    	var date = dt.getDate();
-    	var month = dt.getMonth() + 1;
-    	var year = dt.getFullYear();
-    	var duration = new Date().getFullYear() - new Date ($( "#datepicker" ).val()).getFullYear();
+    	
+    	var a = new Date().getFullYear();
+    	var b = new Date ($( "#datepicker" ).val()).getFullYear();
+    	var duration = moment(a, b).fromNow();
     	console.log(duration);
-    	$("#show_duration").html("Duration="+ date+" days "+month+" months "+year+" years ");
-    		
+    	$("#show_duration").html("Duration="+ duration);
+
     		   	
     });
     
@@ -387,7 +385,7 @@
 <button type="button" id="show_dialog">Dialog</button> 
 
 	<div id="dialog" style="display:none" title="Basic dialog">
-		<p class="not-visible" >Hello Dear! Move me!</p>
+		<p >Hello Dear! Move me!</p>
 	</div>
 
 
@@ -688,3 +686,18 @@
 
 </body>
 </html>
+
+
+<!-- 
+ var dt = $( "#datepicker" ).datepicker("getDate");
+    	var date = dt.getDate();
+    	var month = dt.getMonth() + 1;
+    	var year = dt.getFullYear();
+    	var duration = new Date().getFullYear() - new Date ($( "#datepicker" ).val()).getFullYear();
+    	console.log(duration);
+    	$("#show_duration").html("Duration="+ date+" days "+month+" months "+year+" years ");
+    
+    
+    	
+
+ -->

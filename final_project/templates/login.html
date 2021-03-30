@@ -7,15 +7,15 @@
 
 	<form method="post" action="{% url 'user_login'%}">
 		{% csrf_token %}
-		{% if loggedin %}
-        	<h1>Welcome Dear</h1>
+		{% if user.is_authenticated %}}
+        	<h1>Welcome {{request.user.username}}</h1>
      	{% else %}
-     		<label>Username</label>
+     		<label>Username:</label>
 			<input type="text" name="username" placeholder="Username"/>
-		
-		    <label>Password</label>
-			<input type="password" name="password" />
-		
+		    <p></p>
+		    <label>Password:</label>
+			<input type="password" name="password" placeholder="Password" />
+		    <p></p>
 			<input type="submit" value="login"/>
      	{% endif %}  
 		

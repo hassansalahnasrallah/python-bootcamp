@@ -15,7 +15,7 @@ class UserProfileInfoForm(forms.ModelForm):
     
     class Meta():
         model= UserProfile
-        fields=('position','picture')   
+        fields=('position', 'picture', 'date_of_birth')   
         
 
 class VacationForm(forms.ModelForm): 

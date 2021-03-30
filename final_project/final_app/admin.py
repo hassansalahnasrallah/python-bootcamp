@@ -1,5 +1,5 @@
 from django.contrib import admin
-from final_app.models import UserProfile,Vacation
+from final_app.models import UserProfile, Vacation
 
 # Register your models here.
 

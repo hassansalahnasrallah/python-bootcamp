@@ -18,6 +18,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR,'templates')
 STATIC_DIR = os.path.join(BASE_DIR,'static')
 MEDIA_DIR = os.path.join(BASE_DIR,'media')
 
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -139,7 +140,7 @@ STATICFILES_DIRS = [
     ]
 
 MEDIA_ROOT = MEDIA_DIR
-MEDIA_DIR = '/media/'
+MEDIA_URL = '/media/'
 
 LOGIN_URL = '/user_login'
 
@@ -178,21 +179,21 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['console','main_log_file'],
+            'handlers': ['console'],
             'level': 'ERROR',
             'propagate':True 
             
         },
         
         'requests': {
-            'handlers': ['console','main_log_file'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate':True, 
             
         },
         
         '': {
-            'handlers': ['console','main_log_file'],
+            'handlers': ['console'],
             'level': 'DEBUG',
             'propagate':True, 
             

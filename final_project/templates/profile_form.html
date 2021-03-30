@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+
+ {% block container_block %}
+ 
+ 
+<link rel="stylesheet" href="https://formvalidation.io/vendors/formvalidation/css/formValidation.min.css"> 
+ 
+<h1>This is your Profile form</h1>
+<form name="profile_form" id="profile_form" action="" method="POST">
+	{% csrf_token %}
+	
+	
+	<label>Profile Image:</label>
+	<input type="file" name="profile_img"/>
+	<p></p>
+	
+	<label>Position:</label>
+	<input type="text" name="position" value="{{user_profile.position}}"/>
+	<p></p>
+	
+	<label>Date of Birth:</label>
+	<input type="text" name="date_of_birth" value="{{user_profile.date_of_birth}}"/>
+	<p></p>
+	
+	<button type="button" id="save_profile" class="btn btn-success">Save</button>
+
+</form>
+
+<label>This is your Profile Picture</label>
+<img src="{{MEDIA_URL}}{{user_profile.picture}}"/>		
+
+<script>
+	$(function(){
+		
+		$( "#save_profile" ).click(function(){
+			var formData = new FormData();
+			
+			  //formData.append('profile_img', $("input[name=profile_img]")[0].files[0]);
+			  formData.append(1,2);
+			  //formData.append('date_of_birth', $('input[name=date_of_birth]').val());
+			  formData.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
+			 
+			  console.log(formData);
+			  
+			  $.ajax({
+					method:"POST",
+					url:"{% url 'save_profile' %}",
+					data:formData,
+					processData: false,
+					contentype: false,
+					
+					success: function(response){
+						console.log(response)
+						
+						if(response.status == 'OK'){
+							alert("save success");
+							//var description_id = response.payload.id;
+							//$("input[name=description_id]").val(description_id);
+						}else{
+							if(response.message == "FAIL"){
+								alert("Fail to save");
+							}else if(response.message == "NAME_EXISTS"){
+								alert("This topic already found");											
+							}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
+								alert("You have missing parameters");
+							}
+						}	
+
+					
+				    }, 
+				    error: function(){
+				    	alert("Error in save")
+					}
+				});
+			 
+		});	
+	});
+
+
+</script>
+{% endblock %}
+
+<!-- 
+ rules: {
+				  profile_img: {
+			      required: true,	      
+			    }
+			  },
+			  
+			  messages: {
+				  profile_img: {
+					  required: "Profile image is required" 
+				  }
+				  
+			  },
+			  
+			   submitHandler: function(){
+			   }
+			   
+$("#save_profile").click(function(){
+			
+			$("#profile_form").submit();
+	
+			
+		});			   
+			   
+'position', $('input[name=position]').val()
+ -->

@@ -5,13 +5,27 @@ from . import forms
 from django.contrib.auth import authenticate, login , logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from final_app.models import Vacation
+from final_app.models import Vacation, UserProfile
 import json
+
+from django.db.utils import IntegrityError
+from final_project import settings
+import logging
+from datetime import date
+import os
+import random
+from django.db.models import Q 
+
+log = logging.getLogger(__name__)
 
 # Create your views here.
 
 def index(request):
     context = {}
+    log.debug("Index")
+    log.info("Index ")
+    log.warning("warning")
+    log.error("ll")
     return render(request, 'index.html', context)
 
 def test(request):
@@ -79,7 +93,7 @@ def register(request):
             
             
             profile.save()
-            
+            log.debug("Saved profile and user for user: %s", user)
             registered = True
             #login user
             #redirect to the home or vacation page
@@ -127,7 +141,7 @@ def user_login(request):
                 
                 loggedin = True
                 
-                return HttpResponseRedirect( reverse('vacation_form'))
+                return HttpResponseRedirect( reverse('vacation_page'))
 
 
             
@@ -156,12 +170,14 @@ def vacation_page(request):
     
     context = {}
     
+    #context['django_topic_id'] = Topic.objects.filter(topic_name="django").first().id
     context['vacations'] = Vacation.objects.all()
     
     return render (request,'vacation_page.html',context)
 
 def vacation_form(request):
     
+    log.debug("Now we are in the vacation form")
     context = {}
     
     vacation_id = request.GET.get('id')
@@ -216,20 +232,29 @@ def save_vacation(request):
     except:
         message = "SYSTEM_ERROR"
         status = "FAIL!!"
+        log.error("Error while saving vacation", exc_info=1)
                 
     response = {'status': status, 'message': message, 'payload': payload }
     
     return HttpResponse(json.dumps(response))
 
 def vacation_grid(request):
-    
+    """
+    Display grid of vacation
+    """
     
     #response=[{'title':"vacation title"}]
     
     data = []
-    vacations = Vacation.objects.all()
+    
+    employee_id =request.user.id #request.POST.get('employee_id')
+    
+    vacations = Vacation.objects.filter(employee_id=employee_id).all()
+    
     for vacation in vacations:
-        data.append({'description': vacation.description})#eza aktar mn field bzeed commas
+        data.append({'id': vacation.id,  'description': vacation.description, 'duration': vacation.duration,'status':vacation.status})#eza aktar mn field bzeed commas
+        #, 'date_from': vacation.date_from, 'date_to': vacation.date_to
+    
     
     records = len(vacations)
     
@@ -240,6 +265,72 @@ def vacation_grid(request):
         
         }
     
+    return HttpResponse(json.dumps(response))
+
+def profile_form(request):
+    
+    
+    context = {}
+
+    context['MEDIA_URL'] = settings.MEDIA_URL
+    context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
+    return render(request,'profile_form.html',context)
+
+def save_profile(request):
+    
+    status = "OK"
+    message = "SUCCESS"
+    payload = {}
+    
+    log.debug("request.FILES: %s",request.FILES)
+    profile_img = request.FILES['profile_img']
+    position = request.POST.get('position')
+    date_of_birth = request.POST.get('date_of_birth')
+    try:
+        log.debug("Profile image: %s",profile_img)
+        
+        mediaPrefix = ("%s/%s")%(date.today().year, date.today().month)
+        mediaPathDirectory = ("%s/%s") % (settings.MEDIA_ROOT, mediaPrefix)
+        
+        if not os.path.exists(mediaPathDirectory):
+            os.makedirs(mediaPathDirectory)
+            
+        extension = profile_img.name.split(u'.')[-1]  
+         
+        new_filename = "profile-pic-%s.%s"%(random.randint(0, 10000), extension)
+        
+        path = os.path.join(mediaPathDirectory, new_filename)
+        dest = open(path, 'wb+')
+        
+        for chunk in profile_img.chunks():
+            dest.write(chunck)
+            dest.close()
+            
+        image_url = "%s/%s"%(mediaPrefix, new_filename)
+        
+        
+        user_profile = UserProfile.objects.filter(user_id = request.user.id).first()
+        
+        if not user_profile:
+            user_profile = UserProfile.objects.create(user_id = request.user.id)  
+            log.debug("user profile not found creating a new one")
+            
+        user_profile.picture = image_url
+        user_profile.position = position
+        user_profile.date_of_birth = date_of_birth
+        
+        user_profile.save()
+        log.debug('Saved profile image successfully for user %s', request.user.id)
+        
+    except:
+ 
+        message = "SYSTEM_ERROR"
+        status = "FAIL!!"
+        log.error("Error while saving profile form", exc_info=1)
+                  
+    
+    response = {'status': status, 'message': message, 'payload': payload }
+     
     return HttpResponse(json.dumps(response))
 
 urlpatterns = [
@@ -255,5 +346,7 @@ urlpatterns = [
   url(r'vacation2/',vacation_form,name="vacation_form"),
   url(r'vacation_save/',save_vacation,name="save_vacation"), 
   url(r'vacation_grid/',vacation_grid,name="vacation_grid"),
+  url(r'profile/',profile_form,name="profile_form"),
+  url(r'save_profile_user/',save_profile,name="save_profile"),
 
     ]

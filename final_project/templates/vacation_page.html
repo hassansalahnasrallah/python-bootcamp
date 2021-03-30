@@ -1,27 +1,32 @@
-
+{% extends 'base.html' %}
+{% load static  %}
+{% block block2 %}
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
-<h1>DATA TABLE</h1>
-</table>
+<h1>VACATION TABLE</h1>
 
+{% csrf_token %}
 <table id= "vacation_table" class= "cell-border compact stripe">
 	<thead>
 		<tr>
 			<th>Description</th>
 			<th>Duration</th>
+			<th>Status</th>
+			<th>Action</th>	
 			<th>Date from</th>
 			<th>Date to</th>
-			<th>Action</th>	
+			
+				
 		</tr>
 	</thead>
 	<tbody>
-		{% for vacation in vacations %}
-			<tr>
-				<td>{{vacation.description}}</td>
-				
-			</tr>		
-			
-		{% endfor %}
+	
 	</tbody>
+	<tfoot>
+		<tr>
+			<th style="width:140px;" data-searchable="true" >Description</th>
+		</tr>
+	
+	</tfoot>
 </table>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -34,25 +39,81 @@
 
 	$(function(){
 		
-		$('#vacation_table').DataTable({
+		var vacay_table = $('#vacation_table').DataTable({
 			ajax: {
 				url: '{% url "vacation_grid" %}',
-			},
-			columns: [{
-				'data': 'description', 'name': 'description',
-				//'data': 'duration', 'name': 'duration',
+				type: 'POST',
+				data: function(d){
+					d.csrfmiddlewaretoken = $("input[name=csrfmiddlewaretoken]").val(),
+					d.user_id = "{{request.user.id}}" //$("input[name=user_id]").val()
+					//{{django_topic_id}} w bruh 3al context
+					
+				}
 				
-				}]
+				
+				
+				
+			},
+			columns: [
+				{'data': 'description', 'name': 'description', 'sortable':true},
+				{'data': 'duration', 'name': 'duration'},
+				{'data': 'status', 'name': 'status'},
+				{'data': 'action'}
+				
+				//{'data': 'date_from', 'name': 'date_from'},
+				//{'data': 'date_to', 'name': 'date_to'},
+				
+				],
 			//data esm l data elle be3eta mn l views w name huwe esm l field
+			
+			columnDefs: [
+				{
+					targets: -1, //or 3
+					title: 'Actions',
+					render: function(data, type, full, meta){
+						var edit_url = "{% url 'vacation_form' %}?id=" + full.id;
+						return "<a href='"+edit_url+"'>Edit</a> <button class='btn btn-success' type='button' id='Update'>Update Status</button>"
+					}
+					
+				}
+			]
 		});
+		
+		$("#vacation_table tfoot th[data-searchable=true]").each(function(){
+			var title = $(this).text();
+			$(this).html('<input type="text" placeholder="Search '+title+'"/>');
+		});
+		
+		vacay_table.columns().every(function(){
+		var column = this;
+		$('input',this.footer()).on('change',function(){
+			if(column.search()!== this.value){
+				column.search(this.value).draw();
+			}
+		})
+		})
+		
+		
 		
 	});
 
 </script>
+{% endblock %}
 
 <!-- 
-<a href= "{% url 'vacation_form' %}?id={{desc.id}}">Edit</a> 
+<a href= "{% url 'vacation_form' %}?id={{vacation.id}}">Edit</a> 
 <td>{{vacation.duration}}</td>
 
-
+data: function(d){
+					d.user_id = $("input[name=user_id]").val()
+					
+				}
+				
+{% for vacation in vacations %}
+			<tr>
+				<td>{{vacation.description}}</td>
+				
+			</tr>		
+			
+		{% endfor %}				
 -->
