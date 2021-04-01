@@ -66,10 +66,12 @@
       <div class="container" id="big_div">
       {% block block2 %} 
       	<div class="row" >
+      		{% block block3 %} 
       		<div class="col-6" id="first_div">
       		  <img src="{%static 'images/travel.gif'%}" width="300px" alt="This is an image">
       		   
       		</div>
+      		{% endblock %}
       		<div class= "col-6" id="second_div">
       		
       			{% block container_block %}

@@ -287,7 +287,7 @@ def save_profile(request):
     payload = {}
     
     log.debug("request.FILES: %s",request.FILES)
-    profile_img = request.FILES['profile_img']
+    profile_img = request.FILES.get('profile_img')
     position = request.POST.get('position')
     date_of_birth = request.POST.get('date_of_birth')
     try:
@@ -307,7 +307,7 @@ def save_profile(request):
         dest = open(path, 'wb+')
         
         for chunk in profile_img.chunks():
-            dest.write(chunck)
+            dest.write(chunk)
             dest.close()
             
         image_url = "%s/%s"%(mediaPrefix, new_filename)
@@ -326,6 +326,7 @@ def save_profile(request):
         user_profile.save()
         log.debug('Saved profile image successfully for user %s', request.user.id)
         
+        payload['image_url'] = image_url
     except:
  
         message = "SYSTEM_ERROR"
