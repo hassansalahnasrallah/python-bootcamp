@@ -11,7 +11,7 @@ import json
 from django.db.utils import IntegrityError
 from final_project import settings
 import logging
-from datetime import date
+from datetime import date, datetime
 import os
 import random
 from django.db.models import Q 
@@ -187,54 +187,58 @@ def vacation_form(request):
         print("there is a vacation id")
         
     
-    context['desc'] = employee_vacation
+    context['vacation'] = employee_vacation
     
     return render(request,'vacation_form.html',context)
 
 def save_vacation(request):     
-    
+    """
+    Update add vacation for logged in user
+    """
     description = request.POST.get('description')
-    vacation_id = request.POST.get('description_id')
-    #desc
-    
-    
+    date_from = request.POST.get('date_from')
+    date_to = request.POST.get('date_to')
+    duration = request.POST.get('duration')
+    vacation_id = request.POST.get('vacation_id')
+
     status = "OK"
     message = "SUCCESS"
     payload = {}
     
     try:
-        if description: #and and and 
+        if description and date_from and date_to and duration: 
         
             if vacation_id:
                 #update
-                vacation = Vacation.objects.filter(id = description_id).first()
+                vacation = Vacation.objects.filter(id=vacation_id).first()
             else:
                 vacation = Vacation(employee_id=request.user.id)
             
             if vacation:
                 vacation.description = description
+                vacation.date_from = datetime.strptime(date_from, "%d/%m/%Y")
+                vacation.date_to = datetime.strptime(date_to, "%d/%m/%Y")
+                vacation.duration = duration
                 vacation.save()
-                payload['id'] = desc.id
+                
+                payload['id'] = vacation.id
                 response = "SUCCESS"
+                
+                log.debug("%s vacation successfully" % ("Updated" if vacation_id else "Created"))
             else:
-                message = "DESCRIPTION_NOT_FOUND"
+                message = "VACATION_NOT_FOUND"
                 status = "FAIL"
                 
-#             else:
-#                 #create
-#                 desc = Vacation.objects.create(description=description )
-#                 payload['id'] = desc.id
         else:
             message = "MISSING_REQUIRED_PARAMETERS"
-            status = "FAIL!"
-            
+            status = "FAIL"
 
     except:
         message = "SYSTEM_ERROR"
-        status = "FAIL!!"
+        status = "FAIL"
         log.error("Error while saving vacation", exc_info=1)
                 
-    response = {'status': status, 'message': message, 'payload': payload }
+    response = {'status': status, 'message': message, 'payload': payload}
     
     return HttpResponse(json.dumps(response))
 
@@ -252,8 +256,8 @@ def vacation_grid(request):
     vacations = Vacation.objects.filter(employee_id=employee_id).all()
     
     for vacation in vacations:
-        data.append({'id': vacation.id,  'description': vacation.description, 'duration': vacation.duration,'status':vacation.status})#eza aktar mn field bzeed commas
-        #, 'date_from': vacation.date_from, 'date_to': vacation.date_to
+        data.append({'id': vacation.id,  'description': vacation.description, 'duration': vacation.duration,
+                     'status': "Active" if vacation.status else "Not active", 'date_from': datetime.strftime(vacation.date_from, '%d/%m/%Y'), 'date_to': datetime.strftime(vacation.date_to, '%d/%m/%Y')})
     
     
     records = len(vacations)
@@ -333,6 +337,41 @@ def save_profile(request):
      
     return HttpResponse(json.dumps(response))
 
+
+def update_status(request):
+    """
+    """
+    vacation_id = request.POST.get('vacation_id')
+
+    status = "OK"
+    message = "SUCCESS"
+    payload = {}
+    
+    try:
+        if vacation_id:
+            #update
+            vacation = Vacation.objects.filter(id=vacation_id).first()
+            vacation_status = vacation.status
+            
+            vacation.status = not vacation_status
+            vacation.save()
+                
+            response = "SUCCESS"
+            
+            log.debug("%s vacation successfully" % ("Updated" if vacation_id else "Created"))
+        else:
+            message = "VACATION_NOT_FOUND"
+            status = "FAIL"
+            
+    except:
+        message = "SYSTEM_ERROR"
+        status = "FAIL"
+        log.error("Error while saving vacation", exc_info=1)
+                
+    response = {'status': status, 'message': message, 'payload': payload}
+    
+    return HttpResponse(json.dumps(response))
+
 urlpatterns = [
   url(r'^$',index,name="index"),
   url(r'test/',test,name="test"),
@@ -348,5 +387,7 @@ urlpatterns = [
   url(r'vacation_grid/',vacation_grid,name="vacation_grid"),
   url(r'profile/',profile_form,name="profile_form"),
   url(r'save_profile_user/',save_profile,name="save_profile"),
+  url(r'update_status/',update_status,name="update_status"),
+  
 
     ]

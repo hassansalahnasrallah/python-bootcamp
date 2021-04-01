@@ -1,21 +1,23 @@
 {% extends 'base.html' %}
 {% load static  %}
 {% block block2 %}
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
 <h1>VACATION TABLE</h1>
 
+<hr>
 {% csrf_token %}
-<table id= "vacation_table" class= "cell-border compact stripe">
+<div class="col-sm-12">
+	<button class="btn btn-primary"><a href="{% url 'vacation_form' %}">Add Vacation</a></button>
+</div>
+<div class="col-sm-12">
+<table id= "vacation_table" class= "table">
 	<thead>
 		<tr>
 			<th>Description</th>
+			<th>Date from</th>
+			<th>Date to</th>
 			<th>Duration</th>
 			<th>Status</th>
 			<th>Action</th>	
-			<th>Date from</th>
-			<th>Date to</th>
-			
-				
 		</tr>
 	</thead>
 	<tbody>
@@ -24,16 +26,36 @@
 	<tfoot>
 		<tr>
 			<th style="width:140px;" data-searchable="true" >Description</th>
+			<th style="width:140px;" data-searchable="false" >Date from</th>
+			<th style="width:140px;" data-searchable="false" >Date to</th>
+			<th style="width:140px;" data-searchable="true" >Duration</th>
+			<th style="width:140px;" data-searchable="false" >Status</th>
+			<th style="width:140px;" data-searchable="false"></th>
 		</tr>
-	
 	</tfoot>
 </table>
+</div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
-
-
+<div class="modal" tabindex="-1" role="dialog" id="vacation_status_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Vacation Status</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to update?</p>
+        <input name="vacation_id" type="hidden" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="save_status" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 
@@ -49,13 +71,12 @@
 					//{{django_topic_id}} w bruh 3al context
 					
 				}
-				
-				
-				
-				
 			},
+			responsive: true,
 			columns: [
 				{'data': 'description', 'name': 'description', 'sortable':true},
+				{'data': 'date_from', 'name': 'date_from'},
+				{'data': 'date_to', 'name': 'date_to'},
 				{'data': 'duration', 'name': 'duration'},
 				{'data': 'status', 'name': 'status'},
 				{'data': 'action'}
@@ -72,11 +93,20 @@
 					title: 'Actions',
 					render: function(data, type, full, meta){
 						var edit_url = "{% url 'vacation_form' %}?id=" + full.id;
-						return "<a href='"+edit_url+"'>Edit</a> <button class='btn btn-success' type='button' id='Update'>Update Status</button>"
+						return "<a href='"+edit_url+"'>Edit</a> <button class='btn btn-success btn-sm btn-update' type='button' data-id="+full.id+"><i class='fa fa-check'></i></button>"
 					}
 					
 				}
-			]
+			],
+			
+			createdRow: function(row, data, dataIndex){
+				console.log(data)
+				if(data['status'] == "Active"){
+					$(row).css({'background-color': "green"})
+				}else{
+					$(row).css({'background-color': "red"})
+				}
+			}
 		});
 		
 		$("#vacation_table tfoot th[data-searchable=true]").each(function(){
@@ -85,15 +115,52 @@
 		});
 		
 		vacay_table.columns().every(function(){
-		var column = this;
-		$('input',this.footer()).on('change',function(){
-			if(column.search()!== this.value){
-				column.search(this.value).draw();
-			}
-		})
+			var column = this;
+			$('input',this.footer()).on('change',function(){
+				if(column.search()!== this.value){
+					column.search(this.value).draw();
+				}
+			})
 		})
 		
+		$("#vacation_table tbody").on('click', '.btn-update', function(){
+			//show dialog
+			console.log(2)
+			$("#vacation_status_modal").show();
+			$("input[name=vacation_id]").val($(this).attr('data-id'));
+		});
 		
+		$("#save_status").click(function(){
+			$.ajax({
+				type:"POST",
+				url: "{% url 'update_status' %}",
+				data:{
+					vacation_id: $("input[name=vacation_id]").val(),
+					csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+				},
+				dataType: 'json',//json bcz data is dictionary
+				success: function(response){
+					console.log(response)
+					
+					if(response.status == 'OK'){
+						toastr.success('Vacation status updated');
+						vacay_table.ajax.reload(); //to auto update table on success
+						$("#vacation_status_modal").hide();
+					}else{
+						if(response.message == "VACATION_NOT_FOUND"){
+							toastr.error('Vacation not found')
+						}else if(response.message == "NAME_EXISTS"){
+							alert("This topic already found");											
+						}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
+							alert("You have missing parameters");
+						}
+					}	
+			    }, 
+			    error: function(){
+			    	alert("Error in save")
+				}
+			});
+		});
 		
 	});
 
