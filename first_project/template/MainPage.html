@@ -3,14 +3,28 @@
 {% block title %}MainPage{% endblock %}
 {% load static %}
 {% block container %}
-<h2 id="Home" align="center" class="mt-4 mb-4"><b><em>Welcome To My Site!</em></b></h2>
-    
- <table cellspacing="20px">
-        <tr>
-<td><button type="button"  id="SpecialButton1"  > </button></td>
-<td><img src="{% static 'IMAGE/PhotographyImage1.png' %}" id="Images" class="borderimage"></td>
-<td><button type="button" id="SpecialButton2"  > </button></td> 
-       </tr>
-
-    </table>
+<style>
+p{
+	margin-bottom:0;
+}
+#next{
+	background-color : #f8f9fa!important;
+}
+#employee{
+	margin-bottom:0;
+}
+.ChangeColor{
+	color:green;
+}
+</style>
+<p class="mt-5 ms-4">PYTHON BOOTCAMP</p>
+<h1 id="employee"  class="ms-4"><b><em>Employee </em></b></h1>
+<h1 class="mb-4 ms-4"  ><b><em>Vacation</em></b></h1>
+<p class="ms-4">your way to add a vacation</p>
+<div >
+<a  href="{% url 'userLogin' %}" ><button type="button" class="btn-success ms-4 mt-4" style="width:90px;">LOGIN</button></a>
+</div>
+<div >
+<p class="mt-4 ms-4">Don't have an account?<a href="{% url 'register' %}" class="ChangeColor"> Sign up</a></p>
+</div>
 {% endblock %}

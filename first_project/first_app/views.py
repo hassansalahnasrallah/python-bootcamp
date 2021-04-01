@@ -12,6 +12,10 @@ from datetime import datetime
 from django.utils import formats
 from django.db.transaction import commit
 from django.contrib.auth import logout
+from django.core.serializers.json import DjangoJSONEncoder
+import json
+from telnetlib import theNULL
+from builtins import int
 
 # Create your views here.
 def mainPage(request):
@@ -25,12 +29,15 @@ def register(request):
              user=user_form.save()
              user.set_password(user.password)
              user.save()
-
+             return HttpResponseRedirect(reverse('userLogin'))
+         
      context={"userform":user_form}
      return render(request,'signup.html',context)
      
 def userLogin(request):
      context={}
+     active_user=True
+     registered_user=True
      if request.method=="POST":
          username=request.POST.get('username') 
          password=request.POST.get('password')
@@ -40,35 +47,57 @@ def userLogin(request):
                  login(request,user)
                  return HttpResponseRedirect(reverse('vacation_table'))
              else:
-                 return HttpResponse('ur account isnt active')
+                 active_user=False
+                 
          else:
-             return HttpResponse('Invalid Login Details')
-        
+             registered_user=False
+             
+     context['active_user']=active_user
+     context['registered_user']=registered_user
      return  render(request,'login.html',context)
  
 
 @login_required(login_url='LogIn/')
-def ProfilePageView(request):  
-     user=request.user
-     #user_profile=User.objects.filter(id=user.id)
-     user_one=ProfilePageModel.objects.all()
-     employee_form=forms.ProfilePageForm
-     if request.method =="POST":
-         employee_form=forms.ProfilePageForm(data=request.POST)
-         if employee_form.is_valid:
-             employ=employee_form.save(commit=False)
-             if 'profilepic' in request.FILES:
-                 print("found the picture")
-                 employ.profilepic=request.FILES['profilepic']
-             employ.user=user
-             employ.save()
-             return HttpResponseRedirect(reverse('register'))
-             
-             
-     context={"employee_form":employee_form}
+def ProfilePageView(request): 
+     context={} 
+     # user=request.user
+     # user_profile=User.objects.filter(id=user.id)
+     user_one = ProfilePageModel.objects.all()
+     user_name=request.GET.get('id')
+     usernameprofile=None
+     if user_name:
+         usernameprofile=ProfilePageModel.objects.filter(user_id=request.user.id).first()
+     context['usernameprofile']=usernameprofile
+     context['user_one']=user_one
+     context['user']=request.user
      return render(request,'profilepage.html',context)
+
+
+def SaveProfile(request):
+     user=request.user
+     JobPostion=request.POST.get('JobPostion')
+     file=request.FILES['file']
+     dateofbirth= request.POST.get('dateofbirth')
+     user_name=request.POST.get('user_name')
+     
+     if user_name:
+         userprofile=ProfilePageModel.objects.filter(user_id=user.id).first()
+         if userprofile:
+             userprofile.jobposition= JobPostion
+             userprofile.profilepic= file
+             userprofile.dateOfBirth= dateofbirth
+             userprofile.save()
+             
+     else:
+         ProfilePageModel.objects.create(user_id=user.id,jobposition=JobPostion,profilepic=file,dateOfBirth=dateofbirth)
          
-@login_required(login_url='LogIn/')        
+     return HttpResponse("saved") 
+ 
+def signed_up(request):
+     context={}
+     return render(request,'verifiedsignup.html',context)  
+    
+@login_required(login_url='LogIn/')
 def HomePageView(request):
      context={}
      user=request.user
@@ -89,25 +118,59 @@ def savedHomePage(request):
      datetime_to= request.POST.get('dateto')
      Duration=request.POST.get('duration_field')
      idUserVaca=request.POST.get('idOfVaca')
-     if idUserVaca:
-         user_vaca=HomePageModel.objects.filter(id=idUserVaca).first()
-         if user_vaca:
-             user_vaca.description= description
-             user_vaca.datetimefrom= datetime_from
-             user_vaca.datetimeto= datetime_to
-             user_vaca.Duration= Duration
-             user_vaca.save()
-     else:
-         HomePageModel.objects.create(user=user,description=description,datetimefrom=datetime_from,datetimeto=datetime_to,Duration=Duration)
-     
-     return HttpResponse("Saved")
+     try:
+         status='OK'
+         payload={}
+         message='SUCCESS'
+    
+         if idUserVaca:
+             user_vaca=HomePageModel.objects.filter(id=idUserVaca).first()
+             if user_vaca:
+                 user_vaca.description= description
+                 user_vaca.datetimefrom= datetime_from
+                 user_vaca.datetimeto= datetime_to
+                 user_vaca.Duration= Duration
+                 user_vaca.save()    
+             else:
+                 message="VACATION_NOT_FOUND"
+         else:
+             HomePageModel.objects.create(user=user,description=description,datetimefrom=datetime_from,datetimeto=datetime_to,Duration=Duration)
+     except:
+         message="MISSING_REQUIRED_PARAMETERS"
+         status="FAIL"
+       
+     response={'status':status,'message':message,'payload':payload}
+     return HttpResponse(json.dumps(response))
 
 @login_required(login_url='LogIn/') 
 def vacation_table(request):
-     user_info=HomePageModel.objects.all()
-     context={"user_info":user_info,"present_user":request.user}  
+     # user_info=HomePageModel.objects.all()
+     # context={"user_info":user_info,"present_user":request.user}  
+     context={}
      return render(request,'vacationtable.html',context)
     
+
+def vacation_grid(request): 
+     data=[]
+     table_length=request.POST.get('length')
+     print(table_length)
+     
+     user_info=HomePageModel.objects.filter(user_id=request.user.id).all()[:int(table_length)]
+     print(len(user_info))
+     for info in user_info:
+         data.append({'description':info.description,'datetimefrom':info.datetimefrom,'datetimeto':info.datetimeto,'Duration':info.Duration})
+         
+         
+     records=len(user_info)
+     response={
+         'draw': 1,
+         'recordsTotal':records,
+         'recordsFiltered':records,
+         'data':data,
+         
+    }
+     return HttpResponse(json.dumps(response,sort_keys=True,indent=1,cls=DjangoJSONEncoder))
+     
 def logOutUser(request):
      logout(request)
      return HttpResponseRedirect(reverse('userLogin'))
@@ -119,11 +182,15 @@ urlpatterns = [
     
      url(r'register/',register,name="register"),
      url(r'LogIn/',userLogin,name="userLogin"),
-     url(r'ProfilePage/',ProfilePageView,name="ProfilePageView"),
+     url(r'ProfilePageView/',ProfilePageView,name="ProfilePageView"),
      url(r'HomePage/',HomePageView,name="HomePageView"),
-     url(r'vacation/',vacation_table,name="vacation_table"),
+     url(r'vacation_table/',vacation_table,name="vacation_table"),
      url(r'savedPage/',savedHomePage,name="savedHomePage"),
-     url(r'mainPage/',mainPage,name="mainPage"),
+     url(r'mainPage',mainPage,name="mainPage"),
      url(r'logOut/',logOutUser,name="logOutUser"),
-    url(r'base_Page/',base_Page,name="base_Page"),
+     url(r'base_Page/',base_Page,name="base_Page"),
+     url(r'signed_up/',signed_up,name="signed_up"),
+     url(r'SaveProfile/',SaveProfile,name="SaveProfile"),
+     url(r'vacation_grid/',vacation_grid,name="vacation_grid"),
+     
     ]

@@ -3,57 +3,7 @@ var startdate,enddate;
 var formattedDate,formattedDate2;
 var DateFirst;
 var DateSecond;
- $("#SpecialButton2").html(">");
- $("#SpecialButton1").html("<");
- var save=4;
- var i=1;
 
-$("button").click(function(){
-	var image_src = document.querySelector("#Images");
-    console.log(image_src.getAttribute('src'))
-	 var image=["/static/IMAGE/PhotographyImage1.png","/static/IMAGE/photographyimage3.png", "/static/IMAGE/travel5.jpg", "/static/IMAGE/travel8.jpg"];
-          var valButton = this.id;
-            
-            if(valButton=="SpecialButton2"){
-               if(i < 4 )
-               {
-                
-         image_src.setAttribute('src',image[i]);
-      
-                 save=i;
-                   i=i+1;
-                 
-                  
-                }else{
-                    i=0;
-          image_src.setAttribute('src',image[0]);
-       
-         
-                     save=i;
-                    i=i+1;
-                  
-                    
-                }
-               }
-            else if(valButton=="SpecialButton1"){
-               
-               
-                if(save>0)
-                    {
-                      save=save-1; 
-             image_src.setAttribute('src',image[save]);   
-                    i=save+1;
-                        
-              }else{
-                    save=3;
-               image_src.setAttribute('src',image[save]);
-                  i=save+1;
-                   
-                }
-               
-	}
-	
-})
 $("#date_from").datetimepicker({ 
         format: "Y-m-d", 
           timepicker:false,
@@ -61,7 +11,7 @@ $("#date_from").datetimepicker({
             startdate = new Date($("#date_from").val());
             var data =$('#date_from').val();
             var arr = data.split('-');
-            DateFirst = new Date(arr[0],arr[1],arr[2])
+            DateFirst = new Date(arr[0],arr[1],arr[2]);
      formattedDate =  startdate.getFullYear()+ "-" +(startdate.getMonth() + 1 ) + "-" + (startdate.getDate());
        console.log(DateFirst);
        console.log(formattedDate);
@@ -75,8 +25,11 @@ $("#date_to").datetimepicker({
           timepicker:false,
         onSelectDate: function(){
             enddate = new Date($("#date_to").val());
-    
-        formattedDate2= enddate.getFullYear()+ "-" +( enddate.getMonth() + 1 ) + "-" + ( enddate.getDate());
+    	   var data =$('#date_to').val();
+            var arr1 = data.split('-');
+          DateSecond= new Date(arr1[0],arr1[1],arr1[2]);
+           console.log(moment(enddate).format("MMM Do YY"));
+           formattedDate2= enddate.getFullYear()+ "-" +( enddate.getMonth() + 1 ) + "-" + ( enddate.getDate());
            console.log(DateSecond);
            console.log(formattedDate2);
         }
@@ -90,7 +43,7 @@ $("#ButtonCal").click(function(){
       DateFirst = new Date(arr[0],arr[1],arr[2])
 	 var data =$('#date_to').val();
      var arr1 = data.split('-');
-      DateSecond= new Date(arr1[0],arr1[1],arr1[2])
+      DateSecond= new Date(arr1[0],arr1[1],arr1[2]);
       
 	var timediff =  DateSecond.getTime() - DateFirst.getTime();
 	console.log(timediff);
@@ -98,8 +51,56 @@ $("#ButtonCal").click(function(){
 	console.log(days);
 	$("#durationField").val(parseInt(days));
 	
-	})
- $("#savedHomePage").click(function(){
+	});
+
+$("#vacation_grid").DataTable({
+	
+     ajax : {
+		url:$("#vacation_grid").attr('data-url'),
+		dataSrc: 'data',
+		type:'POST',
+	    data: function(d){
+		d.csrfmiddlewaretoken=$("input[name=csrfmiddlewaretoken]").val();
+	}
+	},
+	
+	lengthMenu: [5,10,25,50],
+    pageLength: 10,
+	
+   
+	processing:true,
+	serverSide:true,
+	
+	columns:[{'data':'description','name':'description'}],
+	
+	
+});
+$("#SignUpForm").validate({
+	rules:{
+		email:{required:true,
+		      email:true},
+	},
+	 messages:{
+		email:"Please enter a valid email",
+	},
+	
+});
+$("#loginForm").validate({
+	
+	rules:{
+		
+	   username:{required:true},
+	   password:{required:true},
+			
+	},
+	 messages:{
+		 username:"this field is required",
+	     password:"this field is required",
+	},
+	
+});
+$("#savedHomePage").click(function(){
+	
 	$.ajax({
 		type:"POST",
 		url:$("form[name=HomePageView]").attr('action'),
@@ -114,6 +115,53 @@ $("#ButtonCal").click(function(){
 			
 		},
 		dataType:'json',
+		success: function(response){
+			console.log(response)
+			
+		},
+		error : function(){
+			  
+		},
+	});
+});
+
+
+$("#date_ofbirth").datetimepicker({ 
+        format: "Y-m-d", 
+        timepicker:false,
+});
+$("#ProfilePage").validate({
+	
+	rules:{
+		
+		JobPostion:{required:true},
+		dateofbirth:{required:true},
+		file:{required:true},
+			
+	},
+	 messages:{
+		 JobPostion:"this field is required",
+         dateofbirth:"this field is required",
+         file:"Image is required",
+	},
+	submitHandler: function() {
+       	var formData = new FormData();
+	formData.append('JobPostion',$("input[name=JobPostion]").val());
+	formData.append('file',$("input[name=file]")[0].files[0]);
+	formData.append('dateofbirth',$("input[name=dateofbirth]").val());
+	
+	if($("input[name=user_name]").val()!=undefined){
+	formData.append('user_name',$("input[name=user_name]").val());
+	}
+
+	formData.append('csrfmiddlewaretoken',$("input[name=csrfmiddlewaretoken]").val());
+	$.ajax({
+		method:"POST",
+		url:$("form[name=ProfilePageView]").attr('action'),
+		data: formData,
+		processData:false,
+		contentType:false,
+		
 		success: function(){
 			
 		},
@@ -121,6 +169,13 @@ $("#ButtonCal").click(function(){
 			  
 		},
 	});
+      }
+	
+});
+
+$("#SaveProfile").click(function(){
+	$("#ProfilePage").submit();
+
 });
 
 });

@@ -1,30 +1,63 @@
 {% extends 'base.html' %}
 {% block title %}Vacation{% endblock %}
-
+{% load static %}
 {% block container %}
-<table border="2" align="center" cellpadding="15" style="text-align:center;" class="vacatable">
-<tbody>
-<tr><td>Description</td>
-<td>DateTimeFrom</td>
-<td>DateTimeTo</td>
-<td>Duration</td>
-<td></td>
-</tr>
-{% for vaca in user_info %}
+<style>
+.row{
+	display:flex;
+	width:100%;
+}
+.col-4{
+	width:100%!important;
+	padding-top:10px;
+	
+	
+	
+}
+#vacation_grid_wrapper{
+	width:990px!important;
+}
+
+</style>
+<!--
+<style>
+.container{
+	width:1000px!important;
+
+	background-color : #f8f9fa!important;
+	
+}
+/*
+table {
+    border-collapse: collapse;
+}
+
+table td {
+    border: 1px solid #333;
+}
+a {
+	text-align:center;
+}*/
+</style>-->
+
+<table id="vacation_grid" data-url="{% url 'vacation_grid' %}">
+{% csrf_token %}
+<thead>
 <tr>
-{% if present_user == vaca.user %}
-<td>{{vaca.description}}</td>
-<td>{{vaca.datetimefrom}}</td>
-<td>{{vaca.datetimeto}}</td>
-<td>{{vaca.Duration}}</td>
-<td><a href="{% url 'HomePageView' %}?id={{vaca.id}}">Edit</a></td>
-{% endif %}
+<th>Description</th>
+
 </tr>
-
-{% endfor %}
-
-
+</thead>
+<tbody>
 </tbody>
-</table>
-{% endblock %}
 
+</table>
+
+<br>
+<div align="center">
+<a  href="{% url 'HomePageView' %}" ><button type="button">Add Vacation</button></a>
+</div>
+<br>
+
+
+{% endblock %}

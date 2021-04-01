@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}SignedUp{% endblock %}
+{% block container %}
+<style>
+.container{
+	width:300px!important;
+	height:200px!important;
+	background-color : #f8f9fa!important;
+	padding-top:40px;
+	padding-bottom:auto;
+	padding-right:auto;
+	padding-left:auto;
+	
+	
+}
+
+</style>
+<table align="center" cellpadding="5">
+<tr><td><p class="ms-5">Your account is active</p></td></tr>
+<tr><td>You can Log in using this Link <a href="{% url 'userLogin' %}">LogIn</a>.</td></tr>
+</table>
+{% endblock %}

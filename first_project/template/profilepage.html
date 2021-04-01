@@ -1,12 +1,33 @@
 {% extends 'base.html' %}
 {% block title %}ProfilePage{% endblock %}
 {% block container %}
-<form method="POST" enctype="multipart/form-data">
-{{employee_form.as_p}}
+<style>
+.col-4{
+	width:50%!important;
+	padding-top:10px;
+	padding-bottom:10px;
+	
+}
+</style>
+
+<h2>Update your profile:</h2>
+<br>
+<form method="POST" name="ProfilePageView"  action="{% url 'SaveProfile' %}" id="ProfilePage">
+<table>
+<tr><td><label>JobPosition:<label></td><td><input type="text" name="JobPostion"  value="{{usernameprofile.jobposition}}" ></td></tr>
+<tr><td><label>ProfilePic:</label></td><td><input type="file" class="form-control-file border" name="file" value="{{usernameprofile.profilepic}}" ></td></tr>
+<tr><td><label>DateOfBirth:</label></td><td><input type="text" name="dateofbirth" id="date_ofbirth" value="{{usernameprofile.dateOfBirth|date:'Y-m-d'}}" required></td></tr>
+</table>
+
 {% csrf_token %}
 <br>
 
-<input type="submit" class="btn btn-dark" value="Submit"/>
+{% for presentuser in user_one%}
+{% if presentuser.user == user %}
+<input type="hidden" name="user_name" value="{{user}}">
+{% endif %}
+{% endfor %}
+<button type="button" id="SaveProfile" class="btn btn-dark">Save</button>
 </form>
 
 

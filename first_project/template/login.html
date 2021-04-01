@@ -2,22 +2,54 @@
 {% block title %}LogIn{% endblock %}
 
 {% block container %}
-<h2 style="text-align:center;">Sign In</h2>
-<form method="POST" action="{% url 'userLogin' %}" style="text-align:center;">
+<style>
+
+#next{
+	margin:0;
+	background-color : #f8f9fa!important;
+	padding-top:20px;
+	
+	/*padding-bottom:auto;
+	padding-right:auto;
+	padding-left:auto;*/
+	
+}
+#tableDisplay{
+	margin:0;
+}
+#username-error{
+	
+	color:red;
+}
+#password-error{
+	color:red;
+}
+</style>
+<h2 class="ms-2">Sign In</h2>
+<form method="POST" action="{% url 'userLogin' %}" style="text-align:center;" id="loginForm" >
 {% csrf_token %}
-<table align="center" cellpadding="5" class="mt-5" style="background-color :white!important ;">
+<table  cellpadding="5" class="mt-5" id="tableDisplay">
 <tr>
 <td><label>username:</label></td>
-<td><input type="text" name ="username" placeholder="username"></td>
+<td><input type="text" name ="username" placeholder="username" ></td>
 </tr>
 <tr>
 <td><label>password:</label></td>
-<td><input type="password" name ="password"></td>
-</tr>
-<tr>
-<td colspan='2' align="center"><input type="submit" value="LogIn"></td>
+<td><input type="password" name ="password" ></td>
 </tr>
 </table>
+<input type="submit" value="LogIn">
+{% if registered_user == False %}
+<script>
+alert("Invalid Login Dettails")
+</script>
+{% endif %}
+{% if active_user == False %}
+<label readonly>your account isnt active</label>
+{% endif %}
+
 </form>
 <label class="mb-5" style="background-color : #f8f9fa!important ;"></label>
+
+
 {% endblock %}

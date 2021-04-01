@@ -3,13 +3,56 @@
 {% block title %}Registration{% endblock %}
 
 {% block container %}
-<h2 >Fill the form:</h2>
+<style>
+.col-6{
+	width:100%;
+}
+#ImageDisplay{
+	width:240px;
+	height:430px;
+}
+#SignUpForm{
+	width:400px!important;
+	margin:0;
+   
+}
+#next{
+	background-color : #f8f9fa!important;
+	/*width:800px!important;*/
+	/*max-width:100%;*/
+}
+#first{
+	padding:0;
+}
+
+/*
+.container{
+	width:900px!important;
+	height:400px!important;
+	background-color : #f8f9fa!important;
+	padding-top:10px;
+	padding-bottom:auto;
+	padding-right:auto;
+	padding-left:auto;
+	
+}*/
+#id_username-error,#id_email-error,#id_password-error{
+	color:red;
+}
+</style>
+<h2 class="mt-3 ms-4">Fill the form:</h2>
 <br>
-<form method="POST">
+<form method="POST" id="SignUpForm" class="ms-4">
 {{userform.as_p}}
 {% csrf_token %}
-<br>
 
 <input type="submit" class="btn btn-dark" value="SignUp"/>
 </form>
+
+<script>
+$("#next").removeClass("col-4");
+$("#next").addClass("col-6");
+$("#first").removeClass("col-6");
+$("#first").addClass("col-4");
+</script>
 {% endblock %}

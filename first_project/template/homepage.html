@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 {% block title %}HomePage{% endblock %}
 {% block container %}
+<style>
+.col-4{
+	width:50%!important;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-right:auto;
+	padding-left:auto;
+	
+	
+}
+
+</style>
 <form method="POST" name="HomePageView" action="{% url 'savedHomePage' %}">
 <table>
 {% csrf_token %}
@@ -28,5 +40,6 @@
 
 <button type="button" id="savedHomePage" class="btn btn-dark"/>Save</button>
 </form>
+
 
 {% endblock %}
