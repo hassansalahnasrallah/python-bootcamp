@@ -1,0 +1,61 @@
+  
+{% extends 'base.html' %}
+
+{% block body_block %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" defer></script>
+<form name="vacation_form" action="{% url 'save_vacation' %}" method="POST">
+	{% csrf_token %}
+	
+	<label>Vacation</label>
+	<input name="Description" class="form-control" value="{{vacation.Description}}" placeholder="Vacation Description" /> 
+	<input type="text" name="DateFrom" id="datepicker"   class="form-control" value="{{vacation.DateFrom}}" placeholder="Vacation Starting date " /> 
+	<input type="text" name="DateTo" id="datepicker2" class="form-control" value="{{vacation.DateTo}}" placeholder="Vacation End date " /> 
+	<input type="hidden" name="vacation_id" value="{{vacation.id}}" />
+	<button type="button" id="save_vacation" class="btn btn-success">Save</button>
+</form>
+
+ 
+
+  
+
+<script>
+
+ 
+
+
+
+	$(function(){
+		$("#save_vacation").click(function(){
+			
+			$.ajax({
+				type: "POST",
+				url: "{% url 'save_vacation' %}", //$("form[name=topic_form]").attr('action')
+				data: {
+					Description: $("input[name=Description]").val(),
+					DateFrom: $("input[name=DateFrom]").val(),
+					DateTo: $("input[name=DateTo]").val(),
+					vacation_id: $("input[name=vacation_id]").val(),
+					csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val()
+				},
+				dataType: 'json',
+				success: function(response){
+					//console.log(response)
+					
+					//Handle form functionality
+				},
+				error: function(){
+					
+				}
+			});
+		});	
+		
+	    $( "#datepicker" ).datepicker();
+   
+        $( "#datepicker2" ).datepicker();
+		
+	});
+
+	
+</script>
+{% endblock %}

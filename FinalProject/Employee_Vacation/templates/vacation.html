@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_block %}
+  <div class="container">
+    <div class="jumbotron">
+    <h1>Add a new Vacation</h1>
+
+        <form id="NewVacation" enctype="multipart/form-data" method="POST" >
+          {% csrf_token %}
+		  
+          {{ vacationform.as_p }}
+          
+          <input id="new" type="submit" name="" value="Submit">
+        </form>
+
+
+    </div>
+
+  </div>
+  <script>
+ $("#new").click(function(){
+    $(location).href(http://localhost:8000/);
+});
+  
+  </script>
+  
+  
+  
+
+{% endblock %}

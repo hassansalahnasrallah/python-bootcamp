@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block body_block %}
+
+<div class="container">
+  <div class="jumbotron">
+    <h1>Employee Vacation Portal</h1>
+    {% if user.is_authenticated %}
+        <h2>Welcome {{ user.username }}!</h2><br>
+		<table class="table table-striped table-bordered table-sm">  
+    <thead class="thead-dark">  
+    <tr>  
+        <th>Employee</th>  
+        <th>Vacation Description</th>  
+        <th>Date From</th>  
+        <th>Date To</th>  
+		
+         
+    </tr>  
+    </thead>  
+    <tbody>  
+{% for vacation in Vacations %}  
+    <tr>  
+        <td>{{ vacation.Employee }}</td>  
+        <td>{{vacation.Description }}</td>  
+        <td>{{ vacation.DateFrom }}</td>  
+        <td>{{ vacation.DateTo }}</td>
+       
+
+			
+    </tr>  
+{% endfor %}  
+    </tbody>  
+</table> 
+		
+		
+		
+		
+    {% else %}
+        <h2>Welcome to the site!</h2>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block body_block %}
+
+<div class="container">
+  <div class="jumbotron">
+    <h1>Employee Profile</h1>
+    {% if user.is_authenticated %}
+        <h2>Check Your Profile:  {{ user.username }}!</h2><br>
+	<div class="container">
+        
+		{% for prof in EmpProfile %}  
+		
+		<ul>
+
+           
+          <li><b>Position :  {{ prof.JobPosition }}</b><br></li>
+          <li><b>Date Of Birth :  {{ prof.DateOfBirth }}</b><br></li>
+          <li><b>Picture :  {{ prof.picture }}</b><br></li>
+
+          
+          
+        </ul>
+		
+		{% endfor %}
+      </div>
+		
+		
+		
+		
+    {% else %}
+        <h2>Login to the site!</h2>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

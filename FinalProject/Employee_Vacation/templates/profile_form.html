@@ -1,0 +1,76 @@
+  
+{% extends 'base.html' %}
+
+{% block body_block %}
+
+<form   name="profile_form" id="profile_form" action="" method="POST">
+	{% csrf_token %}
+	
+	<label>Job Position</label>
+	<input type="text" name="JobPosition" class="form-control" value="{{profile.JobPosition}}" placeholder="Job Position" /> 
+	<label>Date Of Birth</label>
+	<input name="DateOfBirth" class="form-control" value="{{profile.DateOfBirth}}" placeholder="Date Of Birth" />
+    	
+	<label>Update your Profile picture here: </label>
+	<input type="file" id="profile_img" name="profile_img">
+	
+	
+	<button type="button" id="save_profile" class="btn btn-success">Save</button>
+	</form>
+	
+	
+	<image name="picture" src="{{MEDIA_URL}}{{profile.picture}}" /> 
+	
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+
+$(function(){
+		
+		$("#save_profile").click(function(){
+			var formData = new FormData();
+			
+			formData.append('profile_img', $("input[name=profile_img]")[0].files[0]);
+			formData.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
+			formData.append('JobPosition', $("input[name=JobPosition]").val());
+			formData.append('DateOfBirth', $("input[name=DateOfBirth]").val());
+			
+			console.log(formData);
+			
+			$.ajax({
+				method: "POST",
+				url: "{% url 'save_profile' %}",
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function(response){
+					console.log(response)
+					
+					if(response.status == 'OK'){
+						alert("Save success");
+						//var topic_id = response.payload.id;
+						//$("input[name=topic_id]").val(topic_id);
+					}else{
+						if(response.message == 'FAIL'){
+							alert("Fail to save")
+						}else if(response.message == 'NAME_EXISTS'){
+							alert("This profile already found")
+						}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
+							alert("You have missing parameters")
+						}else if(response.message == 'Profile_ALREADY_EXISTS'){
+							alert("profile already found")
+						}
+					}
+					//Handle form functionality
+				},
+				error: function(){
+					
+					alert("Error in save")
+				}
+			});
+		});
+		
+	});
+
+
+</script>
+{% endblock %}

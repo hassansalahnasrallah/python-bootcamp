@@ -1,0 +1,63 @@
+body {
+  background-color: #2E8B57;
+}
+.fa-file{
+
+color: dark-grey;
+
+}
+
+img{
+ padding: -50px;
+  width: 330px;
+
+}
+
+#homefooter{
+height:40px;
+background-color: #505050;
+margin-top:400px;
+padding: 16px 0;
+text-align: center;
+}
+
+
+#imgselection{
+height:400px;
+background-color: #01452c;
+font-size: 30px;
+text-align: center; 
+/*Top,Right, Bottom, Left*/
+ /*Top,Right, Bottom, Left*/
+padding: -100px;
+margin-top: 120px;
+margin-left: 150px;
+}
+
+#homesection2{
+background-color: white;
+margin-top: 120px;
+}
+
+
+a {
+color: black;
+}
+
+#footertext{
+
+font-size: 12px;
+
+}
+
+#text2{
+color: green;
+}
+
+#text1{
+margin-top: 20px;
+}
+
+.red {
+  background-color: red !important;
+}

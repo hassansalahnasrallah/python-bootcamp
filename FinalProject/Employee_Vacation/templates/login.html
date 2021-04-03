@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block body_block %}
+  <div class="container">
+    <div class="jumbotron">
+      <h5 id="text1">PYTHON BOOTCAMP</h5>
+	  <h1 id="text2">Employee Vacation</h1><br>
+	  
+	  <h6>Your way to add a vacation</h6><br>
+
+        <form method="post" action="{% url 'user_login' %}">
+          {% csrf_token %}
+          {# A more "HTML" way of creating the login form#}
+          <label for="username">Username:</label>
+          <input type="text" name="username" placeholder="Username" size="20"><br><br>
+		  
+		  <label for="password">password : </label>
+          <input type="password" name="password" placeholder="password" size="20"><br><br>
+
+          
+
+          <input type="submit" name="" value="Login">
+
+        </form><br>
+
+		
+		<h6>Don't have an account?<a class="navbar-link" href="{% url 'register' %}"><b>SignUP</b></a></h6><br>
+    </div>
+  </div>
+{% endblock %}

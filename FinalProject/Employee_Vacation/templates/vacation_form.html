@@ -1,0 +1,126 @@
+  
+{% extends 'base.html' %}
+
+{% block body_block %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" defer></script>
+ <script src="https://momentjs.com/downloads/moment.min.js"></script>
+<form name="vacation_form" id="vacation_form" action="{% url 'save_vacation' %}" method="POST">
+	{% csrf_token %}
+	
+	<label>Vacation</label>
+	<input name="Description" class="form-control" value="{{vacation.Description}}" placeholder="Vacation Description" /> 
+	<input type="text" name="DateFrom" id="datepicker"   class="form-control" value="{{vacation.DateFrom}}" placeholder="Vacation Starting date " /> 
+	<input type="text" name="DateTo" id="datepicker2" class="form-control" value="{{vacation.DateTo}}" placeholder="Vacation End date " /> 
+	<input type="hidden" name="vacation_id" value="{{vacation.id}}" />
+	<input type="hidden" name="vacation_id" value="{{vacation.id}}" />
+	
+	<input class="form-control" type="text" id="duration" name="duration" readonly />
+	<button type="button"  id="Btn_Calculate">Calculate</button>
+	<br>
+	
+	<button type="button" id="save_vacation" class="btn btn-success">Save</button>
+</form>
+
+ 
+
+  
+
+<script>
+
+ 
+
+
+
+	$(function(){
+		$("#vacation_form").validate({
+		
+		    rules: {
+				Description: {
+					required: true,
+				},
+				DateFrom: {
+					required: true,
+				},
+				
+				DateTo: {
+					required: true,
+				}
+			},
+			
+			messages: {
+				Description: {
+					required: "Description is required"
+				},
+				DateFrom: {
+					required: "Start Date is required"
+				},
+				
+				DateTo: {
+					required: "End Date is required"
+				}
+			},
+		
+			submitHandler: function(){
+			   $.ajax({
+				type: "POST",
+				url: "{% url 'save_vacation' %}", //$("form[name=topic_form]").attr('action')
+				data: {
+					Description: $("input[name=Description]").val(),
+					DateFrom: $("input[name=DateFrom]").val(),
+					DateTo: $("input[name=DateTo]").val(),
+					vacation_id: $("input[name=vacation_id]").val(),
+					csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val()
+				},
+				dataType: 'json',
+			    success: function(response){
+						console.log(response)
+						
+						if(response.status == 'OK'){
+							alert("Save success");
+							var vacation_id = response.payload.id;
+							$("input[name=vacation_id]").val(vacation_id);
+						}else{
+							if(response.message == 'FAIL'){
+								alert("Fail to save")
+							}else if(response.message == 'NAME_EXISTS'){
+								alert("This vacation already found")
+							}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
+								alert("You have missing parameters")
+							}
+							
+							}
+						//Handle form functionality
+					},
+				error: function(){
+					alert("Error in save")
+				}
+			});
+			
+			}
+		});	
+		
+		$("#save_vacation").click(function(){
+			$("#vacation_form").submit();
+		});	
+		
+	    $( "#datepicker" ).datepicker();
+   
+        $( "#datepicker2" ).datepicker();
+		
+		$("#Btn_Calculate").click(function(){
+		
+		 var a= moment($("input[name=DateFrom]").val()); 
+		 var b=moment($("input[name=DateTo]").val());
+		  console.log(a);
+		  console.log(b);
+		 var dur=b.diff(a, 'days');
+		 console.log(dur);
+		 $("#duration").val(parseInt(dur) + " days");
+		 
+		 })
+	});
+
+	
+</script>
+{% endblock %}
