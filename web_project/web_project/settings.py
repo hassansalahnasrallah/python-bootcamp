@@ -27,7 +27,7 @@ SECRET_KEY = 'dhh_+es(!dq91dn&_pv+ofj83t(rpj2xdnrcfk%n6hjduv@z2!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mazen15.pythonanywhere.com']
 
 
 # Application definition

@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% block body_block %}
+
+
+	<form method ="POST" action ="home">
+		{% csrf_token %}
+		<h1>Employee Vacation</h1>
+		
+		
+		<label>click her to login</label></br>
+		<input type="button" onclick="location.href='login';" value="Login here" /></br></br></br>
+		
+		<label>donot have an acoouct click her to register</label></br>
+		<input type="button" onclick="location.href='register';" value="register here" /></br>
+		</form>
+		
+		
+{% endblock %}

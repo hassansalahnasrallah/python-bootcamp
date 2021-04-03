@@ -16,33 +16,44 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
       <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-            <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+            
             <link rel="stylesheet" type="text/css"href="style.css">
-  <script>
-  
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
-  </script>
-          <script type = "text/javascript">
-    $(document).ready(function(){
-        $('#table').DataTable();
-    });
-			</script>
+
 
 <style>
+#table {
+height: 300px;
+width: 200px
+}
  #navbar {
+ position: absolute;
   width: 100%;
-  align: right;
+  float: right;
    z-index: 9;
-    margin-left: 500;}
+    margin-left: 45em;}
+    #nav{
+    position: static;
+top: 50px;
+right: 50px;
+color: black;
+display: inline-block;
+margin-left: 45em;}
+    #row_1{
+     background-color:white;
+      height:500px;
+      align: center;}
+      #row_2{
+      padding-left: 200;
+     background-color:green;
+      height:500px;
+      align:center;}
 body{
-	margin: 0;
-	background-color:#46a046;
+	margin:0;
+	background-color: white;
 	}</style>
   </head>
   <body>
-    <nav class="navbar navbar-default navbar-static-top" id="navbar">
+    <nav class="navbar navbar-default navbar-static-top" id="nav">
       <div class="container">
         <ul class="nav navbar-nav">
           <li><a class="navbar-brand" href="login" >Web App</a></li>
@@ -54,12 +65,12 @@ body{
     </nav>
 <div class="container">
   <div class= "row">
-    <div  style="background:green; height:500px;class="col-6"; float:left; >
+    <div class="col-md-6" id="row_1">
     {% block form_block %}
     <img src="https://tse3.mm.bing.net/th?id=OIP.cml2GTRb2Z3Xp15g9EXPYAHaEc&pid=Api&P=0&w=309&h=186" height="500" width="500"/>
     {% endblock %}
     </div>
-  <div  style="background:white; height:500px;class="col-6"; float:left; >
+    <div class="col-md-6" id="row_2">
     {% block body_block %}
     {# Anything outside of this will be inherited if you use extend.#}
     {% endblock %}

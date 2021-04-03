@@ -1,12 +1,13 @@
 {% extends 'base.html'%}
 {% block body_block %}
 <link rel="stylesheet"href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+            <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+         
 	<h2>this is your vacation {{user}}</h2> 
 	<form method ="POST" action = "showvacation" >
 		  	<div class="container">
-    <div class="row">
-        <div class="col-md-12">
+        
         
            
             <table id= "table">
@@ -27,17 +28,32 @@
                   {% endfor %}
                   </tbody>
                </table>
-                 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-            <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-           <script type = "text/javascript">
-    $(document).ready(function(){
-        $('#table').DataTable();
-    });
-			</script>
-        </div>
-    </div>
-</div>
+           
 
+        
+   
+</div>
+  <script>
+           $(document).ready(function(){
+          
+        	   var vacation_table = $('#table').DataTable({
+        		   ajax: {
+        			   url: '{%url "showvacation" %}',
+        			   type: 'POST',
+        			   data: function(d){
+        				   d.csrfmiddlewaretoken = $("input[name=csrfmiddlewaretoken]").val(),
+        				   d.user_id = "{{request.user.id}}"
+        			   }
+        		   },
+        		   
+        		   columns: [
+        			   {'data': 'description', 'name': 'description', 'sortable':true},
+        			   {'data': 'datefrom', 'name':'datefrom'},
+        			   {'data': 'dateto', 'name':'dateto'},
+        		   ],
+        	   })
+           })
+       			</script>
 
 
 <input type="button" onclick="location.href='vacation';" value="add vacation" />

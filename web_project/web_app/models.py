@@ -7,7 +7,7 @@ class Userprofile(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE)
     job_description=models.CharField(max_length=255)
     picture=models.ImageField(upload_to='profile_pics', blank=True)
-    date=models.DateField()
+    
     
     
     

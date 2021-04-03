@@ -10,6 +10,7 @@ from .models import User
 from django.contrib.auth.decorators import login_required
 from django.template.context_processors import request
 from web_project import settings
+from datetime import datetime
 
 def register(request):
     
@@ -104,10 +105,13 @@ def index(request):
 
 @login_required(login_url='login')
 def showvacation(request):
+    data= []
     current_user = request.user.id
     print('enterd')
     form = models.Vacation.objects.filter(user_id = current_user)
     print(form)
+    for vacation in form:
+        data.append({'id': vacation.id, 'description': vacation.description, 'datefrom':datetime.strftime(vacation.datefrom, '%d/%m/%y'), 'dateto': datetime.strftime(vacation.dateto,'%d/%m/%y')})
     context = {'form':form}
     return render(request, 'showvacation.html', context)
     
@@ -164,6 +168,10 @@ def vacation(request):
 def jquery(request):
     context= {}
     return render(request, 'jqueryui.html', context)
+
+def home(request):
+    context= {}
+    return render(request, 'home.html', context)
 
 
 def userlogout(request):

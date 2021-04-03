@@ -1,0 +1,68 @@
+2021-04-01 16:57:13,891 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-04-01 16:57:20,640 | ERROR | log.py:224| Internal Server Error: /showvacation
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 114, in showvacation
+    data.append({'id': vacation.id, 'description': vacation.description, 'datefrom': datetime.strftime(vacation.datefrom, '%d/%m/%y'), 'dateto':datetime.strftime(vacation.dateto, '%d/%m/%y'),})
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\utils\datetime_safe.py", line 25, in strftime
+    return strftime(self, fmt)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\utils\datetime_safe.py", line 76, in strftime
+    return super(type(dt), dt).strftime(fmt)
+AttributeError: 'super' object has no attribute 'strftime'
+2021-04-01 16:57:20,640 | ERROR | log.py:224| Internal Server Error: /showvacation
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 114, in showvacation
+    data.append({'id': vacation.id, 'description': vacation.description, 'datefrom': datetime.strftime(vacation.datefrom, '%d/%m/%y'), 'dateto':datetime.strftime(vacation.dateto, '%d/%m/%y'),})
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\utils\datetime_safe.py", line 25, in strftime
+    return strftime(self, fmt)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\utils\datetime_safe.py", line 76, in strftime
+    return super(type(dt), dt).strftime(fmt)
+AttributeError: 'super' object has no attribute 'strftime'
+2021-04-01 16:57:20,651 | ERROR | basehttp.py:157| "GET /showvacation HTTP/1.1" 500 81360
+2021-04-01 16:57:20,651 | ERROR | basehttp.py:157| "GET /showvacation HTTP/1.1" 500 81360
+2021-04-01 17:00:21,069 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-04-01 17:00:27,122 | ERROR | log.py:224| Internal Server Error: /showvacation
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 114, in showvacation
+    data.append({'id': vacation.id, 'description': vacation.description, 'datefrom': datetime.strftime(vacation.datefrom, '%d/%m/%y'), 'dateto':datetime.strftime(vacation.dateto, '%d/%m/%y'),})
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\utils\datetime_safe.py", line 25, in strftime
+    return strftime(self, fmt)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\utils\datetime_safe.py", line 76, in strftime
+    return super(type(dt), dt).strftime(fmt)
+AttributeError: 'super' object has no attribute 'strftime'
+2021-04-01 17:00:27,122 | ERROR | log.py:224| Internal Server Error: /showvacation
+Traceback (most recent call last):
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\contrib\auth\decorators.py", line 21, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\workbench3\learning\django\src\python-bootcamp\web_project\web_app\views.py", line 114, in showvacation
+    data.append({'id': vacation.id, 'description': vacation.description, 'datefrom': datetime.strftime(vacation.datefrom, '%d/%m/%y'), 'dateto':datetime.strftime(vacation.dateto, '%d/%m/%y'),})
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\utils\datetime_safe.py", line 25, in strftime
+    return strftime(self, fmt)
+  File "C:\workbench3\learning\django\venv\lib\site-packages\django\utils\datetime_safe.py", line 76, in strftime
+    return super(type(dt), dt).strftime(fmt)
+AttributeError: 'super' object has no attribute 'strftime'
+2021-04-01 17:00:27,134 | ERROR | basehttp.py:157| "GET /showvacation HTTP/1.1" 500 81360
+2021-04-01 17:00:27,134 | ERROR | basehttp.py:157| "GET /showvacation HTTP/1.1" 500 81360
+2021-04-01 17:02:21,438 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-04-01 17:13:31,697 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor

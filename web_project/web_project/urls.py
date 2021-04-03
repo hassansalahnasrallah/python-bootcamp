@@ -29,4 +29,5 @@ urlpatterns = [
     path('showvacation',views.showvacation, name='showvacation'),
     path('jqueryui',views.jquery, name='jquery'),
     url(r'^logout', views.userlogout, name='logout'),
+    url(r'^', views.home, name='home'),
     ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

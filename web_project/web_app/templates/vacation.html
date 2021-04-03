@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://momentjs.com/downloads/moment.min.js"></script>
   <script src="js/jquery.validate.js"></script>
   <script>
   $( function() {
@@ -18,8 +19,14 @@
     $( "#datepicker2" ).datepicker({
     	dateFormat: 'yy-mm-dd'
     });})
-  
+    $("datepicker").change(function(){
+    	myalert();
+    });
+  $("datepicker2").change(function(){
+  	myalert();
+  });
   </script>
+ 
 </head>
 <body>
 
@@ -29,14 +36,24 @@
 		{{vacation.as_p}}
 		<p>Date: <input type="text" id="datepicker" size="30" name="datefrom" required></p>
 		<p>Date: <input type="text" id="datepicker2" size="30" name="dateto" required></p>
+		<input type="text" name="country" value="" readonly><br>
+					
 		
 		
 		
-		
-		<input type = "submit" name="" value = "Register"/>
+		<input type = "submit" name="" value = "Register" onclick="myalert()"/>
 		</form>
 		<script>
 			$("#vacation").validate()</script>
+	 <script>
+					 function myalert() {
+						 $("datepicker").datepicker;
+						 $("datepicker2").datepicker;
+  							var a = moment($("input[name=datefrom]").val());
+							var b = moment($("input[name=dateto]").val());
+ 							 var c = b.diff(a, 'days');
+ 					
+					 $("input[name=country]").val(c)}</script>
 		
 		
 </body>
