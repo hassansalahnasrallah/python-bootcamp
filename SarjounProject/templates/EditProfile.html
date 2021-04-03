@@ -1,10 +1,10 @@
 {% extends 'base.html'%}
 {% block container %}
-<form class="jumbotron" name="Edit_Profile" action="{% url 'save_profile' %}" method="POST">
+<form class="jumbotron" name="Edit_Profile" id="Edit_Profile" action="{% url 'save_profile' %}" method="POST">
 		<h2> Edit your Profile</h2>
 		{% csrf_token %}
 		<label>Job Position</label>
-		<select  class="form-control" name="Jposition">
+		<select  class="form-control" name="jobposition">
 					<option value="Manager">Manager</option>
 					<option value="Assistant Manager">Assistant Manager</option>
 					<option value="Excutive">Excutive</option>
@@ -13,12 +13,14 @@
 					<option value="Administrator">Administrator</option>
 					<option value="Human Resources">Human Resources</option>
 				</select>
-		<label>Date of birth</label>
-		<input class="form-control" type="date" name="date_of_birth" id="date_of_birth"required  />
-		<label>Profile Picture</label>
-		<input  type="file" name="p_pic"/>
 		<br>
-		<input type="button" class="btn btn-primary" id=save_user" value="Save"/>
+		<label>Date of birth</label>
+		<input class="form-control" type="date" name="dateofbirth" required  />
+		<br>
+		<label>Profile Picture</label>
+		<input  type="file" name="profilepic"/>
+		<br>
+		<input type="button" class="btn btn-primary" id="save_user" value="Save"/>
 		<input type="hidden" name="user_id" value="{{user.id}}"/>
 		
 	</form>
@@ -28,55 +30,55 @@
 <br><br>
 
 </div>
-<img src="{{MEDIA_URL}}{{user_profile.picture}}" />
+<img src="{{MEDIA_URL}}{{user_profile.profile_pic}}" />
 <script>
-	$(function(){
+$(function(){
+	
+	$("#save_user").click(function(){
+		var formData = new FormData();
 		
-		$("#save_user").click(function(){
-			var formData = new FormData();
-			
-			formData.append('date_of_birth', $("input[name=date_of_birth]").val());
-			formData.append('Jposition', $("input[name=Jposition]").val());
-			formData.append('p_pic', $("input[name=p_pic]")[0].files[0]);
-			formData.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
-			
-			
-			console.log(formData);
-			
-			$.ajax({
-				method: "POST",
-				url: "{% url 'save_profile' %}",
-				data: formData,
-				processData: false,
-				contentType: false,
-				success: function(response){
-					console.log(response)
-					
-					if(response.status == 'OK'){
-						alert("Save success");
-						//var topic_id = response.payload.id;
-						//$("input[name=topic_id]").val(topic_id);
-					}else{
-						if(response.message == 'FAIL'){
-							alert("Fail to save")
-						}else if(response.message == 'NAME_EXISTS'){
-							alert("This topic already found")
-						}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
-							alert("You have missing parameters")
-						}else if(response.message == 'TOPIC_NAME_ALREADY_EXISTS'){
-							alert("Name already found")
-						}
+		formData.append('dateofbirth', $("input[name=dateofbirth]").val());
+		formData.append('jobposition', $("input[name=jobposition]").val());
+		formData.append('profilepic', $("input[name=profilepic]")[0].files[0]);
+		formData.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
+		
+		
+		console.log(formData);
+		
+		$.ajax({
+			method: "POST",
+			url: "{% url 'save_profile' %}",
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function(response){
+				console.log(response)
+				
+				if(response.status == 'OK'){
+					alert("Save success");
+					//var topic_id = response.payload.id;
+					//$("input[name=topic_id]").val(topic_id);
+				}else{
+					if(response.message == 'FAIL'){
+						alert("Fail to save")
+					}else if(response.message == 'NAME_EXISTS'){
+						alert("This topic already found")
+					}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
+						alert("You have missing parameters")
+					}else if(response.message == 'TOPIC_NAME_ALREADY_EXISTS'){
+						alert("Name already found")
 					}
-					//Handle form functionality
-				},
-				error: function(){
-					
-					alert("Error in save")
 				}
-			});
+				//Handle form functionality
+			},
+			error: function(){
+				
+				alert("Error in save")
+			}
 		});
-		
 	});
+	
+});
 	
 </script>
 

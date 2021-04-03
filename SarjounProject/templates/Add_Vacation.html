@@ -1,0 +1,109 @@
+{% extends 'base.html'%}
+
+<link rel="stylesheet" href="https://formvalidation.io/vendors/formvalidation/css/formValidation.min.css">
+{% block container%}
+<form class="jumbotron" name="Add_Vacations" action="{% url 'save' %}" method="POST">
+	{% csrf_token%}
+	<h3>Fill out the vacation details</h3>
+	<label>Description</label>
+	<input class="form-control" name="desc" value="{{ vacation.description }}" placeholder="Description" required />
+	<label>From</label>
+	<input class="form-control" type="text" name="date_from" id="date_from" value="{{ vacation.datefrom|date:'Y-m-d' }}" required   />
+	<label>To</label>
+	<input class="form-control" type="text" name="date_to" id="date_to" value="{{ vacation.dateto|date:'Y-m-d' }}"required  />
+	<label>Duration</label>
+	<input class="form-control" type="text" name="duration" id="duration" readonly/>
+	<button type="button" id="Btn_Calculate"> Calculate </button>
+	<br>
+	<input type="hidden" name="vacation_id" value="{{vacation.id}}"/>
+	<br>
+	<button type="button" id="save_vacation" class="btn btn-success"> Save </button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+
+$(function(){
+	$("#Btn_Calculate").click(function(){
+	    console.log("done");
+		var data= $("#date_from").val();
+		var array = data.split('-');
+		FirstDate = new Date(array[0],array[1],array[2])
+		var data1= $("#date_to").val();
+		var array1=data1.split('-');
+		SecondDate=new Date(array1[0],array1[1],array1[2]);
+		var timedifference= SecondDate.getTime() - FirstDate.getTime();
+		console.log(timedifference);
+		var nodays= timedifference/(1000*3600*24);
+		console.log(nodays);
+		$("#duration").val(parseInt(nodays)+" days");
+	});
+
+	$("#Add_Vacations").validate({
+		rules: {
+			desc: {
+				required: true,
+			},
+			date_from: {
+				required: true,
+			},
+			date_to: {
+				required: true,
+			},
+		},
+		
+		messages: {
+			desc: {
+				required: "Description is required"
+			},
+			date_from: {
+				required: "Date From is required"
+			},
+			date_to: {
+				required: "Date to is required"
+			},
+			
+		},
+		submitHandler: function(){
+			
+			$.ajax({
+				type:"POST",
+				url:"{% url 'save' %}",
+				data: {
+					desc:$('input[name=desc]').val(),
+					date_from:$('input[name=date_from]').val(),
+					date_to:$('input[name=date_to]').val(),
+					vacation_id:$('input[name=vacation_id]').val(),
+					csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val()
+				},
+				dataType:'json',
+				success: function(response){
+					console.log(response)
+					if(response.status=='OK'){
+						alert("Save Success");
+						var vacation_id=response.payload.id
+						$("input[name=vacation_id]").val(vacation_id)
+					}else if(response.message=='VACATION_NAME_DUPLICATE'){
+						alert("Vacation alraedy found");
+					}else if (response.message=='MISSING_RQUIRED_PARAMETERS'){
+						alert("You have a missing parameter");
+					}
+				},
+				error: function(){
+					alert("error in save")
+				}
+			});
+		}	
+	});
+		
+				$("#save_vacation").click(function(){
+					$("#Add_Vacations").submit();
+				});	
+	
+	});
+
+</script>
+
+{% endblock%}

@@ -1,21 +1,24 @@
 {% extends 'base.html' %}
 
 {% block title%}Signup{%endblock%}
-
+{% load static %}
 {%block container%}
-<div class="jumbotron">
-{% if sign_up %}
-	{%url 'login'%}
-	{% csrf_token %}
-{%else%}
-	<form method ='POST' enctype ="multipart/form-data">
-		<h2> Sign up</h2>
-		{{signup_form.as_p}}
-		{% csrf_token %}
-		<input type="submit" class="btn btn-primary" name=signup" value="Submit"/>
-
+	<div class="row justify-content-start">
+        <div class="col-auto">
+          <img src="{% static 'images/business-man-character-dreaming-about-vacation-vector-35172141.jpg' %}"/>
+	</div>
+	<div class="col-6" id="form" >
+		{% if sign_up %}
+			{%url 'login'%}
+			{% csrf_token %}
+		{%else%}
+		<form method ='POST' enctype ="multipart/form-data">
+			<h2> Sign up</h2>
+			{{signup_form.as_p}}
+			{% csrf_token %}
+			<input type="submit" class="btn btn-primary" name=signup" value="Submit"/>
 	</form>
 	
-{% endif%}
-</div>
+		{% endif%}
+	</div>
 {%endblock%}
