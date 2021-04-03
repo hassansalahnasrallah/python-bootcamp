@@ -30,5 +30,5 @@ urlpatterns = [
     path('jqueryui',views.jquery, name='jquery'),
     url(r'^logout', views.userlogout, name='logout'),
     url(r'^', views.home, name='home'),
-    url('show_vacation', views.vacation_grid, name="show_vacation")
+    url('show_vacation', views.vacation_grid, name='show_vacation')
     ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
