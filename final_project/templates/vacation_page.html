@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 {% load static  %}
+
+
+
+
 {% block block2 %}
 <h1>VACATION TABLE</h1>
 
-<hr>
 {% csrf_token %}
-<div class="col-sm-12">
-	<button class="btn btn-primary"><a href="{% url 'vacation_form' %}">Add Vacation</a></button>
+<div class="col-sm-12 d-flex justify-content-center">
+	<button class="btn btn-dark" ><a href="{% url 'vacation_form' %}">Add Vacation</a></button>
 </div>
+<br/>
 <div class="col-sm-12">
-<table id= "vacation_table" class= "table">
+<table id= "vacation_table" class= "table  row-border cell-border ">
 	<thead>
 		<tr>
 			<th>Description</th>
@@ -30,7 +34,7 @@
 			<th style="width:140px;" data-searchable="false" >Date to</th>
 			<th style="width:140px;" data-searchable="true" >Duration</th>
 			<th style="width:140px;" data-searchable="false" >Status</th>
-			<th style="width:140px;" data-searchable="false"></th>
+			<th style="width:140px;" data-searchable="false">Actions</th>
 		</tr>
 	</tfoot>
 </table>
@@ -50,18 +54,52 @@
         <input name="vacation_id" type="hidden" />
       </div>
       <div class="modal-footer">
-        <button type="button" id="save_status" class="btn btn-primary">Save</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="save_status" class="btn btn-primary">Update</button>
+        <button type="button" id="hide_modal" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
 
+
+<div class="modal" tabindex="-1" role="dialog" id="delete_vacation_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Vacation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete?</p>
+        <input name="vacation_id" type="hidden" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="delete_vacation" class="btn btn-primary">Delete</button>
+        <button type="button" id="close_modal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block scripts %}	
+
+<link rel="stylesheet" href= "{% static 'css/vacation_page.css' %}">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 <script>
 
 	$(function(){
 		
 		var vacay_table = $('#vacation_table').DataTable({
+			
+			responsive: true,
+
 			ajax: {
 				url: '{% url "vacation_grid" %}',
 				type: 'POST',
@@ -72,20 +110,24 @@
 					
 				}
 			},
-			responsive: true,
+
+			lengthMenu: [1, 5, 10, 25, 50 ],
+			
+			pageLength: 10,
+			
+			processing: true,
+			serverSide: true,
+			
 			columns: [
 				{'data': 'description', 'name': 'description', 'sortable':true},
-				{'data': 'date_from', 'name': 'date_from'},
-				{'data': 'date_to', 'name': 'date_to'},
-				{'data': 'duration', 'name': 'duration'},
+				{'data': 'date_from', 'name': 'date_from', 'sortable':true},
+				{'data': 'date_to', 'name': 'date_to', 'sortable':true},
+				{'data': 'duration', 'name': 'duration', 'sortable':true},
 				{'data': 'status', 'name': 'status'},
 				{'data': 'action'}
 				
-				//{'data': 'date_from', 'name': 'date_from'},
-				//{'data': 'date_to', 'name': 'date_to'},
-				
 				],
-			//data esm l data elle be3eta mn l views w name huwe esm l field
+			
 			
 			columnDefs: [
 				{
@@ -93,7 +135,7 @@
 					title: 'Actions',
 					render: function(data, type, full, meta){
 						var edit_url = "{% url 'vacation_form' %}?id=" + full.id;
-						return "<a href='"+edit_url+"'>Edit</a> <button class='btn btn-success btn-sm btn-update' type='button' data-id="+full.id+"><i class='fa fa-check'></i></button>"
+						return "<a href='"+edit_url+"'>Edit</a> <button class='btn btn-dark btn-sm btn-update' type='button' data-id="+full.id+"><i class='fa fa-refresh' aria-hidden='true'></i></button> <button class='btn btn-dark btn-sm btn-delete' type='button' data-id="+full.id+"><i class='fa fa-trash' aria-hidden='true'></i></button>"
 					}
 					
 				}
@@ -102,9 +144,9 @@
 			createdRow: function(row, data, dataIndex){
 				console.log(data)
 				if(data['status'] == "Active"){
-					$(row).css({'background-color': "green"})
+					$(row).css({'background-color': "white"})
 				}else{
-					$(row).css({'background-color': "red"})
+					$(row).css({'background-color': "#ff5656"})
 				}
 			}
 		});
@@ -130,6 +172,11 @@
 			$("input[name=vacation_id]").val($(this).attr('data-id'));
 		});
 		
+		$("#hide_modal").click(function(){
+				
+				$("#vacation_status_modal").hide();
+		});
+		
 		$("#save_status").click(function(){
 			$.ajax({
 				type:"POST",
@@ -148,23 +195,61 @@
 						$("#vacation_status_modal").hide();
 					}else{
 						if(response.message == "VACATION_NOT_FOUND"){
-							toastr.error('Vacation not found')
-						}else if(response.message == "NAME_EXISTS"){
-							alert("This topic already found");											
-						}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
-							alert("You have missing parameters");
+							toastr.error('Vacation not found')										
 						}
 					}	
 			    }, 
 			    error: function(){
-			    	alert("Error in save")
+			    	toastr.error('An Error Has Occured')
 				}
 			});
 		});
 		
+		
+		$("#vacation_table tbody").on('click', '.btn-delete', function(){
+			
+			$("#delete_vacation_modal").show();
+			$("input[name=vacation_id]").val($(this).attr('data-id'));
+		});
+		
+		 $("#close_modal").click(function(){
+			
+			$("#delete_vacation_modal").hide();
+		 });
+		 
+		 $("#delete_vacation").click(function(){
+				$.ajax({
+					type:"POST",
+					url: "{% url 'delete_vacation' %}",
+					data:{
+						vacation_id: $("input[name=vacation_id]").val(),
+						csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+					},
+					dataType: 'json',//json bcz data is dictionary
+					success: function(response){
+						console.log(response)
+						
+						if(response.status == 'OK'){
+							toastr.success('Vacation deleted successfuly');
+							vacay_table.ajax.reload(); //to auto update table on success
+							$("#vacation_status_modal").hide();
+						}else{
+							if(response.message == "VACATION_NOT_FOUND"){
+								toastr.error('Vacation not found')											
+							}
+						}	
+				    }, 
+				    error: function(){
+				    	toastr.error('An Error Has Occured')
+					}
+				});
+			});
+		
 	});
 
 </script>
+
+
 {% endblock %}
 
 <!-- 

@@ -96,7 +96,10 @@ def register(request):
             log.debug("Saved profile and user for user: %s", user)
             registered = True
             #login user
+            login(request,user)
             #redirect to the home or vacation page
+            return HttpResponseRedirect(reverse('vacation_page'))
+            
         else:
             print("form not valid")
             
@@ -251,9 +254,27 @@ def vacation_grid(request):
     
     data = []
     
-    employee_id =request.user.id #request.POST.get('employee_id')
+    employee_id = request.user.id #request.POST.get('employee_id')
+    table_length = request.POST.get('length')
+    global_search =request.POST.get('search[value]')
     
-    vacations = Vacation.objects.filter(employee_id=employee_id).all()
+    
+    sorting_column_index = request.POST.get('order[0][column]')
+    sorting_column_direction = request.POST.get('order[0][dir]')
+    
+    sorted_column = request.POST.get('columns[%s][name]' % (sorting_column_index))
+    
+    qset = Q(employee_id=employee_id)
+    
+    if global_search:
+        qset &= Q(description__icontains=global_search)
+        
+        
+    
+    
+    vacations = Vacation.objects.filter(qset).all().order_by("%s%s" % ("-" if sorting_column_direction == "desc" else "", sorted_column))[:int(table_length)]
+    log.debug("Total retrieved: %s", len(vacations))
+    
     
     for vacation in vacations:
         data.append({'id': vacation.id,  'description': vacation.description, 'duration': vacation.duration,
@@ -341,6 +362,7 @@ def save_profile(request):
 
 def update_status(request):
     """
+    Update status
     """
     vacation_id = request.POST.get('vacation_id')
 
@@ -373,6 +395,40 @@ def update_status(request):
     
     return HttpResponse(json.dumps(response))
 
+def delete_vacation(request):
+    """
+    Delete vacation
+    """
+    vacation_id = request.POST.get('vacation_id')
+
+    status = "OK"
+    message = "SUCCESS"
+    payload = {}
+    
+    try:
+        if vacation_id:
+            #update
+            vacation = Vacation.objects.filter(id=vacation_id).first()
+            
+            vacation.delete()
+                
+            response = "SUCCESS"
+            
+            log.debug("%s vacation successfully" % ("Updated" if vacation_id else "Created"))
+        else:
+            message = "VACATION_NOT_FOUND"
+            status = "FAIL"
+            
+    except:
+        message = "SYSTEM_ERROR"
+        status = "FAIL"
+        log.error("Error while saving vacation", exc_info=1)
+                
+    response = {'status': status, 'message': message, 'payload': payload}
+    
+    return HttpResponse(json.dumps(response))
+
+
 urlpatterns = [
   url(r'^$',index,name="index"),
   url(r'test/',test,name="test"),
@@ -389,6 +445,8 @@ urlpatterns = [
   url(r'profile/',profile_form,name="profile_form"),
   url(r'save_profile_user/',save_profile,name="save_profile"),
   url(r'update_status/',update_status,name="update_status"),
+  url(r'delete_vacation/',delete_vacation,name="delete_vacation"),
+
   
 
     ]

@@ -43,9 +43,15 @@
 	
 	<br/>
 	<button type="button" id="save_vacation" class="btn btn-success">Save</button>
+	
+	<p></p>
+	<a href="{% url 'vacation_page' %}">Go to your vacation table</a>
 </form>
 
+{% endblock %}
 
+{% block scripts %}
+	  
 <script>
 	$(function(){
 		
