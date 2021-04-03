@@ -204,7 +204,7 @@ def vacation_grid(request):
         
         }
     
-    return render(request, 'show_vacation.html', context)
+    return render(request, 'vacation2.html', context)
 
 
 
