@@ -179,5 +179,32 @@ def userlogout(request):
 
     return HttpResponseRedirect(reverse('login'))
 
+def vacation_grid(request):
+    """
+    Display grid of vacation
+    """
+    
+    data = []
+    
+    employee_id =request.user.id 
+    
+    vacations = Vacation.objects.filter(employee_id=employee_id).all()
+    
+    for vacation in vacations:
+        data.append({'id': vacation.id,  'description': vacation.description, 'duration': vacation.duration,
+                     'status': "Active" if vacation.status else "Not active", 'date_from': datetime.strftime(vacation.date_from, '%d/%m/%Y'), 'date_to': datetime.strftime(vacation.date_to, '%d/%m/%Y')})
+    
+    
+    records = len(vacations)
+    
+    response = {
+        'recordsTotal': records,
+        'recordsTotal': records,
+        'data': data,
+        
+        }
+    
+    return HttpResponse(json.dumps(response))
+
 
 
