@@ -1,22 +1,27 @@
 {% extends 'finalapp/basic.html' %}
 {% block title %}Login{% endblock %}
 {% block body_block %}
-  <div class="container" class=style>
-    <div class="jumbotron">
-      <h1>Please Login Here</h1>
-       <h2>If you don't have an account please sign in first</h2>
-        <form method="post" action="{% url 'finalapp:User_Login' %}">
+  <div class="container">
+      <h1 align="center" style="background-color:white;padding:10px;font-family: Lucida Handwriting , Helvetica, cursive;">Please Login Here</h1>
+       <div class="row">
+<div class="col">
+        <form method="post" style="padding:50px 50px 50px 50px;" action="{% url 'finalapp:User_Login' %}">
           {% csrf_token %}
-          <label for="username">Username:</label>
-          <input type="text" name="username" placeholder="Username">
+          <label for="username" style="color:black;font-size:20">Username:</label>
+          <input type="text" style="width:200px;border:5px outset black" name="username" placeholder="Username"><br><br>
 
-          <label for="password">Password:</label>
-          <input type="password" name="password">
-
-          <input type="submit" class="btn btn-primary" name="" value="Login">
-
+          <label for="password" style="color:black;font-size:20">Password:</label>
+          <input type="password" style="text-align:center;width:200px;border:5px outset black" name="password">
+<br><br>
+          <input type="submit" style="font-size: 20px;" class="btn btn-success" name="" value="Login">
+<button class="btn btn-success">
+<a style="color: white;font-size: 20px;" href="{% url 'index' %}">Back</a>
+</button>
         </form>
 
-    </div>
-  </div>
+</div>
+
+</div>
+</div>
+   
 {% endblock %}

@@ -6,7 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import VacationInfo,EmployeeInfo
 from django.contrib.auth.models import User
-
+from datetime import datetime
+from django.utils.dateparse import parse_date
 
 # Create your views here.
 def index(request):
@@ -62,7 +63,7 @@ def User_Login(request):
     else:
         return render(request,'finalapp/User_Login.html',)
     
-    
+@login_required
 def Home(request):
     user=request.user
     all_members=VacationInfo.objects.filter(user_id=user.id)
@@ -86,40 +87,43 @@ def Logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
 
-def EditVacay(request,pk=None):
-    if pk:
-        vacay=VacationInfo.objects.get(id=pk) 
-        form=VacationForm(instance=vacay)
-    if request.method=='POST':
-        form = VacationForm(data=request.POST,instance=vacay)
-        if form.is_valid():
-            form.save()
-    return render(request,'finalapp/EditVacay.html',{'form':form})
+def jquery(request):
+    
+    return render(request,'finalapp/jquery.html',)
 
-def Vacation(request):
-    added=False
-    datefrom=None
-    dateto=None
-    if request.method == 'POST':
-        vacation_form = VacationForm(data=request.POST)
-       # datefrom=None
-       # dateto=None
-        if vacation_form.is_valid():
-          # datefrom=vacation_form.cleaned_data(['datefrom'])
-           #dateto=vacation_form.cleaned_data(['dateto'])
-           vacation = vacation_form.save(commit=False)
-           emp=request.user
-           vacation.user=emp
-           vacation.save()
-          
-           added=True
-           datefrom=vacation_form.cleaned_data['datefrom']
-           dateto=vacation_form.cleaned_data['dateto']
-           
-        else:
-            print(vacation_form.errors)
+
+                    
+def VacationForm(request): 
+    vacation_id=request.GET.get('id')
+    vacay=None
+    if vacation_id:      
+        vacay=VacationInfo.objects.filter(id=vacation_id).first()        
+    return render(request,'finalapp/vacation.html',{'vacation':vacay})
+
+def save_vacation(request):
+    user=request.user
+    id=request.POST.get('id')
+    description=request.POST.get('description')
+    datefrom=request.POST.get('datefrom')
+    dateto=request.POST.get('dateto')
+    duration=request.POST.get('duration')
+    
+    
+    if description and datefrom and dateto and duration:
        
-    else:
-        vacation_form = VacationForm()
-       
-    return render(request,'finalapp/vacation.html',{'form':vacation_form,'added':added,'datefrom':datefrom,'dateto':dateto})
+        if id:
+            vacay=VacationInfo.objects.filter(id=id).first()
+            if vacay:
+                vacay.description=description
+                vacay.datefrom=datefrom
+                vacay.dateto=dateto
+                vacay.duration=duration
+                vacay.save()
+                return HttpResponse("saved")
+              
+        else:            
+            VacationInfo.objects.create(user=user,description=description,datefrom=datefrom,dateto=dateto,duration=duration)
+             
+            
+    return HttpResponse("saved")
+    

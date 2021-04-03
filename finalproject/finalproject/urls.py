@@ -24,10 +24,11 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'^$',views.index,name='index'),
     url(r'^SignUp/',views.SignUp,name='SignUp'),
-    url(r'^Vacation/',views.Vacation,name='Vacation'),
+    url(r'^save_vacation/',views.save_vacation,name='save_vacation'),
+    url(r'^VacationForm/',views.VacationForm,name='VacationForm'),
     url(r'^Home/',views.Home,name='Home'),
     url(r'^Profile/',views.Profile,name='Profile'),
     url(r'^Logout/',views.Logout,name='Logout'),
-    url(r'^EditVacay/(?P<pk>\d+)/$',views.EditVacay,name='EditVacay'),
+    url(r'^jquery/',views.jquery,name='jquery'),
    
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

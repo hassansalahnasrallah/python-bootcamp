@@ -1,0 +1,74 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <style>
+  #draggable { width: 150px; height: 150px; padding: 0.5em; }
+#droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+#resizable { width: 150px; height: 150px; padding: 0.5em; }
+ #selectable .ui-selecting { background: #FECA40; }
+  #selectable .ui-selected { background: #F39814; color: white; }
+#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+  
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+	$( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+	 $( "#selectable" ).selectable();
+	  $( "#resizable" ).resizable();
+    $( "#draggable" ).draggable();
+    $( "#droppable" ).droppable({
+      drop: function( event, ui ) {
+        $( this )
+          .addClass( "ui-state-highlight" )
+          .find( "p" )
+            .html( "Dropped!" );
+ }
+    });
+  } );
+  </script>
+</head>
+<body>
+ 
+<div id="draggable" class="ui-widget-content">
+  <p>Drag me around</p>
+</div>
+ <div id="droppable" class="ui-widget-header">
+  <p>Drop here</p>
+</div><br><br><br><BR><BR><BR><BR><BR><br><br><br><br>
+ <div id="resizable" class="ui-widget-content">
+<h3>i am resizable</h3>
+</div>
+<div>
+<ol id="selectable">
+  <li class="ui-widget-content"> 1</li>
+  <li class="ui-widget-content"> 2</li>
+  <li class="ui-widget-content"> 3</li>
+  <li class="ui-widget-content"> 4</li>
+  <li class="ui-widget-content"> 5</li>
+  <li class="ui-widget-content"> 6</li>
+  <li class="ui-widget-content"> 7</li>
+</ol>
+</div>
+<div>
+<ul id="sortable">
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>one</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>two</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>three</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>four</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>five</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>six</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>seven</li>
+</ul>
+ 
+
+</div>
+</body>
+</html>

@@ -1,34 +1,35 @@
 {% extends "finalapp/basic.html" %}
 {% load static %}
 {% block title %}Vacation{% endblock %}
-{% block script %}<script src="{% static "js/java.js" %}"></script>{% endblock %}
-
 {% block body_block %}
-<div class="container">
-    <div class="jumbotron">
+
+<div class="container" style="background-color:white;margin:60px 60px 60px 60px">
  
- <h1>Fill out the form to add your vacation!</h1>
-    <div class="container">
-      <form method="POST">
-         {{ form.as_p }}
-         <label>Please let the date be in this syntax Y-M-D H:M:S</label><br>
+ <h2 align="center" style="font-family: Lucida Handwriting , Helvetica, cursive;">Fill out the form to add your vacation!</h2>
+    
+      <form method="POST" name="VacationForm" action="{% url 'save_vacation' %}">
+     Description    <input type="text" id="description" value="{{vacation.description}}" name="dsp">
+ <br><br><label>Please let the date be in this syntax Y-M-D </label><br><br>
+    Date From    <input type="text" id="datefrom" value="{{vacation.datefrom|date:'Y-m-d'}}" name="datef"><br><br>
+    Date To     <input type="text" id="dateto" value="{{vacation.dateto|date:'Y-m-d'}}" name="datet"><br><br>
+    Duration<input type="text" id="duration" name="dura" value="{{vacation.duration}}" readonly>Days<br><br>
+       <input type="hidden" name="hidden" value="{{vacation.id}}"/>
           {% csrf_token %}
-         <input type="hidden" id="datefrom" value="{{datefrom}}">
-         <input type="hidden" id="dateto" value="{{dateto}}">
-<button type="button" id="event" class="btn btn-primary" >Calculate Duration</button><br><br>
-    <br>
+      
+<button type="button" id="event" class="btn btn-success" >Calculate Duration</button>
+   
          
-        <input type="submit" class="btn btn-primary" value="Submit">
+        <button type="button" id="save_vacation" class="btn btn-success"  disabled /> Submit</button>
       </form>
-<form>
-  <input type="submit" class="btn btn-primary" value="Back to Home">
+
+<form action="{% url 'Home' %}">
+  <input type="submit"  class="btn btn-success" value="Back to Home">
  </form>
     
-  </div>
+</div>
 
-  </div>
-    </div>
 {% endblock %}
+
 
 
 

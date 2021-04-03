@@ -2,34 +2,39 @@
 {% load static %}
 {% block title %}SignUp{% endblock %}
 {% block body_block %}
-  <div class="container">
-    <div class="jumbotron">
-      
+ 
+      <div class="container" style="background-color:white;margin:60px 60px 60px 60px">
         {% if SignedUp %}
         <h1>Thank you for signing up!</h1>
 <form method="POST" action="{% url 'index' %}">
  {% csrf_token %}
-<input type="submit" class="btn btn-primary" value="Back to Main">
+<input type="submit" class="btn btn-success" value="Back to Main">
  </form>
       {% else %}
-        <h1>Register Here</h1>
-        <h3>Just fill out the form.</h3>
+
+        <h1 align="center" style="color:rgb(0, 0, 0);font-family: Lucida Handwriting , Helvetica, cursive;">Register Here</h1>
+        <h2 align="center" style="color:rgb(0, 0, 0);font-family: Lucida Handwriting , Helvetica, cursive;">Just fill out the form.</h2>
 
         <form enctype="multipart/form-data" method="POST">
           {% csrf_token %}
-          {{ employee_form.as_p }}
-          {{ profile_form.as_p }}
-          <input type="submit" class="btn btn-primary" name="" value="Register">
+         
+          {{ employee_form.as_ul }}
+           {{ profile_form.as_ul}}
+
+
+          <input type="submit" class="btn btn-success" name="" value="Register">
+<button class="btn btn-success">
+<a style="color: white" href="{% url 'index' %}">Back</a>
+</button>
         </form>
 
       {% endif %}
+</div>
 
 
 
     
 
-    </div>
-
-  </div>
+   
 
 {% endblock %}

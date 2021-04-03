@@ -12,10 +12,11 @@ class EmployeeInfo(models.Model):
 
     
 class VacationInfo(models.Model):
+    
     user=models.ForeignKey(User,on_delete=models.CASCADE,)
-    description=models.CharField(max_length=50,blank=True)
-    datefrom=models.DateTimeField()
-    dateto=models.DateTimeField()
+    description=models.CharField(max_length=50)
+    datefrom=models.DateField()
+    dateto=models.DateField()
     duration=models.CharField(max_length=50)
     
     def __str__(self):

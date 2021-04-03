@@ -1,17 +1,36 @@
 {% extends "finalapp/basic.html" %}
 {% block title %}{% endblock %}
 {% block body_block %}
+ <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <ul class="nav navbar-nav">
+          <li><a class="navbar-brand" href="{% url 'index' %}">MAIN</a></li>
+         
+        </ul>
+      </div>
+    </nav>
 
-<div class="container">
-  <div class="jumbotron">
     {% csrf_token %}
-    <h1>Employee Vacation</h1>
-    {% if user.is_authenticated %}
-        <h2>Welcome {{ user.username }}!</h2>
-    {% else %}
-        <h2>Welcome to the site!</h2>
-    {% endif %}
-  </div>
+<div class="row vertical-center">
+  <div class="col-sm-6" style="background-color:#3e6f5a; height:100%; padding:30px;"><img  class="image" width="200" height="230" src="https://wallpaperaccess.com/full/813745.jpg"></div>
+  <div class="col-sm-6" style="background-color:white ; height:100%; ">
+  
+
+    
+    <h4>PYTHON BOOTCAMP</h4>
+   
+        <h3 style="color:#51bb80;  font-family: Lucida Handwriting , Helvetica, cursive;">Employee<br> Vacation</h3>
+      <small>Your way to add a vacation</small><br><br>
+<button class="btn btn-success">
+<a style="color: white" href="{% url 'finalapp:User_Login' %}">Login</a>
+</button><br><br>
+<button style="border:none; background-color:white;">
+Don't have an account?
+<a style="color:black" href="{% url 'SignUp' %}">Sign Up</a>
+</button>
 </div>
+  
+
+    </div>
 
 {% endblock %}

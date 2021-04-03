@@ -2,16 +2,17 @@
 {% load static %}
 {% block title %}Profile{% endblock %}
 {% block body_block %}
-<h1 class="h">You can edit your profile info here</h1>
+<div class="container" style="background-color:white;margin:60px 60px 60px 60px">
+<h1 align="center" style="font-family: Lucida Handwriting , Helvetica, cursive;">You can edit your profile info here</h1>
 
 
 <form action="" method="POST">
  {% csrf_token %}
 {{form.as_p}}
-<input type="Submit" class="btn btn-primary" value="Update Profile" >
+<input type="Submit" class="btn btn-success" value="Update Profile" >
 </form>
 <form action="{% url 'Home' %}">
-<input type="Submit" class="btn btn-primary" value="Back" >
+<input type="Submit" class="btn btn-success" value="Back" >
 </form>
 
 {% endblock %}
