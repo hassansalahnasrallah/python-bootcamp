@@ -34,11 +34,14 @@
 	<button type="button" id="save_profile" class="btn btn-success">Save</button>
 
 </form>
+{% endblock %}
+
+{% block scripts %}
 
 <script>
 	$(function(){
 		
-		$( "#save_profile" ).click(function(){
+		$("#save_profile").click(function(){
 			 //var form_Data = new FormData();
 			
 			  //formData.append('profile_img', $("input[name=profile_img]")[0].files[0]);
