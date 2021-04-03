@@ -7,7 +7,7 @@
 
 	<form method="post" action="{% url 'user_login'%}">
 		{% csrf_token %}
-		{% if user.is_authenticated %}}
+		{% if user.is_authenticated %}
         	<h1>Welcome {{request.user.username}}</h1>
      	{% else %}
      		<label>Username:</label>
