@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='userprofile',
             name='dateofbirth',
-            field=models.DateField(default='Today'),
+            field=models.DateField(),
         ),
         migrations.AddField(
             model_name='userprofile',

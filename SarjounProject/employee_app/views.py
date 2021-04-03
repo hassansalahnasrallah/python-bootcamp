@@ -248,7 +248,7 @@ def save_profile(request):
 
 
 urlpatterns=[
-    url(r'login/',Login,name='login'),
+    url(r'',Login,name='login'),
     url(r'logout/',Logout , name ='logout'),
     url(r'signup/', Signup ,name ='sign_up'),
     url(r'vacation_table/', vacation_table, name='vacation_table'),
