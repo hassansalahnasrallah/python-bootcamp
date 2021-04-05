@@ -8,7 +8,7 @@ from django.urls.base import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
-
+from Project import settings
 
 #to get console debug/log 
 import logging
@@ -28,10 +28,11 @@ def index(request):
     """
 
     context = {}
-    emp = EmployeeProfile.objects.filter(user=request.user).all()
 
-    context  ['emp'] =  emp
-    
+    context['MEDIA_URL'] = settings.MEDIA_URL
+    context['emp'] = EmployeeProfile.objects.filter(user_id=request.user.id).first()
+    #context['emp'] = EmployeeProfile.objects.all()
+    #context ['emp'] : emp
 
     return render(request, "Vacations/index.html", context)
 
@@ -68,43 +69,52 @@ def register(request):
     """
     user inserts required data to DB
     """
+    status = "OK"
+    message = "SUCCESS"
+    payload = {}
 
     user_form = forms.UserForm
     profile_form = forms.UserProfileInfoForm
 
     registered = False
+    try:
+        if request.method == 'POST':
+            user_form = forms.UserForm(data=request.POST)
+            profile_form = forms.UserProfileInfoForm(data=request.POST)
 
-    if request.method == 'POST':
-        user_form = forms.UserForm(data=request.POST)
-        profile_form = forms.UserProfileInfoForm(data=request.POST)
+            if user_form.is_valid() and profile_form.is_valid():
+                # save user to DB:
+                user = user_form.save()
+                # encrypt password:
+                user.set_password(user.password)
+                # update user:
+                user.save()
+                # can't commit => still need to edit profile
+                profile = profile_form.save(commit=False)
 
-        if user_form.is_valid() and profile_form.is_valid():
-            # save user to DB:
-            user = user_form.save()
-            # encrypt password:
-            user.set_password(user.password)
-            # update user:
-            user.save()
-            # can't commit => still need to edit profile
-            profile = profile_form.save(commit=False)
+                # check if profile pic provided
+                if 'profile_pic' in request.FILES:
+                    print("picture found")
+                    profile.profile_pic = request.FILES['profile_pic']
 
-            # check if profile pic provided
-            if 'profile_pic' in request.FILES:
-                print("picture found")
-                profile.profile_pic = request.FILES['profile_pic']
+                profile.user = user
+                profile.save()
+                log.debug("Profile saved successfully for user: %s", user)
+                registered = True
+                return render(request, 'Vacations/newLogin.html')
+                return render('vacations.login.html', message='Save complete')
 
-            profile.user = user
-            profile.save()
-            log.debug("Profile saved successfully for user: %s", user)
-            registered = True
-            return render(request, 'Vacations/newLogin.html')
-            return render('vacations.login.html', message='Save complete')
+            # else:
+            #     log.error("Error while creating user ", exc_info=1)
 
-        else:
-            print("not valid.")
+    except:
+        status = "FAIL"
+        message = "SYSTEM_ERROR" 
+        log.debug("Error while creating user", exc_info=1)
 
-    else:
-        print("not valid request.")
+    response = {"status": status, "message": message, "payload": payload}
+
+    #return HttpResponse(json.dumps(response))
 
     context = {'user_form': user_form,
                'profile_form': profile_form, 'registered': registered}
@@ -168,8 +178,9 @@ def logout_request(request):
     """
     login out for user page
     """
+
     logout(request)
-    log.debug("user logged out")
+    log.debug("user logged out%s",request.user.id)
     return render(request, 'Vacations/newLogin.html')
 
 

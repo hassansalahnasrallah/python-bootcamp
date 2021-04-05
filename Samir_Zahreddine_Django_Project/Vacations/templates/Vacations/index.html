@@ -14,9 +14,7 @@
         height: 500px;
         float: left;
       }
-      #div-2{
-        opacity: 1;
-      }
+
       
       #items{
           color: aliceblue;
@@ -36,7 +34,7 @@
 <p>profile: </p>
 </div>
 <div id="div-2">
-<img src={{emp.profile_pic}} width="120"/>
+<img src="{{MEDIA_URL}} {{ emp.profile_pic }}" width="120"/>
 <!-- <img src="{% static '/images/image1.jpeg' %}" width="250px" />  -->
 </div>
 <p style="color:white;">*Feel Free to Manage your Vacations here at anytime!</p>
