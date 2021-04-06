@@ -194,7 +194,7 @@ def validate_username(request):
     # email = User.object.get(email=request.user.email)
     response = {
         'is_taken': User.objects.filter(username__iexact=username).exists(),
-        'is_taken2': User.objects.filter(email__iexact=email).exists(),
+        #'is_taken2': User.objects.filter(email__iexact=email).exists(), to validate unique email 
 
     }
     return JsonResponse(response)
