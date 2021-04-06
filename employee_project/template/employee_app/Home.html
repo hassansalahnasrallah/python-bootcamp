@@ -1,5 +1,85 @@
-{% extends "employee_app/base.html" %}
+<html>
+<head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+/* .content {
+  max-width: 400px;
+  margin: auto;
+  margin-top:150px;
+  margin-left:650px;
+  background: white;
+  padding: 10px;
+  padding-left: 40px;
+} */
+.content {
+background:white;
+padding-top:15px;
+padding-left:100px;
+margin-right:200px;
+margin-left:-40px;
+padding-bottom:15px;}
 
-{% block title %}Home Page {% endblock %}
-{% block header %}Welcome To Home Page!{% endblock %}
-{% block paragraph %}This is a Employee Vacation Project{% endblock %}
+body {
+background-color:dodgerblue;
+
+}
+
+
+ h2{color:dodgerblue;
+font-size: 40px;
+font-style: normal;
+font-family: "Sofia", sans-serif;
+} 
+p.python{
+letter-spacing: 3px;}
+
+.footer {
+    padding:5px;
+    text-align: center;
+    background:#157DEC; 
+}
+h2.head{text-align:center;}
+
+.margin{margin-top:80px;
+margin-right:-70px;
+}
+
+</style>
+</head>
+<body>
+
+<nav class="navbar" style="background-color:#B4CFEC"> 
+<div class="container-fluid">
+<h2 class="head">Welcome To Home Page</h2>
+</div>
+</nav>
+
+ <div class="container margin"> 
+ <div class="row">
+<div class="col-md-4"> 
+  <img src="https://www.questionpro.com/blog/wp-content/uploads/2018/09/67-Employee-Morale.jpg"  class="img-thumbnail" alt="emplyee_profile" style="width:350px;height:395px;">  
+ </div>  
+<div class="col-md-6">
+<div class="content" >
+<br><br>
+<p class="python">PYTHON BOOTCAMP</p>
+<h2 class="font-effect-shadow-multiple">Employee<br>Vacation</h2><br>
+<p>Your way to add a vacation</p><br>
+<a class="btn btn-primary btn-lg" href="{% url 'user_login' %}"><span class="glyphicon glyphicon-log-in"></span> LogIn</a><br><br><br>
+<p>Don't have an account?<a  href="{% url 'Sign_Up_Form' %}">Signup</a></p>
+</div>
+</div>
+</div>
+</div> 
+<br><br><br><br><br><br><br>
+<div class="footer">
+  <p style="padding-top:10px;font-size:12px;"><u>System</u> created by <u>Shadi AbouZaid</u></p>
+</div>
+
+</body>
+
+
+</html>

@@ -1,0 +1,367 @@
+<html >
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Droppable - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <style>
+  #draggable { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+  #droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+  #resizable { width: 150px; height: 150px; padding: 0.5em; }
+  #resizable h3 { text-align: center; margin: 0; }
+  
+  #feedback { font-size: 1.4em; }
+  #selectable .ui-selecting { background: #FECA40; }
+  #selectable .ui-selected { background: #F39814; color: white; }
+  #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+  
+   #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+  .ui-menu { width: 150px; }
+  #sortable li span { position: absolute; margin-left: -1.3em;} 
+  .toggler { width: 500px; height: 200px; position: relative; }
+    #button { padding: .5em 1em; text-decoration: none; }
+    #effect { width: 240px; height: 170px; padding: 0.4em; position: relative; background: #fff; }
+    #effect h3 { margin: 0; padding: 0.4em; text-align: center; }
+  
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+  $( function() {
+	  var spinner = $( "#spinner" ).spinner();
+	  
+	    $( "#disable" ).on( "click", function() {
+	      if ( spinner.spinner( "option", "disabled" ) ) {
+	        spinner.spinner( "enable" );
+	      } else {
+	        spinner.spinner( "disable" );
+	      }
+	    });
+	    $( "#destroy" ).on( "click", function() {
+	      if ( spinner.spinner( "instance" ) ) {
+	        spinner.spinner( "destroy" );
+	      } else {
+	        spinner.spinner();
+	      }
+	    });
+	    $( "#getvalue" ).on( "click", function() {
+	      alert( spinner.spinner( "value" ) );
+	    });
+	    $( "#setvalue" ).on( "click", function() {
+	      spinner.spinner( "value", 5 );
+	    });
+	    $( "#tabs" ).tabs();
+	   
+	    
+	    $("#CalButton").click(function(){
+	      	 var age= new Date().getFullYear() - new Date($("#datepicker").val()).getFullYear()
+	      	 alert(age)
+	      	 $("#age").html("Your age is : " + age)
+	      	 if (age>25){
+	      		 $( "#age" ).animate({
+	      	          backgroundColor: "green",
+	      	          color: "#000",
+	      	          width: 240
+	      	        }, 1000 );
+	      	 }else{
+	      		 $( "#age" ).animate({
+	      	          backgroundColor:"red",
+	      	          color: "#000",
+	      	          width: 240
+	      	        }, 1000 ); 
+	      	 }
+	    })
+	     $( ".widget input[type=submit], .widget a, .widget button" ).button();
+    $( "button, input, a" ).click( function( event ) {
+      event.preventDefault();
+    } );
+    var state = true;
+    $( "#button" ).on( "click", function() {
+      if ( state ) {
+        $( "#effect" ).animate({
+          backgroundColor: "#aa0000",
+          color: "#fff",
+          width: 500
+        }, 1000 );
+      } else {
+        $( "#effect" ).animate({
+          backgroundColor: "#fff",
+          color: "#000",
+          width: 240
+        }, 1000 );
+      }
+      state = !state;
+    });
+	$( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+	    $( "#slider" ).slider();
+	    $( "#selectable" ).selectable();
+	     $( "#resizable" ).resizable();
+		    $( "#datepicker" ).datepicker();
+		  $("#show_dialog").click(function(){
+			  $( "#dialog" ).dialog();  
+		  });
+		  $( "#accordion" ).accordion();
+		  $( "#menu" ).menu();
+		  $( "#progressbar" ).progressbar({
+		      value:50
+		    });
+		  $( "#tags" ).autocomplete({
+		      source: availableTags
+		    });
+		  $( "#number" )
+	      .selectmenu()
+	      .selectmenu( "menuWidget" )
+	        .addClass( "overflow" );
+		 
+		  $( "input" ).checkboxradio();
+		  
+		 
+		    $( "button" ).button();
+		   
+		      function callback() {
+		        setTimeout(function() {
+		          $( "#effect" ).removeClass( "newClass" );
+		        }, 1500 );
+		      }
+    $( "#draggable" ).draggable();
+    $( "#droppable" ).droppable({
+      drop: function( event, ui ) {
+        $( this )
+          .addClass( "ui-state-highlight" )
+          .find( "p" )
+            .html( "Dropped!" );
+      }
+    });
+  })
+</script>
+</head>
+<body>
+ <div id="slider"></div>
+<div id="draggable" class="ui-widget-content">
+  <p>Drag me to my target</p>
+</div><br>
+ 
+ <div id="droppable" class="ui-widget-header">
+  <p>Drop here</p>
+</div><br> 
+<p>Date: <input type="text" id="datepicker"></p><br>
+<button type="button" class="btn btn-primary" id="CalButton">Calculate Age</button><br>
+<div id="dialog" title="Basic dialog">
+  <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the &apos;x&apos; icon.</p>
+</div><br>
+<button type="button" class="btn btn-primary" id="show_dialog">Show Dialog</button><br>
+<div id="age"></div> <br>
+<div id="resizable" class="ui-widget-content">
+  <h3 class="ui-widget-header">Resizable</h3>
+ </div><br><br><br>
+  <ol id="selectable">
+  <li class="ui-widget-content">Item 1</li>
+  <li class="ui-widget-content">Item 2</li>
+  <li class="ui-widget-content">Item 3</li>
+  <li class="ui-widget-content">Item 4</li>
+  <li class="ui-widget-content">Item 5</li>
+  <li class="ui-widget-content">Item 6</li>
+  <li class="ui-widget-content">Item 7</li>
+</ol>
+</div><br><br><br>
+<ul id="sortable">
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>car 1</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>car 2</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>car 3</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>car 4</li>
+  <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>car 5</li>
+</ul><br><br><br>
+
+<div id="accordion">
+  <h3>Aston Martin</h3>
+  <div>
+  <p>The name Aston Martin is derived partly from the name of its founder, Lionel Martin, and partly for a stretch of road in Hertfordshire, England, used for racing, called the Aston Hillclimb. 
+
+World War I briefly halted production, and afterward Aston Martin produced cars specifically for the racetrack, focusing on speed more than luxury. However, building competition cars proved to be a strain on finances, and Aston Martin changed hands several times until World War II. In 1947, tractor manufacturer David Brown purchased the company, and models built under Brown's ownership also included his initials -- DB</p>
+  </div>
+  <h3>Audi</h3>
+  <div>
+   <p>German Engineer August Horch founded the company August Horch & Cie. Motorwagenwerke AG, in 1899. Due to misunderstandings among partners, Horch left the company and formed a new company, August Horch Automobilwerke GmbH in 1909. 
+
+But what to call the new company? The old company retained the name Horch (meaning "listen" or "hearken" in German) so he chose the Latin translation instead - Audi.
+
+Within a few years, Horch had made the Audi name well known in Europe. </p>
+  </div>
+  <h3>Cadillac</h3>
+  <div>
+   <p>Cadillac was named after the great French explorer Antoine Laumet de La Mothe, Sieur de Cadillac, who founded Detroit, Michigan in 1701.
+
+Cadillac is one of the earliest car brands in the US. Founded in 1902, it is known for manufacturing luxury cars. However, the company was later taken over by General Motors in 1909.</p>
+  </div>
+  <h3> BMW</h3>
+  <div>
+   <p>BMW started its operation in 1912 and was formed by the merger of three German companies.
+
+The acronym BMW stands for Bayerische Motoren Werke GmnH, which roughly translates to Bavarian Engine Works Company. The name harks back to the company's origin in the German state of Bavaria. It also indicates BMW's original product range of engines for various applications.</p>
+  </div>
+</div><br><br><br>
+<div class="ui-widget">
+  <label for="tags">Tags: </label>
+  <input id="tags">
+</div><br><br><br>
+<div class="widget">
+  <h1>Widget Buttons</h1>
+  <button>A button element</button>
+ 
+  <input type="submit" value="A submit button">
+ 
+  <a href="#">An anchor</a>
+</div><br><br><br>
+<div class="widget">
+  <h1>Checkbox and radio button widgets</h1>
+ 
+  <h2>Radio Group</h2>
+  <fieldset>
+    <legend>Select a Location: </legend>
+    <label for="radio-1">New York</label>
+    <input type="radio" name="radio-1" id="radio-1">
+    <label for="radio-2">Paris</label>
+    <input type="radio" name="radio-1" id="radio-2">
+    <label for="radio-3">London</label>
+    <input type="radio" name="radio-1" id="radio-3">
+  </fieldset>
+ 
+  <h2>Checkbox</h2>
+  <fieldset>
+    <legend>Hotel Ratings: </legend>
+    <label for="checkbox-1">2 Star</label>
+    <input type="checkbox" name="checkbox-1" id="checkbox-1">
+    <label for="checkbox-2">3 Star</label>
+    <input type="checkbox" name="checkbox-2" id="checkbox-2">
+    <label for="checkbox-3">4 Star</label>
+    <input type="checkbox" name="checkbox-3" id="checkbox-3">
+    <label for="checkbox-4">5 Star</label>
+    <input type="checkbox" name="checkbox-4" id="checkbox-4">
+  </fieldset>
+  </div><br><br><br>
+  <ul id="menu">
+  <li class="ui-state-disabled"><div>Toys (n/a)</div></li>
+  <li><div>Books</div></li>
+  <li><div>Clothing</div></li>
+  <li><div>Electronics</div>
+    <ul>
+      <li class="ui-state-disabled"><div>Home Entertainment</div></li>
+      <li><div>Car Hifi</div></li>
+      <li><div>Utilities</div></li>
+    </ul>
+  </li>
+  <li><div>Movies</div></li>
+  <li><div>Music</div>
+    <ul>
+      <li><div>Rock</div>
+        <ul>
+          <li><div>Alternative</div></li>
+          <li><div>Classic</div></li>
+        </ul>
+      </li>
+      <li><div>Jazz</div></li></ul></li></ul>
+      <br><br><br>
+      <div id="progressbar"></div><br><br><br>
+      <label for="number">Select a number</label>
+    <select name="number" id="number">
+      <option>1</option>
+      <option selected="selected">2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+      <option>9</option>
+      <option>10</option>
+      <option>11</option>
+      <option>12</option>
+      <option>13</option>
+      <option>14</option>
+      <option>15</option>
+      <option>16</option>
+      <option>17</option>
+      <option>18</option>
+      <option>19</option>
+    </select><br><br><br>
+    <p>
+  <label for="spinner">Select a value:</label>
+  <input id="spinner" name="value">
+</p>
+ 
+<p>
+  <button id="disable">Toggle disable/enable</button>
+  <button id="destroy">Toggle widget</button>
+</p>
+ 
+<p>
+  <button id="getvalue">Get value</button>
+  <button id="setvalue">Set value to 5</button>
+</p><br><br><br>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">BMW</a></li>
+    <li><a href="#tabs-2">Cadillac</a></li>
+    <li><a href="#tabs-3">Audi</a></li>
+  </ul>
+   <div id="tabs-1">
+    <p>BMW started its operation in 1912 and was formed by the merger of three German companies.
+
+The acronym BMW stands for Bayerische Motoren Werke GmnH, which roughly translates to Bavarian Engine Works Company. The name harks back to the company's origin in the German state of Bavaria. It also indicates BMW's original product range of engines for various applications.</p>
+  </div>
+  <div id="tabs-2">
+ <p>Cadillac was named after the great French explorer Antoine Laumet de La Mothe, Sieur de Cadillac, who founded Detroit, Michigan in 1701.
+
+Cadillac is one of the earliest car brands in the US. Founded in 1902, it is known for manufacturing luxury cars. However, the company was later taken over by General Motors in 1909.</p>
+  </div>
+  <div id="tabs-3">
+<p>German Engineer August Horch founded the company August Horch & Cie. Motorwagenwerke AG, in 1899. Due to misunderstandings among partners, Horch left the company and formed a new company, August Horch Automobilwerke GmbH in 1909. 
+
+But what to call the new company? The old company retained the name Horch (meaning "listen" or "hearken" in German) so he chose the Latin translation instead - Audi.
+
+Within a few years, Horch had made the Audi name well known in Europe. </p>
+  </div>
+</div><br><br><br>
+<div class="toggler">
+  <div id="effect" class="ui-widget-content ui-corner-all">
+    <h3 class="ui-widget-header ui-corner-all">Animate</h3>
+    <p>
+      Etiam libero neque, luctus a, eleifend nec, semper at, lorem. Sed pede. Nulla lorem metus, adipiscing ut, luctus sed, hendrerit vitae, mi.
+    </p>
+  </div>
+</div>
+ 
+<button id="button" class="ui-state-default ui-corner-all">Toggle Effect</button>
+<br><br><br>
+
+
+</body>
+</html>

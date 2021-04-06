@@ -6,112 +6,299 @@ from django.template.context_processors import request
 from django.contrib.auth import authenticate,login, logout
 from django.urls.base import reverse
 from django.contrib.auth.decorators import login_required
-from employee_app.models import Employee_Vacation 
+from employee_app.models import Employee_Vacation,Employee_Profile 
 from django.contrib import messages
+from django.core.serializers.json import DjangoJSONEncoder
+import os
+import random
+import logging
+from employee_project import settings
+from django.db.utils import IntegrityError
+import json
+from datetime import date
+from django.db.models import Q
 from django.http import response
+
+
 # Create your views here.
 
-def Main(request):
-    context={}
-    return render(request,"employee_app/Home.html", context)
+log = logging.getLogger(__name__)
 
-def Sign_Up_Form(request):
-    userinfo=forms.UserForm()
-    profileinfo=forms.UserProfileForm()
-    if request.method == 'POST':
-         userinfo=forms.UserForm(data=request.POST)
-         profileinfo=forms.UserProfileForm(data=request.POST)
-         if userinfo.is_valid() and profileinfo.is_valid():
-             user = userinfo.save()
-             user.set_password(user.password)
-             user.save()
-             profile = profileinfo.save(commit=False)
-             profile.user = user
-             if 'employe_profile' in request.FILES:
-                print('found it')
-                profile.employe_profile = request.FILES['employe_profile']
-             profile.save()
-         else:
-             print("Not Valid")
-    else:
-        print("Not valid request")            
-    context={"user_form":userinfo,"profile_form":profileinfo}
-    return render(request,"employee_app/sign_up.html", context)
+
+def sign_up_form(request):
+    try:
+        userinfo = forms.UserForm()
+        if request.method == 'POST':
+            userinfo = forms.UserForm(data=request.POST)
+            if  userinfo.is_valid() :
+                user = userinfo.save()
+                user.set_password(user.password)
+                user.save()
+                log.debug("You have  registered successfully " )
+    except:  
+        log.debug("Error while registering")
+        
+    context = {"user_form": userinfo}              
+    return render(request,"employee_app/sign_up.html",context)    
 
 def user_login(request):
-
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
-        if user:
-            if user.is_active:
-                login(request, user)
-
-                return HttpResponseRedirect(reverse('Vacation_Table'))
-            else:
-                return HttpResponse("Your account is not active.")
-        else:
-            print("Someone tried to login and failed.")
-            print("They used username: {} and password: {}".format(username,password))
-            return HttpResponse("Invalid login details supplied.")
-    else:
-        return render(request, 'employee_app/login.html', {})
-
+    try:
+        if request.method == 'POST':
+             username = request.POST.get('username')
+             password = request.POST.get('password')
+             user = authenticate(username=username, password=password)
+             if user:
+                  if user.is_active:
+                     login(request, user)
+                     log.debug("Welcome You have LogIn ")
+                     return HttpResponseRedirect(reverse('Vacation_Table'))
+                  else:
+                      return HttpResponse("Your account is not active.")
+             else:
+                 log.debug("Someone tried to login and failed.")
+                 log.debug("They used username: {} and password: {}".format(username,password))
+                 return HttpResponse("Invalid login details supplied.")
+    except:
+        log.debug("Error while logIn")
+        
+    return render(request, 'employee_app/login.html', {})
+    
 
 @login_required
-def Vacation_Fields(request):
-        context={}    
-        vacation_id=request.GET.get('id')
-        vacation=None
+def vacation_fields(request):
+        context = {}    
+        log.debug("Now we are in the vacation field")
+        vacation_id = request.GET.get('id')
+        vacation = None
         if vacation_id:
-            vacation=Employee_Vacation.objects.filter(id=vacation_id).first()
-        context['vacation']=vacation   
+            vacation = Employee_Vacation.objects.filter(id=vacation_id).first()
+        context['vacation'] = vacation   
         return render(request,"employee_app/Vacation_requirments.html",context)
     
-def Vacation_save(request):
-     user=request.user
-     Description=request.POST.get("desc")
-     Date_From=request.POST.get("datefrom")
-     Date_To=request.POST.get("dateto")
-     Duration=request.POST.get("duration_d")
-     vacation_id=request.POST.get("vacation_id")
-     if Description and Date_From and Date_To :
-          if vacation_id:
-             vacation=Employee_Vacation.objects.filter(id=vacation_id).first()
-             if vacation:
-                 vacation.Description=Description
-                 vacation.Datetime_From=Date_From
-                 vacation.Datetime_To=Date_To
-                 vacation.save()
-                 response="Success"
-             else: response="Fail"
-          else:
-              Employee_Vacation.objects.create(user=user,Description=Description,Datetime_From=Date_From,Datetime_To=Date_To)
-              response="Success"
-     else:
-         response="Fail"
-     return HttpResponse(response)
+def vacation_save(request):
+     user = request.user
+     Description = request.POST.get("desc")
+     Date_From = request.POST.get("datefrom")
+     Date_To = request.POST.get("dateto")
+     Duration = request.POST.get("duration_d")
+     vacation_id = request.POST.get("vacation_id")
+     status = "OK"
+     message = "SUCCESS"
+     payload = {}
+     try:
+         if Description and Date_From and Date_To and  Duration:
+             if vacation_id:
+                 vacation = Employee_Vacation.objects.filter(id=vacation_id).first()
+                 if vacation:
+                      vacation.Description = Description
+                      vacation.Datetime_From = Date_From
+                      vacation.Datetime_To = Date_To
+                      vacation.Duration = Duration
+                      vacation.save()
+                      payload['id'] = vacation.id
+                      response = "SUCCES"
+                      log.debug("%s vacation successfully" % ("Updated" if vacation_id else "Created"))
+                 else:
+                      message = "Description_NOT_FOUND"
+                      status = "FAIL"
+             else:
+                 Employee_Vacation.objects.create(user=user,Description=Description,Datetime_From=Date_From,Datetime_To=Date_To,Duration=Duration)
+                 payload['id'] = vacation.id
+         else:
+             message = "MISSING_REQUIRED_PARAMETERS"
+             status = "FAIL"
+     except IntegrityError:
+        status = "FAIL"
+        message = "DESCRIPTION_NAME_ALREADY_EXISTS"
+        
+     except:
+         status = "FAIL"
+         message = "SYSTEM_ERROR" 
+         log.error("Error while saving Description name", exc_info=1)
+     response = {"status": status, "message": message, "payload": payload}    
+     return HttpResponse(json.dumps(response))
+     
+
+     return render(request,"employee_app/Vacation_table.html",context)
 
 @login_required
-def Vacation_Table(request):
-     context={}
-     context["vacations"]=Employee_Vacation.objects.all()
-     return render(request,"employee_app/Vacation_table.html",context)
+def vacation_table(request):
+    context = {}
+    return render(request, "employee_app/Vacation_table.html", context)
+
+
+def vacation_grid(request):
+    data = []
+   
+    table_length = request.POST.get('length')
+    global_search = request.POST.get('search[value]')
+    sorting_column_index = request.POST.get('order[0][column]')
+    sorting_column_direction = request.POST.get('order[0][dir]')
+    sorted_column_name = request.POST.get('columns[%s][name]' % (sorting_column_index))
+    qset = Q(user_id=request.user.id)
+
+    description_search=request.POST.get('columns[0][search][value]')
+    if description_search:
+        qset &= Q(Description__icontains=description_search)
+    datefrom_search=request.POST.get('columns[1][search][value]')
+    if datefrom_search:
+        qset &= Q(Datetime_From__icontains=datefrom_search) 
+    dateto_search=request.POST.get('columns[2][search][value]')
+    if dateto_search:
+        qset &= Q(Datetime_To__icontains=dateto_search) 
+    duration_search=request.POST.get('columns[3][search][value]')
+    if duration_search:
+        qset &= Q(Duration__icontains=duration_search) 
+    
+    all_vacations = Employee_Vacation.objects.filter(qset).all().order_by("%s%s" % ("-" if sorting_column_direction == "desc" else "", sorted_column_name))[:int(table_length)]
+    log.debug("Total retrieved: %s", len(all_vacations))
+    
+    for vacation in all_vacations:
+        data.append({ 'id': vacation.id, 'Description': vacation.Description, 'Datetime_From': vacation.Datetime_From, 'Datetime_To': vacation.Datetime_To,'Duration':vacation.Duration,  'status':"Active" if vacation.status else "Not active"})
+         
+    records = len(all_vacations) 
+    response = {
+        'recordsTotal': records,
+        'recordsFiltered': records,
+        'data': data,
+        }
+    return HttpResponse(json.dumps(response,sort_keys=True,indent=1,cls=DjangoJSONEncoder))
+ 
+@login_required 
+def profile_form(request):
+    context = {}
+    context['MEDIA_URL'] = settings.MEDIA_URL
+    context ['user_profile'] =  Employee_Profile.objects.filter(user_id=request.user.id).first()
+    return render(request, "employee_app/Profile_Page.html", context)
+
+def save_profile(request):
+    status = "OK"
+    message = "SUCCESS"
+    payload = {}
+    Job_position = request.POST.get('Job_position')
+    profile_img = request.FILES['profile_img']
+    Birth_date = request.POST.get('Birth_date')
+    
+    try:
+        log.debug("Profile image: %s", profile_img)
+        mediaPrefix = ("%s/%s") % (date.today().year, date.today().month)
+        mediaPathDirectory = ("%s/%s") % (settings.MEDIA_ROOT, mediaPrefix)
+        if not os.path.exists(mediaPathDirectory):
+            os.makedirs(mediaPathDirectory)
+        extension = profile_img.name.split(u'.')[-1]
+        new_filename = "profile-pic-%s.%s" % (random.randint(0, 10000), extension)
+        path = os.path.join(mediaPathDirectory, new_filename)
+        dest = open(path, 'wb+')
+        for chunk in profile_img.chunks():
+            dest.write(chunk)
+            dest.close()
+        image_url = "%s/%s" % (mediaPrefix, new_filename)
+        user_profile = Employee_Profile.objects.filter(user_id=request.user.id).first()
+        if not user_profile:
+            user_profile = Employee_Profile.objects.create(user_id=request.user.id,job_position = Job_position,employe_profile = image_url,birth_date =  Birth_date )
+            log.debug("user profile not found, creating a new one")
+        else:
+             user_profile.job_position = Job_position
+             user_profile.employe_profile = image_url
+             user_profile.birth_date = Birth_date
+             user_profile.save()
+             log.debug("Saved profile image successfully for user: %s", request.user.id)
+             payload['image_url'] = image_url
+        
+    except:
+        status = "FAIL"
+        message = "SYSTEM_ERROR" 
+        log.error("Error while saving description name", exc_info=1)
+        
+    response = {"status": status, "message": message, "payload": payload}
+    return HttpResponse(json.dumps(response))
+ 
+
  
 @login_required
 def employee_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse('Main'))
+    return HttpResponseRedirect(reverse('Home'))
+
+def jquery(request):
+    return render(request,"employee_app/jquery.html",{})
+
+
+def home(request):
+    return render(request,"employee_app/home.html" , {})
+
+def update_status(request):
+
+    vacation_id = request.POST.get('vacation_id')
+
+    status = "OK"
+    message = "SUCCESS"
+    payload = {}
     
+    try:
+        if vacation_id:
+            vacation = Employee_Vacation.objects.filter(id=vacation_id).first()
+            vacation_status = vacation.status
+            log.debug(vacation_status)
+            vacation.status = not (vacation_status)
+            log.debug(vacation.status)
+            vacation.save()
+                
+            response = "SUCCESS"
+            
+            log.debug("%s vacation successfully" % ("Updated" if vacation_id else "Created"))
+        else:
+            message = "VACATION_NOT_FOUND"
+            status = "FAIL"
+            
+    except:
+        message = "SYSTEM_ERROR"
+        status = "FAIL"
+        log.error("Error while saving vacation", exc_info=1)
+                
+    response = {'status': status, 'message': message, 'payload': payload}
+    
+    return HttpResponse(json.dumps(response))
+
+def delete_vacation(request):
+    vacation_id = request.POST.get('vacation_id')
+
+    status = "OK"
+    message = "SUCCESS"
+    payload = {}
+    
+    try:
+        if vacation_id:
+            vacation = Employee_Vacation.objects.filter(id=vacation_id).first()
+            vacation.delete()
+            response = "SUCCESS"
+            
+            log.debug(" vacation is deleted successfully")
+        else:
+            message = "VACATION_NOT_FOUND"
+            status = "FAIL"
+            
+    except:
+        message = "SYSTEM_ERROR"
+        status = "FAIL"
+        log.error("Error while saving vacation", exc_info=1)
+                
+    response = {'status': status, 'message': message, 'payload': payload}
+    
+    return HttpResponse(json.dumps(response))
     
 urlpatterns=[
-    url(r'Main/',Main,name='Main'),
-    url(r'Sign_up/',Sign_Up_Form,name='Sign_Up_Form'),
+    url(r'Sign_up/',sign_up_form,name='Sign_Up_Form'),
     url(r'login/',user_login,name='user_login') ,
-    url(r'Vacation_Fields/', Vacation_Fields,name='Vacation_Fields') ,
-    url(r'Vacation_Table/', Vacation_Table,name='Vacation_Table') ,
-    url(r'Vacation_save/', Vacation_save,name='Vacation_save') ,
-    url(r'logout/',employee_logout,name='employee_logout') 
-    
+    url(r'Vacation_Fields/', vacation_fields,name='Vacation_Fields') ,
+    url(r'Vacation_Table/', vacation_table,name='Vacation_Table') ,
+    url(r'Vacation_save/', vacation_save,name='Vacation_save') ,
+    url(r'Vacation_grid/', vacation_grid,name='vacation_grid') ,
+    url(r"profile/", profile_form, name="profile_form"),
+    url(r"save_profile_user/", save_profile, name="save_profile"),
+    url(r'logout/',employee_logout,name='employee_logout'),
+    url(r'jquery/',jquery,name='jquery'),
+    url(r'Home/',home,name='Home'),
+    url(r'update_status/',update_status,name='update_status'),
+    url(r'delete_vacation/',delete_vacation,name='delete_vacation'),
     ]

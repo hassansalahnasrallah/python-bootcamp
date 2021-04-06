@@ -1,0 +1,3 @@
+lsettings = {
+    "DEBUG": True,
+}

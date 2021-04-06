@@ -1,11 +1,99 @@
 {% extends "employee_app/base.html" %}
 {% block title %} Sign Up Form {% endblock %}
-{% block header %}Fill out All Fields:{% endblock %}
+{% block two %}
+<div class="col-md-4" >
+
+<img src="https://www.questionpro.com/blog/wp-content/uploads/2018/09/67-Employee-Morale.jpg"  class="img-thumbnail" alt="emplyee_profile" id="profile">  
+</div>
+ 
+ {% endblock %}
+
+
+ {% block header %}<h2>Fill out All Fields:</h2>{% endblock %} 
 {% block container_block %}
-    <form method="POST" enctype="multipart/form-data">
+<style>
+
+ .content {
+background:white;
+padding-left:20px;
+ margin-right:100px; 
+margin-left:-30px;
+padding-bottom:15px;} 
+#profile { width:450px;
+height:540px;
+}
+label { font-size:16px;}
+ .btn {
+  background-color: dodgerblue;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.8;
+}
+.btn:hover {
+  opacity: 1;
+} 
+
+</style>
+     <form method="POST"  id="signup" style="max-width:500px;margin:auto;height:420px;">
          {{ user_form.as_p }}
-         {{ profile_form.as_p }}
          {% csrf_token %}
-         <input type="submit" class='btn btn-primary' value="Sign Up">
+        <center> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-ghFSkqRBZq6LX1wiTc-FmnQZJ6mibLaGCw&usqp=CAU" alt="image not found" style="width:130px"></center>
+         <br>
+         <input type="submit" class='btn btn-primary btn-lg' value="Sign Up"> 
          </form>
+         {% endblock %} 
+         
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+{% block scripts %}
+<script>
+ $(function(){
+	$("#signup").validate({
+		rules: {
+			username: {
+				required: true,
+			},
+			email: {
+				required: true,
+			},
+			password: {
+				required: true,
+			},
+			first_name: {
+				required: true,
+			},
+			last_name: {
+				required: true,
+			},
+		},
+		
+		messages: {
+			username: {
+				required: "username is required"
+			},
+			email: {
+				required: "email is required"
+			},
+			password: {
+				required: " Password is required "
+			},
+			first_name: {
+				required: "first_name is required"
+			},
+			last_name: {
+				required: "last_name is required"
+			},
+			
+		},
+	});
+}); 
+ 
+</script>
+
 {% endblock %}
+         

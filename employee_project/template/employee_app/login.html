@@ -1,13 +1,88 @@
 {% extends "employee_app/base.html" %}
 {% block title %} Sign Up Form {% endblock %}
-{% block header %}Welcome To LogIn Page You Should Sign Up First:{% endblock %}
+{% block two %} 
+<div class="col-md-4" >
+
+<img src="https://www.questionpro.com/blog/wp-content/uploads/2018/09/67-Employee-Morale.jpg"  class="img-thumbnail" alt="emplyee_profile" id="profile">  
+</div>
+ 
+ {% endblock %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% block header %}<h2>LogIn Form</h2>{% endblock %}
 {% block container_block %}
-<form method="POST" action="{% url  'user_login' %}">
+<style>
+ .content {
+background:white;
+padding-left:50px;
+margin-right:100px;
+margin-left:-30px;
+padding-bottom:15px;} 
+ .btn {
+  background-color: dodgerblue;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  width: 70%;
+  opacity: 0.8;
+}
+.btn:hover {
+  opacity: 1;
+} 
+#profile { width:450px;
+height:519px;
+
+}
+
+</style>
+<form method="POST" id="login" style="max-width:500px;margin:auto;height:93px;" action="{% url  'user_login' %}">
  {% csrf_token %}
-<label for="name">User Name:</label>
-<input type="text" name="username" placeholder="username" /><br>
-<label for="password">Password:</label>
-<input type="password" name="password" placeholder="Password" /><br>
-<input type="submit" class='btn btn-primary' value="LogIn">
-</form>
+ <div class="input-container">
+<i class="fa fa-user icon"></i>
+<input type="text" name="username" class="input-field"  placeholder="username" /></div>
+<div class="input-container">
+<i class="fa fa-key icon"></i>
+<input type="password"  class="input-field" name="password" placeholder="Password" /></div><br>
+<input type="submit" class='btn' value="LogIn" style="width:75%">
+</form><br><br><br><br><br><br>
+<center><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3XrDMAo9vp23B3Kwny_ikOKg0_no_fu-Zgg&usqp=CAU"  style="width:130px"></center>
+<br>
+<p style="font-size:20px">Not a user Yet?<a  href="{% url  'Sign_Up_Form' %}" >Register</a><p>
+
+{% endblock %}
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script> 
+
+{% block scripts %}
+<script>
+ $(function(){
+	$("#login").validate({
+		rules: {
+			username: {
+				required: true,
+			},
+			password: {
+				required: true,
+			},
+		},
+		
+		messages: {
+			username: {
+				required: "Name is required"
+			},
+			password: {
+				required: " Password is required ",
+			},
+			
+		},
+	});
+}); 
+ 
+</script>
+
 {% endblock %}

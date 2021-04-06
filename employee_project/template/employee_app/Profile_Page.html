@@ -1,0 +1,170 @@
+{% extends "employee_app/base.html" %}
+{% block title %} Profile Page {% endblock %}
+{% block two %} 
+<div class="col-md-4" >
+
+<img src="https://www.questionpro.com/blog/wp-content/uploads/2018/09/67-Employee-Morale.jpg"  class="img-thumbnail" alt="emplyee_profile" id="profile">  
+</div>
+ 
+ {% endblock %}
+{% block header %}<h2>Fill out All Profile page Fields:</h2>{% endblock %}
+{% block container_block %}
+<style>
+/*  .content {
+background:white;
+padding-left:70px;
+margin-right:0px;
+margin-left:-60px;
+padding-bottom:45px;
+padding-right: 40px;}   */
+ .content {
+background:white;
+padding-left:50px;
+margin-right:100px;
+margin-left:-30px;
+padding-bottom:15px;} 
+
+ .btn {
+  background-color: dodgerblue;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  width: 70%;
+  opacity: 0.8;
+}
+#profile { width:450px;
+height:580px;
+
+}
+.btn:hover {
+  opacity: 1;
+} 
+label {font-size:18px}
+.size { height:35px;
+ width: 200px;}
+</style>
+
+ <form method="POST" name="profile_page" id="profile_form" style="height:450px;"><br>
+ {% csrf_token %}
+<div class="form-group">
+<div class="row">
+<div class="col-8">
+<label for="Job" >Job Position:</label> <span class="glyphicon glyphicon-briefcase"></span>
+<input type="text" name="Job_position" id="position"  width="25" class="size" value="{{user_profile.job_position}}" required />
+</div><br>
+<div class="col-8">
+<label for="Profile">Profile Picture:</label> <span class="glyphicon glyphicon-folder-open"></span>
+<input type="file" name="profile_img" class="size" />
+</div><br>
+<div class="col-8">
+<label for="date_Birth">Date Of Birth:</label> <span class="glyphicon glyphicon-calendar"></span>
+<input type="text" name="Birth_date" id="Birthdate" class="size" value="{{user_profile.birth_date|date:'Y-m-d'}}" required/>
+</div><br>
+<div class="col-8">
+<center><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcn_Cc91wBoigiWW_ED9WZgE-o5HTAL-VpcQ&usqp=CAU"  style="width:130px"></center>
+</div><br>
+<div class="col-8">
+<center><button type="button" id="save_profile" class="btn btn-primary" style="width:50%">Save Profile</button></center>
+</div>
+</div>
+</div>
+</form>
+
+<script src="http://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js" integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE="  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.14/jquery.datetimepicker.full.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.14/jquery.datetimepicker.min.css" rel="stylesheet"/>
+
+
+<script>
+$(document).ready(function(){
+	
+	$("#Birthdate").datetimepicker({
+		    format:"Y-m-d",
+		    timepicker:false,
+		    })
+		    
+ $("#profile_form").validate({
+	rules: {
+		Job_position: {
+			required: true,
+		},
+		profile_img: {
+			required: true,
+		},
+		Birthdate: {
+			required: true,
+		},
+	}, 
+
+	messages: {
+		desc: {
+			required: "Job Position is required"
+		},
+		datefrom: {
+			required: "Profile pic is required"
+		},
+		dateto: {
+			required: "Birth Date is required"
+		},
+		
+	},
+		
+
+	
+	   submitHandler: function(){
+		var formData = new FormData();
+		
+ 		formData.append('Job_position', $("input[name=Job_position]").val()); 
+		formData.append('profile_img', $("input[name=profile_img]")[0].files[0]);
+		formData.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
+ 	 	formData.append('Birth_date', $("input[name=Birth_date]").val());  
+		console.log(formData);
+		
+		$.ajax({
+			method: "POST",
+			url: "{% url 'save_profile' %}",
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function(response){
+				
+				if(response.status == 'OK'){
+					toastr.success("Save success");
+					var vacation_id = response.payload.id;
+					$("input[name=vacation_id]").val(vacation_id);
+
+				}else{
+					if(response.message == 'FAIL'){
+						toastr.success("Fail to save")
+					}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
+						toastr.success("You have missing parameters")
+					}
+					
+				}
+			},
+			error: function(){
+				
+				toastr.success("Error in save")
+			}
+		});
+	}
+ });
+	
+	$("#save_profile").click(function(){
+		$("#profile_form").submit();
+	});
+})
+
+</script>
+
+{% endblock %}
