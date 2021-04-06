@@ -18,7 +18,7 @@
 <p><strong>Vacations:</strong></p>
 
 <body>
-  <table id="vacation_table" class="table" >
+  <table id="vacation_table" class="table table-darks" >
     <thead>
       <tr>
         <th>id</th>
@@ -33,7 +33,7 @@
       <tr>
         <td>{{vacation.user_id}}</td>
 
-        <td >{{vacation.desc}}</td>
+        <td>{{vacation.desc}}</td>
         <td>{{vacation.user}}</td>
         <td>{{vacation.from_date}}</td>
         <td>{{vacation.to_date}}
@@ -46,12 +46,11 @@
 
 
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
   <script>
    
-    $(function () {
+  /*  $(function () {
      // $('#vacation_table').DataTable({
       //responsive: true,
       $('#vacation_table').DataTable({
@@ -67,7 +66,7 @@
         },
        
       });
-    }); 
+    }); */
      
       
   

@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 class EmployeeProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_pic = models.ImageField(default='static/images/df.png')
+    profile_pic = models.ImageField(default='df.png')
     position = models.CharField(max_length=255)
     date_of_birth = models.DateField()
 
