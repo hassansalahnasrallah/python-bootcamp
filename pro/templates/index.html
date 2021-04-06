@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+	
+{% load static %}
+
+{%block title%}Welcome{% endblock %}
+
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+ 
+    	
+{% block container_block %}
+
+   <h2>Employee Vacation</h2><br/>
+   
+   <h5>Hey!</h5><br/>
+   <h5>Click here to log in</h5><br/>
+   <a class="btn btn-dark" href="{%url 'employee_login' %}" role="button" id="button-index" style="background-color:#CC92C2; color: black;">Login</a><br/><br/>
+   <h5>Click to sign in if you don't have an account</h5><br/>
+   <a class="btn btn-dark" href="{%url 'register' %}" role="button" id="button-index" style="background-color:#CC92C2; color: black;">Sign up</a>
+   <br/><br/>
+   <h5>Thank you!</h5>
+        
+{% endblock %}

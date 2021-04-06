@@ -1,0 +1,42 @@
+body {
+      background-color: #CC92C2;
+      color: black;
+      font-weight: bold;
+      }
+html{
+    background-color: #f8f9fa;
+    margin:10px 10px 10px 10px;
+  
+            } 
+            
+#big_div{
+	width:800px;
+	min-height: 500px;
+	margin-top: 10%;
+    margin-bottom: 60;
+	border-style : 20px solid #f8f9fa;
+	
+}
+
+#second_div{
+	background-color: #f8f9fa ;
+	height:60%;
+	width: 60%;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	padding:20px;
+	margin-right:40%;
+	margin-left: 20%;
+	text-align:center;
+}
+
+
+.footer{
+	background-color:#f8f9fa;
+	height: 50px;
+	text-align:center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	
+	
+}

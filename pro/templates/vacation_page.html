@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static  %}
+
+{% block table %} 
+      	
+<h1 style="color:#f8f9fa;">Table of Vacations</h1>
+
+{% csrf_token %}
+<form action="{% url 'vacation_grid' %}" method="POST">
+<div class="col-sm-12">
+<table id= "vacation_table" class= "table  row-border cell-border compact" href="{% url 'vacation_grid' %}" style="background-color:#f8f9fa; color: black;">
+	
+	
+	<thead>
+		<tr>
+			<th></th>
+			<th style="width:140px;" data-searchable="true" >Description</th>
+			<th style="width:140px;" data-searchable="false" >Date from</th>
+			<th style="width:140px;" data-searchable="false" >Date to</th>
+			<th style="width:140px;" data-searchable="true" >Duration</th>
+			<th style="width:140px;" data-searchable="false" >Status</th>
+			<th style="width:140px;" data-searchable="false">Actions</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+	</tbody>
+
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="vacation_status_modal" href="{% url 'vacation_grid' %}">
+        <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                 <div class="modal-header">
+       
+                        </div>
+                       <div class="modal-body">
+                           <p>Are you sure you want to update?</p>
+                                   <input name="vacation_id" type="hidden" />
+                              </div>
+                           <div class="modal-footer">
+                           <button type="button" id="save_status" class="btn btn-primary">Update</button>
+                          <button type="button" id="hide_modal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+  </div>
+  </div>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" id="delete_vacation_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Vacation</h5>
+      
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete?</p>
+        <input name="vacation_id" type="hidden" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="delete_vacation" class="btn btn-primary">Delete</button>
+        <button type="button" id="close_modal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </table>
+        </form>
+        <br>
+   <div class="col-sm-12 d-flex justify-content-center">
+	<button class="btn btn-dark" style="background-color:#f8f9fa; color: black;" ><a id="link" href="{% url 'vacation_form' %}">Add your vacation</a></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %} <script src="{% static 'js/vacation_page.js' %}"></script> {% endblock %}

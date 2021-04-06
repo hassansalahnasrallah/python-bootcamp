@@ -1,0 +1,22 @@
+{%extends 'base.html' %}
+{% load static %}
+
+{%block title%}Registration{% endblock %}
+
+{% block container_block %}
+
+     <center>
+     	 <div id="form_div">
+      	 <form id="registration_form" method="POST" enctype="multipart/form-data">
+      
+       		{%csrf_token%}
+      		{{user_form.as_p}}
+      		{{profile_form.as_p}}
+      <br>
+      	 <input class="btn btn-dark" style="background-color:#CC92C2; color: black;" type="submit" name="" id="register" value="Sign in"/>          
+     	 </form>
+     	 </div>  
+     	 </center>  
+{% endblock %}
+
+{% block scripts %} <script src="{% static 'js/registration_form.js' %}"></script> {% endblock %}

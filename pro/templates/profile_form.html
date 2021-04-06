@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block container_block %}
+
+
+<link rel="stylesheet" href="https://formvalidation.io/vendors/formvalidation/css/formValidation.min.css"> 
+ 
+<h1>{{request.user.username}}</h1>
+<center>
+<form name="profile_form" id="profile_form" action="" method="POST">
+	{% csrf_token %}
+	
+	<br>
+    <img id="image_1" src="{{MEDIA_URL}}{{user_profile.picture}}" width="300px" alt="This is an image">
+    <br><br>
+    	
+	<label>Job Position:</label>
+	<input type="text" name="position" value="{{user_profile.position}}"/>
+	<br><br><br>
+	
+	<label>Date of Birth:</label>
+	<input type="text" name="date_of_birth" value="{{user_profile.date_of_birth}}"/>
+	<br><br><br>
+	
+	<label>Profile Image:----------------------------</label><br><br>
+	<input type="file" name="profile_img"/>
+	<br><br><br>
+	
+	<button type="button" id="save_profile" class="btn btn-dark" style="background-color:#CC92C2; color: black;">Save</button>
+
+</form>
+</center>
+{% endblock %}
+
+{% block scripts %} <script src="{% static 'js/profile_form.js' %}"></script> {% endblock %}
