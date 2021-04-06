@@ -15,7 +15,9 @@ class UserProfile(models.Model):
 
 class Vacation(models.Model):
     id=models.AutoField(primary_key=True)
-    user=models.ForeignKey(User,on_delete=models.CASCADE, null=True)
-    description=models.CharField(max_length=255,unique=True)
-    datefrom=models.DateField()
-    dateto=models.DateField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    description = models.CharField(max_length=255, null=True)
+    duration = models.IntegerField(default=0, null=True)
+    datefrom = models.DateField(null=True)
+    dateto = models.DateField(null=True)
+    status = models.BooleanField(default=True)

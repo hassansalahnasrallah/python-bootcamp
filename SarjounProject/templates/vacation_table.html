@@ -1,73 +1,242 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
 {% block container%}
 		{% csrf_token %}
 		<h3 align="center" >Vacation table</h3>
 		
-	<table id="VacationTable">
+	<table id="VacationTable" class= "table  row-border cell-border compact">
 		<thead>
-		
-			<th> Description </th>
-			<th> Date from </th>
-			<th> Date to </th>
-			<th> </th>
-		</thead>
-		<tbody>
-		
-		</tbody>
-		<tfoot>
+		<tr>
+			<th>Description</th>
+			<th>Date from</th>
+			<th>Date to</th>
+			<th>Duration</th>
+			<th>Status</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+	</tbody>
+	<tfoot>
 		<tr>
 			<th style="width:140px;" data-searchable="true" >Description</th>
+			<th style="width:140px;" data-searchable="false" ></th>
+			<th style="width:140px;" data-searchable="false" ></th>
+			<th style="width:140px;" data-searchable="true" >Duration</th>
+			<th style="width:140px;" data-searchable="false" ></th>
+			<th style="width:140px;" data-searchable="false"></th>
 		</tr>
-	
 	</tfoot>
 	</table>
 	<br/>
 	<br/>
 	<a type="Button" class="btn btn-success "href="{% url 'Add_Vacation' %}">Add Vacation</a>		
 
+<div class="modal" tabindex="-1" role="dialog" id="vacation_status_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Vacation Status</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to update?</p>
+        <input name="vacation_id" type="hidden" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="save_status" class="btn btn-primary">Update</button>
+        <button type="button" id="hide_modal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" id="delete_vacation_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Vacation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete?</p>
+        <input name="vacation_id" id="vacation_id" type="hidden" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="delete_vacation" class="btn btn-primary">Delete</button>
+        <button type="button" id="close_modal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
 <script>
 
-$("#VacationTable").DataTable({
-	ajax: {
-		url: "{% url 'vacation_grid' %}",
-		type: "POST",
-		data: function(d){
-			d.csrfmiddlewaretoken = $("input[name=csrfmiddlewaretoken]").val(),
-			d.vacation_id = "{{django_vacation_id}}"
-		}
-	},
-	lengthMenu: [1, 5, 10, 25, 50],
+
+$(function(){
 	
-	pageLength: 10,
-	
-	processing: true,
-	serverSide: true,
-	
-	columns: [
-		{'data': 'description', 'name': 'description', 'sortable': true},
-		{'data': 'datefrom', 'name': 'datefrom', 'sortable': true},
-		{'data': 'dateto', 'name': 'dateto', 'sortable': true},
-		{'data': 'action'}
-	],
-	
-	columnDefs: [
-		{
-			targets: -1, //or 3
-			title: 'Actions',
-			render: function(data, type, full, meta){
-				var add_vacation = "{% url 'Add_Vacation' %}?id=" + full.id ;
-				return "<a href='"+add_vacation+"'>Edit</a>"
+	var vacay_table = $('#VacationTable').DataTable({
+		
+		responsive: true,
+
+		ajax: {
+			url: '{% url "vacation_grid" %}',
+			type: 'POST',
+			data: function(d){
+				d.csrfmiddlewaretoken = $("input[name=csrfmiddlewaretoken]").val(),
+				d.user_id = "{{request.user.id}}" //$("input[name=user_id]").val()
+				//{{django_topic_id}} w bruh 3al context
+				
 			}
+		},
+
+		lengthMenu: [1, 5, 10, 25, 50 ],
+		
+		pageLength: 10,
+		
+		processing: true,
+		serverSide: true,
+		
+		columns: [
+			{'data': 'description', 'name': 'description', 'sortable':true},
+			{'data': 'datefrom', 'name': 'datefrom', 'sortable':true},
+			{'data': 'dateto', 'name': 'dateto', 'sortable':true},
+			{'data': 'duration', 'name': 'duration', 'sortable':true},
+			{'data': 'status', 'name': 'status'},
+			{'data': 'action'}
 			
+			],
+		
+		
+		columnDefs: [
+			{
+				targets: -1, //or 3
+				title: 'Actions',
+				render: function(data, type, full, meta){
+					var edit_url = "{% url 'Add_Vacation' %}?id=" + full.id;
+					return "<a href='"+edit_url+"'>Edit</a> <button class='btn btn-dark btn-sm btn-update' type='button' data-id="+full.id+"><i class='fa fa-refresh' aria-hidden='true'></i></button> <button class='btn btn-dark btn-sm btn-delete' type='button' data-id="+full.id+"><i class='fa fa-trash' aria-hidden='true'></i></button>"
+				}
+				
+			}
+		],
+		
+		createdRow: function(row, data, dataIndex){
+			console.log(data)
+			if(data['status'] == "Active"){
+				$(row).css({'background-color': "white"})
+			}else{
+				$(row).css({'background-color': "#ff5656"})
+			}
 		}
-	]
-})
-
-
+	});
+	
+	$("#VacationTable tfoot th[data-searchable=true]").each(function(){
+		var title = $(this).text();
+		$(this).html('<input type="text" placeholder="Search '+title+'"/>');
+	});
+	
+	vacay_table.columns().every(function(){
+		var column = this;
+		$('input',this.footer()).on('change',function(){
+			if(column.search()!== this.value){
+				column.search(this.value).draw();
+			}
+		})
+	})
+	
+	$("#VacationTable tbody").on('click', '.btn-update', function(){
+		//show dialog
+		console.log(2)
+		$("#vacation_status_modal").show();
+		$("input[name=vacation_id]").val($(this).attr('data-id'));
+	});
+	
+	$("#hide_modal").click(function(){
+			
+			$("#vacation_status_modal").hide();
+	});
+	
+	$("#save_status").click(function(){
+		$.ajax({
+			type:"POST",
+			url: "{% url 'update_status' %}",
+			data:{
+				vacation_id: $("input[name=vacation_id]").val(),
+				csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+			},
+			dataType: 'json',//json bcz data is dictionary
+			success: function(response){
+				console.log(response)
+				
+				if(response.status == 'OK'){
+					toastr.success('Vacation status updated');
+					vacay_table.ajax.reload(); //to auto update table on success
+					$("#vacation_status_modal").hide();
+				}else{
+					if(response.message == "VACATION_NOT_FOUND"){
+						toastr.error('Vacation not found')										
+					}
+				}	
+		    }, 
+		    error: function(){
+		    	toastr.error('An Error Has Occured')
+			}
+		});
+	});
+	
+	
+	$("#VacationTable tbody").on('click', '.btn-delete', function(){
+		
+		$("#delete_vacation_modal").show();
+		$("input[name=vacation_id]").val($(this).attr('data-id'));
+	});
+	
+	 $("#close_modal").click(function(){
+		
+		$("#delete_vacation_modal").hide();
+	 });
+	 
+	 $("#delete_vacation").click(function(){
+			$.ajax({
+				type:"POST",
+				url: "{% url 'delete_vacation' %}",
+				data:{
+					vacation_id: $("input[name=vacation_id]").val(),
+					csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+				},
+				dataType: 'json',//json bcz data is dictionary
+				success: function(response){
+					console.log(response)
+					
+					if(response.status == 'OK'){
+						toastr.success('Vacation deleted successfuly');
+						vacay_table.ajax.reload(); //to auto update table on success
+						$("#vacation_status_modal").hide();
+					}else{
+						if(response.message == "VACATION_NOT_FOUND"){
+							toastr.error('Vacation not found')											
+						}
+					}	
+			    }, 
+			    error: function(){
+			    	toastr.error('An Error Has Occured')
+				}
+			});
+		});
+	
+});
 </script>
 
 
