@@ -105,6 +105,28 @@ margin-top:-20px;}
 
 {% block scripts %}
 <script>
+/* function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Description:</td>'+
+            '<td>'+d.Description+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Date_From:</td>'+
+            '<td>'+d.Datetime_From+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Date_to:</td>'+
+            '<td>'+d.Datetime_To+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Duration:</td>'+
+        '<td>'+d.Duration+'</td>'+
+    '</tr>'+
+    '</table>';
+} */
+
 $(function(){
 	var vacation_table = $(" #vacation_table ").DataTable( {
 		ajax: {
@@ -121,6 +143,13 @@ $(function(){
 		processing: true,
 		serverSide: true,
 	    columns: [
+	 /*    		{
+	                "className":      'details-control',
+	                "orderable":      false,
+	                "data":           null,
+	                "defaultContent": ''
+	            }, */
+	    	
 		   {'data': 'Description', 'name': 'Description', 'sortable': true},
 		   {'data': 'Datetime_From', 'name': 'Datetime_From', 'sortable': true},
 		   {'data': 'Datetime_To', 'name': 'Datetime_To', 'sortable': true},
@@ -128,6 +157,7 @@ $(function(){
 		   {'data': 'status', 'name': 'status'},
 		   {'data': 'action'} ,
 	],
+/* 	"order": [[1, 'asc']], */
 	    columnDefs: [
 		{
 			targets: -1, 
@@ -240,10 +270,29 @@ $(" #vacation_table tfoot th[data-searchable=true]").each(function(){
 				});
 			});
 			
+			
             $("#close_delete").click(function(){
 				
 				$("#vacation_delete_modal").hide();
 			 });
+            
+            
+       /*      $('#vacation_table tbody').on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row( tr );
+         
+                if ( row.child.isShown() ) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    // Open this row
+                    row.child( format(row.data()) ).show();
+                    tr.addClass('shown');
+                }
+            } );
+        } ); */
 
 
 });
