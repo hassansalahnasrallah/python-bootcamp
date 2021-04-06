@@ -21,11 +21,19 @@ log = logging.getLogger(__name__)
 # Create your views here.
 
 def index(request):
+    """
+    Main Page
+    """
     context = {}
     log.debug("Index")
     log.info("Index ")
     log.warning("warning")
     log.error("ll")
+    
+    log.debug("Now we are in the Home page")
+    
+    context['MEDIA_URL'] = settings.MEDIA_URL
+    context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
     return render(request, 'index.html', context)
 
 def test(request):
@@ -60,6 +68,7 @@ def table(request):
 
 def register(request):   
     """
+    Register to the app 
     """
     #TODO add try catch and logging
     user_form = forms.UserForm
@@ -71,6 +80,8 @@ def register(request):
         
         user_form = forms.UserForm(data=request.POST)
         profile_form = forms.UserProfileInfoForm(data = request.POST)
+        
+        
         
         if user_form.is_valid() and profile_form.is_valid():
             
@@ -122,6 +133,7 @@ def register(request):
 
 def user_login(request):
     """
+    log in into the app
     """
     
     context={}
@@ -164,12 +176,15 @@ def user_login(request):
 def user_logout(request):
     logout(request)
 
-    return HttpResponseRedirect(reverse('user_login'))           
+    return HttpResponseRedirect(reverse('index'))           
 
 #tene method heyye vacation grid
 
 @login_required
 def vacation_page(request):
+    """
+    
+    """
     
     context = {}
     
@@ -178,7 +193,11 @@ def vacation_page(request):
     
     return render (request,'vacation_page.html',context)
 
+@login_required
 def vacation_form(request):
+    """
+    Show vacation form for the logged in user 
+    """
     
     log.debug("Now we are in the vacation form")
     context = {}
@@ -194,6 +213,8 @@ def vacation_form(request):
     
     return render(request,'vacation_form.html',context)
 
+
+@login_required
 def save_vacation(request):     
     """
     Update add vacation for logged in user
@@ -245,13 +266,15 @@ def save_vacation(request):
     
     return HttpResponse(json.dumps(response))
 
+
+@login_required
 def vacation_grid(request):
     """
     Display grid of vacation
     """
     
     #response=[{'title':"vacation title"}]
-    
+    log.debug("Now we are in the vacation table")
     data = []
     
     employee_id = request.user.id #request.POST.get('employee_id')
@@ -269,11 +292,20 @@ def vacation_grid(request):
     if global_search:
         qset &= Q(description__icontains=global_search)
         
+    description_search = request.POST.get('columns[1][search][value]')
+    if description_search:
+        qset &= Q(description__icontains=description_search)
+        
+    duration_search = request.POST.get('columns[4][search][value]')
+    if duration_search:
+        qset &= Q(duration__contains=duration_search)    
+           
+        
         
     
     
     vacations = Vacation.objects.filter(qset).all().order_by("%s%s" % ("-" if sorting_column_direction == "desc" else "", sorted_column))[:int(table_length)]
-    log.debug("Total retrieved: %s", len(vacations))
+    log.debug("Total retrieved objects: %s", len(vacations))
     
     
     for vacation in vacations:
@@ -285,16 +317,17 @@ def vacation_grid(request):
     
     response = {
         'recordsTotal': records,
-        'recordsTotal': records,
+        'recordsFiltered': records,
         'data': data,
-        
         }
     
     return HttpResponse(json.dumps(response))
 
 def profile_form(request):
-    
-    
+    """
+    Display the profile form
+    """
+    log.debug("Now we are in the Profile form")
     context = {}
 
     context['MEDIA_URL'] = settings.MEDIA_URL
@@ -302,6 +335,9 @@ def profile_form(request):
     return render(request,'profile_form.html',context)
 
 def save_profile(request):
+    """
+    Save and update the profile form
+    """
     
     status = "OK"
     message = "SUCCESS"
@@ -351,7 +387,7 @@ def save_profile(request):
     except:
  
         message = "SYSTEM_ERROR"
-        status = "FAIL!!"
+        status = "FAIL"
         log.error("Error while saving profile form", exc_info=1)
                   
     
@@ -414,7 +450,7 @@ def delete_vacation(request):
                 
             response = "SUCCESS"
             
-            log.debug("%s vacation successfully" % ("Updated" if vacation_id else "Created"))
+            log.debug("%s vacation successfully deleted")
         else:
             message = "VACATION_NOT_FOUND"
             status = "FAIL"
@@ -432,14 +468,14 @@ def delete_vacation(request):
 urlpatterns = [
   url(r'^$',index,name="index"),
   url(r'test/',test,name="test"),
-  url(r'table/',table,name="table"),
+  url(r'table2/',table,name="table"),
   #url(r'vacation/',form_vacation,name="form_vacation"),
   url(r'register/',register,name="register"),
   #url(r'register_save/',save_register,name="save_register"),
   url(r'user_login/',user_login,name="user_login"),
   url(r'user_logout/',user_logout,name="user_logout"), 
-  url(r'page/',vacation_page,name="vacation_page"),
-  url(r'vacation2/',vacation_form,name="vacation_form"),
+  url(r'table/',vacation_page,name="vacation_page"),
+  url(r'vacation/',vacation_form,name="vacation_form"),
   url(r'vacation_save/',save_vacation,name="save_vacation"), 
   url(r'vacation_grid/',vacation_grid,name="vacation_grid"),
   url(r'profile/',profile_form,name="profile_form"),

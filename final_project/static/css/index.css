@@ -1,3 +1,26 @@
-body{
-	background-color: rgb(150, 38, 217);
+h1{
+	font-family: 'Montserrat Alternates', sans-serif;
+    
+	color: #069c55 ;
+    
+}
+
+h2{
+	font-family: cursive;
+	text-align: center;	
+}
+
+#second_div {
+    background-color: white;
+    min-height: 400px;
+    width: 350px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 50px;
+    margin-right: auto;
+    text-align: center;
+}
+
+#image_1{
+	width: 200px;
 }

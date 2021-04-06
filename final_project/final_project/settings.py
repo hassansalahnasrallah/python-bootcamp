@@ -12,11 +12,17 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
+try:
+    from first_project.local_settings import lsettings
+except ImportError:
+    lsettings = {}
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR,'templates')
 STATIC_DIR = os.path.join(BASE_DIR,'static')
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+#STATIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_DIR = os.path.join(BASE_DIR,'media')
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
@@ -30,7 +36,7 @@ SECRET_KEY = 'wq40gk%&gv3v+9hd)(%l+$in8bjj4y!6_mqwffiqw(@+lxfbox'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['daliaabk.pythonanywhere.com']
+ALLOWED_HOSTS = ['daliaabk.pythonanywhere.com', 'localhost']
 
 
 # Application definition
@@ -118,6 +124,61 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+#LOGGING Configurations
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'formatters': {
+        'simple': {
+            'format': '%(module)s line: %(lineno)s: %(message)s'
+        },
+        'level_app':{
+            'format': '%(asctime)s | %(levelname)s | %(filename)s:%(lineno)s | %(message)s'
+        }
+        
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'level_app'
+        },
+#         'main_log_file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.handlers.TimedRotatingFileHandler',
+#             'filename': '%s/main.log' % (BASE_DIR),
+#             'formatter': 'level_app'
+#         }
+        
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],#, 'main_log_file'],
+            'level': 'ERROR',
+            'propagate': True
+        },
+        'requests': {
+            'handlers': ['console'],#, 'main_log_file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        '': {
+            'handlers': ['console'],#, 'main_log_file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        }
+        
+    }
+}
+
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -137,7 +198,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    #STATIC_DIR,
+    STATIC_DIR,
     ]
 
 MEDIA_ROOT = MEDIA_DIR
@@ -146,60 +207,3 @@ MEDIA_URL = '/media/'
 LOGIN_URL = '/user_login'
 
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()':'django.utils.log.RequireDebugFalse' 
-        }
-        
-    },
-    'formatters': {
-        'simple': {
-            'format': '%(module)s line: %(lineno)s: %(message)s'   
-        },
-        'level_app': {
-            'formate': '%(asctime)s | %(levelname)s | %(filename)s: %(lineno)s | %(message)s'
-        }
-    },
-    'handlers': {
-        'console': {
-          'level': 'DEBUG',
-          'class': 'logging.StreamHandler',
-          'formatter': 'level_app'  
-        },
-        'main_log_file': {
-            'level': 'DEBUG',
-            'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': '%s/main.log' % (BASE_DIR),
-            'formatter': 'level_app'
-            
-        }
-        
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'ERROR',
-            'propagate':True 
-            
-        },
-        
-        'requests': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate':True, 
-            
-        },
-        
-        '': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate':True, 
-            
-        }
-        
-    }
-
-}
