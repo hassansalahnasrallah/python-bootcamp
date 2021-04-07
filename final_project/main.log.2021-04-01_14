@@ -1,0 +1,551 @@
+2021-04-01 13:16:52,193 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-04-01 13:17:06,483 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-04-01 13:17:30,868 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-04-01 13:18:03,309 | DEBUG | views.py:44| Index
+2021-04-01 13:18:03,311 | INFO | views.py:45| Index 
+2021-04-01 13:18:03,313 | WARNING | views.py:46| warning
+2021-04-01 13:18:03,314 | ERROR | views.py:47| ll
+2021-04-01 13:18:08,124 | ERROR | log.py:224| Internal Server Error: /index
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 48, in index
+    return render(request, 'index.html', context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\defaulttags.py", line 312, in render
+    return nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\defaulttags.py", line 446, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\urls\base.py", line 87, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\urls\resolvers.py", line 685, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'user_logout' not found. 'user_logout' is not a valid view function or pattern name.
+2021-04-01 13:18:08,124 | ERROR | log.py:224| Internal Server Error: /index
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 48, in index
+    return render(request, 'index.html', context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\defaulttags.py", line 312, in render
+    return nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\defaulttags.py", line 446, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\urls\base.py", line 87, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\urls\resolvers.py", line 685, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'user_logout' not found. 'user_logout' is not a valid view function or pattern name.
+2021-04-01 13:18:08,161 | ERROR | basehttp.py:157| "GET /index HTTP/1.1" 500 151302
+2021-04-01 13:18:08,161 | ERROR | basehttp.py:157| "GET /index HTTP/1.1" 500 151302
+2021-04-01 13:20:42,002 | DEBUG | views.py:44| Index
+2021-04-01 13:20:42,004 | INFO | views.py:45| Index 
+2021-04-01 13:20:42,007 | WARNING | views.py:46| warning
+2021-04-01 13:20:42,011 | ERROR | views.py:47| ll
+2021-04-01 13:20:42,579 | ERROR | log.py:224| Internal Server Error: /index
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 48, in index
+    return render(request, 'index.html', context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\defaulttags.py", line 312, in render
+    return nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\defaulttags.py", line 446, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\urls\base.py", line 87, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\urls\resolvers.py", line 685, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'user_logout' not found. 'user_logout' is not a valid view function or pattern name.
+2021-04-01 13:20:42,579 | ERROR | log.py:224| Internal Server Error: /index
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 48, in index
+    return render(request, 'index.html', context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\defaulttags.py", line 312, in render
+    return nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\defaulttags.py", line 446, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\urls\base.py", line 87, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\urls\resolvers.py", line 685, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'user_logout' not found. 'user_logout' is not a valid view function or pattern name.
+2021-04-01 13:20:42,598 | ERROR | basehttp.py:157| "GET /index HTTP/1.1" 500 151437
+2021-04-01 13:20:42,598 | ERROR | basehttp.py:157| "GET /index HTTP/1.1" 500 151437
+2021-04-01 13:26:22,270 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 151, in profile
+    context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
+NameError: name 'UserProfile' is not defined
+2021-04-01 13:26:22,270 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 151, in profile
+    context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
+NameError: name 'UserProfile' is not defined
+2021-04-01 13:26:22,278 | ERROR | basehttp.py:157| "GET /profile HTTP/1.1" 500 66036
+2021-04-01 13:26:22,278 | ERROR | basehttp.py:157| "GET /profile HTTP/1.1" 500 66036
+2021-04-01 13:27:18,055 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-04-01 13:28:02,448 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 151, in profile
+    context['user_profile'] = UserProfileInfo.objects.filter(user_id=request.user.id).first()
+NameError: name 'UserProfileInfo' is not defined
+2021-04-01 13:28:02,448 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 151, in profile
+    context['user_profile'] = UserProfileInfo.objects.filter(user_id=request.user.id).first()
+NameError: name 'UserProfileInfo' is not defined
+2021-04-01 13:28:02,473 | ERROR | basehttp.py:157| "GET /profile HTTP/1.1" 500 66197
+2021-04-01 13:28:02,473 | ERROR | basehttp.py:157| "GET /profile HTTP/1.1" 500 66197
+2021-04-01 13:28:16,664 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 151, in profile
+    context['user_profile'] = UserProfileInfo.objects.filter(user_id=request.user.id).first()
+NameError: name 'UserProfileInfo' is not defined
+2021-04-01 13:28:16,664 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 151, in profile
+    context['user_profile'] = UserProfileInfo.objects.filter(user_id=request.user.id).first()
+NameError: name 'UserProfileInfo' is not defined
+2021-04-01 13:28:16,686 | ERROR | basehttp.py:157| "GET /profile HTTP/1.1" 500 66197
+2021-04-01 13:28:16,686 | ERROR | basehttp.py:157| "GET /profile HTTP/1.1" 500 66197
+2021-04-01 13:30:35,881 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-04-01 13:31:09,832 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-04-01 13:31:10,095 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-04-01 13:32:08,188 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-04-01 13:32:53,510 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-04-01 13:33:26,621 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-04-01 13:33:39,626 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-04-01 13:34:03,894 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 151, in profile
+    context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
+NameError: name 'UserProfile' is not defined
+2021-04-01 13:34:03,894 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 151, in profile
+    context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
+NameError: name 'UserProfile' is not defined
+2021-04-01 13:34:03,913 | ERROR | basehttp.py:157| "GET /profile HTTP/1.1" 500 66173
+2021-04-01 13:34:03,913 | ERROR | basehttp.py:157| "GET /profile HTTP/1.1" 500 66173
+2021-04-01 13:39:58,022 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-04-01 13:40:07,229 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 152, in profile
+    return render(request,'profile.html',context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\defaulttags.py", line 312, in render
+    return nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\defaulttags.py", line 446, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\urls\base.py", line 87, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\urls\resolvers.py", line 685, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'user_logout' not found. 'user_logout' is not a valid view function or pattern name.
+2021-04-01 13:40:07,229 | ERROR | log.py:224| Internal Server Error: /profile
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 152, in profile
+    return render(request,'profile.html',context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\defaulttags.py", line 312, in render
+    return nodelist.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\defaulttags.py", line 446, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\urls\base.py", line 87, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\urls\resolvers.py", line 685, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'user_logout' not found. 'user_logout' is not a valid view function or pattern name.
+2021-04-01 13:40:07,260 | ERROR | basehttp.py:157| "GET /profile HTTP/1.1" 500 153355
+2021-04-01 13:40:07,260 | ERROR | basehttp.py:157| "GET /profile HTTP/1.1" 500 153355
+2021-04-01 13:41:57,860 | DEBUG | views.py:44| Index
+2021-04-01 13:41:57,866 | INFO | views.py:45| Index 
+2021-04-01 13:41:57,868 | WARNING | views.py:46| warning
+2021-04-01 13:41:57,875 | ERROR | views.py:47| ll
+2021-04-01 14:02:22,223 | DEBUG | views.py:44| Index
+2021-04-01 14:02:22,377 | INFO | views.py:45| Index 
+2021-04-01 14:02:22,388 | WARNING | views.py:46| warning
+2021-04-01 14:02:22,393 | ERROR | views.py:47| ll
+2021-04-01 14:05:40,030 | DEBUG | views.py:223| Now we are in the vacation formss
+2021-04-01 14:05:40,615 | ERROR | log.py:224| Internal Server Error: /vacation_forms/
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 235, in vacation_forms
+    return render(request,'vacation_forms.html',context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loaders\base.py", line 29, in get_template
+    return Template(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader_tags.py", line 270, in do_extends
+    nodelist = parser.parse()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader_tags.py", line 213, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 483, in parse
+    self.unclosed_block_tag(parse_until)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 544, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 4: 'block'. Looking for one of: endblock.
+2021-04-01 14:05:40,615 | ERROR | log.py:224| Internal Server Error: /vacation_forms/
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 235, in vacation_forms
+    return render(request,'vacation_forms.html',context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\engine.py", line 143, in get_template
+    template, origin = self.find_template(template_name)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\engine.py", line 125, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loaders\base.py", line 29, in get_template
+    return Template(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 155, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 193, in compile_nodelist
+    return parser.parse()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader_tags.py", line 270, in do_extends
+    nodelist = parser.parse()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 478, in parse
+    raise self.error(token, e)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 476, in parse
+    compiled_result = compile_func(self, token)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\loader_tags.py", line 213, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 483, in parse
+    self.unclosed_block_tag(parse_until)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\template\base.py", line 544, in unclosed_block_tag
+    raise self.error(token, msg)
+django.template.exceptions.TemplateSyntaxError: Unclosed tag on line 4: 'block'. Looking for one of: endblock.
+2021-04-01 14:05:40,636 | ERROR | basehttp.py:157| "GET /vacation_forms/?id=10 HTTP/1.1" 500 151238
+2021-04-01 14:05:40,636 | ERROR | basehttp.py:157| "GET /vacation_forms/?id=10 HTTP/1.1" 500 151238
+2021-04-01 14:07:24,087 | DEBUG | views.py:223| Now we are in the vacation formss
+2021-04-01 14:07:39,414 | ERROR | views.py:278| Error while saving vacation
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 320, in _query
+    self._do_get_result(db)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 145, in _do_get_result
+    self._result = result = self._get_result()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 352, in _get_result
+    return self._get_db().store_result()
+MySQLdb._exceptions.OperationalError: (1048, "Column 'duration' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 259, in save_vacation
+    vacation.save()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 78, in execute
+    raise IntegrityError(*tuple(e.args))
+django.db.utils.IntegrityError: (1048, "Column 'duration' cannot be null")
+2021-04-01 14:07:43,735 | ERROR | views.py:278| Error while saving vacation
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 206, in execute
+    res = self._query(query)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 320, in _query
+    self._do_get_result(db)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 145, in _do_get_result
+    self._result = result = self._get_result()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\MySQLdb\cursors.py", line 352, in _get_result
+    return self._get_db().store_result()
+MySQLdb._exceptions.OperationalError: (1048, "Column 'duration' cannot be null")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\workbench2\learning\wissam_alahmadieh\src\python-bootcamp\final_project\final_app\views.py", line 259, in save_vacation
+    vacation.save()
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 753, in save
+    self.save_base(using=using, force_insert=force_insert,
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 790, in save_base
+    updated = self._save_table(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 895, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\base.py", line 933, in _do_insert
+    return manager._insert(
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\query.py", line 1254, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\models\sql\compiler.py", line 1397, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\workbench2\learning\wissam_alahmadieh\venv\lib\site-packages\django\db\backends\mysql\base.py", line 78, in execute
+    raise IntegrityError(*tuple(e.args))
+django.db.utils.IntegrityError: (1048, "Column 'duration' cannot be null")
+2021-04-01 14:09:48,086 | DEBUG | views.py:223| Now we are in the vacation formss

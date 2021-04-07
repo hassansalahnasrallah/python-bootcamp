@@ -1,37 +1,36 @@
-{% extends 'base.html'%}
-{% block body_block%}
-<div class="container">
-    <div class="jumbotron">
-	<h2>Welcome back {{user}}</h2> 
-	<form method ="POST" action = "index" >
-		  	<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-        <h1>
-       <table border= '5px'  bordercolor="black" >
-            <thead>
-            <tr>
-            <td>job_position</td> 
-            <td>Date_Of_Birth</td>
-               <td>profile_pic</td>
-                </tr></thead>
-                <tbody>
-           {% for data in form %}
-                  <tr>
-                  <td>{{data.job_position}}</td>
-                  <td>{{data.Date_Of_Birth}}</td>
-                  <td><img src="{{MEDIA_URL}}{{ profile_pic }}"/>{{data.profile_pic}}</td>
-                  </td></tr>
-                  {% endfor %}
-                  </tbody>
-                  </table>
-            </h1>
-        </div>
-    </div>
-</div>
-</div>
-</div>
-<input type="button" onclick="location.href='profile'" value="Change your profile" />
-</form>
-          
+{% extends 'base.html' %}
+	
+{% load static %}
+
+
+
+{%block title%}Welcome{% endblock %}
+
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+	
+
+
+{% block container_block %}
+   <h4 id="python">PYTHON BOOTCAMP</h4>
+   <h1 id="green">Employee Vacation</h1>
+
+  
+
+   <br/>
+   
+   <h5>Your way to add a vacation</h5>
+   <a class="btn btn-success" href="{%url 'user_login' %}" role="button" >Login</a>
+   <p></p>
+   <h6>You don't have an account?!<a href="{%url 'register' %}" >Sign up</a></h6>
+   
+   
+
+         
+{% endblock %}
+
+{% block scripts %}
+
+	
+
 {% endblock %}

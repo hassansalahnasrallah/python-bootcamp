@@ -15,6 +15,8 @@ from django.conf.global_settings import MEDIA_ROOT, MEDIA_URL
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR,"templates")
+STATIC_DIR = os.path.join(BASE_DIR,'static')
+#STATIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_DIR = os.path.join(BASE_DIR, "media")
 
 # Quick-start development settings - unsuitable for production
@@ -72,19 +74,23 @@ TEMPLATES = [
 WSGI_APPLICATION = 'final_project.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'final_project',
-        'USER':'root',
-        'PASSWORD': '12/10/2019',
-        'HOST': 'localhost',
-        'PORT': '3306'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+    # 'default': {
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'final_project',
+        # 'USER':'root',
+        # 'PASSWORD': '12/10/2019',
+        # 'HOST': 'localhost',
+        # 'PORT': '3306'
+    # }
+# }
 
 
 # Password validation
@@ -106,50 +112,62 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LOGGING = {
-    'version':1,
+    'version': 1,
     'disable_existing_loggers': False,
-    'filters':{
-        'require_debug_false':{
-            '()': 'django.utils.log.RequireDebugFalse'}
-            },
-        'formatters':{
-            'simple':{
-                'format': '%(module)s line: %(lineno)s: %(message)s'},
-            'level_app':{
-                'format': '%(asctime)s | %(levelname)s | %(filename)s:%(lineno)s| %(message)s'
-                }
-            },
-        
-        'handlers':{
-            'console':{
-                'level': 'DEBUG',
-                'class': 'logging.StreamHandler',
-                'formatter': 'level_app'
-                },
-            'main_log_file': {
-                'level': 'DEBUG',
-                'class': 'logging.handlers.TimedRotatingFileHandler',
-                'filename': '%s/main.log' %(BASE_DIR),
-                'formatter': 'level_app'
-                }
-            },
-        
-        'loggers':{
-            'django': {
-                'handlers': ['console', 'main_log_file'],
-                'level': 'ERROR',
-                'propagate': True
-                },
-            'requests': {
-                'handlers': ['console', 'main_log_file'],
-                'level': 'INFO',
-                'propagate': True,
-                },
-            '':{'handlers': ['console', 'main_log_file'],
-                'level': 'DEBUG',
-                'propagate': True,
-                }}
+    'filters': {
+        'require_debug_false': {
+            '()':'django.utils.log.RequireDebugFalse' 
         }
+        
+    },
+    'formatters': {
+        'simple': {
+            'format': '%(module)s line: %(lineno)s: %(message)s'   
+        },
+        'level_app': {
+            'formate': '%(asctime)s | %(levelname)s | %(filename)s: %(lineno)s | %(message)s'
+        }
+    },
+    'handlers': {
+        'console': {
+          'level': 'DEBUG',
+          'class': 'logging.StreamHandler',
+          'formatter': 'level_app'  
+        },
+        'main_log_file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': '%s/main.log' % (BASE_DIR),
+            'formatter': 'level_app'
+            
+        }
+        
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate':True 
+            
+        },
+        
+        'requests': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate':True, 
+            
+        },
+        
+        '': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate':True, 
+            
+        }
+        
+    }
+
+}
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -168,13 +186,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
-
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+    STATIC_DIR,
+    ]
 
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
+
 LOGIN_URL = '/login/'

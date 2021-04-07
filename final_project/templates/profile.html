@@ -1,32 +1,95 @@
-{% extends 'base.html'%}
-{% block body_block%}
-<div class="container">
-    <div class="jumbotron">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery UI Datepicker - Format date</title>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    $( "#datepicker" ).datepicker({
-    	dateFormat: 'yy-mm-dd'
-    });})
-  
-  </script>
-</head>
-<body>
-	<form method ="POST">
-		{% csrf_token %}
-		{{profile_form.as_p}}
-		<p>Date_Of_Birth: <input type="text" id="datepicker" size="40" name="Date"></p>
+{% extends 'base.html' %}
+
+
+{% block block3 %} 
+      		<div class="col-6" id="container1">
+      		  <img id="image_1" src="{{MEDIA_URL}}{{user_profile.profile_pic}}" width="300px" alt="Here is an image">
+      		   
+      		</div>
+      		{% endblock %}
+      		
+      
+ {% block container_block %}
+ 
+ 
+<link rel="stylesheet" href="https://formvalidation.io/vendors/formvalidation/css/formValidation.min.css"> 
+ 
+<h1>{{request.user.username}} update your profile here:</h1>
+<form name="profile" id="profile" action="" method="POST">
+	{% csrf_token %}
+	
+	
+	<label>Profile Image:</label>
+	<input type="file" name="profile_img"/>
+	<p></p>
+	
+	<label>Position:</label>
+	<input type="text" name="job_position" value="{{user_profile.job_position}}"/>
+	<p></p>
+	
+	<label>Date of Birth:</label>
+	<input type="text" name="date_of_birth" value="{{user_profile.date_of_birth}}"/>
+	<p></p>
+	
+	<button type="button" id="save_profile" class="btn btn-success">Save</button>
+
+</form>
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+	$(function(){
 		
-		<input type = "submit" name="" value = "Register"/>
-		</form>
-</body>
-</div>
-</div>
+		$("#save_profile").click(function(){
+			 //var form_Data = new FormData();
+			
+			  //formData.append('profile_img', $("input[name=profile_img]")[0].files[0]);
+			  //form_Data.append('date_of_birth', $('input[name=date_of_birth]').val());
+			  //form_Data.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
+			 
+			  //console.log(form_Data);
+			  
+			  	var formData = new FormData();
+			    
+		    	formData.append('profile_img', $('input[name=profile_img]')[0].files[0]); 
+		    	formData.append('date_of_birth', $('input[name=date_of_birth]').val());
+		    	formData.append('job_position', $('input[name=job_position]').val());
+		    	formData.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
+			  
+			  $.ajax({
+					method:"POST",
+					url:"{% url 'save_profile' %}",
+					data: formData,
+			        processData: false,
+			        contentType: false,
+					success: function(response){
+					
+						
+						console.log(response.payload)
+						if(response.status == 'OK'){
+							alert("save success");
+							$("#image_1").attr('src', '{{MEDIA_URL}}'+response.payload.image_url)
+							//var description_id = response.payload.id;
+							//$("input[name=description_id]").val(description_id);
+						}else{
+							if(response.message == "FAIL"){
+								alert("Fail to save");
+							}else if(response.message == "NAME_EXISTS"){
+								alert("This topic already found");											
+							}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
+								alert("You have missing parameters");
+							}
+						}	
+				    }, 
+				    error: function(){
+				    	alert("Error in save")
+					}
+				});
+			 
+		});	
+	});
+
+
+</script>
 {% endblock %}

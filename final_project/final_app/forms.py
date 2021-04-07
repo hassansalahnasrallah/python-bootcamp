@@ -1,5 +1,5 @@
 from django import forms
-from final_app.models import User, UserProfileInfo, Vacation
+from final_app.models import User, UserProfile, Vacation
 from django.contrib.auth.models import User
 from tkinter.test.support import widget_eq
 from final_app import models
@@ -21,14 +21,14 @@ class UserForm(forms.ModelForm):
 class UserProfileInfoForm(forms.ModelForm):
     
     class Meta():
-        model = UserProfileInfo
-        fields = ('job_position' , 'profile_pic' )
+        model= UserProfile
+        fields=('job_position', 'profile_pic', 'date_of_birth')
         
         
         
         
         
-class vacation(forms.ModelForm):
+class VacationForm(forms.ModelForm): 
     class Meta():
-        model = Vacation
-        fields = ('description',)
+        model = Vacation   
+        fields ='__all__'

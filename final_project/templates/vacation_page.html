@@ -1,0 +1,261 @@
+{% extends 'base.html' %}
+{% load static  %}
+
+
+
+
+{% block block2 %}
+<h1 style="font: italic 30pt Impact;">VACATION TABLE</h1>
+
+{% csrf_token %}
+<div class="col-sm-12 d-flex">
+		<button class="btn btn-success"  ><a href="{% url 'vacation_forms' %}" id= "add">Add Vacation</a></button>
+</div>
+<br/>
+<div class="col-sm-12">
+<table id= "vacation_table" class= "table  row-border cell-border compact" style="width:100%;">
+	<thead>
+		<tr>
+			<th>Description</th>
+			<th>Date from</th>
+			<th>Date to</th>
+			<th>Duration</th>
+			<th>Status</th>
+			<th>Action</th>	
+		</tr>
+	</thead>
+	<tbody>
+	
+	</tbody>
+	<tfoot>
+		<tr>
+			<th style="width:140px;" data-searchable="true" >Description</th>
+			<th style="width:140px;" data-searchable="false" >Date from</th>
+			<th style="width:140px;" data-searchable="false" >Date to</th>
+			<th style="width:140px;" data-searchable="true" >Duration</th>
+			<th style="width:140px;" data-searchable="false" >Status</th>
+			<th style="width:140px;" data-searchable="false">Actions</th>
+		</tr>
+	</tfoot>
+</table>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="vacation_status_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Vacation Status</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to update?</p>
+        <input name="vacation_id" type="hidden" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="update_status" class="btn btn-success">Update</button>
+        <button type="button" id="hide_modal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" id="delete_vacation_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Vacation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete?</p>
+        <input name="vacation_id" type="hidden" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="delete_vacation" class="btn btn-success">Delete</button>
+        <button type="button" id="close_modal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block scripts %}	
+
+<link rel="stylesheet" href= "{% static 'css/table_page.css' %}">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<script>
+	function format ( d ) {
+	    var div = $('<div/>')
+	        .addClass( 'loading' )
+	        .text( 'Loading...' );
+	 
+	    div.load("{% url 'vacation_details' %}?id="+d.id)
+	    return div;
+	}
+
+	$(function(){
+		
+		var vacay_table = $('#vacation_table').DataTable({
+			
+			responsive: true,
+
+			ajax: {
+				url: '{% url "vacation_grid" %}',
+				type: 'POST',
+				data: function(d){
+					d.csrfmiddlewaretoken = $("input[name=csrfmiddlewaretoken]").val(),
+					d.user_id = "{{request.user.id}}"
+					
+				}
+			},
+
+			lengthMenu: [1, 5, 10, 25, 50 ],
+			
+			pageLength: 5,
+			
+			processing: true,
+			serverSide: true,
+			
+			columns: [
+				
+				{'data': 'description', 'name': 'description', 'sortable':true},
+				{'data': 'date_from', 'name': 'date_from', 'sortable':true},
+				{'data': 'date_to', 'name': 'date_to', 'sortable':true},
+				{'data': 'duration', 'name': 'duration', 'sortable':true},
+				{'data': 'status', 'name': 'status'},
+				{'data': 'action'}
+				
+				],
+			
+				"order": [[1, 'asc']],
+			columnDefs: [
+				{
+					targets: -1, //or 3
+					title: 'Actions',
+					render: function(data, type, full, meta){
+						var edit_url = "{% url 'vacation_forms' %}?id=" + full.id;
+						return "<a href='"+edit_url+"' <button class='btn btn-success btn-sm btn-edit' type='button' data-id="+full.id+"><i class='fa fa-edit'></i></button></a> <button class='btn btn-success btn-sm btn-update' type='button' data-id="+full.id+"><i class='fa fa-check' aria-hidden='true'></i></button> <button class='btn btn-success btn-sm btn-delete' type='button' data-id="+full.id+"><i class='fa fa-trash' aria-hidden='true'></i></button>"
+					}
+					
+				}
+			],
+			
+			createdRow: function(row, data, dataIndex){
+				console.log(data)
+				if(data['status'] == "Active"){
+					$(row).css({'background-color': "white"})
+				}else{
+					$(row).css({'background-color': "#ff5656"})
+				}
+			}
+		});
+		
+		$("#vacation_table tfoot th[data-searchable=true]").each(function(){
+			var title = $(this).text();
+			$(this).html('<input type="text" placeholder="Search '+title+'"/>');
+		});
+		
+		vacay_table.columns().every(function(){
+			var column = this;
+			$('input',this.footer()).on('change',function(){
+				if(column.search()!== this.value){
+					column.search(this.value).draw();
+				}
+			})
+		})
+		
+		$("#vacation_table tbody").on('click', '.btn-update', function(){
+			//show dialog
+			console.log(2)
+			$("#vacation_status_modal").show();
+			$("input[name=vacation_id]").val($(this).attr('data-id'));
+		});
+		
+		$("#hide_modal").click(function(){
+				
+				$("#vacation_status_modal").hide();
+		});
+		
+		$("#update_status").click(function(){
+			$.ajax({
+				type:"POST",
+				url: "{% url 'update_status' %}",
+				data:{
+					vacation_id: $("input[name=vacation_id]").val(),
+					csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+				},
+				dataType: 'json',
+				success: function(response){
+					console.log(response)
+					
+					if(response.status == 'OK'){
+						toastr.success('Vacation status updated');
+						vacay_table.ajax.reload(); 
+						$("#vacation_status_modal").hide();
+					}else{
+						if(response.message == "VACATION_NOT_FOUND"){
+							toastr.error('Vacation not found')										
+						}
+					}	
+			    }, 
+			    error: function(){
+			    	toastr.error('An Error Has Occured')
+				}
+			});
+		});
+		
+		
+		$("#vacation_table tbody").on('click', '.btn-delete', function(){
+			
+			$("#delete_vacation_modal").show();
+			$("input[name=vacation_id]").val($(this).attr('data-id'));
+		});
+		
+		 $("#close_modal").click(function(){
+			
+			$("#delete_vacation_modal").hide();
+		 });
+		 
+		 $("#delete_vacation").click(function(){
+				$.ajax({
+					type:"POST",
+					url: "{% url 'delete_vacation' %}",
+					data:{
+						vacation_id: $("input[name=vacation_id]").val(),
+						csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+					},
+					dataType: 'json',//json bcz data is dictionary
+					success: function(response){
+						console.log(response)
+						
+						if(response.status == 'OK'){
+							toastr.success('Vacation deleted successfuly');
+							vacay_table.ajax.reload(); //to auto update table on success
+							$("#vacation_status_modal").hide();
+						}else{
+							if(response.message == "VACATION_NOT_FOUND"){
+								toastr.error('Vacation not found')											
+							}
+						}	
+				    }, 
+				    error: function(){
+				    	toastr.error('An Error Has Occured')
+					}
+				});
+			});
+		
+	});
+
+</script>
+
+
+{% endblock %}

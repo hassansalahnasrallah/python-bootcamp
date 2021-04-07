@@ -1,23 +1,27 @@
-{% extends 'base.html'%}
-{% block body_block %}
-  <div class="container">
-    <div class="jumbotron">
+  
+{% extends 'base.html' %}
 
-        <form method="post" action="{% url 'login' %}">
-          {% csrf_token %}
-          <h1>Please Login</h1>
-          <label for="username">Username:</label>
-          <input type="text" name="username" placeholder="Username">
-          <label for="password">Password:</label>
-          <label for="password"></label>
-          <input type="password" name="password">
-		  <input type = "submit" name="" value = "login"/>
-		  </br>
-          </br>
-          </br>
-		  <input type="button" onclick="location.href='register';" value="register here" />
-		</form>
-	</div>
-</div>
+{%block title%}Login{% endblock %}
+
+{% block container_block %}
+
+
+	<form method="post" action="{% url 'user_login'%}">
+		{% csrf_token %}
+		{% if user.is_authenticated %}
+        	<h1>Welcome {{request.user.username}}</h1>
+     	{% else %}
+     		<label>Username:</label>
+			<input type="text" name="username" placeholder="Username"/>
+		    <p></p>
+		    <label>Password:</label>
+			<input type="password" name="password" placeholder="Password" />
+		    <p></p>
+			<input type="submit" value="login"/>
+     	{% endif %}  
 		
+	
+	</form>
+
+
 {% endblock %}

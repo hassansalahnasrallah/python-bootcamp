@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+
+
+{%block title%}Home page{% endblock %}
+
+{% block container_block %}
+
+	<h1 >Vacations Table</h1>
+	
+    	<table class= "table table-bordered" >
+
+    			<tr>
+    				<th scope="col">Number</th>
+    				<th scope="col">Vacation Info</th>
+    				
+    			</tr>
+    			
+    		</thead>
+	        
+	        
+	        <tbody>
+	        	<tr>
+	        		<th scope="row">1</th>
+	        		<td>
+	        		<a class="btn btn-dark" href="{% url 'vacation_forms' %}" role="button" >Add vacation</a>
+	        		</td>
+	        
+	        	</tr>
+	        	
+	        	<tr>
+	        		<th scope="row">2</th>
+	        		<td>
+	        		<a class="btn btn-dark" href="{% url 'vacation_forms' %}" role="button" >Add vacation</a>
+	        		</td>
+	        
+	        	</tr>
+	        	
+	        	
+	        	<tr>
+	        		<th scope="row">3</th>
+	        		<td>
+	        		<a class="btn btn-dark" href="{% url 'vacation_forms' %}" role="button" >Add vacation</a>
+	        		</td>
+	        
+	        	</tr>
+	        	
+            </tbody>
+   		</table>
+
+         
+{% endblock %}

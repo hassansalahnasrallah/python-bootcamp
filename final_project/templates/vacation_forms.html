@@ -1,48 +1,187 @@
-{% extends 'base.html'%}
-{% block body_block %}
-<link rel="stylesheet"href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-<div class="container">
-    <div class="jumbotron">
-	<h2> this is your vacation {{user}} </h2> 
-	<form method ="POST" action = "vacation_forms" >
-		  	<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-        
-           
-            <table id="vacation_table">
-            <thead>
-            <tr>
-            <td>description</td> 
-            <td>date_from</td>
-               <td>date_to</td>
-                </tr></thead>
-                <tbody>
-                   {% for data in form %}
-                   <tr>
-                  <td>{{data.description}}</td>>
-                  <td>{{data.date_from}}</td>
-                  <td>{{data.date_to}}</td>
-                  <td> <a href= "{% url 'vacation'%}?id={{data.id}}">Edit</a>
-                  </td></tr>
-                  {% endfor %}
-                  </tbody>
-                  </table>
-                 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-            <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-        </div>
-    </div>
-</div>
-</div>
-</div>
-<script>
-    $(document).ready(function(){
-        $('#vacation_table').DataTable();
-    });
-</script>
+{% extends 'base.html' %}
 
-<input type="button" onclick="location.href='vacation';" value="add vacation" />
+
+ {% block container_block %}
+ 
+ 
+<link rel="stylesheet" href="https://formvalidation.io/vendors/formvalidation/css/formValidation.min.css"> 
+ 
+<h4>{% if vacation.id %}Edit{% else %}Add{% endif %} Vacation</h4>
+
+<form name="vacation_forms" id="vacation_forms" action="{% url 'save_vacation' %}" method="POST">
+	{%csrf_token%}
+	
+	<div class="row form-group">
+		<label class="col-sm-12">Description</label>
+		<div class="col-sm-12">
+			<input name="description" class="form-control" value="{{vacation.description}}" placeholder="Description" required>
+		</div>
+	</div>
+	
+	<div class="row form-group">
+		<label class="col-sm-12">Date From</label>
+		<div class="col-sm-12">
+			<input id="date_from" name="date_from" class="form-control" value="{{vacation.date_from|date:'d/m/Y'}}" placeholder="date from" />
+		</div>
+	</div>
+	
+	<div class="row form-group">
+		<label class="col-sm-12">Date To</label>
+		<div class="col-sm-12">
+			<input id="date_to" name="date_to" class="form-control" value="{{vacation.date_to|date:'d/m/Y'}}" placeholder="date to"  />
+		</div>
+	</div>
+	
+	<div class="row form-group">
+		<label class="col-sm-12">Duration <small>(per days)</small></label>
+		<div class="col-sm-12">
+			<input name="duration" readonly class="form-control" value="{{vacation.duration}}" placeholder="Duration" >
+		</div>
+	</div>
+	
+	<input type="hidden" name="vacation_id" value="{{vacation.id}}">
+	
+	<br/>
+	<button type="button" id="save_vacation" class="btn btn-success">Save</button>
+	
+	<p></p>
+	<a href="{% url 'vacation_page' %}" class="btn btn-success" >Vacation table</a>
 </form>
+
+{% endblock %}
+
+{% block scripts %}
+	  
+<script>
+	$(function(){
+		
+		$("#date_from").datepicker({
+			'format': "dd/mm/yyyy",
+			 startDate: new Date(),
+		}).on('changeDate', function(ev) {
+		    //Get actual date objects from both
+		    var dt1 = $('#date_from').data('datepicker').viewDate;
+		    var dt2 = $('#date_to').data('datepicker').viewDate;
+		    if (dt2 < dt1) {
+		        //If #dateEnd is before #dateStart, set #dateEnd to #dateStart
+		        $('#date_to').datepicker('update', $('#date_from').val());
+		    }
+		    //Always limit #dateEnd's starting date to #dateStart's value
+		    $('#date_to').datepicker('setStartDate', $('#date_from').val());
+		    
+		    calculationDuration();
+		});
+		
+		$("#date_to").datepicker({
+			'format': "dd/mm/yyyy",
+			startDate: new Date(),
+		}).on('changeDate', function(ev) {
+		    //Get actual date objects from both
+		    var dt1 = $('#date_from').data('datepicker').viewDate;
+		    var dt2 = $('#date_to').data('datepicker').viewDate;
+		    if (dt2 < dt1) {
+		        //If #dateEnd is before #dateStart, set #dateEnd to #dateStart
+		        $('#date_to').datepicker('update', $('#date_from').val());
+		    }
+		    //Always limit #dateEnd's starting date to #dateStart's value
+		    $('#date_to').datepicker('setStartDate', $('#date_from').val());
+		    
+		    calculationDuration();
+		});
+		
+		$("#date_from").change(function(){
+			calculationDuration();
+		});
+		
+		$("#date_to").change(function(){
+			calculationDuration();
+		});
+		
+		$("#vacation_forms").validate({
+			  rules: {
+				  description: {
+			      	required: true,	      
+			      },
+			      date_from: {
+			    	  required: true,
+			      },
+			      date_to: {
+			    	  required: true,
+			      },
+			      duration: {
+			    	  required: true,
+			      }
+			  },
+			  
+			  messages: {
+				  description: {
+					  required: "Description is required" 
+				  },
+				  date_from:{
+					  required: "Date from is required"
+				  },
+				  date_to: {
+			    	  required: "Date to is required"
+			      },
+			      duration: {
+			    	  required: "Duration is required",
+			      }
+				  
+			  },
+			  submitHandler: function(){
+				  
+				  $.ajax({
+						type:"POST",
+						url: $("form[name=vacation_forms]").attr('action'),
+						data:{
+							description: $("input[name=description]").val(),
+							date_from: $("input[name=date_from]").val(),
+							date_to: $("input[name=date_to]").val(),
+							duration: $("input[name=duration]").val(),
+							vacation_id: $("input[name=vacation_id]").val(),
+							csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+						},
+						dataType: 'json',
+						success: function(response){
+							console.log(response)
+							
+							if(response.status == 'OK'){
+								toastr.success('Vacation Saved')
+								var vacation_id = response.payload.id;
+								$("input[name=vacation_id]").val(vacation_id);
+							}else{
+								if(response.message == "VACATION_NOT_FOUND"){
+									toastr.error('Vacation not found')
+								}else if(response.message == "NAME_EXISTS"){
+									alert("This topic already found");											
+								}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
+									alert("You have missing parameters");
+								}
+							}	
+					    }, 
+					    error: function(){
+					    	alert("Error in save")
+						}
+					});
+			  }
+		});
 		
 		
+		$("#save_vacation").click(function(){
+			$("#vacation_forms").submit();
+		});
+	});
+	
+	function calculationDuration(){
+		var date_from = $("#date_from").data('datepicker').viewDate;
+		var date_to = $("#date_to").data('datepicker').viewDate;
+		
+		if(date_from && date_to){
+			var duration = moment(date_to).diff(moment(date_from), 'days');
+			
+			$("input[name=duration]").val(duration);
+		}
+		
+	}
+</script>
 {% endblock %}

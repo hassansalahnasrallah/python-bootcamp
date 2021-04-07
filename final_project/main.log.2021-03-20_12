@@ -1,0 +1,3 @@
+2021-03-20 11:21:09,708 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-20 11:21:35,647 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
+2021-03-20 11:30:11,518 | DEBUG | proactor_events.py:623| Using proactor: IocpProactor
