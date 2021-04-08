@@ -4,12 +4,19 @@
 
 {% block container %}
 <style>
-.col-6{
-	width:100%;
-}
+
+/*
+#first_first{
+	background-color : #f8f9fa!important;
+	min-width:500px!important;
+	margin-top:40px;
+	
+}*/
 #ImageDisplay{
-	width:240px;
-	height:430px;
+	min-width:570px;
+	max-height:auto;
+	margin-left:0;
+	margin-top:80px;
 }
 #SignUpForm{
 	width:400px!important;
@@ -18,12 +25,19 @@
 }
 #next{
 	background-color : #f8f9fa!important;
+	min-width:500px;
+	min-height:430px;
 	/*width:800px!important;*/
 	/*max-width:100%;*/
 }
 #first{
 	padding:0;
+   
+    min-width:240px;
+	/*min-height:430px;*/
+
 }
+
 
 /*
 .container{
@@ -49,10 +63,10 @@
 <input type="submit" class="btn btn-dark" value="SignUp"/>
 </form>
 
-<script>
+<!--<script>
 $("#next").removeClass("col-4");
 $("#next").addClass("col-6");
 $("#first").removeClass("col-6");
 $("#first").addClass("col-4");
-</script>
+</script>-->
 {% endblock %}

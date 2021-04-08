@@ -3,16 +3,24 @@
 {% block container %}
 <style>
 .col-4{
-	width:50%!important;
+	width:100%!important;
 	padding-top:10px;
 	padding-bottom:10px;
 	padding-right:auto;
 	padding-left:auto;
+
+	flex: 0 0 96%;
+    max-width: 100%;
 	
-	
+}
+h2,label{
+	  color:bisque;
 }
 
 </style>
+<h2>Add Vacation:</h2>
+<br>
+<br>
 <form method="POST" name="HomePageView" action="{% url 'savedHomePage' %}">
 <table>
 {% csrf_token %}
@@ -26,10 +34,9 @@
 <td><label>DateTo:</label></td>
 <td><input id="date_to" name="dateto" value="{{userid.datetimeto|date:'Y-m-d'}}"></td></tr>
 <tr>
-<td><label>Duration:</label></td>
+<td><label>Duration<small>(per days)</small>:</label></td>
 <td><input type="text" name="duration_field" id="durationField" value="{{userid.Duration}}" readonly></td>
 </tr>
-<tr><td colspan="2"><button type="button" id="ButtonCal">CalculateDuration</button></td></tr>
 
 <input type="hidden" name="idOfVaca" value="{{userid.id}}">
 

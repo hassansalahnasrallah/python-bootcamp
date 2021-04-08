@@ -4,6 +4,7 @@
 {% load static %}
 {% block container %}
 <style>
+
 p{
 	margin-bottom:0;
 }
@@ -25,6 +26,6 @@ p{
 <a  href="{% url 'userLogin' %}" ><button type="button" class="btn-success ms-4 mt-4" style="width:90px;">LOGIN</button></a>
 </div>
 <div >
-<p class="mt-4 ms-4">Don't have an account?<a href="{% url 'register' %}" class="ChangeColor"> Sign up</a></p>
+<p class="mt-4 ms-4 mb-3">Don't have an account?<a href="{% url 'register' %}" class="ChangeColor"> Sign up</a></p>
 </div>
 {% endblock %}

@@ -4,11 +4,17 @@
 {% block container %}
 <style>
 
+#ImageDisplay{
+	min-width:570px;
+	max-height:auto;
+	margin-left:0;
+	margin-top:80px;
+}
 #next{
 	margin:0;
 	background-color : #f8f9fa!important;
 	padding-top:20px;
-	
+
 	/*padding-bottom:auto;
 	padding-right:auto;
 	padding-left:auto;*/
@@ -39,14 +45,7 @@
 </tr>
 </table>
 <input type="submit" value="LogIn">
-{% if registered_user == False %}
-<script>
-alert("Invalid Login Dettails")
-</script>
-{% endif %}
-{% if active_user == False %}
-<label readonly>your account isnt active</label>
-{% endif %}
+
 
 </form>
 <label class="mb-5" style="background-color : #f8f9fa!important ;"></label>

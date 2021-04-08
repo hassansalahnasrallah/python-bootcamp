@@ -10,13 +10,34 @@
 .col-4{
 	width:100%!important;
 	padding-top:10px;
-	
+	background-color : #f8f9fa!important;
+	flex: 0 0 96%;
+    max-width: 100%;
 	
 	
 }
 #vacation_grid_wrapper{
 	width:990px!important;
 }
+.modal-header{
+	display: -ms-flexbox;
+}
+table {
+    border-collapse: collapse;
+}
+
+table td {
+    border: 1px solid #333;
+}
+
+/*
+td.details-control {
+    background: url('https://datatables.net/examples/resources/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
+}*/
 
 </style>
 <!--
@@ -27,7 +48,7 @@
 	background-color : #f8f9fa!important;
 	
 }
-/*
+
 table {
     border-collapse: collapse;
 }
@@ -35,29 +56,87 @@ table {
 table td {
     border: 1px solid #333;
 }
+
 a {
 	text-align:center;
-}*/
+}
 </style>-->
-
-<table id="vacation_grid" data-url="{% url 'vacation_grid' %}">
+<div align="center">
+<a  href="{% url 'HomePageView' %}" ><button type="button">Add Vacation</button></a>
+</div>
+<table id="vacation_grid" data-url="{% url 'vacation_grid' %}" class="responsive nowrap" width="100%">
 {% csrf_token %}
 <thead>
 <tr>
 <th>Description</th>
-
+<th>datetimefrom</th>
+<th>datetimeto</th>
+<th>Duration</th>
+<th>Status</th>
+<th>Actions</th>
 </tr>
 </thead>
 <tbody>
 </tbody>
-
+<tfoot>
+<tr>
+<th style="width:140px;" data-searchable="true">Description</th>
+<th style="width:140px;" data-searchable="true">datetimefrom</th>
+<th style="width:140px;" data-searchable="true">datetimeto</th>
+<th style="width:140px;" data-searchable="true">Duration</th>
+<th style="width:140px;" data-searchable="false">status</th>
+<th style="width:140px;" data-searchable="false">Actions</th>
+</tr>
+</tfoot>
 </table>
 
 <br>
-<div align="center">
-<a  href="{% url 'HomePageView' %}" ><button type="button">Add Vacation</button></a>
-</div>
+
 <br>
 
+<div class="modal" role="dialog" id="modal_update" >
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+       <h4 class="modal-title me-auto">Update Vacation Status</h4>
+          <button type="button" class="btn-close" id="btnclose" >
+        </button>
+       
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to update?</p>
+          <input name="vacation_Id" type="hidden" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="update_status" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-default" id="close_status" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
+<div class="modal" role="dialog" id="modal_delete" >
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+       <h4 class="modal-title me-auto">Delete Vacation</h4>
+          <button type="button" class="btn-close" id="btn_close_delete" >
+        </button>
+       
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this record?</p>
+          <input name="vacation_id" type="hidden" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="Delete_status" class="btn btn-primary">Yes</button>
+          <button type="button" class="btn btn-default" id="NDelete_status" data-dismiss="modal">No</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 {% endblock %}

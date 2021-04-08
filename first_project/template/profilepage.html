@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}ProfilePage{% endblock %}
+{% load static %}
 {% block container %}
 <style>
 .col-4{
@@ -7,10 +8,20 @@
 	padding-top:10px;
 	padding-bottom:10px;
 	
+	
+}
+h2,label{
+	 color:bisque;
+}
+.btn{
+	background-color:#212529;
 }
 </style>
 
 <h2>Update your profile:</h2>
+<div >
+  <img src="{% static 'IMAGE/profile__image.png' %}" style="height:150px;border-radius: 50%; border: 10px solid black;">
+</div>
 <br>
 <form method="POST" name="ProfilePageView"  action="{% url 'SaveProfile' %}" id="ProfilePage">
 <table>
