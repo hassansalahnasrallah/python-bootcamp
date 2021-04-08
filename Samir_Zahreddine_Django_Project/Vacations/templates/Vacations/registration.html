@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
 
@@ -27,33 +28,47 @@
         }
 
         .div-1 {
-            width: 50%;
-            padding-left: 150px;
-            align-content: center;
+            color: black;
+            font: size 24px;
+
+        }
+
+        a {
+            color: black;
+        }
+
+        footer {
+            padding: 0 !important;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6%;
+            z-index: 999;
+            background-color: white;
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-        <div class="container">
-            <ul class="nav navbar-nav">
-                <li><a>Registration Form</a></li>
-                <li><a></a></li>
-                <li><a href="{% url 'index' %}">Profile </a></li>
-                <li><a href="{% url 'form_VacationForm' %}">Add vacation</a></li>
-                <li><a href="{% url 'vacation_list' %}">Vacation List</a></li>
-                <li><a>&nspar; &ThinSpace;</a></li>
-                <li class="form-inline15"><a href="{% url 'logout_request' %}">Logout</a></li>
-        </div>
+        <ul class="nav navbar-nav">
+            <li><a class="nav-link">Registration</a></li>
+            <li><a></a></li>
+            <li><a class="nav-link" href="{% url 'index' %}">Home </a></li>
+            <li><a class="nav-link" href="{% url 'form_VacationForm' %}">Vacations</a></li>
+            <li><a class="nav-link" href="{% url 'vacation_list' %}">Profile</a></li>
+            <li><a class="nav-link">&nspar; &ThinSpace;&ThinSpace;&ThinSpace;</a></li><a>
+                <li class="form-inline"><a class="nav-link" href="{% url 'logout_request' %}">Logout</a></li>
+                </div>
         </ul>
         </div>
     </nav>
 
-    <h1 class="container mt-5 w-50" style='color:aliceblue;'> Signup Form:</h1>
+    <h4 class="container mt-5 w-50" style='color:aliceblue;'> Signup Form:</h4>
     <div class='div-1'>
-        <div class="jumbotron container mt-10 w-20" style=" background: rgba(80, 182, 156, 0.39);">
+        <div class="jumbotron container mt-10 w-20" style=" background: rgba(76, 192, 163, 0.39);">
             <div class="form-group">
                 {% if registered %}
 
@@ -73,102 +88,106 @@
         </div>
     </div>
     {% endif %}
-    <footer>
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-
-            <p class="text-white">Samir Zahreddine Django Project</p>
-        </div>
-        <!-- Copyright -->
-    </footer>
-
-
-    <script type="text/javascript">
-       // var validator = $("#form-1").validate();
-        //validator.form();
 
 
 
-        $(document).ready(function () {
-            $('#form-1').validate({
-                rules: {
-                    username: {
-                        required: true,
-                        minlength: 4,
-                        maxlength: 15
-                    },
-                    email: {
-                        required: true,
-                    },
-                    password: {
-                        required: true,
-                        minlength: 4,
-                        maxlength: 15,
-                    },
-                    position: {
-                        required: true,
-                        minlength: 4,
-                        maxlength: 15
-                    },
-                },
-                messages: {
-                    username: {
-                        required: "Please Enter your username."
-                    },
-
-                    email: {
-                        required: " Please Enter your valid email."
-                    },
-
-                    password: {
-                        required: "Please Enter a valid password.",
-                      //  minlengthl: jQuery.validator.format("Please, at least 4 characters are necessary")
-                    },
-
-                    position: {
-                        required: "Please Enter your position."
-                    },
-
-                    date_of_birth: {
-                        required: "Please Enter your date of birth."
-                    },
-                },
-        
-            });
-        });
-
-
-        // catch the form's submit event
-        $('#form-1').keyup(function () {
-            // create an AJAX call
-            $.ajax({
-                data: $(this).serialize(), // get the form data
-                url: "{% url 'validate_username' %}",
-                // on success
-                success: function (response) {
-                    if (response.is_taken == true) {
-                        $('#form-1').removeClass('is-valid').addClass('is-invalid');
-                        $('#form-1').after(
-                            '<div class="invalid-feedback d-block" style= "color: white;" id="usernameError">* username or email are not available!</div>'
-                        )
-
-                        $('#form-1').removeClass('is-valid').addClass('is-invalid');
-                        $('#form-1').after(
-                            '<div class="invalid-feedback d-block" style= "color: white;" id="usernameError">* username or email are not available!!</div>'
-                        )
-                    } else {
-                        $('#form-1').removeClass('is-invalid').addClass('is-valid');
-                        $('#usernameError').remove();
-                    }
-                },
-                // on error
-                error: function (response) {
-                    // alert the error if any error occured
-
-                    console.log(response.responseJSON.errors)
-                }
-            });
-            return false;
-        });
-   
-    </script>
 </body>
+<footer class="text-center text-black ">
+
+
+    <div class="text-center py-3" style="background-color:white;">
+        <p> Samir Zahreddine Django Project </p>
+    </div>
+
+</footer>
+</div>
+
+
+<script type="text/javascript">
+    window.onload = function () {
+        alert("Please enter valid details.");
+
+    };
+
+    $(document).ready(function () {
+        $('#form-1').validate({
+            rules: {
+                username: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 15
+                },
+                email: {
+                    required: true,
+                },
+                password: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 15,
+                },
+                position: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 15
+                },
+            },
+            messages: {
+                username: {
+                    required: "Please Enter your username."
+                },
+
+                email: {
+                    required: " Please Enter your valid email."
+                },
+
+                password: {
+                    required: "Please Enter a valid password.",
+                    //  minlengthl: jQuery.validator.format("Please, at least 4 characters are necessary")
+                },
+
+                position: {
+                    required: "Please Enter your position."
+                },
+
+                date_of_birth: {
+                    required: "Please Enter your date of birth."
+                },
+            },
+
+        });
+    });
+
+
+    // catch the form's submit event
+    $('#form-1').keyup(function () {
+        // create an AJAX call
+        $.ajax({
+            data: $(this).serialize(), // get the form data
+            url: "{% url 'validate_username' %}",
+            // on success
+            success: function (response) {
+                if (response.is_taken == true) {
+                    $('#form-1').removeClass('is-valid').addClass('is-invalid');
+                    $('#form-1').after(
+                        '<div class="invalid-feedback d-block" style= "color: white;" id="usernameError">* username or email are not available!</div>'
+                    )
+
+                    $('#form-1').removeClass('is-valid').addClass('is-invalid');
+                    $('#form-1').after(
+                        '<div class="invalid-feedback d-block" style= "color: white;" id="usernameError">* username or email are not available!!</div>'
+                    )
+                } else {
+                    $('#form-1').removeClass('is-invalid').addClass('is-valid');
+                    $('#usernameError').remove();
+                }
+            },
+            // on error
+            error: function (response) {
+                // alert the error if any error occured
+
+                console.log(response.responseJSON.errors)
+            }
+        });
+        return false;
+    });
+</script>

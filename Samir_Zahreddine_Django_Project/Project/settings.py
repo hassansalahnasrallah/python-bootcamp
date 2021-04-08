@@ -37,6 +37,7 @@ DEBUG = True
 
 #DEBUG = lsettings.get('DEBUG',False)
 ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['samirzd.pythonanywhere.com']  --> readd when updating setting in host
 
 
 # Application definition

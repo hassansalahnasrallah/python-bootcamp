@@ -101,7 +101,7 @@ def register(request):
                 profile.save()
                 log.debug("Profile saved successfully for user: %s", user)
                 registered = True
-                return render(request, 'Vacations/newLogin.html')
+                return render(request, 'Vacations/login.html')
                 return render('vacations.login.html', message='Save complete')
 
             # else:
@@ -155,9 +155,9 @@ def user_login(request):
 
     else:
       
-        return render(request, 'Vacations/newLogin.html', context)
+        return render(request, 'Vacations/login.html', context)
   
-    return render(request, 'Vacations/newLogin.html', context)
+    return render(request, 'Vacations/login.html', context)
 
 
 @login_required
@@ -181,7 +181,7 @@ def logout_request(request):
 
     logout(request)
     log.debug("user logged out%s",request.user.id)
-    return render(request, 'Vacations/newLogin.html')
+    return render(request, 'Vacations/login.html')
 
 
 def validate_username(request):
@@ -204,7 +204,7 @@ def jsTest(request):
     context={}
     emp = EmployeeProfile.objects.all()
     context  ['emp'] =  emp
-    return render(request,'Vacations/newIndex.html',context)
+    return render(request,'Vacations/web_page.html',context)
 
 
 

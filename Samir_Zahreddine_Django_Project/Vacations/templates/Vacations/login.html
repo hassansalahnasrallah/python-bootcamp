@@ -1,3 +1,5 @@
+{% extends "Vacations/base.html" %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,42 +12,96 @@
  
 <title>{%block title %} {% endblock %}</title>
 
+
+{% block container_block %}
+
 <style>
+  *{
+ 
+    padding: 0;
+    margin: 0;
+    }
   body{
-    margin: 0 auto;
-    width:80% ; /* value of your choice which suits your alignment */
+    margin: 0 ;
+    width:100% ; /* value of your choice which suits your alignment */
     align-items: center;
+    background-color: #209171;
+    
   }
+  footer{
+  
+    padding: 0 !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 6%;
+    width: 100%;
+    z-index: 999;
+   }
+  
+  #div1{
+    background-color: #126950;
+    
+  }
+  img{
+    border-radius: 50%;
+    border-radius: 4px;
+    padding: 10px;
+    width: 85px;
+  }
+  .jumbotron{
+  
+    background-color: #126950;
+
+  }
+  #items {
+    background-color: white;
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+    
+  }
+
+
 </style>
 
 </head>
 <body>
-{% block container_block %}
-
+<br/><br/>
 <div class="jumbotron">
-<div class="form-group">
-  <div class="container center_div">
-    <p>Please Login to Add a Vacation:</p>
 
+  <div id='div-1' class=" jubmotron container center_div ">
+ 
+<div id='items' class="jubmotron">
+    <img src="{% static '/images/default.png' %}" />
+    <p>PYTHON BOOTCAMP</p>
+    <h1 style="color: #209171;">Employee Vacataion</h1>
+    <p>Your way to add a vacation</p>
     <form method="POST" action="{% url 'user_login' %}">
-  
-  {% csrf_token %}
-  
-  {{employee_name}}
-  <label>username: </label>
-  <input type="text" name="username" placeholder="username" /><br>
-  <label>Password: </label>
-  <input type="password" name="password" placeholder="password" /><br>
+      <div  class="form-group">
+      {% csrf_token %}
+      <p>username: </p>
+      <input type="text" name="username" placeholder="username" /><br>
+      <p>Password: </p>
+      <input type="password" name="password" placeholder="password" /><br/>
 
-  <input  type="submit" value="login" class="btn btn-primary" />
+      <input type="submit" value="login" class="btn btn-success" /><p></p>
 
-</form>
-<hr>
-<p>Not a user yet? <a href="{% url 'register' %}">register</a></p>
+    </form>
+
+<p>Not a user yet? <a href="{% url 'register' %}">register</a></p><p>&nbsp;</p>
 </div>
 </div>
 </div>
+</div>
+
+</body>
+<footer class="text-center text-black bottom-fixed " style="background-color: white;">
+  <div class="text-center py-3">
+    <p> Samir Zahreddine Django Project </p>
+  </div>
+</footer>
 {% endblock %}
 
 
-</body>
