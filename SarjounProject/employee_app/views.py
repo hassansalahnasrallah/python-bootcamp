@@ -46,7 +46,7 @@ def Login(request):
 
 def Signup(request):
     """
-    
+    Signup form
     """
     try:
         signup_form = forms.FormSignup()
@@ -58,6 +58,8 @@ def Signup(request):
                 user.set_password(user.password)
                 user.save()
                 log.debug("You have  registered successfully " )
+                login(request, user)
+                return HttpResponseRedirect(reverse('vacation_table'))
     except:  
         log.debug("Error while registering")
     
