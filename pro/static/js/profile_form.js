@@ -2,10 +2,17 @@
 	$(function(){
 		
 		$("#save_profile").click(function(){
-
+			 //var form_Data = new FormData();
+			
+			  //formData.append('profile_img', $("input[name=profile_img]")[0].files[0]);
+			  //form_Data.append('date_of_birth', $('input[name=date_of_birth]').val());
+			  //form_Data.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
+			 
+			  //console.log(form_Data);
+			  
 			  	var formData = new FormData();
 			    
-		    	formData.append('profile_img', $('input[name=profile_img]')[0].files[0]); 
+		    	formData.append('image_1', $('input[name=profile_img]')[0].files[0]); 
 		    	formData.append('date_of_birth', $('input[name=date_of_birth]').val());
 		    	formData.append('position', $('input[name=position]').val());
 		    	formData.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
@@ -23,7 +30,8 @@
 						if(response.status == 'OK'){
 							alert("save success");
 							$("#image_1").attr('src', '{{MEDIA_URL}}'+response.payload.image_url)
-							
+							//var description_id = response.payload.id;
+							//$("input[name=description_id]").val(description_id);
 						}else{
 							if(response.message == "FAIL"){
 								alert("Fail to save");

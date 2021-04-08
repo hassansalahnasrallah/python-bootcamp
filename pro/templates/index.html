@@ -14,10 +14,19 @@
    
    <h5>Hey!</h5><br/>
    <h5>Click here to log in</h5><br/>
-   <a class="btn btn-dark" href="{%url 'employee_login' %}" role="button" id="button-index" style="background-color:#CC92C2; color: black;">Login</a><br/><br/>
+   <a class="btn btn-dark" href="{%url 'employee_login' %}" role="button" id="button-index" style="border : 2px solid black; font-weight: bold; background-color:#CC92C2; color: black;">Login</a><br/><br/>
    <h5>Click to sign in if you don't have an account</h5><br/>
-   <a class="btn btn-dark" href="{%url 'register' %}" role="button" id="button-index" style="background-color:#CC92C2; color: black;">Sign up</a>
-   <br/><br/>
-   <h5>Thank you!</h5>
+   <a class="btn btn-dark" href="{%url 'register' %}" role="button" id="button-index" style="border : 2px solid black;font-weight: bold;background-color:#CC92C2; color: black;">Sign up</a>
+   <br/><br/><br>
+   <h4 style="font-weight: bold;">Thank you!</h4>
         
 {% endblock %}
+
+
+{% block scripts %}
+ 
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300&family=Righteous&display=swap" rel="stylesheet">
+
+{% endblock %}
+	  

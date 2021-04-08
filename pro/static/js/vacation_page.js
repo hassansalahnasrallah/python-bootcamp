@@ -1,8 +1,26 @@
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+	function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Description:</td>'+
+            '<td>'+d.description+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extension number:</td>'+
+            '<td>'+d.date_from+'</td>'+
+        '</tr>'+
+        
+    '</table>';
+}
+ 
+
 	$(function(){
 		
 		var vacay_table = $('#vacation_table').DataTable({
+			responsive : true,
+			//"searching":false,
 			
-			responsive: true,
 
 			ajax: {
 				url: '{% url "vacation_grid" %}',
@@ -23,23 +41,30 @@
 			serverSide: true,
 			
 			columns: [
+				{
+	                "className":      'details-control',
+	                "orderable":      false,
+	                "data":           null,
+	                "defaultContent": ''
+	            },
+				
 				{'data': 'description', 'name': 'description', 'sortable':true},
 				{'data': 'date_from', 'name': 'date_from', 'sortable':true},
 				{'data': 'date_to', 'name': 'date_to', 'sortable':true},
 				{'data': 'duration', 'name': 'duration', 'sortable':true},
 				{'data': 'status', 'name': 'status'},
 				{'data': 'action'}
-				
+			
 				],
 			
-			
+				"order": [[1, 'asc']],
 			columnDefs: [
 				{
 					targets: -1, //or 3
 					title: 'Actions',
 					render: function(data, type, full, meta){
 						var edit_url = "{% url 'vacation_form' %}?id=" + full.id;
-						return "<a href='"+edit_url+"'>Edit</a> <button class='btn btn-dark btn-sm btn-update' type='button' data-id="+full.id+"><i class='fa fa-refresh' aria-hidden='true'></i></button> <button class='btn btn-dark btn-sm btn-delete' type='button' data-id="+full.id+"><i class='fa fa-trash' aria-hidden='true'></i></button>"
+						return " <button class='btn btn-dark btn-sm btn-edit' type='button' ><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> <button class='btn btn-dark btn-sm btn-update' type='button' data-id="+full.id+"><i class='fa fa-refresh' aria-hidden='true'></i></button> <button class='btn btn-dark btn-sm btn-delete' type='button' data-id="+full.id+"><i class='fa fa-trash' aria-hidden='true'></i></button>"
 					}
 					
 				}
@@ -67,7 +92,11 @@
 					column.search(this.value).draw();
 				}
 			})
-		})
+		});
+		
+		//$("#vacation_table tbody").on('click', '.btn-edit', function(){
+			
+		//});
 		
 		$("#vacation_table tbody").on('click', '.btn-update', function(){
 			//show dialog
@@ -150,3 +179,22 @@
 			});
 		
 	});
+
+	
+	
+	$('#vacation_table tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    });
+		

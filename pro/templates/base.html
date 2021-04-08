@@ -20,7 +20,7 @@
    <body>  
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
   			<div class="container-fluid">
-    			<a class="navbar-brand" href="{%url 'index' %}">Hey!</a>
+    			<a class="navbar-brand" href="{%url 'index' %}">Hey! SignUp</a> &nbsp;&nbsp;
     			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       			<span class="navbar-toggler-icon"></span>
     			</button>
@@ -30,32 +30,33 @@
     		       <div class="collapse navbar-collapse" id="navbarSupportedContent">
       			    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         			 <li class="nav-item">
-          			    <a class="nav-link active" aria-current="page" href="{%url 'vacation_page' %}">Table of Vacations</a>
+          			    <a class="navbar-brand" aria-current="page" href="{%url 'vacation_page' %}">Table of Vacations</a>&nbsp;&nbsp;
         			 </li>
         			 <li class="nav-item">
-          			    <a class="nav-link active" aria-current="page" href="{%url 'profile_form' %}">{{request.user.username}} 's Profile</a>
+          			    <a class="navbar-brand" aria-current="page" href="{%url 'profile_form' %}">{{request.user.username}} 's Profile</a>&nbsp;&nbsp;
         			 </li>
        			    </ul>
        			 
       			   <div class="d-flex justify-content-end">
-           		     <a class="nav-link active" aria-current="page" href="{%url 'employee_logout' %}" style="color: black;">Log out</a>
+           		     <a class="navbar-brand" aria-current="page" href="{%url 'employee_logout' %}" style="color: black;">Log out</a>
            		   </div>
            		        					
            		{% else %}	
-           				<a class="nav-link active" aria-current="page" href="{%url 'employee_logout' %}" style="color: black;">Log In</a>	
+           				<a class="navbar-brand" aria-current="page" href="{%url 'employee_logout' %}" style="color: black;">Log In</a>	
         		{% endif %}      			
     		</div>
   			</div>
 		</nav>
       
-      <div class="container" id="big_div">
+      <div class="container" id="first_block">
  
  
  {% block table %} 
       	
       <div class="row" >
-      <div class= "col-6" id="second_div">
-      		
+      <div class= "col-6" id="second_block">
+     
+     		
  {% block container_block %}
      
  {% endblock %}
@@ -68,28 +69,29 @@
       	
       </div>
   {% endblock %}         
-      </div>
+     
       
- 
+ </div>
 	
 	<footer class="footer">
+	<br>
   <p >Student: Tala Al Halabi<br>
 	Lebanese University, Faculty of Technology, Aabey , CCNE III<br>
 	 Academic Year : 2020-2021<br>
   <a href="mailto:halabitala5@gmail.com" style="color:#CC92C2;"><big>"halabitala5@gmail.com"</big></a></p>
+  <br>
 </footer>
 
 	
    </body>
-        {% block scripts %}
-	  
-   <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+   
+    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
    <script src="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
    <script src="https://momentjs.com/downloads/moment.min.js"></script>
    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 	    
-	     {% endblock %}
+{% block scripts %}{% endblock %}
    
 </html>

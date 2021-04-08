@@ -29,6 +29,10 @@ def index(request):
     log.error("ll")
     return render(request, 'index.html', context)
 
+def test(request):
+    context = {}
+    return render(request, 'test.html', context)
+
 
 @login_required
 
@@ -124,19 +128,26 @@ def employee_logout(request):
 
 
 @login_required
+@login_required
 def vacation_page(request):
+    """
+    
+    """
     
     context = {}
     
-    
+    #context['django_topic_id'] = Topic.objects.filter(topic_name="django").first().id
     context['vacations'] = Vacation.objects.all()
     
     return render (request,'vacation_page.html',context)
 
 @login_required
 def vacation_form(request):
+    """
+    Show vacation form for the logged in user 
+    """
     
-    log.debug("vacation table")
+    log.debug("Now we are in the vacation form")
     context = {}
     
     vacation_id = request.GET.get('id')
@@ -145,7 +156,7 @@ def vacation_form(request):
         employee_vacation = Vacation.objects.filter(id=vacation_id).first()
         print("there is a vacation id")
         
-   
+    
     context['vacation'] = employee_vacation
     
     return render(request,'vacation_form.html',context)
@@ -153,7 +164,9 @@ def vacation_form(request):
 
 @login_required
 def save_vacation(request):     
-   
+    """
+    Update add vacation for logged in user
+    """
     description = request.POST.get('description')
     date_from = request.POST.get('date_from')
     date_to = request.POST.get('date_to')
@@ -168,7 +181,7 @@ def save_vacation(request):
         if description and date_from and date_to and duration: 
         
             if vacation_id:
-                
+                #update
                 vacation = Vacation.objects.filter(id=vacation_id).first()
             else:
                 vacation = Vacation(employee_id=request.user.id)
@@ -204,8 +217,12 @@ def save_vacation(request):
 
 @login_required
 def vacation_grid(request):
-  
-    log.debug("vacation grid")
+    """
+    Display grid of vacation
+    """
+    
+    #response=[{'title':"vacation title"}]
+    log.debug("Now we are in the vacation table")
     data = []
     
     employee_id = request.user.id #request.POST.get('employee_id')
@@ -253,18 +270,21 @@ def vacation_grid(request):
         }
     
     return HttpResponse(json.dumps(response))
-
 def profile_form(request):
    
-    log.debug(" Profile form")
+    log.debug("Now we are in the Profile form")
     context = {}
 
     context['MEDIA_URL'] = settings.MEDIA_URL
     context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
     return render(request,'profile_form.html',context)
 
+
 def save_profile(request):
-  
+    """
+    Save and update the profile form
+    """
+    
     status = "OK"
     message = "SUCCESS"
     payload = {}
@@ -323,7 +343,9 @@ def save_profile(request):
 
 
 def update_status(request):
-    
+    """
+    Update status
+    """
     vacation_id = request.POST.get('vacation_id')
 
     status = "OK"
@@ -356,7 +378,9 @@ def update_status(request):
     return HttpResponse(json.dumps(response))
 
 def delete_vacation(request):
-   
+    """
+    Delete vacation
+    """
     vacation_id = request.POST.get('vacation_id')
 
     status = "OK"
@@ -365,7 +389,7 @@ def delete_vacation(request):
     
     try:
         if vacation_id:
-           
+            #update
             vacation = Vacation.objects.filter(id=vacation_id).first()
             
             vacation.delete()
@@ -387,21 +411,22 @@ def delete_vacation(request):
     return HttpResponse(json.dumps(response))
 
 
+
 urlpatterns = [
     
   url(r'^$',index,name="index"),
+  url(r'test/',test,name="test"),
   url(r'register/',register,name="register"),
   url(r'employee_login/', employee_login,name="employee_login"),
   url(r'employee_logout/',employee_logout,name="employee_logout"),   
   url(r'profile_form/',profile_form,name="profile_form"),
-  url(r'save_profile/',save_profile,name="save_profile"),
   url(r'update_status/',update_status,name="update_status"),
   url(r'delete_vacation/',delete_vacation,name="delete_vacation"),   
-  url(r'vacation_page/',vacation_page,name="vacation_page"),
-  url(r'vacation_form/',vacation_form,name="vacation_form"),
-  url(r'save_vacation/',save_vacation,name="save_vacation"), 
-  url(r'vacation_grid/',vacation_grid,name="vacation_grid"),
   url(r'update_status/',update_status,name="update_status"),
-  url(r'delete_vacation/',delete_vacation,name="delete_vacation"),
+  url(r'page/',vacation_page,name="vacation_page"),
+  url(r'vacation2/',vacation_form,name="vacation_form"),
+  url(r'vacation_save/',save_vacation,name="save_vacation"), 
+  url(r'vacation_grid/',vacation_grid,name="vacation_grid"),
+  url(r'save_profile/',save_profile,name="save_profile"),
 
     ]

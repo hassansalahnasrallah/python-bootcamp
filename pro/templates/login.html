@@ -1,26 +1,29 @@
 {% extends 'base.html' %}
+{% load static  %}
 
 {%block title%}Login{% endblock %}
 
 {% block container_block %}
 
 
-	<form method="post" action="{% url 'employee_login'%}">
+ <form  id="login_form" method="post" action="{% url 'employee_login'%}">
 		{% csrf_token %}
 		{% if user.is_authenticated %}
         	<h1>Welcome {{request.user.username}}</h1>
      	{% else %}
-     		<label>Username:</label>
-			<input type="text" name="username" placeholder="Username"/>
+     		<label>Username:</label><br>
+			<input style="border : 2px solid #CC92C2;" type="text" name="username" placeholder="Username"/>
 		    <br><br>
-		    <label>Password:</label>
-			<input type="password" name="password" placeholder="Password" />
+		    <label>Password:</label><br>
+			<input style="border : 2px solid #CC92C2;" type="password" name="password" placeholder="Password" />
 		   <br><br>
-			<input class="btn btn-dark" type="submit" style="background-color:#CC92C2; color: black;" value="Login"/>
+			<input class="btn btn-dark" type="submit" style="border : 2px solid black;background-color:#CC92C2; color: black;font-weight: bold;" value="Login"/>
      	{% endif %}  
 		
 	
 	</form>
-
-
 {% endblock %}
+
+{% block scripts %} <script src="{% static 'js/login_form.js' %}"></script> {% endblock %}
+
+
