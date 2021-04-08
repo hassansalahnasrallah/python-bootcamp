@@ -25,6 +25,10 @@
     body {
       margin: 0px;
     }
+    .navbar-nav > li{
+      padding-left:15px;
+      padding-right:15x;
+    }
   </style>
 </head>
 
@@ -35,11 +39,18 @@
       <ul class="nav navbar-nav">
         <li><a class="nav-link"></a></li>
         <li><a></a></li>
-        <li><a class="nav-link" href="{% url 'index' %}">Home </a></li>
+          {% if request.user.is_authenticated %}
+              <li><a class="nav-link" href="{% url 'index' %}">Welcome Back: {{request.user.username|upper}} </a></li>
+          {% endif %}
+        <li><a class="nav-link" href="{% url 'index' %}">Home</a></li><a></a>
         <li><a class="nav-link" href="{% url 'form_VacationForm' %}">Vacations</a></li>
         <li><a class="nav-link" href="{% url 'vacation_list' %}">Vacataion Lists</a></li>
-        <li><a class="nav-link">&nspar; &ThinSpace;&ThinSpace;&ThinSpace;</a></li><a>
-          <li class="form-inline"><a class="nav-link" href="{% url 'logout_request' %}">Logout</a></li>
+          {% if user.is_authenticated %}
+          <li><a class="nav-link">&nspar; &ThinSpace;&ThinSpace;&ThinSpace;</a></li><a>
+              <li class="form-inline"><a class="nav-link" href="{% url 'logout_request' %}">Logout</a></li>
+          {% else %}
+              <li class="form-inline"><a class="nav-link" href="{% url 'logout_request' %}"></a></li>
+          {% endif %}
     </div>
     </ul>
     </div>

@@ -47,24 +47,38 @@
             z-index: 999;
             background-color: white;
         }
+        .navbar-nav > li{
+            padding-left:15px;
+            padding-right:15x;
+          }
+         
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
 
-        <ul class="nav navbar-nav">
-            <li><a class="nav-link">Registration</a></li>
+        <div class="container">
+          <ul class="nav navbar-nav">
+            <li><a class="nav-link"></a></li>
             <li><a></a></li>
-            <li><a class="nav-link" href="{% url 'index' %}">Home </a></li>
+              {% if request.user.is_authenticated %}
+                  <li><a class="nav-link" href="{% url 'index' %}">Welcome {{request.user.username}} </a></li>
+              {% endif %}
+            <li><a class="nav-link" href="{% url 'index' %}">Home</a></li>
             <li><a class="nav-link" href="{% url 'form_VacationForm' %}">Vacations</a></li>
-            <li><a class="nav-link" href="{% url 'vacation_list' %}">Profile</a></li>
+            <li><a class="nav-link" href="{% url 'vacation_list' %}">Vacataion Lists</a></li>
             <li><a class="nav-link">&nspar; &ThinSpace;&ThinSpace;&ThinSpace;</a></li><a>
-                <li class="form-inline"><a class="nav-link" href="{% url 'logout_request' %}">Logout</a></li>
-                </div>
+              {% if user.is_authenticated %}
+                  <li class="form-inline"><a class="nav-link" href="{% url 'logout_request' %}">Logout</a></li>
+              {% else %}
+                  <li class="form-inline"><a class="nav-link" href="{% url 'logout_request' %}"></a></li>
+              {% endif %}
+        </div>
         </ul>
         </div>
-    </nav>
+      </nav>
+    
 
     <h4 class="container mt-5 w-50" style='color:aliceblue;'> Signup Form:</h4>
     <div class='div-1'>
@@ -131,29 +145,19 @@
                     maxlength: 15
                 },
             },
-            messages: {
-                username: {
-                    required: "Please Enter your username."
-                },
-
-                email: {
-                    required: " Please Enter your valid email."
-                },
-
-                password: {
-                    required: "Please Enter a valid password.",
-                    //  minlengthl: jQuery.validator.format("Please, at least 4 characters are necessary")
-                },
-
-                position: {
-                    required: "Please Enter your position."
-                },
-
-                date_of_birth: {
-                    required: "Please Enter your date of birth."
-                },
+            submitHandler: function(form) {
+                form.submit();
             },
-
+            
+            // Called when the element is invalid:
+            highlight: function(element) {
+                $(element).css('background', 'red');
+            },
+            
+            // Called when the element is valid:
+            unhighlight: function(element) {
+                $(element).css('background', '#ffffff');
+            },
         });
     });
 
