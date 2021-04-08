@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 
 try:
-    from first_project.local_settings import lsettings
+    from final_project.local_settings import lsettings
 except ImportError:
     lsettings = {}
 
@@ -36,7 +36,7 @@ SECRET_KEY = 'wq40gk%&gv3v+9hd)(%l+$in8bjj4y!6_mqwffiqw(@+lxfbox'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['daliaabk.pythonanywhere.com', 'localhost']
+ALLOWED_HOSTS = lsettings.get('ALLOWED_HOSTS',[]);
 
 
 # Application definition

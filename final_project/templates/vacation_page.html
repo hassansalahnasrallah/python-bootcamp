@@ -96,6 +96,16 @@
 
 <script>
 
+function format ( rowData ) {
+    var div = $('<div/>')
+        .addClass( 'loading' )
+        .text( 'Loading...' );
+ 
+    	div.load("{% url 'vacation_details' %}?id="+rowData.id)
+ 
+    return div;
+}
+/*
 function format ( d ) {
     // `d` is the original data object for the row
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
@@ -109,7 +119,7 @@ function format ( d ) {
         '</tr>'+
         
     '</table>';
-}
+}*/
  
 
 	$(function(){
@@ -161,7 +171,7 @@ function format ( d ) {
 					title: 'Actions',
 					render: function(data, type, full, meta){
 						var edit_url = "{% url 'vacation_form' %}?id=" + full.id;
-						return " <button class='btn btn-dark btn-sm btn-edit' type='button' ><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button> <button class='btn btn-dark btn-sm btn-update' type='button' data-id="+full.id+"><i class='fa fa-refresh' aria-hidden='true'></i></button> <button class='btn btn-dark btn-sm btn-delete' type='button' data-id="+full.id+"><i class='fa fa-trash' aria-hidden='true'></i></button>"
+						return " <a href="+edit_url+" type='button' class='btn btn-dark btn-sm btn-edit'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a> <button class='btn btn-dark btn-sm btn-update' type='button' data-id="+full.id+"><i class='fa fa-refresh' aria-hidden='true'></i></button> <button class='btn btn-dark btn-sm btn-delete' type='button' data-id="+full.id+"><i class='fa fa-trash' aria-hidden='true'></i></button>"
 					}
 					
 				}
@@ -177,6 +187,22 @@ function format ( d ) {
 			}
 		});
 		
+		$('#vacation_table tbody').on('click', 'td.details-control', function () {
+	        var tr = $(this).closest('tr');
+	        var row = vacay_table.row( tr );
+	 
+	        if ( row.child.isShown() ) {
+	            // This row is already open - close it
+	            row.child.hide();
+	            tr.removeClass('shown');
+	        }
+	        else {
+	            // Open this row
+	            row.child( format(row.data()) ).show();
+	            tr.addClass('shown');
+	        }
+	    });
+		
 		$("#vacation_table tfoot th[data-searchable=true]").each(function(){
 			var title = $(this).text();
 			$(this).html('<input type="text" placeholder="Search '+title+'"/>');
@@ -191,9 +217,6 @@ function format ( d ) {
 			})
 		});
 		
-		//$("#vacation_table tbody").on('click', '.btn-edit', function(){
-			
-		//});
 		
 		$("#vacation_table tbody").on('click', '.btn-update', function(){
 			//show dialog
@@ -279,21 +302,7 @@ function format ( d ) {
 
 	
 	
-	$('#vacation_table tbody').on('click', 'td.details-control', function () {
-        var tr = $(this).closest('tr');
-        var row = table.row( tr );
- 
-        if ( row.child.isShown() ) {
-            // This row is already open - close it
-            row.child.hide();
-            tr.removeClass('shown');
-        }
-        else {
-            // Open this row
-            row.child( format(row.data()) ).show();
-            tr.addClass('shown');
-        }
-    });
+	
 	
 	
 	

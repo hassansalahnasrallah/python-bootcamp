@@ -465,6 +465,21 @@ def delete_vacation(request):
     return HttpResponse(json.dumps(response))
 
 
+def vacation_details(request):
+    """
+    Display the subgrid datatable
+    """
+    vacation_id = request.GET.get('vacation_id')
+    
+    log.debug("Now we are in the vacation details html")
+    context = {}
+
+    
+    context['vacation_details'] = Vacation.objects.filter(id=vacation_id).first()
+    return render(request,'vacation_details.html',context)
+
+
+
 urlpatterns = [
   url(r'^$',index,name="index"),
   url(r'test/',test,name="test"),
@@ -482,6 +497,7 @@ urlpatterns = [
   url(r'save_profile_user/',save_profile,name="save_profile"),
   url(r'update_status/',update_status,name="update_status"),
   url(r'delete_vacation/',delete_vacation,name="delete_vacation"),
+  url(r'details/',vacation_details,name="vacation_details"),
 
   
 
