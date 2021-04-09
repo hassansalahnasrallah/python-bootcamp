@@ -1,3 +1,18 @@
+body{
+	table-layout: fixed;
+}
+	
+#link{
+    color: white;
+}
+
+#add{
+	font: italic 30pt Impact;
+	color: #3b986c;
+}
+
+
+
 #container0{
 	width: auto;
 	min-height: 500px;

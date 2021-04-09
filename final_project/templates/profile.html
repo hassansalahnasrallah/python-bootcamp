@@ -14,7 +14,7 @@
  
 <link rel="stylesheet" href="https://formvalidation.io/vendors/formvalidation/css/formValidation.min.css"> 
  
-<h1>{{request.user.username}} update your profile here:</h1>
+<h1 id="add">{{request.user.username}} update your profile here:</h1>
 <form name="profile" id="profile" action="" method="POST">
 	{% csrf_token %}
 	
@@ -28,7 +28,7 @@
 	<p></p>
 	
 	<label>Date of Birth:</label>
-	<input type="text" name="date_of_birth" value="{{user_profile.date_of_birth}}"/>
+	<input type="text" name="dateofbirth" id="dateofbirth" class="form-control" value="{{user_profile.date_of_birth|date:'Y/m/d' }}" required/>
 	<p></p>
 	
 	<button type="button" id="save_profile" class="btn btn-success">Save</button>
@@ -40,13 +40,12 @@
 
 <script>
 	$(function(){
-		
+		$("#dateofbirth").datepicker({
+			'format': "yyyy/mm/dd",
+			    })
+			    
 		$("#save_profile").click(function(){
-			 //var form_Data = new FormData();
-			
-			  //formData.append('profile_img', $("input[name=profile_img]")[0].files[0]);
-			  //form_Data.append('date_of_birth', $('input[name=date_of_birth]').val());
-			  //form_Data.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
+			 
 			 
 			  //console.log(form_Data);
 			  
@@ -68,17 +67,17 @@
 						
 						console.log(response.payload)
 						if(response.status == 'OK'){
-							alert("save success");
+							toastr.success("save success");
 							$("#image_1").attr('src', '{{MEDIA_URL}}'+response.payload.image_url)
 							//var description_id = response.payload.id;
 							//$("input[name=description_id]").val(description_id);
 						}else{
 							if(response.message == "FAIL"){
-								alert("Fail to save");
+								toastr.success("Fail to save");
 							}else if(response.message == "NAME_EXISTS"){
-								alert("This topic already found");											
+								toastr.success("This topic already found");											
 							}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
-								alert("You have missing parameters");
+								toastr.success("You have missing parameters");
 							}
 						}	
 				    }, 

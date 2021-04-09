@@ -12,12 +12,19 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 from django.conf.global_settings import MEDIA_ROOT, MEDIA_URL
+
+
+try:
+    from final_project.local_settings import lsettings
+except ImportError:
+    lsettings = {}
+    
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR,"templates")
 STATIC_DIR = os.path.join(BASE_DIR,'static')
 #STATIC_ROOT = os.path.join(BASE_DIR,'static')
-MEDIA_DIR = os.path.join(BASE_DIR, "media")
+MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/

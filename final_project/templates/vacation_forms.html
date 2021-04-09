@@ -5,8 +5,8 @@
  
  
 <link rel="stylesheet" href="https://formvalidation.io/vendors/formvalidation/css/formValidation.min.css"> 
- 
-<h4>{% if vacation.id %}Edit{% else %}Add{% endif %} Vacation</h4>
+
+<h4 id="add">{% if vacation.id %}Edit{% else %}Add{% endif %} Vacation</h4>
 
 <form name="vacation_forms" id="vacation_forms" action="{% url 'save_vacation' %}" method="POST">
 	{%csrf_token%}

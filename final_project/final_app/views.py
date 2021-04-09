@@ -47,18 +47,25 @@ from datetime import datetime
 log = logging.getLogger(__name__)
 
 def index(request):
+    """
+    Main Page
+    """
     context = {}
     log.debug("Index")
     log.info("Index ")
     log.warning("warning")
     log.error("ll")
+    
+    log.debug("Now we are in the Home page")
+    
+    context['MEDIA_URL'] = settings.MEDIA_URL
+    context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
     return render(request, 'index.html', context)
 
 def register(request):   
     """
     Allow the user to sign up if he doesn't logged in 
     """
-    
     user_form = forms.UserForm
     profile_form = forms.UserProfileInfoForm
     
@@ -68,6 +75,8 @@ def register(request):
         
         user_form = forms.UserForm(data=request.POST)
         profile_form = forms.UserProfileInfoForm(data = request.POST)
+        
+        
         
         if user_form.is_valid() and profile_form.is_valid():
             
@@ -93,6 +102,10 @@ def register(request):
             log.debug("Saved profile and user for user: %s", user)
             registered = True
             
+            login(request,user)
+            
+            return HttpResponseRedirect(reverse('vacation_page'))
+            
         else:
             print("form not valid")
             
@@ -101,7 +114,7 @@ def register(request):
               
     context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered}
     
-    return render(request,'registration.html',context) 
+    return render(request,'registration.html',context)
             
     
 
@@ -153,7 +166,7 @@ def vacation_page(request):
     Display page of vacation
     """
     context = {}
-    context['vacations'] = Vacation.objects.all()
+    context['vacations'] = [{'id': v.id, 'title': v.description, 'start': datetime.strftime(v.date_from,'%Y-%m-%d'), 'end':  datetime.strftime(v.date_to,'%Y-%m-%d')} for v in Vacation.objects.filter(employee_id=request.user.id).all()]
     
     return render (request,'vacation_page.html',context)
 
@@ -250,11 +263,20 @@ def vacation_grid(request):
     if global_search:
         qset &= Q(description__icontains=global_search)
         
+    description_search = request.POST.get('columns[1][search][value]')
+    if description_search:
+        qset &= Q(description__icontains=description_search)
+        
+    duration_search = request.POST.get('columns[4][search][value]')
+    if duration_search:
+        qset &= Q(duration__contains=duration_search)    
+           
+        
         
     
     
     vacations = Vacation.objects.filter(qset).all().order_by("%s%s" % ("-" if sorting_column_direction == "desc" else "", sorted_column))[:int(table_length)]
-    log.debug("Total retrieved: %s", len(vacations))
+    log.debug("Total retrieved objects: %s", len(vacations))
     
     
     for vacation in vacations:
@@ -268,7 +290,6 @@ def vacation_grid(request):
         'recordsTotal': records,
         'recordsFiltered': records,
         'data': data,
-        
         }
     
     return HttpResponse(json.dumps(response))
@@ -283,15 +304,18 @@ def profile(request):
     context['MEDIA_URL'] = settings.MEDIA_URL
     context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
     return render(request,'profile.html',context)
+
 def vacation_details(request):
     """
-    Display form of profile
+    Display the subgrid datatable
     """
+    vacation_id = request.GET.get('vacation_id')
     
+    log.debug("Now we are in the vacation details html")
     context = {}
 
-    context['MEDIA_URL'] = settings.MEDIA_URL
-    context['vacation_details'] = Vacation.objects.filter(id=request.GET.get('id')).first()
+    
+    context['vacation_details'] = Vacation.objects.filter(id=vacation_id).first()
     return render(request,'vacation_details.html',context)
 
 def save_profile(request):

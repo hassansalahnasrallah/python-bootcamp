@@ -4,22 +4,79 @@
 
 {% block container_block %}
 
-     
      	<div id="form_div">
       	 <form id="registration_form" method="POST" enctype="multipart/form-data">
       
        		{%csrf_token%}
-      		{{user_form.as_p}}
-      		{{profile_form.as_p}}
-      
+       		
+       		<div class="row form-group">
+			<label class="col-sm-12">User Name:</label>
+				<div class="col-sm-12">
+					<input name="username" class="form-control" value="{{UserForm.username}}" placeholder="username" required>
+				</div>
+			</div>
+			
+			<div class="row form-group">
+			<label class="col-sm-12">Email:</label>
+				<div class="col-sm-12">
+					<input name="email" class="form-control" value="{{UserForm.email}}" placeholder="email" required/>
+				</div>
+			</div>
+			
+			<div class="row form-group">
+			<label class="col-sm-12">Password:</label>
+				<div class="col-sm-12">
+					<input  type="password" name="password" class="form-control" value="{{UserForm.password}}" placeholder="password" required>
+				</div>
+			</div>
+      		
+      		<div class="row form-group">
+			<label class="col-sm-12">First Name:</label>
+				<div class="col-sm-12">
+					<input name="first_name" class="form-control" value="{{UserForm.first_name}}" placeholder="first name" required>
+				</div>
+			</div>
+			
+			<div class="row form-group">
+			<label class="col-sm-12">Last Name:</label>
+				<div class="col-sm-12">
+					<input name="last_name" class="form-control" value="{{UserForm.last_name}}" placeholder="Last name" required>
+				</div>
+			</div>
+			
+			
+			<div class="row form-group">
+			<label class="col-sm-12">Job Position:</label>
+				<div class="col-sm-12">
+					<input name="job_position" class="form-control" value="{{UserProfileInfoForm.job_position}}" placeholder="job_position" required>
+				</div>
+			</div>
+			
+			<div class="row form-group">
+			<label class="col-sm-12">Date of Birth:</label>
+				<div class="col-sm-12">
+					<input id="date_of_birth" name="date_of_birth" class="form-control" value="{{UserProfileInfoForm.date_of_birth|date:'d/m/Y'}}" placeholder="date of birth" required />
+				</div>
+			</div>
+			
+			<div class="row form-group">
+			<label class="col-sm-12">ProfilePic:</label>
+				<div class="col-sm-12">
+					<input type="file" name="profile_img" value="{{UserProfileInfoForm.profile_pic}}" required/>				
+				</div>
+			</div>
+			
       		<p>
-      	 	<input class="btn btn-dark" type="submit" name="" id="register" value="Register"/>  
+      	 	<button type="button" id="register" class="btn btn-success">Register</button><br/><br/> 
+      	 	<a href="{% url 'index' %}" class="btn btn-success" >Home</a>
             </p>
      	 </form>
-     	 </div>
-   
+     	 </div>    
 {% endblock %}
 
+
+
+{% block scripts %}
 <script>
 
 	$(function(){
@@ -28,13 +85,74 @@
 			  rules: {
 				  username: {
 			      required: true,	      
-			    }
+			    },
+	
+			      email: {
+				      required: true,	      
+				},
+				
+				 password: {
+				      required: true,	      
+				},
+				
+				first_name: {
+				      required: true,	      
+				},
+				
+				last_name: {
+				      required: true,	      
+				},
+				
+				job_position: {
+				      required: true,	      
+				},
+				
+				date_of_birth: {
+				      required: true,	      
+				},
+				
+				profile_pic: {
+				      required: true,	      
+				},
+				   
+		
 			  },
 			  
 			  messages: {
 				  username: {
 					  required: "User name is required" 
-				  }
+				  },
+				  
+				  email: {
+				      required: "Email is required"	      
+				  },
+				
+				  password: {
+				      required: "Password is required",	      
+				  },
+				
+				  first_name: {
+				      required: "First name is required"	      
+				  },
+				
+				  last_name: {
+				      required: "Last name is required"	      
+				  },
+				
+				  job_position: {
+				      required: "Job Position name is required"	      
+				  },
+				
+				  date_of_birth: {
+				      required: "Date of birth is required"	      
+				  },
+				
+				  profile_pic: {
+				      required: "profile_pic is required"	      
+				  },
+			  
+			  
+			  
 				  
 			  } 
 		});
@@ -44,6 +162,13 @@
 			$("#registration_form").submit();
 		});
 		
+		
+		$("#date_of_birth").datepicker({
+			'format':"dd/mm/yyyy",
+		});
+		
 	});
 
 </script>
+
+{% endblock %}

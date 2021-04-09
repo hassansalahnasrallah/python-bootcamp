@@ -5,11 +5,19 @@
 
 
 {% block block2 %}
-<h1 style="font: italic 30pt Impact;">VACATION TABLE</h1>
+<h1 id="add">VACATION TABLE</h1>
 
 {% csrf_token %}
 <div class="col-sm-12 d-flex">
-		<button class="btn btn-success"  ><a href="{% url 'vacation_forms' %}" id= "add">Add Vacation</a></button>
+		<a href="{% url 'vacation_forms' %}" class="btn btn-success" >Add Vacation</a>
+		
+</div>
+<br/>
+<div class="col-sm-12 d-flex" id="calender_view">
+<div  id="calender">
+		<button class='btn btn-success' type='button' ><i class='fa fa-list'></i></button>
+		<button class='btn btn-success' type='button' ><i class='fa fa-calendar'></i></button>
+</div>		
 </div>
 <br/>
 <div class="col-sm-12">
@@ -90,7 +98,7 @@
 {% block scripts %}	
 
 <link rel="stylesheet" href= "{% static 'css/table_page.css' %}">
-  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js">   
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 <script>
 	function format ( d ) {
@@ -103,6 +111,27 @@
 	}
 
 	$(function(){
+		
+		$("#calendar view").hide(); 
+		$("#table_btn").css("background", "red"); 
+		
+		$("#table btn").click(function(){ 
+			
+			$("#table div").show(); 
+			$("#calendar view").hide(); 
+			$("#table btn").css("background", "red"); 
+			$("#calendar_btn").css("background", "#1cif23"); 
+			
+		}); 
+		
+		
+		$("#calendar_btn").click(function(){ 
+			$("#calendarLview"). show(); 
+			$("#table_div").hide(); 
+			$("#calendar btn").css("background", "red"); 
+			$("#table_btn").css("background", "#1cif23"); 
+			
+		});
 		
 		var vacay_table = $('#vacation_table').DataTable({
 			
@@ -126,6 +155,13 @@
 			serverSide: true,
 			
 			columns: [
+				/*{
+	                "className":      'details-control',
+	                "orderable":      false,
+	                "data":           null,
+	                "defaultContent": ''
+	       },*/
+
 				
 				{'data': 'description', 'name': 'description', 'sortable':true},
 				{'data': 'date_from', 'name': 'date_from', 'sortable':true},
@@ -158,6 +194,22 @@
 				}
 			}
 		});
+		
+		$('#vacation_table tbody').on('click', 'td.details-control', function () {
+	        var tr = $(this).closest('tr');
+	        var row = vacay_table.row( tr );
+	 
+	        if ( row.child.isShown() ) {
+	            // This row is already open - close it
+	            row.child.hide();
+	            tr.removeClass('shown');
+	        }
+	        else {
+	            // Open this row
+	            row.child( format(row.data()) ).show();
+	            tr.addClass('shown');
+	        }
+	    });
 		
 		$("#vacation_table tfoot th[data-searchable=true]").each(function(){
 			var title = $(this).text();
@@ -253,6 +305,70 @@
 				});
 			});
 		
+		 var CalendarBasic = function() {
+
+			    return {
+			        //main function to initiate the module
+			        init: function() {
+			        	var todayDate = moment().startOf('day');
+			            var TODAY = todayDate.format('YYYY-MM-DD');
+			            var calendarEl = document.getElementById('calendar');
+			            var calendar = new FullCalendar.Calendar(calendarEl, {
+			                plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid'],
+			                themeSystem: 'bootstrap',
+
+
+			                header: {
+			                    left: 'prev,next today',
+			                    center: 'title',
+			                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+			                },
+
+			                height: 500,
+			                contentHeight: 480,
+			                aspectRatio: 3,  // see: https://fullcalendar.io/docs/aspectRatio
+
+			                nowIndicator: true,
+			               // now: TODAY + 'T09:25:00', // just for demo
+
+			                views: {
+			                    dayGridMonth: { buttonText: 'month' },
+			                    timeGridWeek: { buttonText: 'week' },
+			                    timeGridDay: { buttonText: 'day' },
+			                    listDay: { buttonText: 'list' },
+			                },
+
+			                defaultView: 'dayGridMonth',
+			                defaultDate: TODAY,
+
+			                editable: false,
+			                eventLimit: true, // allow "more" link when too many events
+			                navLinks: true,
+			                events: {{vacations|safe}},
+			                eventRender: function(info) {
+			                    var element = $(info.el);
+									
+			                    if (info.event.extendedProps && info.event.extendedProps.description) {
+			                        if (element.hasClass('fc-day-grid-event')) {
+			                            element.data('content', info.event.extendedProps.description);
+			                            element.data('placement', 'top');
+			                            KTApp.initPopover(element);
+			                        } else if (element.hasClass('fc-time-grid-event')) {
+			                            element.find('.fc-title').append('<div class="fc-description">' + info.event.extendedProps.description + '</div>');
+			                        } else if (element.find('.fc-list-item-title').lenght !== 0) {
+			                            element.find('.fc-list-item-title').append('<div class="fc-description">' + info.event.extendedProps.description + '</div>');
+			                        }
+			                    }
+			                },
+
+			            });
+
+			            calendar.render();
+			        }
+			    };
+			}();
+			
+			CalendarBasic.init();
 	});
 
 </script>
