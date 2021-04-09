@@ -4,13 +4,18 @@
 
 {%block title%}Welcome{% endblock %}
 
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
- 
-    	
 {% block container_block %}
-
-   <h2>Employee Vacation</h2><br/>
+<style>
+.vvv{ 
+          width:450px;
+          height:230px;
+          
+}
+</style>
+<center>
+<h2>Employee Vacation</h2><br>
+ <img class="vvv" src="{%static 'images/vacation_2.gif'%}"  alt="This is an image"><br><br>
+   
    
    <h5>Hey!</h5><br/>
    <h5>Click here to log in</h5><br/>
@@ -19,7 +24,9 @@
    <a class="btn btn-dark" href="{%url 'register' %}" role="button" id="button-index" style="border : 2px solid black;font-weight: bold;background-color:#CC92C2; color: black;">Sign up</a>
    <br/><br/><br>
    <h4 style="font-weight: bold;">Thank you!</h4>
-        
+   
+</center>
+     
 {% endblock %}
 
 

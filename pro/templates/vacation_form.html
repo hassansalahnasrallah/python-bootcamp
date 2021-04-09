@@ -5,10 +5,22 @@
  
  
 <link rel="stylesheet" href="https://formvalidation.io/vendors/formvalidation/css/formValidation.min.css"> 
- 
+
+<style>
+
+.vvv{ 
+          width:250px;
+          height:300px;
+          
+}
+
+</style>
+  <table>
+  <tr>
+  <td>
 <h4>Add your vacation info</h4><br>
 
-<form name="vacation_form" id="vacation_form" action="{% url 'save_vacation' %}" method="POST">
+<form style="width:250px;" name="vacation_form" id="vacation_form" action="{% url 'save_vacation' %}" method="POST">
 	{%csrf_token%}
 	
 	<div class="row form-group">
@@ -47,9 +59,16 @@
 	
 	<br><br>
 	 <a class="btn btn-dark" href="{% url 'vacation_page' %}" role="button" id="button-index" style="border : 2px solid black; font-weight: bold; background-color:#CC92C2; color: black;">Return to table of vacations</a><br/><br/>
-	
-</form>
 
+</form>
+</td>
+
+<td>
+
+<img class="vvv" src="{%static 'images/vvv'%}"  alt="This is an image">
+</td>
+</tr>
+</table>
 {% endblock %}
 
 {% block scripts %} <script src="{% static 'js/vacation_form.js' %}"></script> {% endblock %}
