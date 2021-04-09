@@ -59,14 +59,14 @@
 			'format': "dd/mm/yyyy",
 			 startDate: new Date(),
 		}).on('changeDate', function(ev) {
-		    //Get actual date objects from both
+		    
 		    var dt1 = $('#date_from').data('datepicker').viewDate;
 		    var dt2 = $('#date_to').data('datepicker').viewDate;
 		    if (dt2 < dt1) {
-		        //If #dateEnd is before #dateStart, set #dateEnd to #dateStart
+		        
 		        $('#date_to').datepicker('update', $('#date_from').val());
 		    }
-		    //Always limit #dateEnd's starting date to #dateStart's value
+		   
 		    $('#date_to').datepicker('setStartDate', $('#date_from').val());
 		    
 		    calculationDuration();
@@ -76,14 +76,14 @@
 			'format': "dd/mm/yyyy",
 			startDate: new Date(),
 		}).on('changeDate', function(ev) {
-		    //Get actual date objects from both
+		  
 		    var dt1 = $('#date_from').data('datepicker').viewDate;
 		    var dt2 = $('#date_to').data('datepicker').viewDate;
 		    if (dt2 < dt1) {
-		        //If #dateEnd is before #dateStart, set #dateEnd to #dateStart
+		        
 		        $('#date_to').datepicker('update', $('#date_from').val());
 		    }
-		    //Always limit #dateEnd's starting date to #dateStart's value
+		 
 		    $('#date_to').datepicker('setStartDate', $('#date_from').val());
 		    
 		    calculationDuration();

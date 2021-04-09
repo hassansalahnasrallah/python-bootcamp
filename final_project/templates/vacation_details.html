@@ -10,7 +10,7 @@
 
 
 function format ( d ) {
-    // `d` is the original data object for the row
+    
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
             '<td>Description:</td>'+
@@ -28,7 +28,7 @@ $(function(){
 	
 	var vacay_table = $('#vacation_table').DataTable({
 		responsive : true,
-		//"searching":false,
+		
 		
 
 		ajax: {
@@ -36,8 +36,7 @@ $(function(){
 			type: 'POST',
 			data: function(d){
 				d.csrfmiddlewaretoken = $("input[name=csrfmiddlewaretoken]").val(),
-				d.user_id = "{{request.user.id}}" //$("input[name=user_id]").val()
-				//{{django_topic_id}} w bruh 3al context
+				d.user_id = "{{request.user.id}}"
 				
 			}
 		},
@@ -69,7 +68,7 @@ $(function(){
 			"order": [[1, 'asc']],
 		columnDefs: [
 			{
-				targets: -1, //or 3
+				targets: -1,
 				title: 'Actions',
 				render: function(data, type, full, meta){
 					var edit_url = "{% url 'vacation_forms' %}?id=" + full.id;
@@ -94,12 +93,12 @@ $(function(){
         var row = table.row( tr );
  
         if ( row.child.isShown() ) {
-            // This row is already open - close it
+           
             row.child.hide();
             tr.removeClass('shown');
         }
         else {
-            // Open this row
+       
             row.child( format(row.data()) ).show();
             tr.addClass('shown');
         }

@@ -200,12 +200,12 @@
 	        var row = vacay_table.row( tr );
 	 
 	        if ( row.child.isShown() ) {
-	            // This row is already open - close it
+	            
 	            row.child.hide();
 	            tr.removeClass('shown');
 	        }
 	        else {
-	            // Open this row
+	           
 	            row.child( format(row.data()) ).show();
 	            tr.addClass('shown');
 	        }
@@ -226,7 +226,7 @@
 		})
 		
 		$("#vacation_table tbody").on('click', '.btn-update', function(){
-			//show dialog
+			
 			console.log(2)
 			$("#vacation_status_modal").show();
 			$("input[name=vacation_id]").val($(this).attr('data-id'));
@@ -285,13 +285,13 @@
 						vacation_id: $("input[name=vacation_id]").val(),
 						csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
 					},
-					dataType: 'json',//json bcz data is dictionary
+					dataType: 'json',
 					success: function(response){
 						console.log(response)
 						
 						if(response.status == 'OK'){
 							toastr.success('Vacation deleted successfuly');
-							vacay_table.ajax.reload(); //to auto update table on success
+							vacay_table.ajax.reload(); 
 							$("#vacation_status_modal").hide();
 						}else{
 							if(response.message == "VACATION_NOT_FOUND"){
@@ -308,7 +308,7 @@
 		 var CalendarBasic = function() {
 
 			    return {
-			        //main function to initiate the module
+			      
 			        init: function() {
 			        	var todayDate = moment().startOf('day');
 			            var TODAY = todayDate.format('YYYY-MM-DD');
@@ -326,10 +326,10 @@
 
 			                height: 500,
 			                contentHeight: 480,
-			                aspectRatio: 3,  // see: https://fullcalendar.io/docs/aspectRatio
+			                aspectRatio: 3,  
 
 			                nowIndicator: true,
-			               // now: TODAY + 'T09:25:00', // just for demo
+			               
 
 			                views: {
 			                    dayGridMonth: { buttonText: 'month' },
@@ -342,7 +342,7 @@
 			                defaultDate: TODAY,
 
 			                editable: false,
-			                eventLimit: true, // allow "more" link when too many events
+			                eventLimit: true, 
 			                navLinks: true,
 			                events: {{vacations|safe}},
 			                eventRender: function(info) {
