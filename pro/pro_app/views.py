@@ -34,7 +34,7 @@ def test(request):
     return render(request, 'test.html', context)
 
 
-@login_required
+
 
 
 def register(request):   
