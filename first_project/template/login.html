@@ -12,12 +12,14 @@
 }
 #next{
 	margin:0;
-	background-color : #f8f9fa!important;
+	background-color : white;
 	padding-top:20px;
+	
 
 	/*padding-bottom:auto;
 	padding-right:auto;
-	padding-left:auto;*/
+	padding-left:auto;
+	background-color : #f8f9fa!important;*/
 	
 }
 #tableDisplay{
@@ -30,23 +32,32 @@
 #password-error{
 	color:red;
 }
+h2,label,.loggedIn{
+	 color: #993300;
+}
 </style>
 <h2 class="ms-2">Sign In</h2>
 <form method="POST" action="{% url 'userLogin' %}" style="text-align:center;" id="loginForm" >
 {% csrf_token %}
-<table  cellpadding="5" class="mt-5" id="tableDisplay">
-<tr>
-<td><label>username:</label></td>
-<td><input type="text" name ="username" placeholder="username" ></td>
-</tr>
-<tr>
-<td><label>password:</label></td>
-<td><input type="password" name ="password" ></td>
-</tr>
-</table>
-<input type="submit" value="LogIn">
+
+<div class="row form-group mt-5">
+
+	<label class="col-sm-4"><b>username:</b></label>
+	<div class="col-sm-4">
+	     <input type="text" name ="username" placeholder="username" >
+	</div>
+</div>
+
+<div class="row form-group">
+
+<label class="col-sm-4"><b>password:</b></label>
+<div class="col-sm-4">
+<input type="password" name ="password" >
+</div>
+</div>
 
 
+<input type="submit" value="LogIn" class="loggedIn">
 </form>
 <label class="mb-5" style="background-color : #f8f9fa!important ;"></label>
 

@@ -4,7 +4,7 @@ var formattedDate,formattedDate2;
 var DateFirst;
 var DateSecond;
 
- function format ( d ) {
+/* function format ( d ) {
     // `d` is the original data object for the row
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
@@ -24,8 +24,56 @@ var DateSecond;
         '<td>'+d.Duration+'</td>'+
     '</tr>'+
     '</table>';
-}  
-
+} */ 
+$("#Home_Page").validate({
+	rules:{
+		text_area:"required",
+		datefrom:{required:true},
+		dateto:{required:true},
+		duration_field:{required:true},
+	},
+	message:{
+		text_area:{required:"description is required"},
+		datefrom:"Date is required",
+		dateto:"Date is required",
+		duration_field:"duration is required",
+	},
+	submitHandler: function() {
+		$.ajax({
+		type:"POST",
+		url:$("form[name=HomePageView]").attr('action'),
+		data:{
+			idOfVaca:$("input[name=idOfVaca]").val(),
+			text_area :$("#text").val(),
+			datefrom:$("input[name=datefrom]").val(),
+			dateto:$("input[name=dateto]").val(),
+			duration_field:$("input[name=duration_field]").val(),
+			csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),
+			
+			
+		},
+		dataType:'json',
+		success: function(response){
+			        if(response.status == 'OK'){
+						toastr.success('Record Saved');	 	
+					}else{
+							if(response.message == "VACATION_NOT_FOUND"){
+								toastr.error('Vacation not found')											
+							}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
+								toastr.success("missing parameters");
+							}
+							}
+		},
+		error : function(){
+		  toastr.error('ERROR IN SAVE!');	
+		},
+	});
+	}
+});
+$("#savedHomePage").click(function(){
+	
+	$("#Home_Page").submit();
+});
 /*
 $("#date_from").datetimepicker({ 
         format: "Y-m-d", 
@@ -193,7 +241,7 @@ var vacation_table = $("#vacation_grid").DataTable({
 		var edit_id = "/url/HomePage/?id=" + row.id;
 	     
 
-	 return "<a href='"+edit_id+"'>Edit</a> <button type='button' class='btn btn-success btn-sm btn-update' data-id='"+row.id+"'><i class='fa fa-check-circle' style='font-size:10px;'></i></button> <button type='button' class='btn btn-success btn-sm btn-delete' data-id='"+row.id+"'><i class='fa fa-trash' style='font-size:10px;'></i></button>" ;
+	 return "<a href='"+edit_id+"'><i class='fa fa-pencil'></i></a> <button type='button' class='btn btn-info btn-sm btn-update' data-id='"+row.id+"'><i class='fa fa-check-circle' style='font-size:10px;'></i></button> <button type='button' class='btn btn-info btn-sm btn-delete' data-id='"+row.id+"'><i class='fa fa-trash' style='font-size:10px;'></i></button>" ;
      // return "<a href='#'>Edit</a>";
 		}
 		
@@ -342,37 +390,14 @@ $("#loginForm").validate({
 	},
 	
 });
-$("#savedHomePage").click(function(){
-	
-	$.ajax({
-		type:"POST",
-		url:$("form[name=HomePageView]").attr('action'),
-		data:{
-			idOfVaca:$("input[name=idOfVaca]").val(),
-			text_area :$("#text").val(),
-			datefrom:$("input[name=datefrom]").val(),
-			dateto:$("input[name=dateto]").val(),
-			duration_field:$("input[name=duration_field]").val(),
-			csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),
-			
-			
-		},
-		dataType:'json',
-		success: function(response){
-			console.log(response)
-			
-		},
-		error : function(){
-			  
-		},
-	});
-});
+
 
 
 $("#date_ofbirth").datetimepicker({ 
         format: "Y-m-d", 
         timepicker:false,
 });
+
 $("#ProfilePage").validate({
 	
 	rules:{
@@ -383,8 +408,8 @@ $("#ProfilePage").validate({
 			
 	},
 	 messages:{
-		 JobPostion:"this field is required",
-         dateofbirth:"this field is required",
+		 JobPostion:"Job Position is required",
+         dateofbirth:"Date Of Birth is required",
          file:"Image is required",
 	},
 	submitHandler: function() {
@@ -406,7 +431,7 @@ $("#ProfilePage").validate({
 		contentType:false,
 		
 		success: function(){
-			
+	   toastr.success('Saved!');
 		},
 		error : function(){
 			  

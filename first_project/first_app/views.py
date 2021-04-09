@@ -13,11 +13,15 @@ from django.utils import formats
 from django.db.transaction import commit
 from django.contrib.auth import logout
 from django.core.serializers.json import DjangoJSONEncoder
+from first_project import settings
 import json
 import logging
 from telnetlib import theNULL
 from builtins import int
 from django.db.models import Q
+import random
+from _datetime import date
+import os
 # Create your views here.
 
 log = logging.getLogger(__name__)
@@ -84,24 +88,49 @@ def ProfilePageView(request):
 
 
 def SaveProfile(request):
+     status="OK"
+     message="SUCCESS"
+     payload={}
+     
      user=request.user
      JobPostion=request.POST.get('JobPostion')
      file=request.FILES['file']
      dateofbirth= request.POST.get('dateofbirth')
      user_name=request.POST.get('user_name')
      
-     if user_name:
-         userprofile=ProfilePageModel.objects.filter(user_id=user.id).first()
-         if userprofile:
-             userprofile.jobposition= JobPostion
-             userprofile.profilepic= file
-             userprofile.dateOfBirth= dateofbirth
-             userprofile.save()
-             
-     else:
-         ProfilePageModel.objects.create(user_id=user.id,jobposition=JobPostion,profilepic=file,dateOfBirth=dateofbirth)
+     try:
+         log.debug("Profile image: %s", file)
+         mediaPrefix = ("%s/%s") % (date.today().year, date.today().month)
+         mediaPathDirectory = ("%s/%s") % (settings.MEDIA_ROOT, mediaPrefix)
+         if not os.path.exists(mediaPathDirectory):
+             os.makedirs(mediaPathDirectory)
+         extension = file.name.split(u'.')[-1]
+         new_filename = "profile-pic-%s.%s" % (random.randint(0, 10000), extension)
+         path = os.path.join(mediaPathDirectory, new_filename)
+         dest = open(path, 'wb+')
+         for chunk in file.chunks():
+             dest.write(chunk)
+             dest.close()
+         image_url = "%s/%s" % (mediaPrefix, new_filename)
          
-     return HttpResponse("saved") 
+         if user_name:
+             userprofile=ProfilePageModel.objects.filter(user_id=user.id).first()
+             if userprofile:
+                 userprofile.jobposition= JobPostion
+                 userprofile.profilepic= image_url 
+                 userprofile.dateOfBirth= dateofbirth
+                 userprofile.save()
+                 log.debug("Saved profile image successfully for user: %s", request.user.id)
+                 
+         else:
+             ProfilePageModel.objects.create(user_id=user.id,jobposition=JobPostion,profilepic=image_url,dateOfBirth=dateofbirth)
+             log.debug("user profile not found, creating a new one")
+     except:
+         status = "FAIL"
+         message = "SYSTEM_ERROR" 
+         log.error("Error while saving description name", exc_info=1) 
+     response = {"status": status, "message": message, "payload": payload}   
+     return HttpResponse(json.dumps(response)) 
  
 def signed_up(request):
      context={}

@@ -3,6 +3,7 @@
 {% load static %}
 {% block container %}
 <style>
+
 .col-4{
 	width:50%!important;
 	padding-top:10px;
@@ -19,9 +20,14 @@ h2,label{
 </style>
 
 <h2>Update your profile:</h2>
+{% for presentuser in user_one%}
+{% if presentuser.user == user %}
 <div >
-  <img src="{% static 'IMAGE/profile__image.png' %}" style="height:150px;border-radius: 50%; border: 10px solid black;">
+  <img src="/media/{{usernameprofile.profilepic}}" style="height:200px;width:200px;border-radius: 50%; border: 10px solid black;">
 </div>
+{% endif %}
+{% endfor %}
+
 <br>
 <form method="POST" name="ProfilePageView"  action="{% url 'SaveProfile' %}" id="ProfilePage">
 <table>
