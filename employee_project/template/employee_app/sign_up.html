@@ -3,7 +3,7 @@
 {% block two %}
 <div class="col-md-4" >
 
-<img src="https://www.questionpro.com/blog/wp-content/uploads/2018/09/67-Employee-Morale.jpg"  class="img-thumbnail" alt="emplyee_profile" id="profile">  
+<img src="https://www.questionpro.com/blog/wp-content/uploads/2018/09/67-Employee-Morale.jpg"   alt="emplyee_profile" id="pic_div">  
 </div>
  
  {% endblock %}
@@ -19,9 +19,7 @@ padding-left:20px;
  margin-right:100px; 
 margin-left:-30px;
 padding-bottom:15px;} 
-#profile { width:450px;
-height:540px;
-}
+
 label { font-size:16px;}
  .btn {
   background-color: dodgerblue;
@@ -35,6 +33,16 @@ label { font-size:16px;}
 .btn:hover {
   opacity: 1;
 } 
+#pic_div{
+	background-color : #2E86C1 ;
+	min-height:540px;
+	width: 100%;
+	margin-top : 0px;
+	margin-bottom : 50px;
+	padding:20px;
+	text-align:center;	
+	margin-left:11px;
+}
 
 </style>
      <form method="POST"  id="signup" style="max-width:500px;margin:auto;height:420px;">
@@ -77,16 +85,16 @@ label { font-size:16px;}
 				required: "username is required"
 			},
 			email: {
-				required: "email is required"
+				required: "Email is required"
 			},
 			password: {
 				required: " Password is required "
 			},
 			first_name: {
-				required: "first_name is required"
+				required: "First Name is required"
 			},
 			last_name: {
-				required: "last_name is required"
+				required: "Last Name is required"
 			},
 			
 		},

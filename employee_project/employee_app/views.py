@@ -35,6 +35,7 @@ def sign_up_form(request):
                 user.set_password(user.password)
                 user.save()
                 log.debug("You have  registered successfully " )
+                return HttpResponseRedirect(reverse('user_login'))
     except:  
         log.debug("Error while registering")
         
@@ -103,7 +104,7 @@ def vacation_save(request):
                       status = "FAIL"
              else:
                  Employee_Vacation.objects.create(user=user,Description=Description,Datetime_From=Date_From,Datetime_To=Date_To,Duration=Duration)
-                 payload['id'] = vacation.id
+                 log.debug("vacation is created successfly")
          else:
              message = "MISSING_REQUIRED_PARAMETERS"
              status = "FAIL"
@@ -137,16 +138,16 @@ def vacation_grid(request):
     sorted_column_name = request.POST.get('columns[%s][name]' % (sorting_column_index))
     qset = Q(user_id=request.user.id)
 
-    description_search=request.POST.get('columns[0][search][value]')
+    description_search=request.POST.get('columns[1][search][value]')
     if description_search:
         qset &= Q(Description__icontains=description_search)
-    datefrom_search=request.POST.get('columns[1][search][value]')
+    datefrom_search=request.POST.get('columns[2][search][value]')
     if datefrom_search:
         qset &= Q(Datetime_From__icontains=datefrom_search) 
-    dateto_search=request.POST.get('columns[2][search][value]')
+    dateto_search=request.POST.get('columns[3][search][value]')
     if dateto_search:
         qset &= Q(Datetime_To__icontains=dateto_search) 
-    duration_search=request.POST.get('columns[3][search][value]')
+    duration_search=request.POST.get('columns[4][search][value]')
     if duration_search:
         qset &= Q(Duration__icontains=duration_search) 
     
@@ -168,6 +169,7 @@ def vacation_grid(request):
 def profile_form(request):
     context = {}
     context['MEDIA_URL'] = settings.MEDIA_URL
+    context['employee_profile'] =  Employee_Profile.objects.all()
     context ['user_profile'] =  Employee_Profile.objects.filter(user_id=request.user.id).first()
     return render(request, "employee_app/Profile_Page.html", context)
 
@@ -186,24 +188,25 @@ def save_profile(request):
         if not os.path.exists(mediaPathDirectory):
             os.makedirs(mediaPathDirectory)
         extension = profile_img.name.split(u'.')[-1]
-        new_filename = "profile-pic-%s.%s" % (random.randint(0, 10000), extension)
+        new_filename = "profile-pic-%s.%s" % (random.randint(0, 10000),extension)
         path = os.path.join(mediaPathDirectory, new_filename)
         dest = open(path, 'wb+')
         for chunk in profile_img.chunks():
             dest.write(chunk)
             dest.close()
         image_url = "%s/%s" % (mediaPrefix, new_filename)
+        log.debug(image_url)
         user_profile = Employee_Profile.objects.filter(user_id=request.user.id).first()
         if not user_profile:
-            user_profile = Employee_Profile.objects.create(user_id=request.user.id,job_position = Job_position,employe_profile = image_url,birth_date =  Birth_date )
+            user_profile = Employee_Profile.objects.create(user_id=request.user.id,job_position = Job_position,employe_profile = image_url,birth_date =  Birth_date)
             log.debug("user profile not found, creating a new one")
-        else:
-             user_profile.job_position = Job_position
-             user_profile.employe_profile = image_url
-             user_profile.birth_date = Birth_date
-             user_profile.save()
-             log.debug("Saved profile image successfully for user: %s", request.user.id)
-             payload['image_url'] = image_url
+        else:    
+            user_profile.job_position = Job_position
+            user_profile.employe_profile = image_url
+            user_profile.birth_date = Birth_date
+            user_profile.save()
+            log.debug("Saved profile image successfully for user: %s", request.user.id)
+            payload['image_url'] = image_url
         
     except:
         status = "FAIL"
@@ -243,7 +246,7 @@ def update_status(request):
             vacation.status = not (vacation_status)
             log.debug(vacation.status)
             vacation.save()
-                
+            
             response = "SUCCESS"
             
             log.debug("%s vacation successfully" % ("Updated" if vacation_id else "Created"))
@@ -286,7 +289,9 @@ def delete_vacation(request):
     response = {'status': status, 'message': message, 'payload': payload}
     
     return HttpResponse(json.dumps(response))
-    
+
+
+
 urlpatterns=[
     url(r'Sign_up/',sign_up_form,name='Sign_Up_Form'),
     url(r'login/',user_login,name='user_login') ,

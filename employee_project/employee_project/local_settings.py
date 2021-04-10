@@ -1,3 +1,3 @@
 lsettings = {
-    "DEBUG": True,
+    "DEBUG": False,
 }
