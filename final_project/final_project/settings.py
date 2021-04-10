@@ -29,7 +29,7 @@ STATIC_URL = lsettings.get('STATIC_URL', '/static/')
 MEDIA_URL = lsettings.get('MEDIA_URL', '/media/')
 
 MEDIA_ROOT = lsettings.get('MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
-STATIC_ROOT = lsettings.get('STATIC_ROOT', os.path.join(BASE_DIR, 'final_project', 'static'))
+STATIC_ROOT = lsettings.get('STATIC_ROOT', os.path.join(BASE_DIR, 'final_app', 'static'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -37,9 +37,9 @@ STATIC_ROOT = lsettings.get('STATIC_ROOT', os.path.join(BASE_DIR, 'final_project
 SECRET_KEY = 'y0-5f_x_-dmn2sqrt29(awqp-eir0k!11n0!6y8ah*ky=^4#1o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = lsettings.get('DEBUG', False )
+DEBUG = lsettings.get('DEBUG', True )
 
-ALLOWED_HOSTS = lsettings.get('ALLOWED_HOSTS', [] )
+ALLOWED_HOSTS = lsettings.get('ALLOWED_HOSTS', ["*"] )
 
 
 # Application definition

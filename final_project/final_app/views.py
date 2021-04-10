@@ -78,7 +78,7 @@ def register(request):
         
         
         
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid(): # and profile_form.is_valid():
             
             print("form valid")
             
@@ -87,16 +87,11 @@ def register(request):
             
             user.save()
             
-            profile = profile_form.save(commit=False)
-            
-            
-            profile.user=user
-            
+            profile = UserProfile.objects.create(user=user)
             
             if 'profile_pic' in request.FILES:
                 print("found the picture")
                 profile.profile_pic = request.FILES['profile_pic']
-            
             
             profile.save()
             log.debug("Saved profile and user for user: %s", user)
@@ -309,7 +304,7 @@ def vacation_details(request):
     """
     Display the subgrid datatable
     """
-    vacation_id = request.GET.get('vacation_id')
+    vacation_id = request.GET.get('id')
     
     log.debug("Now we are in the vacation details html")
     context = {}
@@ -361,7 +356,7 @@ def save_profile(request):
             
         user_profile.profile_pic = image_url
         user_profile.job_position = job_position
-        user_profile.date_of_birth = date_of_birth
+        user_profile.date_of_birth = datetime.strptime(date_of_birth, "%Y/%m/%d")
         
         user_profile.save()
         log.debug('Saved profile image successfully for user %s', request.user.id)

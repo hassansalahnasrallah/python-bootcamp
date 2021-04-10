@@ -13,17 +13,23 @@
 		
 </div>
 <br/>
-<div class="col-sm-12 d-flex" id="calender_view">
-<div  id="calender">
-		<button class='btn btn-success' type='button' ><i class='fa fa-list'></i></button>
-		<button class='btn btn-success' type='button' ><i class='fa fa-calendar'></i></button>
-</div>		
+
+<div class="col-sm-12 d-flex">
+<button class='btn btn-success' type='button' id="table_btn"><i class='fa fa-list'></i></button>
+		<button class='btn btn-success' type='button' id="calendar_btn" ><i class='fa fa-calendar'></i></button>
+		
+</div>
+<div class="col-sm-12" id="calender_view">
+	<div  id="calendar">
+			
+	</div>		
 </div>
 <br/>
-<div class="col-sm-12">
+<div class="col-sm-12" id="table_view">
 <table id= "vacation_table" class= "table  row-border cell-border compact" style="width:100%;">
 	<thead>
 		<tr>
+			<th></th>
 			<th>Description</th>
 			<th>Date from</th>
 			<th>Date to</th>
@@ -37,6 +43,7 @@
 	</tbody>
 	<tfoot>
 		<tr>
+			<th></th>
 			<th style="width:140px;" data-searchable="true" >Description</th>
 			<th style="width:140px;" data-searchable="false" >Date from</th>
 			<th style="width:140px;" data-searchable="false" >Date to</th>
@@ -98,8 +105,6 @@
 {% block scripts %}	
 
 <link rel="stylesheet" href= "{% static 'css/table_page.css' %}">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.6.0/main.min.js">   
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 <script>
 	function format ( d ) {
 	    var div = $('<div/>')
@@ -112,25 +117,23 @@
 
 	$(function(){
 		
-		$("#calendar view").hide(); 
+		$("#calender_view").hide(); 
 		$("#table_btn").css("background", "red"); 
 		
-		$("#table btn").click(function(){ 
-			
-			$("#table div").show(); 
-			$("#calendar view").hide(); 
-			$("#table btn").css("background", "red"); 
+		$("#table_btn").click(function(){ 
+			$("#table_view").show(); 
+			$("#calender_view").hide(); 
+			$("#table_btn").css("background", "red"); 
 			$("#calendar_btn").css("background", "#1cif23"); 
 			
 		}); 
 		
 		
 		$("#calendar_btn").click(function(){ 
-			$("#calendarLview"). show(); 
-			$("#table_div").hide(); 
-			$("#calendar btn").css("background", "red"); 
+			$("#calender_view").show(); 
+			$("#table_view").hide(); 
+			$("#calendar_btn").css("background", "red"); 
 			$("#table_btn").css("background", "#1cif23"); 
-			
 		});
 		
 		var vacay_table = $('#vacation_table').DataTable({
@@ -155,12 +158,12 @@
 			serverSide: true,
 			
 			columns: [
-				/*{
+				{
 	                "className":      'details-control',
 	                "orderable":      false,
 	                "data":           null,
 	                "defaultContent": ''
-	       },*/
+	       		},
 
 				
 				{'data': 'description', 'name': 'description', 'sortable':true},
@@ -303,12 +306,12 @@
 				    	toastr.error('An Error Has Occured')
 					}
 				});
-			});
+		 });
 		
 		 var CalendarBasic = function() {
 
 			    return {
-			      
+			        //main function to initiate the module
 			        init: function() {
 			        	var todayDate = moment().startOf('day');
 			            var TODAY = todayDate.format('YYYY-MM-DD');
@@ -326,10 +329,10 @@
 
 			                height: 500,
 			                contentHeight: 480,
-			                aspectRatio: 3,  
+			                aspectRatio: 3,  // see: https://fullcalendar.io/docs/aspectRatio
 
 			                nowIndicator: true,
-			               
+			               // now: TODAY + 'T09:25:00', // just for demo
 
 			                views: {
 			                    dayGridMonth: { buttonText: 'month' },
@@ -342,7 +345,7 @@
 			                defaultDate: TODAY,
 
 			                editable: false,
-			                eventLimit: true, 
+			                eventLimit: true, // allow "more" link when too many events
 			                navLinks: true,
 			                events: {{vacations|safe}},
 			                eventRender: function(info) {
@@ -352,7 +355,6 @@
 			                        if (element.hasClass('fc-day-grid-event')) {
 			                            element.data('content', info.event.extendedProps.description);
 			                            element.data('placement', 'top');
-			                            KTApp.initPopover(element);
 			                        } else if (element.hasClass('fc-time-grid-event')) {
 			                            element.find('.fc-title').append('<div class="fc-description">' + info.event.extendedProps.description + '</div>');
 			                        } else if (element.find('.fc-list-item-title').lenght !== 0) {
