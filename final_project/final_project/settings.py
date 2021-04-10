@@ -21,9 +21,12 @@ except ImportError:
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR,'templates')
-STATIC_DIR = os.path.join(BASE_DIR,'static')
-#STATIC_ROOT = os.path.join(BASE_DIR,'static')
-MEDIA_DIR = os.path.join(BASE_DIR,'media')
+
+STATIC_URL = lsettings.get('STATIC_URL', '/static/')
+MEDIA_URL = lsettings.get('MEDIA_URL', '/media/')
+
+MEDIA_ROOT = lsettings.get('MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
+STATIC_ROOT = lsettings.get('STATIC_ROOT', os.path.join(BASE_DIR, 'final_app', 'static'))
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 
@@ -34,10 +37,11 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 SECRET_KEY = 'wq40gk%&gv3v+9hd)(%l+$in8bjj4y!6_mqwffiqw(@+lxfbox'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = lsettings.get('DEBUG', False)
 
-ALLOWED_HOSTS = lsettings.get('ALLOWED_HOSTS',[]);
+ALLOWED_HOSTS = lsettings.get('ALLOWED_HOSTS', []);
 
+LOGIN_URL = '/user_login'
 
 # Application definition
 
@@ -149,12 +153,12 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'level_app'
         },
-#         'main_log_file': {
-#             'level': 'DEBUG',
-#             'class': 'logging.handlers.TimedRotatingFileHandler',
-#             'filename': '%s/main.log' % (BASE_DIR),
-#             'formatter': 'level_app'
-#         }
+        'main_log_file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': '%s/main.log' % (BASE_DIR),
+            'formatter': 'level_app'
+        }
         
     },
     'loggers': {
@@ -195,15 +199,4 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
-STATIC_URL = '/static/'
-#STATICFILES_DIRS = lsettings.get('STATICFILES_DIRS',[]);
-
-STATICFILES_DIRS =[STATIC_DIR];
-
-MEDIA_ROOT = MEDIA_DIR
-MEDIA_URL = '/media/'
-
-LOGIN_URL = '/user_login'
-
 

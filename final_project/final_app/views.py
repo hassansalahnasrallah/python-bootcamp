@@ -15,6 +15,7 @@ from datetime import date, datetime
 import os
 import random
 from django.db.models import Q 
+from django.contrib.auth.models import User
 
 log = logging.getLogger(__name__)
 
@@ -29,7 +30,6 @@ def index(request):
     log.debug("Now we are in the Home page")
     
     context['MEDIA_URL'] = settings.MEDIA_URL
-    context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
     return render(request, 'index.html', context)
 
 def test(request):
@@ -46,7 +46,6 @@ def register(request):
     context = {}
 
     context['MEDIA_URL'] = settings.MEDIA_URL
-    context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
     return render(request,'registration.html',context)
 
 def registration_save(request):
@@ -68,7 +67,6 @@ def registration_save(request):
     position = request.POST.get('position')
     date_of_birth = request.POST.get('date_of_birth')
     profile_img = request.FILES.get('profile_img')
-    register_id = request.POST.get('register_id')
     
     try:
         log.debug("Profile image: %s",profile_img)
@@ -92,36 +90,18 @@ def registration_save(request):
             
         image_url = "%s/%s"%(mediaPrefix, new_filename)
         
-        
-        
-        
         if username and email and password and first_name and last_name and position and date_of_birth and profile_img:
+            user = User.objects.create(username=username, email=email, first_name=first_name, last_name=last_name)
+            if user: 
+                user.set_password(password)
+                user.save()
+                
+                log.debug("User %s is created. Creating user profile", user)
             
-            if register_id:
-              
-                user_profile = UserProfile.objects.filter(user_id = request.user.id).first()
-            else:
-                user_profile = UserProfile(user_id=request.user.id)
-            
-            
-            
-            if user_profile:
-                user_profile.username = username
-                user_profile.email = email
-                user_profile.password = password
-                user_profile.first_name = first_name
-                user_profile.last_name = last_name  
-                user_profile.picture = image_url
-                user_profile.position = position
-                user_profile.date_of_birth = datetime.strptime(date_of_birth, "%d/%m/%Y")
+                user_profile = UserProfile.objects.create(user_id=user.id, picture=image_url, position=position, date_of_birth=datetime.strptime(date_of_birth, "%d/%m/%Y"))
 
-        
-                user_profile.save()
-                
-                payload['id'] = user_profile.id
-                response = "SUCCESS"
-                
-                log.debug('successfully registered for user %s', request.user.id)
+                login(request, user)
+                log.debug('successfully registered user %s', user)
             else:
                 message = "USER_NOT_FOUND"
                 status = "FAIL"
@@ -129,17 +109,18 @@ def registration_save(request):
         else:
             message = "MISSING_REQUIRED_PARAMETERS"
             status = "FAIL" 
-        
-        payload['image_url'] = image_url
     
+    except IntegrityError:
+        log.warning("Username or email already exits")
+        message = "USERNAME_EMAIL_EXISTS"
+        status = "FAIL"
+        
     except:
- 
         message = "SYSTEM_ERROR"
         status = "FAIL"
         log.error("Error while saving registration form", exc_info=1)
                   
-    
-    response = {'status': status, 'message': message, 'payload': payload }
+    response = {'status': status, 'message': message, 'payload': payload}
      
     return HttpResponse(json.dumps(response))
 
@@ -260,6 +241,7 @@ def vacation_page(request):
     
     context = {}
     
+    context['MEDIA_URL'] = settings.MEDIA_URL
     context['vacations'] = [{'id': v.id, 'title': v.description, 'start': datetime.strftime(v.date_from,'%Y-%m-%d'), 'end':  datetime.strftime(v.date_to,'%Y-%m-%d')} for v in Vacation.objects.filter(employee_id=request.user.id).all()]
     
     return render (request,'vacation_page.html',context)
@@ -280,7 +262,6 @@ def vacation_form(request):
         print("there is a vacation id")
         
     context['MEDIA_URL'] = settings.MEDIA_URL
-    context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
     context['vacation'] = employee_vacation
     
     return render(request,'vacation_form.html',context)
@@ -388,6 +369,7 @@ def vacation_grid(request):
     records = len(vacations)
     
     response = {
+        'draw': request.POST.get('draw'),
         'recordsTotal': records,
         'recordsFiltered': records,
         'data': data,
@@ -542,7 +524,7 @@ def vacation_details(request):
     """
     Display the subgrid datatable
     """
-    vacation_id = request.GET.get('vacation_id')
+    vacation_id = request.GET.get('id')
     
     log.debug("Now we are in the vacation details html")
     context = {}
