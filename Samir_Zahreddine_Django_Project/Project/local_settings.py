@@ -1,3 +1,0 @@
-lsettings = {
-    'Debug':True,
-}
