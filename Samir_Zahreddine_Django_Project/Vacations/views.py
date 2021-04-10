@@ -14,6 +14,7 @@ from Project import settings
 import logging
 import json
 from django.db.models import Q
+from Project.forms import VacationInfoForm
 log = logging.getLogger(__name__)
 
 
@@ -200,11 +201,121 @@ def validate_username(request):
     return JsonResponse(response)
 
 
-def jsTest(request):
-    context={}
-    emp = EmployeeProfile.objects.all()
-    context  ['emp'] =  emp
-    return render(request,'Vacations/web_page.html',context)
+
+@login_required
+def edit_profile(request):
+    """
+    user updates his existing profile
+    """
+    form = VacationInfoForm()
+    if request.method == 'POST':
+        user_form = forms.UserForm(data = request.POST,instance = request.user)
+
+        profile_form =forms.UserProfileInfoForm(data=request.POST,instance=request.user.employeeprofile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+                # save user to DB:
+                user = user_form.save()
+                # encrypt password:
+                user.set_password(user.password)
+                # update user:
+                user.save()
+                # can't commit => still need to edit profile
+                profile = profile_form.save(commit=False)
+
+                # check if profile pic provided
+                if 'profile_pic' in request.FILES:
+                    print("picture found")
+                    profile.profile_pic = request.FILES['profile_pic']
+
+                profile.user = user
+                profile.save()
+                log.debug("Profile saved successfully for user: %s", user)
+
+                return render(request, 'Vacations/edit_profile.html')
+
+    else:
+        user_form = forms.UserForm(instance = request.user)
+        profile_form = forms.UserProfileInfoForm(instance = request.user)
+
+    context = {
+            'user_form':user_form,
+            'profile_form':profile_form
+     }
+    return render(request,'Vacations/edit_profile.html',context)
+
+@login_required
+def edit_vacation(request):
+ 
+    # context = {}
+    # desc = request.POST.get('desc')
+    # from_date = request.POST.get('from_date')
+    # to_date = request.POST.get('to_date')
+   
+    # vacation_id = request.POST.get('vacation_id')
+    # #vacation = vacation.objects.filter(id=vacation_id).first()
+
+    
+    # try:
+    #     vacation = vacation.objects.filter(id=vacation_id).first()
+
+    #     if desc and from_date and to_date: 
+            
+    #         # if vacation_id:
+    #         if vacation:
+
+    #             #update
+    #             Vacation.desc = desc
+    #             Vacation.from_date = from_date
+    #             Vacation.to_date = to_date
+    #             #vacation = vacation.objects.filter(id=vacation_id).first()
+    #             vacation.save()
+    #             log.debug("%s vacation successfully" % ("Updated" if vacation_id else "Created"))
+    #         else:
+    #             vacation = Vacation(user_id=request.user.id)
+   
+                
+    #     else:
+    #         log.error("failed to update")
+
+
+    # except:
+    #     log.error("Error while saving vacation", exc_info=1)
+    #form = forms.VacationInfoForm()
+    vacation_form = VacationInfoForm(data=request.POST,instance=request.user.id)
+
+    if request.method == 'POST':
+        #vacation_form = forms.UserForm(data = request.POST,instance = request.user)
+
+        vacation_form =VacationInfoForm(data=request.POST,instance=request.user.id)
+
+        if vacation_form.is_valid() :
+                # save user to DB:
+                vacation = vacation_form.save()
+                # encrypt password:
+                
+                # update user:
+                vacation.save()
+                # can't commit => still need to edit profile
+              
+
+                # check if profile pic provided
+                
+
+                log.debug("Profile updated successfully")
+
+                return render(request, 'Vacations/edit_vacation.html')
+
+        else:
+            forms = forms.VacationInfoForm(instance = request.user)
+
+  
+    vacation_id = request.POST.get('vacation_id')       
+    context = {'vacation' : Vacation.objects.filter(id=vacation_id).first(),
+    'forms': VacationInfoForm}
+    
+    return render(request,'Vacations/edit_vacation.html',context)
+
 
 
 
@@ -219,7 +330,9 @@ urlpatterns = [
     url(r'logout/', logout_request, name='logout_request'),
     url(r'validate_username', validate_username, name='validate_username'),
    
-    url(r'jsTest/', jsTest, name='jsTest'),
+    url(r'edit_profile/', edit_profile, name='edit_profile'),
+    url(r'edit_vacation/', edit_vacation, name='edit_vacation'),
+
 
     
 

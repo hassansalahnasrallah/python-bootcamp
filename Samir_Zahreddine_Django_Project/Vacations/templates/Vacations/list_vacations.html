@@ -52,7 +52,7 @@
   <table id="vacation_table" class="table">
     <thead>
       <tr scope="row">
-        <th>id</th>
+        <th>Vacation id</th>
         <th>Location</th>
         <th>Employee</th>
         <th>From:</th>
@@ -62,14 +62,17 @@
     <tbody>
       {% for vacation in vacations %}
       <tr>
-        <td>{{vacation.user_id}}</td>
-
+        <td>{{vacation.id}}</td>
         <td>{{vacation.desc}}</td>
         <td>{{vacation.user}}</td>
         <td>{{vacation.from_date}}</td>
         <td>
           {{vacation.to_date}}
-          <button type="submit" value="edit" class="btn btn-link">Edit</button>
+          <!-- <a href="{% url 'edit_vacation' %}?id={{vacation.id}}">Edit </a> -->
+          <a href="{% url 'edit_vacation' %}">Edit </a>
+
+
+
         </td>
       </tr>
       {% endfor %}

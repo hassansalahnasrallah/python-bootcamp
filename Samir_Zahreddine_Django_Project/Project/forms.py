@@ -1,4 +1,5 @@
 from django import forms
+
 from Vacations.models import *
 from Project import settings
 from datetime import *
@@ -22,6 +23,13 @@ class UserProfileInfoForm(forms.ModelForm):
             'date_of_birth': DateInput(attrs={'type': 'date'}), 
         }  
 
+
+class UserForm1(forms.ModelForm):
+    password = forms.CharField(widget = forms.PasswordInput())
+    class Meta():
+        model = User
+        fields =('email','password')
+     
 
 
 
