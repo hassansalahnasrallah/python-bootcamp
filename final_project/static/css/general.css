@@ -14,21 +14,43 @@
 	width: 350px;
 	margin-top: 50px;
 	margin-bottom: 50px;
-	padding:20px;
-	text-align:center;	
 	margin-left: auto;
+	padding:20px;
+	text-align:center;		
 }
 
+	
 #second_div{
 	background-color: white ;
 	min-height:400px;
 	width: 350px;
 	margin-top: 50px;
 	margin-bottom: 50px;
-	padding:20px;
 	margin-right: auto;
+	padding:20px;
 }
-
+@media(max-width:960px){
+	#first_div{
+	background-color: #3c6652 ;
+	min-height:400px;
+	width: 100%;
+	padding:20px;
+	text-align:center;
+	margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+	
+}
+	#second_div{
+	background-color: white ;
+	min-height:400px;
+	width: 100%;
+	padding:20px;
+	margin-top:0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+	}	
+}
 .error{
 	color: red;
 }
@@ -48,18 +70,21 @@
 
 
 #image{
-	width:300px;
-    margin-top: 50%;
-    margin-bottom: 50%;
-
+	max-width:100%;
 }
 
+#image_profile{
+    border-radius: 50%;
+    width:30;
+    height:24;
+}
 #down{
 	background-color: #333333;
 	height: 50px;
-	text-align:center;
 	padding-top: 10px;
 	padding-bottom: 10px;
+    text-align:center;
+	
 	
 }
 
@@ -67,3 +92,5 @@
 	font-family: "Arial";
 	color:white;
 }
+
+

@@ -25,11 +25,7 @@ def index(request):
     Main Page
     """
     context = {}
-    log.debug("Index")
-    log.info("Index ")
-    log.warning("warning")
-    log.error("ll")
-    
+
     log.debug("Now we are in the Home page")
     
     context['MEDIA_URL'] = settings.MEDIA_URL
@@ -40,36 +36,118 @@ def test(request):
     context = {}
     return render(request, 'test.html', context)
 
-@login_required
-def table(request):
+
+def register(request):
+    """
+    Register for a new user
+    
+    """
+    log.debug("Now we are in the Registration form")
     context = {}
-    return render(request, 'table.html', context)
 
-#@login_required
-#def form_vacation(request):
-#     form=forms.VacationForm()
-#    
-#    
-#     if request.method == 'POST':
-#           form=forms.VacationForm(request.POST)
-#           
-#           if form.is_valid():
-#                form.save(commit=True)
-#                return index(request)
-#           else:
-#                print("ERROR")
-          
-          
-                    
-                
-#     context={'form':form} 
+    context['MEDIA_URL'] = settings.MEDIA_URL
+    context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
+    return render(request,'registration.html',context)
+
+def registration_save(request):
+    """
+    Save and update the registration form
+    """
+    
+    status = "OK"
+    message = "SUCCESS"
+    payload = {}
+    
+    log.debug("request.FILES: %s",request.FILES)
+    
+    username = request.POST.get('username')
+    email = request.POST.get('email')
+    password = request.POST.get('password')
+    first_name = request.POST.get('first_name')
+    last_name = request.POST.get('last_name')
+    position = request.POST.get('position')
+    date_of_birth = request.POST.get('date_of_birth')
+    profile_img = request.FILES.get('profile_img')
+    register_id = request.POST.get('register_id')
+    
+    try:
+        log.debug("Profile image: %s",profile_img)
+        
+        mediaPrefix = ("%s/%s")%(date.today().year, date.today().month)
+        mediaPathDirectory = ("%s/%s") % (settings.MEDIA_ROOT, mediaPrefix)
+        
+        if not os.path.exists(mediaPathDirectory):
+            os.makedirs(mediaPathDirectory)
+            
+        extension = profile_img.name.split(u'.')[-1]  
          
-#     return render(request,'vacation.html',context) 
+        new_filename = "profile-pic-%s.%s"%(random.randint(0, 10000), extension)
+        
+        path = os.path.join(mediaPathDirectory, new_filename)
+        dest = open(path, 'wb+')
+        
+        for chunk in profile_img.chunks():
+            dest.write(chunk)
+            dest.close()
+            
+        image_url = "%s/%s"%(mediaPrefix, new_filename)
+        
+        
+        
+        
+        if username and email and password and first_name and last_name and position and date_of_birth and profile_img:
+            
+            if register_id:
+              
+                user_profile = UserProfile.objects.filter(user_id = request.user.id).first()
+            else:
+                user_profile = UserProfile(user_id=request.user.id)
+            
+            
+            
+            if user_profile:
+                user_profile.username = username
+                user_profile.email = email
+                user_profile.password = password
+                user_profile.first_name = first_name
+                user_profile.last_name = last_name  
+                user_profile.picture = image_url
+                user_profile.position = position
+                user_profile.date_of_birth = datetime.strptime(date_of_birth, "%d/%m/%Y")
 
+        
+                user_profile.save()
+                
+                payload['id'] = user_profile.id
+                response = "SUCCESS"
+                
+                log.debug('successfully registered for user %s', request.user.id)
+            else:
+                message = "USER_NOT_FOUND"
+                status = "FAIL"
+                
+        else:
+            message = "MISSING_REQUIRED_PARAMETERS"
+            status = "FAIL" 
+        
+        payload['image_url'] = image_url
+    
+    except:
+ 
+        message = "SYSTEM_ERROR"
+        status = "FAIL"
+        log.error("Error while saving registration form", exc_info=1)
+                  
+    
+    response = {'status': status, 'message': message, 'payload': payload }
+     
+    return HttpResponse(json.dumps(response))
+
+"""
 def register(request):   
-    """
+    
     Register to the app 
-    """
+    
     #TODO add try catch and logging
     user_form = forms.UserForm
     profile_form = forms.UserProfileInfoForm
@@ -80,7 +158,7 @@ def register(request):
         
         user_form = forms.UserForm(data=request.POST)
         profile_form = forms.UserProfileInfoForm(data = request.POST)
-        
+        #date_of_birth = request.POST.get('date_of_birth')
         
         
         if user_form.is_valid() and profile_form.is_valid():
@@ -96,11 +174,12 @@ def register(request):
             #commit=false prevent to save the profile bbecause still need to edit profile (bdna User)
             
             profile.user=user
-            
+            #profile.date_of_birth = datetime.strptime(date_of_birth, "%d/%m/%Y")
             #check if profile pic provided
             if 'picture' in request.FILES:
                 print("found the picture")
                 profile.picture = request.FILES['picture']
+                
             
             
             profile.save()
@@ -120,14 +199,8 @@ def register(request):
     context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered}
     
     return render(request,'registration.html',context)
+"""
 
-
-#def save_register(request):     
-    
-#    description = request.POST.get('')
-#    description_id = request.POST.get('')
-
-#    return HttpResponse(json.dumps(response))
 
 
 
@@ -144,10 +217,10 @@ def user_login(request):
         
         loggedin = False
         
-        #django built in authentication
+        
         
         user = authenticate(username=username,password=password)
-        #check if username valid then if active
+        
         
         if user:
             
@@ -164,12 +237,12 @@ def user_login(request):
                 return HttpResponse("Your account is not active") 
             
         else:
-            return HttpResponse("Invalid login details")
+            return render (request,'invalid_login.html',context)
                   
     else:
         return render (request,'login.html',context)
         
-    context={'loggedin': loggedin}
+    context = {'loggedin': loggedin}
     
     return render (request,'login.html',context)
 
@@ -178,7 +251,6 @@ def user_logout(request):
 
     return HttpResponseRedirect(reverse('index'))           
 
-#tene method heyye vacation grid
 
 @login_required
 def vacation_page(request):
@@ -188,8 +260,7 @@ def vacation_page(request):
     
     context = {}
     
-    #context['django_topic_id'] = Topic.objects.filter(topic_name="django").first().id
-    context['vacations'] = Vacation.objects.all()
+    context['vacations'] = [{'id': v.id, 'title': v.description, 'start': datetime.strftime(v.date_from,'%Y-%m-%d'), 'end':  datetime.strftime(v.date_to,'%Y-%m-%d')} for v in Vacation.objects.filter(employee_id=request.user.id).all()]
     
     return render (request,'vacation_page.html',context)
 
@@ -208,7 +279,8 @@ def vacation_form(request):
         employee_vacation = Vacation.objects.filter(id=vacation_id).first()
         print("there is a vacation id")
         
-    
+    context['MEDIA_URL'] = settings.MEDIA_URL
+    context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
     context['vacation'] = employee_vacation
     
     return render(request,'vacation_form.html',context)
@@ -378,7 +450,8 @@ def save_profile(request):
             
         user_profile.picture = image_url
         user_profile.position = position
-        user_profile.date_of_birth = date_of_birth
+        user_profile.date_of_birth = datetime.strptime(date_of_birth, "%d/%m/%Y")
+
         
         user_profile.save()
         log.debug('Saved profile image successfully for user %s', request.user.id)
@@ -443,14 +516,14 @@ def delete_vacation(request):
     
     try:
         if vacation_id:
-            #update
+          
             vacation = Vacation.objects.filter(id=vacation_id).first()
             
             vacation.delete()
                 
             response = "SUCCESS"
             
-            log.debug("%s vacation successfully deleted")
+            log.debug("vacation successfully deleted")
         else:
             message = "VACATION_NOT_FOUND"
             status = "FAIL"
@@ -458,7 +531,7 @@ def delete_vacation(request):
     except:
         message = "SYSTEM_ERROR"
         status = "FAIL"
-        log.error("Error while saving vacation", exc_info=1)
+        log.error("Error while deleting vacation", exc_info=1)
                 
     response = {'status': status, 'message': message, 'payload': payload}
     
@@ -483,10 +556,8 @@ def vacation_details(request):
 urlpatterns = [
   url(r'^$',index,name="index"),
   url(r'test/',test,name="test"),
-  url(r'table2/',table,name="table"),
-  #url(r'vacation/',form_vacation,name="form_vacation"),
   url(r'register/',register,name="register"),
-  #url(r'register_save/',save_register,name="save_register"),
+  url(r'registration_save/',registration_save,name="registration_save"),
   url(r'user_login/',user_login,name="user_login"),
   url(r'user_logout/',user_logout,name="user_logout"), 
   url(r'table/',vacation_page,name="vacation_page"),
@@ -496,9 +567,7 @@ urlpatterns = [
   url(r'profile/',profile_form,name="profile_form"),
   url(r'save_profile_user/',save_profile,name="save_profile"),
   url(r'update_status/',update_status,name="update_status"),
-  url(r'delete_vacation/',delete_vacation,name="delete_vacation"),
+  url(r'delete/',delete_vacation,name="delete_vacation"),
   url(r'details/',vacation_details,name="vacation_details"),
-
-  
 
     ]

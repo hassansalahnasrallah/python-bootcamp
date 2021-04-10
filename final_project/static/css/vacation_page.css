@@ -1,9 +1,18 @@
-body{
-	table-layout: fixed;
+
+
+h1{
+	font-family: 'Montserrat Alternates', sans-serif;
+	color: #069c55 ;
 }
-	
+
+
 #link{
     color: white;
+}
+@media(max-width:960px){
+#table_div{
+	min-width: fit-content;
+}
 }
 
 #big_div{
@@ -12,6 +21,17 @@ body{
     margin-bottom: 100;
 	border-style : solid;
 	background-color: white;
+}
+
+
+@media(max-width:960px){
+	#big_div{
+	min-height: 500px;
+	margin-top: 100;
+    margin-bottom: 100;
+	border-style : solid;
+	background-color: white;
+	}	
 }
 
 td.details-control {

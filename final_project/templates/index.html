@@ -7,20 +7,12 @@
 {%block title%}Welcome{% endblock %}
 
 
-	
-
-<!-- 
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
- -->
-
-
-
 
 {% block container_block %}
 
 	{% if user.is_authenticated %}
-	  	<h2>Welcome "{{request.user.username}}"</h2>
+	  	<h2>Welcome "{{request.user.username}}" !</h2>
+	  	
 	  	<img id="image_1" src="{{MEDIA_URL}}{{user_profile.picture}}" alt="This is an image">
 	  	
 	{% else %}
@@ -28,7 +20,7 @@
    		<br/>
    
    		<h5>Please Sign in!</h5>
-   		<a class="btn btn-dark" href="{%url 'user_login' %}" role="button" >Login</a>
+   		<a class="btn btn-dark" href="{%url 'user_login' %}" role="button" >Sign in</a>
    		<p></p>
    		<h6>Don't have an account?</h6>
    		<a href="{%url 'register' %}" >Sign up</a>
@@ -42,8 +34,7 @@
 
  <link rel="stylesheet" href= "{% static 'css/index.css' %}">
  
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300&family=Righteous&display=swap" rel="stylesheet">
+
 
 {% endblock %}
 	  

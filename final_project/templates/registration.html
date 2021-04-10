@@ -62,7 +62,7 @@
 			<div class="row form-group">
 			<label class="col-sm-12">Picture:</label>
 				<div class="col-sm-12">
-					<input type="file" name="profile_img" value="{{UserProfileInfoForm.picture}}" required/>				
+					<input id="image_1" type="file" name="profile_img" value="{{UserProfileInfoForm.picture}}" required/>				
 				</div>
 			</div>
 			
@@ -153,25 +153,64 @@
 			  
 			  
 				  
-			  } 
-		});
+			  },
 		
+			  submitHandler: function(){
+				  
+				  	var formData = new FormData();
+				    
+				  	formData.append('username', $('input[name=username]').val());
+				  	formData.append('email', $('input[name=email]').val());
+				  	formData.append('password', $('input[name=password]').val());
+				  	formData.append('first_name', $('input[name=first_name]').val());
+				  	formData.append('last_name', $('input[name=last_name]').val());
+				  	
+			    	formData.append('profile_img', $('input[name=profile_img]')[0].files[0]); 
+			    	formData.append('date_of_birth', $('input[name=date_of_birth]').val());
+			    	formData.append('position', $('input[name=position]').val());
+			    	formData.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
+				  
+				  $.ajax({
+						method:"POST",
+						url:"{% url 'registration_save' %}",
+						data: formData,
+				        processData: false,
+				        contentType: false,
+						success: function(response){
+							var response = JSON.parse(response)
+							
+							console.log(response.payload)
+							if(response.status == 'OK'){
+								toastr.success('Save success')
+								$("#image_1").attr('src', '{{MEDIA_URL}}'+response.payload.image_url)
+								//var description_id = response.payload.id;
+								//$("input[name=description_id]").val(description_id);
+							}else{
+								if(response.message == "FAIL"){
+									toastr.error('Fail to save')									
+								}else if(response.message == "MISSING_REQUIRED_PARAMETERS"){
+									alert("You have missing parameters");
+								}
+							}	
+					    }, 
+					    error: function(){
+					    	toastr.error('Error in save')
+						}
+					});
+			 	
+			  }
+		
+		});
+		$("#date_of_birth").datepicker({
+			'format':"dd/mm/yyyy",
+	    });
+
 		$("#register").click(function(){
-			
 			$("#registration_form").submit();
 		});
-		
-		
-		//$("#date_of_birth").datepicker({
-			//'format':"dd/mm/yyyy",
-		//});
 		
 	});
 
 </script>
 
 {% endblock %}
-
-<!-- {{user_form.as_p}}
-      		{{profile_form.as_p}}
-       -->
