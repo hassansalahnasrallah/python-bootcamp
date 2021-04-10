@@ -68,7 +68,7 @@
 			
       		<p>
       	 	<button type="button" id="register" class="btn btn-success">Register</button><br/><br/> 
-      	 	<a href="{% url 'index' %}" class="btn btn-success" >Home</a>
+      	 	
             </p>
      	 </form>
      	 </div>    
@@ -160,6 +160,7 @@
 		$("#register").click(function(){
 			
 			$("#registration_form").submit();
+			location.href="{% url 'index' %}";
 		});
 		
 		

@@ -9,7 +9,7 @@
 		{% csrf_token %}
 		{% if user.is_authenticated %}
         	<h1 id="add">Welcome {{request.user.username}}</h1>
-        	<a href="{% url 'index' %}" class="btn btn-success" >Home</a>
+        	
      	{% else %}
      		<div class="row form-group">
 			<label class="col-sm-12">User Name:</label>
@@ -70,6 +70,7 @@
 		
 		$("#login").click(function(){
 			$("#login_form").submit();
+			location.href="{% url 'index' %}";
 		});
 		
 	});
