@@ -37,9 +37,9 @@ STATIC_ROOT = lsettings.get('STATIC_ROOT', os.path.join(BASE_DIR, 'final_project
 SECRET_KEY = 'y0-5f_x_-dmn2sqrt29(awqp-eir0k!11n0!6y8ah*ky=^4#1o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = lsettings.get('DEBUG', False )
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = lsettings.get('ALLOWED_HOSTS', [] )
 
 
 # Application definition
