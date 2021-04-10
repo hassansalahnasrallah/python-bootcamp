@@ -100,7 +100,7 @@ def register(request):
 
                 profile.user = user
                 profile.save()
-                log.debug("Profile saved successfully for user: %s", user)
+                log.debug("Profile saved successfully for user: %s", User)
                 registered = True
                 return render(request, 'Vacations/login.html')
                 return render('vacations.login.html', message='Save complete')
@@ -143,7 +143,7 @@ def user_login(request):
             if user.is_active:
                 # session
                 login(request, user)
-                log.debug("user logged in: %s", user)
+                log.debug("user logged in: %s", User)
                 return HttpResponseRedirect(reverse('index'))
 
             else:
@@ -247,69 +247,45 @@ def edit_profile(request):
 @login_required
 def edit_vacation(request):
  
-    # context = {}
-    # desc = request.POST.get('desc')
-    # from_date = request.POST.get('from_date')
-    # to_date = request.POST.get('to_date')
+    context = {}
+    desc = request.POST.get('desc')
+    from_date = request.POST.get('from_date')
+    to_date = request.POST.get('to_date')
    
-    # vacation_id = request.POST.get('vacation_id')
-    # #vacation = vacation.objects.filter(id=vacation_id).first()
+    vacation_id = request.POST.get('vacation_id')
+    #vacation = vacation.objects.filter(id=vacation_id).first()
 
     
-    # try:
-    #     vacation = vacation.objects.filter(id=vacation_id).first()
+    try:
+        vacation = Vacation.objects.filter(id=vacation_id).first()
 
-    #     if desc and from_date and to_date: 
+      
             
-    #         # if vacation_id:
-    #         if vacation:
+            # if vacation_id:
+        if vacation_id:
 
-    #             #update
-    #             Vacation.desc = desc
-    #             Vacation.from_date = from_date
-    #             Vacation.to_date = to_date
-    #             #vacation = vacation.objects.filter(id=vacation_id).first()
-    #             vacation.save()
-    #             log.debug("%s vacation successfully" % ("Updated" if vacation_id else "Created"))
-    #         else:
-    #             vacation = Vacation(user_id=request.user.id)
+                #update
+                vacation_des = Vacation.desc
+                vacation_from_date = Vacation.from_date
+                vacation_to_date = Vacation.to_date
+                
+
+                #vacation = vacation.objects.filter(id=vacation_id).first()
+                vacation.save()
+                log.debug("vacation updated successfully")
+        else:
+                vacation = Vacation(user_id=request.user.id)
    
                 
-    #     else:
-    #         log.error("failed to update")
+       
+                log.error("failed to update")
 
 
-    # except:
-    #     log.error("Error while saving vacation", exc_info=1)
-    #form = forms.VacationInfoForm()
-    vacation_form = VacationInfoForm(data=request.POST,instance=request.user.id)
+    except Exception:
+        log.error("Error while saving vacation", exc_info=1)
+    form = forms.VacationInfoForm()
+   # vacation_form = forms.VacationInfoForm(data=request.POST,instance=request.user.id)
 
-    if request.method == 'POST':
-        #vacation_form = forms.UserForm(data = request.POST,instance = request.user)
-
-        vacation_form =VacationInfoForm(data=request.POST,instance=request.user.id)
-
-        if vacation_form.is_valid() :
-                # save user to DB:
-                vacation = vacation_form.save()
-                # encrypt password:
-                
-                # update user:
-                vacation.save()
-                # can't commit => still need to edit profile
-              
-
-                # check if profile pic provided
-                
-
-                log.debug("Profile updated successfully")
-
-                return render(request, 'Vacations/edit_vacation.html')
-
-        else:
-            forms = forms.VacationInfoForm(instance = request.user)
-
-  
     vacation_id = request.POST.get('vacation_id')       
     context = {'vacation' : Vacation.objects.filter(id=vacation_id).first(),
     'forms': VacationInfoForm}
