@@ -1,4 +1,4 @@
 lsettings = {
     "DEBUG": False,
-    "ALLOWED_HOSTS" : ['shadibz.pythonanywhere.com']
+    "ALLOWED_HOSTS" : ['http://shadibz.pythonanywhere.com']
 }
