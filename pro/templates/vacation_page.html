@@ -2,13 +2,49 @@
 {% load static  %}
 
 {% block table %}
-<h1> Table of Vacations:</h1>
+
+<style>
+
+.buttons{
+
+          border-radius: 20px;
+          background-color: orange;
+          padding: 10px 10px;
+          color:#274472;
+          font-weight:bold;
+}
+
+.h{
+          color:#f8f9fa;
+          font-weight:bold;
+          text-align:center;
+}
+
+table{ 
+         border : 2px solid #274472;
+         font-weight: bold; 
+         background-color:#f8f9fa;
+         color:#274472;
+
+}
+
+th{
+		 border : 2px solid #274472;
+         font-weight: bold; 
+         background-color:#f8f9fa;
+         color:#274472;
+      
+}
+
+</style>
+
+<h1 class="h"> Table of Vacations:</h1>
 <br>
 {% csrf_token %}
 
 <br/>
 <div class="col-sm-12">
-<table id= "vacation_table" class= "table  row-border cell-border compact"  style="border : 2px solid black; font-weight: bold; background-color:#f8f9fa; color: black;" >
+<table id= "vacation_table" class= "table  row-border cell-border compact"  >
 	<thead>
 		<tr>
 			<th></th>
@@ -36,9 +72,9 @@
 	</tfoot>
 </table>
 <br>
-<h5>Request Time OFF:</h5>
+<h5 class="h">Request Time OFF:</h5>
 <div class="col-sm-12 d-flex justify-content-center"><br>
- <a class="btn btn-dark" href="{% url 'vacation_form' %}" role="button" id="button-index" style="border : 2px solid black; font-weight: bold; background-color:#f8f9fa; color: black;">add your vacation</a>
+ <a class="buttons" href="{% url 'vacation_form' %}" role="button" id="button-index" >add your vacation</a>
 	
 </div>
 
@@ -48,16 +84,16 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Vacation Status</h5>
+        <h5 class="modal-title" style="color:#274472;">Vacation Status</h5>
      
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to change your vacation status?</p>
+        <p style="color:#274472;">Are you sure you want to change your vacation status?</p>
         <input name="vacation_id" type="hidden" />
       </div>
       <div class="modal-footer">
-        <button type="button" id="save_status" class="btn btn-dark" style="border : 2px solid black;background-color:#CC92C2; color: black;font-weight: bold;">Activate/Deactivacte</button>
-        <button type="button" id="hide_modal" class="btn btn-dark" style="border : 2px solid black;background-color:#CC92C2; color: black;font-weight: bold;" data-dismiss="modal">Close</button>
+        <button type="button" id="save_status" class="buttons" >Activate/Deactivacte</button>
+        <button type="button" id="hide_modal" class="buttons"  data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -68,16 +104,16 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Delete Vacation</h5>
+        <h5 class="modal-title" style="color:#274472;">Delete Vacation</h5>
         
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to delete?</p>
+        <p style="color:#274472;">Are you sure you want to delete?</p>
         <input name="vacation_id" type="hidden" />
       </div>
       <div class="modal-footer">
-        <button type="button" id="delete_vacation" class="btn btn-dark" style="border : 2px solid black;background-color:#CC92C2; color: black;font-weight: bold;">Delete</button>
-        <button type="button" id="close_modal" class="btn btn-dark" style="border : 2px solid black;background-color:#CC92C2; color: black;font-weight: bold;" data-dismiss="modal">Close</button>
+        <button type="button" id="delete_vacation" class="buttons">Delete</button>
+        <button type="button" id="close_modal" class="buttons"  data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -258,7 +294,7 @@ $(function(){
 					if(response.status == 'OK'){
 						toastr.success('Vacation deleted successfuly');
 						vacay_table.ajax.reload(); 
-						$("#vacation_status_modal").hide();
+						$("#delete_vacation_modal").hide();
 					}else{
 						if(response.message == "VACATION_NOT_FOUND"){
 							toastr.error('Vacation not found')											

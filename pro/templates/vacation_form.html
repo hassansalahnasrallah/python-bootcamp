@@ -14,40 +14,69 @@
           
 }
 
+#borders{
+
+         border : 2px solid #274472;
+         color:#274472;
+         font-weight:bold;
+       
+}
+
+.buttons{
+
+          border-radius: 20px;
+          background-color: orange;
+          padding: 10px 10px;
+          color:#274472;
+          font-weight:bold;
+}
+
+.h{
+          color:#274472;
+          font-weight:bold;
+          text-align:center;
+}
+
+label{
+         color:#274472;
+         font-weight:bold;
+
+}
+
 </style>
   <table>
   <tr>
   <td>
-<h4>Add your vacation info</h4><br>
+<h4 class="h">Add your vacation information</h4><br>
 
 <form style="width:250px;" name="vacation_form" id="vacation_form" action="{% url 'save_vacation' %}" method="POST">
 	{%csrf_token%}
 	
 	<div class="row form-group">
-		<label class="col-sm-12">Vacation Description</label>
+		<label>Vacation Description</label>
 		<div class="col-sm-12">
-			<input name="description" class="form-control" value="{{vacation.description}}" placeholder="Description" required>
+			<input id="borders" name="description" class="form-control" value="{{vacation.description}}" placeholder="Description" required>
 		</div>
 	</div>
 	<br>
 	<div class="row form-group">
-		<label class="col-sm-12">Date From</label>
+		<label>Date From</label>
 		<div class="col-sm-12">
-			<input id="date_from" name="date_from" class="form-control" value="{{vacation.date_from|date:'d/m/Y'}}" placeholder="date from" />
+			<input  id="date_from" name="date_from" class="form-control" value="{{vacation.date_from|date:'d/m/Y'}}" placeholder="date from" style="border : 2px solid #274472;color:#274472;font-weight:bold;"/>
 		</div>
 	</div>
 	<br>
 	<div class="row form-group">
-		<label class="col-sm-12">Date To</label>
+		<label>Date To</label>
 		<div class="col-sm-12">
-			<input id="date_to" name="date_to" class="form-control" value="{{vacation.date_to|date:'d/m/Y'}}" placeholder="date to"  />
+			<input id="date_to" name="date_to" class="form-control" value="{{vacation.date_to|date:'d/m/Y'}}" placeholder="date to" style="border : 2px solid #274472;color:#274472;font-weight:bold;" />
 		</div>
 	</div>
 	<br>
 	<div class="row form-group">
-		<label class="col-sm-12">Duration <small>(per days)</small></label>
+		<label >Duration <small>(per days)</small></label>
 		<div class="col-sm-12">
-			<input name="duration" readonly class="form-control" value="{{vacation.duration}}" placeholder="Duration" >
+			<input id="borders" name="duration" readonly class="form-control" value="{{vacation.duration}}" placeholder="Duration" >
 		</div>
 	</div>
 	
@@ -55,10 +84,10 @@
 	
 	<br/>
 	
-	<button type="button" id="save_vacation" class="btn btn-dark" style="border : 2px solid black;background-color:#CC92C2; color: black;font-weight: bold;">Save</button>
+	<button type="button" id="save_vacation" class="buttons">Save</button>
 	
 	<br><br>
-	 <a class="btn btn-dark" href="{% url 'vacation_page' %}" role="button" id="button-index" style="border : 2px solid black; font-weight: bold; background-color:#CC92C2; color: black;">Return to table of vacations</a><br/><br/>
+	 <a class="buttons" href="{% url 'vacation_page' %}" role="button" id="button-index" >Return to table of vacations</a><br/><br/>
 
 </form>
 </td>

@@ -6,24 +6,40 @@
 
 {% block container_block %}
 <style>
-.vvv{ 
-          width:450px;
-          height:230px;
-          
+
+.buttons{
+
+          border-radius: 20px;
+          background-color: orange;
+          padding: 15px 15px;
+          color:#274472;
+          font-weight:bold;
 }
+
+.h{
+          color:#274472;
+          font-weight:bold;
+}
+
+.gif{
+          width:350px;
+          height:130px;
+          border-radius: 260px;
+ }
 </style>
+
 <center>
-<h2>Employee Vacation</h2><br>
- <img class="vvv" src="{%static 'images/vacation_2.gif'%}"  alt="This is an image"><br><br>
+<h2 class="h">Employee Vacation</h2><br>
+ <img class="gif" src="{%static 'images/vacation_2.gif'%}"  alt="This is an image"><br><br>
    
    
-   <h5>Hey!</h5><br/>
-   <h5>Click here to log in</h5><br/>
-   <a class="btn btn-dark" href="{%url 'employee_login' %}" role="button" id="button-index" style="border : 2px solid black; font-weight: bold; background-color:#CC92C2; color: black;">Login</a><br/><br/>
-   <h5>Click to sign in if you don't have an account</h5><br/>
-   <a class="btn btn-dark" href="{%url 'register' %}" role="button" id="button-index" style="border : 2px solid black;font-weight: bold;background-color:#CC92C2; color: black;">Sign up</a>
+   <h5  class="h">Hey!</h5><br/>
+   <h5  class="h">Click here to log in</h5><br/>
+   <a class="buttons" href="{%url 'employee_login' %}" role="button" id="button-index">Login</a><br/><br/>
+   <h5  class="h">Click to sign in if you don't have an account</h5><br/>
+   <a class="buttons" href="{%url 'register' %}" role="button" id="button-index" >Sign up</a>
    <br/><br/><br>
-   <h4 style="font-weight: bold;">Thank you!</h4>
+   <h4  class="h">Thank you!</h4>
    
 </center>
      

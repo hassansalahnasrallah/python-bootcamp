@@ -1,15 +1,45 @@
 {%extends 'base.html' %}
 {% load static  %}
 {%block title%}Registration{% endblock %}
-
+ 
+ 
 {% block container_block %}
+<style>
+ 
+ .gif{
+          width:150px;
+          height:140px;
+          border-radius: 260px;
+ }
+ 
+ .buttons{
 
-    
+          border-radius: 20px;
+          background-color: orange;
+          padding: 15px 15px;
+          color:#274472;
+          font-weight:bold;
+}
+ 
+.h{
+          color:#274472;
+          font-weight:bold;
+          text-align:center;
+}
+
+label{
+         color:#274472;
+         font-weight:bold;
+
+}
+ 
+ </style>
+   
     <div id="form_div">
       	 <form id="registration_form" method="POST" enctype="multipart/form-data">
       
        		{%csrf_token%}
-       		
+       		 <img class="gif" src="{%static 'images/airplane.gif'%}"  alt="This is an image"><br><br>
        		<div class="row form-group">
 			<label class="col-sm-12">User Name:</label><br>
 				<div class="col-sm-12">
@@ -47,7 +77,7 @@
 			
 			<br><br>
 			
-			<p >*** Please provide us with more information ***</p><br>
+			<h6 class="h">*** Please provide us with more information ***</p><br>
 			
 			
 		
@@ -64,32 +94,12 @@
 			<br>
 			
       		
-      	 	<button type="button" id="register" class="btn btn-dark" style="border : 2px solid black; font-weight: bold;background-color:#CC92C2; color: black; ">Sign up!</button> 
+      	 	<button type="button" id="register" class="buttons">Sign up!</button> 
      
      	 </form>
      	 </div>    
     
-<!-- 
-     <center>
-     	 <div id="form_div">
-     	 
-      	 <form id="registration_form" method="POST" enctype="multipart/form-data">
-      
-       		{%csrf_token%}
-       		
-      		{{user_form.as_p}} <br>
-      		{{profile_form.as_p}}
-      		<br>
-      		 
-      <br>
-      	 <input class="btn btn-dark" style="background-color:#CC92C2; color: black;" type="submit" name="" id="register" value="Sign in"/>          
-     	
-     
-     	 </form>
-     	 </div>  
-     	 </center>  -->
-     	
- 
+
 {% endblock %}
 
 {% block scripts %} <script src="{% static 'js/registration_form.js' %}"></script> {% endblock %}

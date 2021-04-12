@@ -14,6 +14,8 @@ from datetime import date, datetime
 import os
 import random
 from django.db.models import Q 
+from django.contrib.auth.models import User
+
 
 log = logging.getLogger(__name__)
 
@@ -34,11 +36,12 @@ def test(request):
     return render(request, 'test.html', context)
 
 
-@login_required
-
 
 def register(request):   
-   
+    """
+    Register to the app 
+    """
+    #TODO add try catch and logging
     user_form = forms.UserForm
     profile_form = forms.UserProfileInfoForm
     
@@ -49,20 +52,23 @@ def register(request):
         user_form = forms.UserForm(data=request.POST)
         profile_form = forms.UserProfileInfoForm(data = request.POST)
         
+        
+        
         if user_form.is_valid() and profile_form.is_valid():
             
             print("form valid")
-            
+            #save data
             user = user_form.save()
             user.set_password(user.password)
             
             user.save()
             
             profile = profile_form.save(commit=False)
-           
+            #commit=false prevent to save the profile bbecause still need to edit profile (bdna User)
+            
             profile.user=user
             
-        
+            #check if profile pic provided
             if 'picture' in request.FILES:
                 print("found the picture")
                 profile.picture = request.FILES['picture']
@@ -71,9 +77,9 @@ def register(request):
             profile.save()
             log.debug("Saved profile and user for user: %s", user)
             registered = True
-            
+            #login user
             login(request,user)
-            
+            #redirect to the home or vacation page
             return HttpResponseRedirect(reverse('vacation_page'))
             
         else:
@@ -85,6 +91,8 @@ def register(request):
     context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered}
     
     return render(request,'registration.html',context)
+
+
 
 
 def employee_login(request):
@@ -127,27 +135,22 @@ def employee_logout(request):
     return HttpResponseRedirect(reverse('employee_login'))           
 
 
-@login_required
+
 @login_required
 def vacation_page(request):
-    """
-    
-    """
     
     context = {}
     
-    #context['django_topic_id'] = Topic.objects.filter(topic_name="django").first().id
-    context['vacations'] = Vacation.objects.all()
+    context['MEDIA_URL'] = settings.MEDIA_URL
+    context['vacations'] = [{'id': v.id, 'title': v.description, 'start': datetime.strftime(v.date_from,'%Y-%m-%d'), 'end':  datetime.strftime(v.date_to,'%Y-%m-%d')} for v in Vacation.objects.filter(employee_id=request.user.id).all()]
     
     return render (request,'vacation_page.html',context)
 
 @login_required
 def vacation_form(request):
-    """
-    Show vacation form for the logged in user 
-    """
+   
     
-    log.debug("Now we are in the vacation form")
+    log.debug("vacation form")
     context = {}
     
     vacation_id = request.GET.get('id')
@@ -156,7 +159,7 @@ def vacation_form(request):
         employee_vacation = Vacation.objects.filter(id=vacation_id).first()
         print("there is a vacation id")
         
-    
+    context['MEDIA_URL'] = settings.MEDIA_URL
     context['vacation'] = employee_vacation
     
     return render(request,'vacation_form.html',context)
@@ -164,9 +167,7 @@ def vacation_form(request):
 
 @login_required
 def save_vacation(request):     
-    """
-    Update add vacation for logged in user
-    """
+    
     description = request.POST.get('description')
     date_from = request.POST.get('date_from')
     date_to = request.POST.get('date_to')
@@ -217,15 +218,12 @@ def save_vacation(request):
 
 @login_required
 def vacation_grid(request):
-    """
-    Display grid of vacation
-    """
-    
+      
     #response=[{'title':"vacation title"}]
     log.debug("Now we are in the vacation table")
     data = []
     
-    employee_id = request.user.id #request.POST.get('employee_id')
+    employee_id = request.user.id 
     table_length = request.POST.get('length')
     global_search =request.POST.get('search[value]')
     
@@ -247,11 +245,7 @@ def vacation_grid(request):
     duration_search = request.POST.get('columns[4][search][value]')
     if duration_search:
         qset &= Q(duration__contains=duration_search)    
-           
-        
-        
-    
-    
+              
     vacations = Vacation.objects.filter(qset).all().order_by("%s%s" % ("-" if sorting_column_direction == "desc" else "", sorted_column))[:int(table_length)]
     log.debug("Total retrieved objects: %s", len(vacations))
     
@@ -264,12 +258,15 @@ def vacation_grid(request):
     records = len(vacations)
     
     response = {
+        'draw': request.POST.get('draw'),
         'recordsTotal': records,
         'recordsFiltered': records,
         'data': data,
         }
     
     return HttpResponse(json.dumps(response))
+
+
 def profile_form(request):
    
     log.debug("Now we are in the Profile form")
@@ -278,69 +275,6 @@ def profile_form(request):
     context['MEDIA_URL'] = settings.MEDIA_URL
     context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
     return render(request,'profile_form.html',context)
-
-
-def save_profile(request):
-    """
-    Save and update the profile form
-    """
-    
-    status = "OK"
-    message = "SUCCESS"
-    payload = {}
-    
-    log.debug("request.FILES: %s",request.FILES)
-    profile_img = request.FILES.get('profile_img')
-    position = request.POST.get('position')
-    date_of_birth = request.POST.get('date_of_birth')
-    try:
-        log.debug("Profile image: %s",profile_img)
-        
-        mediaPrefix = ("%s/%s")%(date.today().year, date.today().month)
-        mediaPathDirectory = ("%s/%s") % (settings.MEDIA_ROOT, mediaPrefix)
-        
-        if not os.path.exists(mediaPathDirectory):
-            os.makedirs(mediaPathDirectory)
-            
-        extension = profile_img.name.split(u'.')[-1]  
-         
-        new_filename = "profile-pic-%s.%s"%(random.randint(0, 10000), extension)
-        
-        path = os.path.join(mediaPathDirectory, new_filename)
-        dest = open(path, 'wb+')
-        
-        for chunk in profile_img.chunks():
-            dest.write(chunk)
-            dest.close()
-            
-        image_url = "%s/%s"%(mediaPrefix, new_filename)
-        
-        
-        user_profile = UserProfile.objects.filter(user_id = request.user.id).first()
-        
-        if not user_profile:
-            user_profile = UserProfile.objects.create(user_id = request.user.id)  
-            log.debug("user profile not found creating a new one")
-            
-        user_profile.picture = image_url
-        user_profile.position = position
-        user_profile.date_of_birth = date_of_birth
-        
-        user_profile.save()
-        log.debug('Saved profile image successfully for user %s', request.user.id)
-        
-        payload['image_url'] = image_url
-    except:
- 
-        message = "SYSTEM_ERROR"
-        status = "FAIL"
-        log.error("Error while saving profile form", exc_info=1)
-                  
-    
-    response = {'status': status, 'message': message, 'payload': payload }
-     
-    return HttpResponse(json.dumps(response))
-
 
 def update_status(request):
     """
@@ -411,7 +345,6 @@ def delete_vacation(request):
     return HttpResponse(json.dumps(response))
 
 
-
 urlpatterns = [
     
   url(r'^$',index,name="index"),
@@ -427,6 +360,5 @@ urlpatterns = [
   url(r'vacation2/',vacation_form,name="vacation_form"),
   url(r'vacation_save/',save_vacation,name="save_vacation"), 
   url(r'vacation_grid/',vacation_grid,name="vacation_grid"),
-  url(r'save_profile/',save_profile,name="save_profile"),
 
     ]
