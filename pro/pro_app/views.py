@@ -36,6 +36,11 @@ def test(request):
     return render(request, 'test.html', context)
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 2aaa91a37936ba90b6c2d6a613e4ca2e56be2536
 
 def register(request):   
     """
