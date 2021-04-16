@@ -21,9 +21,16 @@ except ImportError:
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
-MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+# TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+# STATIC_DIR = os.path.join(BASE_DIR, 'static')
+# MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+
+STATIC_URL = lsettings.get('STATIC_URL', '/static/')
+MEDIA_URL = lsettings.get('MEDIA_URL', '/media/')
+
+MEDIA_ROOT = lsettings.get('MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
+STATIC_ROOT = lsettings.get('STATIC_ROOT', os.path.join(BASE_DIR, 'Project', 'static'))
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -36,8 +43,8 @@ SECRET_KEY = 'y8lxq0&bpu+w02$s@ri8aoun3p6snj#gea3+3bb2v%uqxwwd8z'
 DEBUG = True
 
 #DEBUG = lsettings.get('DEBUG',False)
-ALLOWED_HOSTS = []
-#ALLOWED_HOSTS = ['samirzd.pythonanywhere.com']  --> readd when updating setting in host
+#ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = ['samirzd.pythonanywhere.com','Localhost']  #--> readd when updating setting in host
 
 
 # Application definition
@@ -145,15 +152,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-MEDIA_ROOT = MEDIA_DIR
-MEDIA_URL = '/media/'
+# MEDIA_ROOT = MEDIA_DIR
+# MEDIA_URL = '/media/'
 
 
 
 
-STATICFILES_DIRS = [
-    STATIC_DIR,
-]
+# STATICFILES_DIRS = [
+#     STATIC_DIR,
+# ]
 
 
 

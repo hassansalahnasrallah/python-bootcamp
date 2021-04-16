@@ -1,0 +1,47 @@
+{% extends 'Vacations/base.html'%}
+{% load static %}
+<title>{%block title %}Edit Profile{% endblock %}</title>
+{% block container_block %}
+
+<head>
+    <style>
+        body {
+            background-color: #30c090;
+        }
+     
+            .footer {
+                margin-top: 40%;
+                height: 55px;
+                width: 100%;
+                min-height: 100px;
+                background-color: white;
+          
+              }
+          
+    </style>
+</head>
+<body>
+<br />
+
+<div class="jumbotron">
+<form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group mx-auto p-5">
+       <p>-----------------------------</p>
+        {{user_form.as_p}}
+        {{profile_form.as_p}}
+        <input type="submit">
+    </div>
+</form>
+</div>
+</body>
+<footer class="text-center text-black" style="background-color: white;">
+
+    <div class="text-center"></div>
+      <p> Samir Zahreddine Django Project </p>
+    </div>
+  
+  </footer>
+ 
+
+{% endblock %}
