@@ -1,5 +1,7 @@
+{% load static%}
 <!DOCTYPE html>
 <html lang="en">
+  {% block head %}
 
 <head>
   <meta charset="UTF-8">
@@ -20,7 +22,9 @@
   </script>
   <script src="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
 
-  <title>{%block title %} {% endblock %}</title>
+  <title>{% block title %} {% endblock %}</title>
+
+  
   <style>
     body {
       margin: 0px;
@@ -29,10 +33,26 @@
       padding-left:15px;
       padding-right:15x;
     }
-  </style>
+   
+    #third{
+      background: url("{% static 'images/beirut.jpeg' %}")  50% 0 no-repeat fixed;
+              
+    
+      background-size: cover; 
+      
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+      }
+      
+    </style>
+    {% endblock %}
+ 
 </head>
 
 <body>
+  
   <nav class="navbar navbar-expand-lg navbar-light bg-light ">
 
     <div class="container">
@@ -40,7 +60,7 @@
         <li><a class="nav-link"></a></li>
         <li><a></a></li>
           {% if request.user.is_authenticated %}
-              <li><a class="nav-link" href="{% url 'index' %}">Welcome Back: {{request.user.username|upper}} </a></li>
+              <li><a class="nav-link">Welcome Back: {{request.user.username|capfirst}} </a></li>
           {% endif %}
         <li><a class="nav-link" href="{% url 'index' %}">Home</a></li><a></a>
         <li><a class="nav-link" href="{% url 'form_VacationForm' %}">Vacations</a></li>
@@ -55,15 +75,16 @@
     </ul>
     </div>
   </nav>
+ 
+ 
 
-
-  <div class="container md-6">
-
+ 
+ <div class="container">   
     {% block container_block %}
 
     {% endblock  %}
-
-  </div>
+    </div>
+ 
 
 </body>
 

@@ -15,7 +15,6 @@ class EmployeeProfile(models.Model):
 
 
 class Vacation(models.Model):
-    #emp_name = models.ForeignKey(User,on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     desc = models.CharField(max_length=255)
     from_date = models.DateField()

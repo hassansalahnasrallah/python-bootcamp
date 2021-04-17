@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, response
 from django.conf.urls import url
 from Vacations.models import *
@@ -15,12 +15,19 @@ import logging
 import json
 from django.db.models import Q
 from Project.forms import VacationInfoForm
+import datetime
 log = logging.getLogger(__name__)
 
 
+ 
+
 # Create your views here.
-def home(request):
-    return HttpResponse("<h1>This is the Home Page.</h1>")
+def test(request):
+
+    context = {}
+    return render(request, "Vacations/LandingPage.html", context)
+    #return HttpResponse("<h1>This is the Home Page.</h1>")
+
 
 @login_required
 def index(request):
@@ -38,32 +45,7 @@ def index(request):
     return render(request, "Vacations/index.html", context)
 
 
-@login_required
-#def form_vacation
-def form_VacationForm(request):
-    """
-    On form validated, create vacation and assign it to the logged in user
-    On success, redirect to the vacation list
-    """
-    form = forms.VacationInfoForm()
-    
-    if request.method == 'POST':
-        form = forms.VacationInfoForm(data=request.POST)
 
-        if form.is_valid():
-            vacation = form.save(commit=False)
-            vacation.user = request.user
-            vacation.save()
-            log.debug("Vacation successfully added for user: %s",vacation.user)
-            return vacation_list(request)
-
-
-        else:
-           # print("Error Saving.")
-            log.error("failed to save...")
-
-    context = {'form': form}
-    return render(request, 'Vacations/vacation_form.html', context)
 
 
 def register(request):
@@ -182,7 +164,7 @@ def logout_request(request):
 
     logout(request)
     log.debug("user logged out%s",request.user.id)
-    return render(request, 'Vacations/login.html')
+    return render(request, 'Vacations/LandingPage.html')
 
 
 def validate_username(request):
@@ -244,53 +226,76 @@ def edit_profile(request):
      }
     return render(request,'Vacations/edit_profile.html',context)
 
+
 @login_required
-def edit_vacation(request):
- 
-    context = {}
-    desc = request.POST.get('desc')
-    from_date = request.POST.get('from_date')
-    to_date = request.POST.get('to_date')
-   
-    vacation_id = request.POST.get('vacation_id')
-    #vacation = vacation.objects.filter(id=vacation_id).first()
-
-    
-    try:
-        vacation = Vacation.objects.filter(id=vacation_id).first()
-
-      
-            
-            # if vacation_id:
-        if vacation_id:
-
-                #update
-                vacation_des = Vacation.desc
-                vacation_from_date = Vacation.from_date
-                vacation_to_date = Vacation.to_date
-                
-
-                #vacation = vacation.objects.filter(id=vacation_id).first()
-                vacation.save()
-                log.debug("vacation updated successfully")
-        else:
-                vacation = Vacation(user_id=request.user.id)
-   
-                
-       
-                log.error("failed to update")
-
-
-    except Exception:
-        log.error("Error while saving vacation", exc_info=1)
+def form_VacationForm(request):
+    """
+    On form validated, create vacation and assign it to the logged in user
+    On success, redirect to the vacation list
+    """
     form = forms.VacationInfoForm()
-   # vacation_form = forms.VacationInfoForm(data=request.POST,instance=request.user.id)
-
-    vacation_id = request.POST.get('vacation_id')       
-    context = {'vacation' : Vacation.objects.filter(id=vacation_id).first(),
-    'forms': VacationInfoForm}
     
-    return render(request,'Vacations/edit_vacation.html',context)
+    if request.method == 'POST':
+        form = forms.VacationInfoForm(data=request.POST)
+
+        if form.is_valid():
+            vacation = form.save(commit=False)
+            vacation.user = request.user
+            vacation.save()
+            log.debug("Vacation successfully added for user: %s",vacation.user)
+            return vacation_list(request)
+
+
+        else:
+           # print("Error Saving.")
+           
+            log.error("failed to save...")
+
+    context = {'form': form}
+    return render(request, 'Vacations/vacation_form.html', context)
+
+
+
+@login_required
+def edit_vacation(request, id ):
+    """
+    user edits his Vacations
+    """
+    
+    instance = Vacation.objects.get(pk = id)
+    if request.method == 'POST':
+        form = VacationInfoForm(request.POST,instance = instance)
+        if form.is_valid():
+            form.save()
+            #return  render(request, 'Vacations/list_vacations.html')
+            return redirect('Vacations/list_vacations')
+            messages.success(request,"UPDATED")
+            log.debug('UPDATED')
+
+    form = VacationInfoForm(instance = instance)
+    return render(request,'Vacations/edit_vacation.html',context={'forms':form})
+
+            
+@login_required
+def delete_vacation(request):
+    """
+    user deletes unwanted vvacations
+    """
+
+    form = VacationInfoForm(request.POST)
+    if request.method == 'POST':
+        id = request.POST['id']
+        Vacation.objects.get(pk = id).delete()
+        fm = VacationInfoForm()
+        #return HttpResponse('Vacation Deleted')
+        return HttpResponseRedirect(reverse('vacation_list'))
+    else:
+        return HttpResponseRedirect(reverse('vacation_list'))
+
+    return render(request,'Vacations/list_vacations.html',context={'forms':form})
+    
+
+        
 
 
 
@@ -305,11 +310,10 @@ urlpatterns = [
     url(r'vacations/', vacation_list, name='vacation_list'),
     url(r'logout/', logout_request, name='logout_request'),
     url(r'validate_username', validate_username, name='validate_username'),
+    
+    url(r'test/',test,name='test'),
    
     url(r'edit_profile/', edit_profile, name='edit_profile'),
-    url(r'edit_vacation/', edit_vacation, name='edit_vacation'),
-
-
-    
+    url(r'delete_vacation/', delete_vacation, name='delete_vacation'),
 
 ]

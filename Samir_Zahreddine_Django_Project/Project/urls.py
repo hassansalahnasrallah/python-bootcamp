@@ -20,11 +20,20 @@ from django.conf.urls import url
 from Project import settings
 from django.conf.urls.static import static
 
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     #url(r'test', views.test, name='test'),
+#     re_path(r'^$',views.test,name='test'),
+
+#     path(r'',include(views.urlpatterns))
+# ]  + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
    # (r'^$', views.index, name='index'),
-    re_path(r'^$',views.user_login,name='user_login'),
-    #path(views.home,name='home'),
+    re_path(r'^$',views.test,name='test'),
+        #path(views.home,name='home'),
+    path('<int:id>/', views.edit_vacation, name='edit_vacation'),
+
     path(r'',include(views.urlpatterns))
 ]  + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
-

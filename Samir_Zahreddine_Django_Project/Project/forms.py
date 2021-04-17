@@ -40,5 +40,5 @@ class VacationInfoForm(forms.ModelForm):
         #fields = ('__all__')
         widgets = {
             'from_date': DateInput(attrs={'type': 'date'}),
-            'to_date': DateTimeInput(attrs={'type': 'date'}),
+            'to_date': DateInput(attrs={'type': 'date'}),
         }    

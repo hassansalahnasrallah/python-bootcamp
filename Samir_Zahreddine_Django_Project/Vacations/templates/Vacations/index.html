@@ -1,14 +1,27 @@
 {% extends 'Vacations/base.html' %}
 {% load static %}
-{% block title %} index {%endblock %}
-{% block container_block %}
+{% block title %} index {% endblock %}
+
+{% block head %}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style>
+   
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,200;300;400;500;600;700&display=swap');
+
+    * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+    }
+
     body {
         background-color: #30c090;
-
+       /* background-image: url("/static/images/beirut.jpeg");*/
+        
     }
+   
 
     #div-1 {
         background-color: #126950;
@@ -23,7 +36,15 @@
 
     #items {
         color: aliceblue;
-        font-size: 24px;
+        /*font-size: 24px;*/
+        position: relative;
+        z-index: 10;
+
+
+        font-size:1.5em;
+        margin: 20px 20px;
+        font-weight: 450;
+        max-width: 700px;
     }
 
     footer {
@@ -33,33 +54,41 @@
         left: 0;
         width: 100%;
         height: 6%;
-        z-index: 999;
+        z-index: 2;
+    
     }
+    img{
+        border: 1px solid white;
+    }
+  
 </style>
+{% endblock %}
+<body>
+  
+   
+
+    {% block container_block %}
 <div class="container-1 h-100 row align-items-center">
     <h1 style="color: aliceblue;">Vacation Manager:</h1>
 
 </div>
 <div id='div-1' class="jumbotron">
     <div id="items">
-        <p style="color:white;">*Feel Free to Edit your webister <a href={% url 'edit_profile' %}>here!</a></p>
-        <p><strong><u>Your Employee Card:</u></strong> </p>
-        <p>username: {{request.user.username}}</p>
-        <p>email: {{user.email}}</p>
-        <p>position: {{emp.position}}</p>
-        <p>email: {{emp.date_of_birth}}</p>
+        <p style="color:white;"><u>*Feel Free to Edit your webister <a href={% url 'edit_profile' %}>here!</a></u></p>
+        <p><strong><u>Your Info Card:</u></strong> </p>
+        <p>Username: {{request.user.username|capfirst}}</p>
+        <p>Email: {{user.email|capfirst}}</p>
+        <p>Position: {{emp.position|capfirst}}</p>
+        <p>DOB: {{emp.date_of_birth}}</p>
         <p>profile image:  <img src="{{MEDIA_URL}}{{emp.profile_pic}}" width="150px" /></p>
     </div>
-    <div id="div-2">
        
-        <!-- <img src="{% static '/images/image1.jpeg' %}" width="250px" />  -->
-    </div>
-   
-
+  
     <br />
     {{help_text}}
     <br />
 </div>
+</body>
 <footer>
 
     <footer class="text-center text-black ">

@@ -1,8 +1,8 @@
-{% extends "Vacations/base.html" %} {%block head %} Vacation List{% endblock%}
+{% extends "Vacations/base.html" %}
+{% block head %}
+<head>
 
-<head> </head>
 
-{% block container_block %}
 <link
   rel="stylesheet"
   href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -47,9 +47,12 @@
  
   }
 </style>
-<p style="color: white"><strong>Vacations:</strong></p>
-
+</head>
+{% endblock%}
+  {% block container_block %}
 <body>
+
+  <p style="color: white"><strong>Vacations:</strong></p>
   <table id="vacation_table" class="table">
     <thead>
       <tr scope="row">
@@ -67,24 +70,19 @@
         <td>{{vacation.desc}}</td>
         <td>{{vacation.user}}</td>
         <td>{{vacation.from_date}}</td>
-        <td>
-          {{vacation.to_date}}
-          <!-- <a href="{% url 'edit_vacation' %}?id={{vacation.id}}">Edit </a> -->
-          <a href="{% url 'edit_vacation' %}">Edit </a>
-
-
-
+        <td>{{vacation.to_date}}
+          <td class="d-flex"><a  href="/{{vacation.id}}/" class = 'btn btn-success btn-sm mx-2'>Edit</a>
+          <form action ={% url 'delete_vacation' %}" method='POST'>
+            {% csrf_token %}
+            <input type="hidden" value="{{vacation.id}}" name='id'>
+            <button class="btn btn-danger btn-sm mx-2" name="delete">Delete</button>
+          </form>
         </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
-  <p></p>
-  <footer class="text-center text-black bottom" style="background-color: white">
-    <div class="text-center py-3">
-      <p>Samir Zahreddine Django Project</p>
-    </div>
-  </footer>
+ 
   <script
     type="text/javascript"
     charset="utf8"
