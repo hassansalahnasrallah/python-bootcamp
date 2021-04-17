@@ -84,8 +84,9 @@ def register(request):
                 profile.save()
                 log.debug("Profile saved successfully for user: %s", User)
                 registered = True
-                return render(request, 'Vacations/login.html')
-                return render('vacations.login.html', message='Save complete')
+                #return render(request, 'Vacations/login.html')
+                return HttpResponseRedirect(reverse('index'))
+
 
             # else:
             #     log.error("Error while creating user ", exc_info=1)
@@ -214,11 +215,14 @@ def edit_profile(request):
                 profile.save()
                 log.debug("Profile saved successfully for user: %s", user)
 
-                return render(request, 'Vacations/edit_profile.html')
+                return HttpResponseRedirect(reverse('index'))
 
     else:
         user_form = forms.UserForm(instance = request.user)
         profile_form = forms.UserProfileInfoForm(instance = request.user)
+        #return HttpResponseRedirect(reverse('edit_profile'))
+       
+    
 
     context = {
             'user_form':user_form,
@@ -295,13 +299,6 @@ def delete_vacation(request):
     return render(request,'Vacations/list_vacations.html',context={'forms':form})
     
 
-        
-
-
-
-
-
- 
 urlpatterns = [
     url(r'index/', index, name='index'),
     url(r'vacationform/', form_VacationForm, name='form_VacationForm'),

@@ -56,7 +56,6 @@
   <table id="vacation_table" class="table">
     <thead>
       <tr scope="row">
-        <th>Vacation id</th>
         <th>Location</th>
         <th>Employee</th>
         <th>From:</th>
@@ -66,7 +65,7 @@
     <tbody>
       {% for vacation in vacations %}
       <tr>
-        <td>{{vacation.id}}</td>
+
         <td>{{vacation.desc}}</td>
         <td>{{vacation.user}}</td>
         <td>{{vacation.from_date}}</td>
