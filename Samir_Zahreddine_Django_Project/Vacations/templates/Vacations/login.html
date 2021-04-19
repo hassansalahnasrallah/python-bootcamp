@@ -12,7 +12,7 @@
     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 
-  <title>{%block title %} {% endblock %}</title>
+  <title>{%block title %} Home {% endblock %}</title>
 
 
   {% block container_block %}
@@ -21,18 +21,20 @@
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,200;300;400;500;600;700&display=swap');
 
     * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
- 
+
       width: 100%;
       /* value of your choice which suits your alignment */
       align-items: center;
-      background-color: #30c090;
+      background-color: #f9f9f9;
+      background-image: linear-gradient(315deg, #f9f9f9 0%, #02a388 74%);
+
 
 
     }
@@ -50,7 +52,7 @@
 
     #div1 {
       background-color: #126950;
-   
+
 
     }
 
@@ -91,7 +93,7 @@
 </head>
 
 <body>
-  
+
   <br /><br />
 
 
@@ -105,7 +107,7 @@
       <form method="POST" action="{% url 'user_login' %}">
         <div class="form-group mx-auto p-2">
           {% csrf_token %}
-          <p>username: </p>
+          <p>Username: </p>
           <input type="text" name="username" placeholder="enter your username" /><br>
           <p>Password: </p>
           <input type="password" name="password" placeholder="enter your password" /><br />
@@ -117,7 +119,7 @@
       <p>&nbsp;</p>
     </div>
   </div>
- 
+
 
 </body>
 <footer class="text-center text-black bottom-fixed " style="background-color: white;">

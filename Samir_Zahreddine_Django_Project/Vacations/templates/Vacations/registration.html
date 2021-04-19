@@ -20,18 +20,25 @@
 
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-
+    <title>Registration Form</title>
 
     <style>
         body {
-            background-color: #30c090;
+            /*background-color: #30c090;*/
+
+            background-color: #f9f9f9;
+    background-image: linear-gradient(315deg, #f9f9f9 0%, #02a388 74%);
 
         }
 
+        jumbotron{
+            background-color: rgb(0 0 0 / 8%);
+            color: white;
+        }
         .div-1 {
             color: black;
             font: size 24px;
-
+            background-color: rgb(0 0 0 / 8%);
         }
 
         a {
@@ -52,12 +59,17 @@
             padding-left:15px;
             padding-right:15x;
           }
+        .const{
+            background-color: rgb(0 0 0 / 8%);
+        }
          
     </style>
 </head>
 
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+
 
         <div class="container">
           <ul class="nav navbar-nav">
@@ -80,10 +92,10 @@
         </div>
       </nav>
     
-
-    <h4 class="container mt-5 w-50" style='color:aliceblue;'> Signup Form:</h4>
+    <div class="cont">
+    <h4 class="container mt-5 w-50"> Signup Form:</h4>
     <div class='div-1'>
-        <div class="jumbotron container mt-10 w-20" style=" background-color: #209171de; color:aliceblue">
+        <div class="jumbotron container mt-10 w-20" >
             <div class="form-group">
                 {% if registered %}
 
@@ -102,6 +114,8 @@
             </div>
         </div>
     </div>
+</div>
+    </body>
     {% endif %}
 
 

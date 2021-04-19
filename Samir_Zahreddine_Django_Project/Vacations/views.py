@@ -28,6 +28,16 @@ def test(request):
     return render(request, "Vacations/LandingPage.html", context)
     #return HttpResponse("<h1>This is the Home Page.</h1>")
 
+@login_required
+def img_index(request):
+ 
+    context = {}
+
+    context['MEDIA_URL'] = settings.MEDIA_URL
+    context['emp'] = EmployeeProfile.objects.filter(user_id=request.user.id).first()
+    #context['emp'] = EmployeeProfile.objects.all()
+    #context ['emp'] : emp
+
 
 @login_required
 def index(request):
@@ -140,7 +150,7 @@ def user_login(request):
     else:
       
         return render(request, 'Vacations/login.html', context)
-  
+    
     return render(request, 'Vacations/login.html', context)
 
 
@@ -154,7 +164,10 @@ def vacation_list(request):
     vacation_list = Vacation.objects.filter(user=request.user).all()
 
     context['vacations'] = vacation_list
+  
 
+    context['MEDIA_URL'] = settings.MEDIA_URL
+    context['emp'] = EmployeeProfile.objects.filter(user_id=request.user.id).first()
     return render(request, 'Vacations/list_vacations.html', context)
 
 
@@ -228,6 +241,10 @@ def edit_profile(request):
             'user_form':user_form,
             'profile_form':profile_form
      }
+
+
+    context['MEDIA_URL'] = settings.MEDIA_URL
+    context['emp'] = EmployeeProfile.objects.filter(user_id=request.user.id).first()
     return render(request,'Vacations/edit_profile.html',context)
 
 
@@ -256,6 +273,10 @@ def form_VacationForm(request):
             log.error("failed to save...")
 
     context = {'form': form}
+ 
+
+    context['MEDIA_URL'] = settings.MEDIA_URL
+    context['emp'] = EmployeeProfile.objects.filter(user_id=request.user.id).first()
     return render(request, 'Vacations/vacation_form.html', context)
 
 
@@ -265,7 +286,7 @@ def edit_vacation(request, id ):
     """
     user edits his Vacations
     """
-    
+    context = {}
     instance = Vacation.objects.get(pk = id)
     if request.method == 'POST':
         form = VacationInfoForm(request.POST,instance = instance)
@@ -277,7 +298,11 @@ def edit_vacation(request, id ):
             log.debug('UPDATED')
 
     form = VacationInfoForm(instance = instance)
-    return render(request,'Vacations/edit_vacation.html',context={'forms':form})
+
+    context['MEDIA_URL'] = settings.MEDIA_URL
+    context['emp'] = EmployeeProfile.objects.filter(user_id=request.user.id).first()
+    context['forms'] = form
+    return render(request,'Vacations/edit_vacation.html',context)
 
             
 @login_required
@@ -307,7 +332,10 @@ urlpatterns = [
     url(r'vacations/', vacation_list, name='vacation_list'),
     url(r'logout/', logout_request, name='logout_request'),
     url(r'validate_username', validate_username, name='validate_username'),
-    
+
+    url(r'img_index', img_index, name='img_index'),
+
+
     url(r'test/',test,name='test'),
    
     url(r'edit_profile/', edit_profile, name='edit_profile'),

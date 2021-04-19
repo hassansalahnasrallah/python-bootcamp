@@ -1,7 +1,7 @@
 {% load static%}
 <!DOCTYPE html>
 <html lang="en">
-  {% block head %}
+{% block head %}
 
 <head>
   <meta charset="UTF-8">
@@ -45,7 +45,7 @@
       object-fit: cover;
       opacity: 0.8;
       }
-      
+    
     </style>
     {% endblock %}
  
@@ -53,24 +53,29 @@
 
 <body>
   
-  <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
 
     <div class="container">
       <ul class="nav navbar-nav">
-        <li><a class="nav-link"></a></li>
-        <li><a></a></li>
           {% if request.user.is_authenticated %}
-              <li><a class="nav-link">Welcome Back: {{request.user.username|capfirst}} </a></li>
+              <li><a class=" navbar-brand nav-link">Welcome Back: {{request.user.username|capfirst}}
+                <img src="{{MEDIA_URL}}{{emp.profile_pic}}" width="31" height="31" style="border-radius: 50%;"/>
+              
+                &nbsp;</a></li>
           {% endif %}
         <li><a class="nav-link" href="{% url 'index' %}">Home</a></li><a></a>
         <li><a class="nav-link" href="{% url 'form_VacationForm' %}">Vacations</a></li>
         <li><a class="nav-link" href="{% url 'vacation_list' %}">Vacataion Lists</a></li>
+        <form class="form-inline my-2 my-lg-0">
+         
+        
           {% if user.is_authenticated %}
-          <li><a class="nav-link">&nspar; &ThinSpace;&ThinSpace;&ThinSpace;</a></li><a>
-              <li class="form-inline"><a class="nav-link" href="{% url 'logout_request' %}">Logout</a></li>
+          <li><a class="nav-link"></a></li><a>
+              <li class="nav-link"><a class="nav-link" href="{% url 'logout_request' %}">Logout</a></li>
           {% else %}
-              <li class="form-inline"><a class="nav-link" href="{% url 'logout_request' %}"></a></li>
+              <li class="nav-link"><a class="nav-link" href="{% url 'logout_request' %}"></a></li>
           {% endif %}
+        </form>
     </div>
     </ul>
     </div>

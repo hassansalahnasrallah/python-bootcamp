@@ -100,14 +100,14 @@ DATABASES = {
     }
 }
 
-
+#------------------- use XAMPP or Devserver ------------------
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'Project',
+#         'NAME': 'test', #DB name
 #         'USER': 'root',
-#         'PASSWORD': 'root',
-#         'HOST': '127.0.0.1',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
 #         'PORT': '3306',
 #     }
 # }

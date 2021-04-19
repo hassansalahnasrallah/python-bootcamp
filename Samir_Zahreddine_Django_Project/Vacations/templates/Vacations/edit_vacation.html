@@ -4,90 +4,95 @@
 {%block title %} Vacation Form {% endblock %}
 
 {% block container_block %}
+
 <head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<style>
-    body {
-        background-color: #30c090;
+    <style>
+        body {
+            background-color: #f9f9f9;
+            background-image: linear-gradient(315deg, #f9f9f9 0%, #02a388 74%);
 
-    }
+        }
 
-    footer {
-        padding: 0 !important;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 6%;
-     
-    }
-</style>
+        footer {
+            padding: 0 !important;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6%;
+
+        }
+    </style>
 </head>
 
 <body>
-<br />
-<br />
-<div class="jumbotron">
-    <h1>Vacation update:</h1><br />
-    <P>* all fields are required.</P>
-    <form name="vacationForm" action="" method="POST">
-        {% csrf_token %}
-        {{forms.as_p}} 
-        
-        
-    
 
-        <input type="submit" id='save_vacation' class="btn btn-primary" value="submit">
-    </form>
-</div>
+
+
+    <br />
+    <br />
+    <div class="jumbotron">
+        <h1>Vacation update:</h1><br />
+        <P>* all fields are required.</P>
+        <form name="vacationForm" action="" method="POST">
+            {% csrf_token %}
+            {{forms.as_p}}
+
+
+
+
+            <input type="submit" id='save_vacation' class="btn btn-success" value="submit">
+        </form>
+    </div>
 </body>
-    <footer class="text-center text-black fixed-bottom" style="background-color: white;">
+<footer class="text-center text-black fixed-bottom" style="background-color: white;">
 
 
-        <div class="text-center py-3">
-            <p> Samir Zahreddine Django Project </p>
-        </div>
+    <div class="text-center py-3">
+        <p> Samir Zahreddine Django Project </p>
+    </div>
 
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+</footer>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
 
-    <script>
-        $(document).ready(function () {
-            $("#vacationForm").validate({
-                rules: {
-                    desc: {
-                        required: true,
-                        minlength: 4,
-                        maxlength: 20
-                    },
-                    from_date: {
-                        required: true,
-                    },
-                    to_date: {
-                        required: true,
-
-                    },
+<script>
+    $(document).ready(function () {
+        $("#vacationForm").validate({
+            rules: {
+                desc: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 20
                 },
-                messages: {
-                    desc: {
-                        required: "Please Enter a vacation description."
-                    },
-
-                    from_date: {
-                        required: " Please Enter your from date."
-                    },
-
-                    to_date: {
-                        required: "Please Enter to date.",
-                    },
+                from_date: {
+                    required: true,
+                },
+                to_date: {
+                    required: true,
 
                 },
+            },
+            messages: {
+                desc: {
+                    required: "Please Enter a vacation description."
+                },
 
-            });
+                from_date: {
+                    required: " Please Enter your from date."
+                },
+
+                to_date: {
+                    required: "Please Enter to date.",
+                },
+
+            },
+
         });
-    </script>
-    {% endblock %}
+    });
+</script>
+{% endblock %}

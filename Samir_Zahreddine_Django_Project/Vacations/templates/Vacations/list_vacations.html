@@ -30,11 +30,13 @@
     margin: 0;
     width: 100%; /* value of your choice which suits your alignment */
     align-items: center;
-    background-color: #30c090;
+    background-color: #f9f9f9;
+    background-image: linear-gradient(315deg, #f9f9f9 0%, #02a388 74%);
 
   }
   table {
     background-color: white;
+   
   }
   footer {
     padding: 0 !important;
@@ -47,6 +49,7 @@
  
   }
 </style>
+<title>{%block title %} Vacation List {% endblock %}</title>
 </head>
 {% endblock%}
   {% block container_block %}
@@ -60,12 +63,12 @@
         <th>Employee</th>
         <th>From:</th>
         <th>To:</th>
+        <th>Action:</th>
       </tr>
     </thead>
     <tbody>
       {% for vacation in vacations %}
       <tr>
-
         <td>{{vacation.desc}}</td>
         <td>{{vacation.user}}</td>
         <td>{{vacation.from_date}}</td>
