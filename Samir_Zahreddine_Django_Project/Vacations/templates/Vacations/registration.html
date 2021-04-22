@@ -103,14 +103,14 @@
                 <a href="{% url 'user_login' %}">Login</a>
                 {% else %}
 
-                <form id='form-1' method="POST" enctype="multipart/form-data">
+                <form class="form-group" id='form-1' method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{user_form.as_p}}
                     {{profile_form.as_p}}
 
                     <input type="submit" name='register' id="register" value="register" class='btn btn-success' />
                 </form>
-                <p>Already a user? <a href="{% url 'user_login' %}">Login</a></p>
+                <p>Already a user? <a href="{% url 'user_login' %}" class="badge badge-primary">Login</a></p>
             </div>
         </div>
     </div>

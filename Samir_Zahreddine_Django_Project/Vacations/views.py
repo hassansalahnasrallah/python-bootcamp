@@ -229,7 +229,7 @@ def edit_profile(request):
                 log.debug("Profile saved successfully for user: %s", user)
 
                 return HttpResponseRedirect(reverse('index'))
-
+                
     else:
         user_form = forms.UserForm(instance = request.user)
         profile_form = forms.UserProfileInfoForm(instance = request.user)

@@ -108,14 +108,14 @@
         <div class="form-group mx-auto p-2">
           {% csrf_token %}
           <p>Username: </p>
-          <input type="text" name="username" placeholder="enter your username" /><br>
+          <input type="text" name="username" class="form-control" placeholder="enter your username" /><br>
           <p>Password: </p>
-          <input type="password" name="password" placeholder="enter your password" /><br />
+          <input type="password" name="password" class="form-control" placeholder="enter your password" /><br />
 
           <input type="submit" value="login" class="btn btn-success" />
           <hr>
       </form>
-      <p>Not a user yet? <a href="{% url 'register' %}">register</a></p>
+      <p>Not a user yet? <a href="{% url 'register' %}" class="badge badge-primary">register</a></p>
       <p>&nbsp;</p>
     </div>
   </div>

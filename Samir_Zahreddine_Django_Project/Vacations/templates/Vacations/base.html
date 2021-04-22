@@ -68,12 +68,11 @@
         <li><a class="nav-link" href="{% url 'vacation_list' %}">Vacataion Lists</a></li>
         <form class="form-inline my-2 my-lg-0">
          
-        
           {% if user.is_authenticated %}
-          <li><a class="nav-link"></a></li><a>
-              <li class="nav-link"><a class="nav-link" href="{% url 'logout_request' %}">Logout</a></li>
+       
+              <li><a class="nav-link" href="{% url 'logout_request' %}">Logout</a></li>
           {% else %}
-              <li class="nav-link"><a class="nav-link" href="{% url 'logout_request' %}"></a></li>
+              <li><a class="nav-link" href="{% url 'logout_request' %}"></a></li>
           {% endif %}
         </form>
     </div>
