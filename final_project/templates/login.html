@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{%block title%}Login{% endblock %}
+
+{% block container_block %}
+
+
+	<form id="login_form" method="post" action="{% url 'user_login'%}">
+		{% csrf_token %}
+		{% if user.is_authenticated %}
+        	<h1>Welcome {{request.user.username}}</h1>
+     	{% else %}
+     		<div class="row form-group">
+			<label class="col-sm-12">User Name:</label>
+				<div class="col-sm-12">
+					<input type="text" name="username" class="form-control" placeholder="username" required>
+				</div>
+			</div>
+			
+		    <div class="row form-group">
+			<label class="col-sm-12">Password:</label>
+				<div class="col-sm-12">
+					<input  type="password" name="password" class="form-control" value="{{UserForm.password}}" placeholder="password" required>
+				</div>
+			</div>
+			
+			<p>
+      	 	<button type="button" id="login" class="btn btn-success">Login</button> 
+            </p>
+     	{% endif %}  
+		
+	
+	</form>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+	$(function(){
+		
+		$( "#login_form" ).validate({
+			  rules: {
+				  username: {
+			      required: true,	      
+			    },
+	
+				 password: {
+				      required: true,	      
+				},
+				
+	
+			  }, 
+			  
+			  messages: {
+				  username: {
+					  required: "User name is required" 
+				  },
+				  
+				  password: {
+				      required: "Password is required",	      
+				  },
+			
+			  
+				  
+			  } 
+		});
+		
+		$("#login").click(function(){
+			$("#login_form").submit();
+		});
+		
+	});
+
+</script>
+	  
+	  
+	  
+	  
+	  
+{% endblock %}

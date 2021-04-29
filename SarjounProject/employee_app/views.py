@@ -74,6 +74,9 @@ def Logout(request):
 @login_required()
 def vacation_table(request):
     context={}
+    context['MEDIA_URL'] = settings.MEDIA_URL
+    context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
+    context['employee_profile'] =  UserProfile.objects.all()
     return render(request,'vacation_table.html',context)
 
 def vacation_grid(request):
@@ -82,47 +85,52 @@ def vacation_grid(request):
     """
     
     #response=[{'title':"vacation title"}]
-    
+    log.debug("Now we are in the vacation table")
     data = []
+    
+    user_id = request.user.id #request.POST.get('employee_id')
     table_length = request.POST.get('length')
     global_search =request.POST.get('search[value]')
+    
+    
     sorting_column_index = request.POST.get('order[0][column]')
     sorting_column_direction = request.POST.get('order[0][dir]')
+    
     sorted_column = request.POST.get('columns[%s][name]' % (sorting_column_index))
-    qset = Q(user_id=request.user.id)
     
-    description_search=request.POST.get('columns[0][search][value]')
-    if description_search:
-        qset &= Q(Description__icontains=description_search)
-    datefrom_search=request.POST.get('columns[1][search][value]')
+    qset = Q(user_id=user_id)
     
-    if datefrom_search:
-        qset &= Q(Datetime_From__icontains=datefrom_search) 
-    dateto_search=request.POST.get('columns[2][search][value]')
-    
-    if dateto_search:
-        qset &= Q(Datetime_To__icontains=dateto_search) 
-    duration_search=request.POST.get('columns[3][search][value]')
-    
-    if duration_search:
-        qset &= Q(Duration__icontains=duration_search)
+    if global_search:
+        qset &= Q(description__icontains=global_search)
         
+    description_search = request.POST.get('columns[1][search][value]')
+    if description_search:
+        qset &= Q(description__icontains=description_search)
+        
+    duration_search = request.POST.get('columns[4][search][value]')
+    if duration_search:
+        qset &= Q(duration__contains=duration_search)    
+           
+        
+        
+    
+    
     vacations = Vacation.objects.filter(qset).all().order_by("%s%s" % ("-" if sorting_column_direction == "desc" else "", sorted_column))[:int(table_length)]
-    log.debug("Total retrieved: %s", len(vacations))
+    log.debug("Total retrieved objects: %s", len(vacations))
     
     
     for vacation in vacations:
-        data.append({'id': vacation.id,  'description': vacation.description, 'duration': vacation.duration,
-                     'status': "Active" if vacation.status else "Not active", 'datefrom': datetime.strftime(vacation.datefrom, '%d/%m/%Y'), 'dateto': datetime.strftime(vacation.dateto, '%d/%m/%Y')})
+        data.append({'id': vacation.id,  'desc': vacation.description, 'duration': vacation.duration,
+                     'status': "Active" if vacation.status else "NOT Active", 'date_from': datetime.strftime(vacation.datefrom, '%d/%m/%Y'), 'date_to': datetime.strftime(vacation.dateto, '%d/%m/%Y')})
     
     
     records = len(vacations)
     
     response = {
+        'draw': request.POST.get('draw'),
         'recordsTotal': records,
-        'recordsTotal': records,
+        'recordsFiltered': records,
         'data': data,
-        
         }
     
     return HttpResponse(json.dumps(response,sort_keys=True,indent=1,cls=DjangoJSONEncoder))
@@ -211,13 +219,14 @@ def Add_Vacation(request):
     context['vacation']=vacation
     return render(request,'Add_Vacation.html',context)
 
-def save_vacation(request):
+def save_vacation(request):     
     """
     Update add vacation for logged in user
     """
+    user = request.user
     description = request.POST.get('desc')
-    datefrom = request.POST.get('date_from')
-    dateto = request.POST.get('date_to')
+    date_from = request.POST.get('date_from')
+    date_to = request.POST.get('date_to')
     duration = request.POST.get('duration')
     vacation_id = request.POST.get('vacation_id')
 
@@ -226,35 +235,33 @@ def save_vacation(request):
     payload = {}
     
     try:
-        if description and datefrom and dateto and duration: 
+        if description and date_from and date_to and duration: 
+        
             if vacation_id:
                 #update
                 vacation = Vacation.objects.filter(id=vacation_id).first()
-                if vacation:
-                    vacation.description = description
-                    vacation.datefrom = datetime.strptime(datefrom, "%d/%m/%Y")
-                    vacation.dateto = datetime.strptime(dateto, "%d/%m/%Y")
-                    vacation.duration = duration
-                    vacation.save()
-                    
-                    payload['id'] = vacation.id
-                    response = "SUCCESS"
-                    
-                    log.debug("%s vacation successfully" % ("Updated" if vacation_id else "Created"))
-                else:
-                    message = "VACATION_NOT_FOUND"
-                    status = "FAIL"
             else:
-                 Employee_Vacation.objects.create(user=user,description=description,datefrom=datefrom,datetoo=dateto,duration=duration)
-                 payload['id'] = vacation.id
-                    
+                vacation = Vacation(id=request.user.id)
+            
+            if vacation:
+                vacation.user=user
+                vacation.description = description
+                vacation.datefrom = datetime.strptime(date_from, "%d/%m/%Y")
+                vacation.dateto = datetime.strptime(date_to, "%d/%m/%Y")
+                vacation.duration = duration
+                vacation.save()
+                
+                payload['id'] = vacation.id
+                response = "SUCCESS"
+                
+                log.debug("%s vacation successfully" % ("Updated" if vacation_id else "Created"))
+            else:
+                message = "VACATION_NOT_FOUND"
+                status = "FAIL"
+                
         else:
             message = "MISSING_REQUIRED_PARAMETERS"
             status = "FAIL"
-    
-    except IntegrityError:
-        status = "FAIL"
-        message = "DESCRIPTION_NAME_ALREADY_EXISTS"
 
     except:
         message = "SYSTEM_ERROR"
@@ -264,14 +271,13 @@ def save_vacation(request):
     response = {'status': status, 'message': message, 'payload': payload}
     
     return HttpResponse(json.dumps(response))
-
 @login_required()
 def EditProfile(request):
+    log.debug("Now we are in the Profile form")
     context = {}
-    
     context['MEDIA_URL'] = settings.MEDIA_URL
     context['user_profile'] = UserProfile.objects.filter(user_id=request.user.id).first()
-    
+    context['employee_profile'] =  UserProfile.objects.all()
     return render(request, "EditProfile.html", context)
 
 def save_profile(request):
@@ -300,7 +306,7 @@ def save_profile(request):
         extension = profile_picture.name.split(u'.')[-1]  
         
         #rename profile image
-        new_filename = "profile-pic-%s.%s" % (random.randint(0, 10000), extension)
+        new_filename = "profile_pics%s.%s" % (random.randint(0, 10000), extension)
         
         #set path
         path = os.path.join(mediaPathDirectory, new_filename)
@@ -321,7 +327,7 @@ def save_profile(request):
         
         user_profile.profile_picture = image_url
         user_profile.job_position=job_position
-        user_profile.date_of_birth=date_of_birth
+        user_profile.date_of_birth=datetime.strptime(date_of_birth, "%d/%m/%Y")
         user_profile.save()
         log.debug("Saved profile image successfully for user: %s", request.user.id)
         payload['image_url'] = image_url
@@ -334,6 +340,19 @@ def save_profile(request):
     response = {"status": status, "message": message, "payload": payload}
     
     return HttpResponse(json.dumps(response))
+
+def vacation_details(request):
+    """
+    Display the subgrid datatable
+    """
+    vacation_id = request.GET.get('id')
+    
+    log.debug("Now we are in the vacation details html")
+    context = {}
+
+    
+    context['vacation_details'] = Vacation.objects.filter(id=vacation_id).first()
+    return render(request,'vacation_details.html',context)
 
 
 urlpatterns=[
@@ -348,4 +367,5 @@ urlpatterns=[
     url(r"save_profile/", save_profile ,name ="save_profile"),
     url(r"update_status/", update_status ,name ="update_status"),
     url(r"vacation_delete", save_profile ,name ="delete_vacation"),
+    url(r'details/',vacation_details,name="vacation_details"),
     ]

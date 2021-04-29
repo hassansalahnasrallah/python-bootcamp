@@ -1,0 +1,46 @@
+h1{
+	font-family: 'Montserrat Alternates', sans-serif;
+	color: #069c55 ;
+}
+
+h2{
+	font-family: 'Montserrat Alternates', sans-serif;
+	text-align: center;	
+	color: #069c55 ;
+}
+
+#second_div{
+	background-color: white ;
+	min-height:400px;
+	width: 350px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	margin-right: auto;
+	padding:20px;
+	text-align: center;
+	
+}
+
+
+@media(max-width:960px){
+	#second_div{
+	background-color: white ;
+	min-height:400px;
+	width: 100%;
+	padding:20px;
+	margin-top:0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    text-align: center;
+	}
+	
+	#image_1{
+	max-width: 200px;
+	margin: 20%;
+    }	
+}
+
+#image_1{
+	max-width: 200px;
+	margin: 20%;
+    }	

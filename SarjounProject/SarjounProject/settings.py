@@ -23,6 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR=os.path.join(BASE_DIR,'templates')
 STATIC_DIR=os.path.join(BASE_DIR,'static')
 MEDIA_DIR=os.path.join(BASE_DIR,'media')
+STATIC_URL = lsettings.get('STATIC_URL', '/static/')
+MEDIA_URL = lsettings.get('MEDIA_URL', '/media/')
+
+MEDIA_ROOT = lsettings.get('MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))
+STATIC_ROOT = lsettings.get('STATIC_ROOT', os.path.join(BASE_DIR, 'SarjounProject', 'static'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -31,10 +36,9 @@ MEDIA_DIR=os.path.join(BASE_DIR,'media')
 SECRET_KEY = '7(e#4juk-ws2ybyy%y0)=u(g-3ta243@=yp0jy*frh%lmfb_$+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = lsettings.get('DEBUG',True)
 
-ALLOWED_HOSTS = ['sarjounsd.pythonanywhere.com', 'localhost']
-
+ALLOWED_HOSTS = lsettings.get('ALLOWED_HOSTS', [])
 
 # Application definition
 
@@ -79,8 +83,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'SarjounProject.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+#Database
+#https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -91,11 +95,11 @@ DATABASES = {
         'HOST':'127.0.0.1',
         'PORT':'3306'
     }
-}
+    }
 # DATABASES = {
     # 'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME':BASE_DIR / 'db.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
     # }
 # }
 
@@ -142,12 +146,12 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'level_app'
         },
-#         'main_log_file': {
-#             'level': 'DEBUG',
-#             'class': 'logging.handlers.TimedRotatingFileHandler',
-#             'filename': '%s/main.log' % (BASE_DIR),
-#             'formatter': 'level_app'
-#         }
+        'main_log_file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': '%s/main.log' % (BASE_DIR),
+            'formatter': 'level_app'
+        }
         
     },
     'loggers': {
