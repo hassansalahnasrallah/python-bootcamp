@@ -32,31 +32,32 @@ margin-top:50px;}
 
 
 {% csrf_token %}
-<div class="form-group">
-<div class="row">
-<div class="col-6">
-<label for="Description" >Description:</label>
-<textarea id="desc" name="desc" rows="2" cols="50"  >{{vacation.Description}}</textarea>
-</div>
-<div class="col-6">
- <label for="Date_From">DateTime_From:</label>
-<input  name="datefrom" id="date_from" value="{{vacation.Datetime_From|date:'Y-m-d'}}" />
-</div>
-<div class="col-6">
- <label for="Date_To">DateTime_To:</label>
-<input  name="dateto" id="date_to"  value="{{vacation.Datetime_To|date:'Y-m-d'}}" />
-</div>
-<div class="col-6">
- <label for="Duration">Duration:</label>
-<input type="text" name="duration_d" id="duration"  value="{{vacation.Duration}}" readonly/><span>days</span></div><br>
-<br>
 
-<div class="col-6">
+<div class="form-group">
+<label for="Description" >Description:</label>
+<input type="text"  style="width:70%" class="form-control" id="desc" name="desc" value="{{vacation.Description}}"  >
+</div>
+
+<div class="form-group">
+ <label for="Date_From">DateTime_From:</label>
+<input  name="datefrom" id="date_from" style="width:70%" class="form-control" value="{{vacation.Datetime_From|date:'Y-m-d'}}" />
+</div>
+
+<div class="form-group">
+ <label for="Date_To">DateTime_To:</label>
+<input  name="dateto" id="date_to" style="width:70%" class="form-control"  value="{{vacation.Datetime_To|date:'Y-m-d'}}" />
+</div>
+
+<div class="form-group">
+ <label for="Duration">Duration:</label><small>(no of days)</small>
+<input type="text" name="duration_d" id="duration" style="width:70%" class="form-control" value="{{vacation.Duration}}" readonly/>
+</div>
+
+
 <input type="hidden" name="vacation_id" value="{{vacation.id}}" />
 <button type="button" id="Vacation_save" class="btn btn-primary" style="width:60%">Save Vacation</button><br><br>
-<a  href="{% url  'Vacation_Table' %}" class="btn btn-primary " id="table" style="width:60%">Vacation Table</a></div><br>
-</div>
-</div>
+<a  href="{% url  'Vacation_Table' %}" class="btn btn-primary " id="table" style="width:60%">Vacation Table</a>
+
 </form >
 
 {% endblock %}
@@ -209,8 +210,7 @@ function calculationDuration(){
 		var date_to = $("#date_to").data('datepicker').viewDate;
 		
 		if(date_from && date_to){
-			var duration = moment(date_to).diff(moment(date_from), 'days');
-			
+			var duration = moment(date_to).diff(moment(date_from),'days');
 			$("input[name=duration_d]").val(duration);
 		}
 		
