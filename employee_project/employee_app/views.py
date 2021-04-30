@@ -15,7 +15,7 @@ import logging
 from employee_project import settings
 from django.db.utils import IntegrityError
 import json
-from datetime import date
+from datetime import date ,datetime
 from django.db.models import Q
 from django.http import response
 
@@ -125,6 +125,7 @@ def vacation_save(request):
 @login_required
 def vacation_table(request):
     context = {}
+    context['vacations'] = [{'id': vacation.id, 'title': vacation.Description, 'start':datetime.strftime(vacation.Datetime_From,'%Y-%m-%d') , 'end': datetime.strftime(vacation.Datetime_To,'%Y-%m-%d')} for vacation in Employee_Vacation.objects.filter(user_id=request.user.id).all()]
     return render(request, "employee_app/Vacation_table.html", context)
 
 
@@ -290,6 +291,18 @@ def delete_vacation(request):
     
     return HttpResponse(json.dumps(response))
 
+def vacation_details(request):
+    """
+    Display the subgrid datatable
+    """
+    vacation_id = request.GET.get('id')
+    
+    log.debug("Now we are in the vacation details html")
+    context = {}
+
+    
+    context['vacation_details'] =Employee_Vacation.objects.filter(id=vacation_id).first()
+    return render(request,'employee_app/vacation_details.html',context)
 
 
 urlpatterns=[
@@ -306,4 +319,5 @@ urlpatterns=[
     url(r'Home/',home,name='Home'),
     url(r'update_status/',update_status,name='update_status'),
     url(r'delete_vacation/',delete_vacation,name='delete_vacation'),
+    url(r'details/',vacation_details,name="vacation_details"),
     ]

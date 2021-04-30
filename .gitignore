@@ -1,0 +1,10 @@
+*.pyc
+local_settings.py
+*.bak
+/debug.log
+/.pydevproject
+=======
+.settings
+.idea
+/Trump.csv
+*.sqlite3
